@@ -1,0 +1,64 @@
+      <section class="step">
+        <h2>Google で測る</h2>
+        <ul class="plain">
+          <li>AI 機能の掲載も Search Console の Web 検索タイプに含まれる</li>
+          <li>Generative AI performance report で生成 AI 面を見る</li>
+          <li>AI Overviews 経由のクリックは滞在が長い、という Google 側の観察。クリック数だけ見るとこの面の価値を落とします</li>
+        </ul>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>AI features and your website</li>
+            <li>succeeding in AI search</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>スイッチを混ぜない</h2>
+        <table>
+          <thead><tr><th>スイッチ</th><th>止まると</th><th>止まらない</th></tr></thead>
+          <tbody>
+            <tr><td>Googlebot / noindex</td><td>Search 全体</td><td>—</td></tr>
+            <tr><td>nosnippet 系</td><td>プレビューと AI 面の本文量</td><td>インデックス（noindex 以外）</td></tr>
+            <tr><td>Search generative AI control</td><td>AI Overviews / AI Mode / Discover の生成 AI</td><td>通常検索の順位。学習は止まらない</td></tr>
+            <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地</td><td>Search の掲載と順位</td></tr>
+          </tbody>
+        </table>
+        <p>生成 AI control の既定は掲載する、です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
+        <p class="note">学習だけ止めたいのに生成 AI control を除外する、は取り違えです。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Search Console, Search generative AI control</li>
+            <li>Google, New opportunities…（2026-06-03）</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>ChatGPT · Claude · Perplexity</h2>
+        <p>ChatGPT の掲載オプトアウトは OAI-SearchBot。約 24 時間。ChatGPT-User は検索掲載の判定に使いません。</p>
+        <p>公式コンソールが無い面は、固定プロンプトの定点観測です。言及、引用 URL、誤情報、日付、モデル名を残します。</p>
+        <p>「ブロックしたのに引用された」なら、まず公式の「robots.txt を無視しうる」行に当たります。</p>
+      </section>
+      <section class="step">
+        <h2>最小の指標</h2>
+        <ol class="plain">
+          <li>技術準備度（200 で本文を取れているか）。これは引用率ではない</li>
+          <li>言及率</li>
+          <li>引用率</li>
+          <li>正確性（価格・拠点の誤り）</li>
+          <li>Search Console（通常検索と、使えるなら生成 AI レポート）</li>
+        </ol>
+        <p>1 が落ちているのに、2 をコンテンツ改稿で取りに行きません。</p>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>学習されたくないが、AI Overviews には出したい。どのスイッチか。</li>
+            <li>生成 AI control で除外したあと、通常検索 3 位のまま。矛盾するか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. Google-Extended を Disallow。生成 AI control は触らない。Googlebot は許可。</p>
+            <p>2. 矛盾しません。公式は通常検索の順位シグナルに使わない、と書いています。</p>
+          </details>
+        </div>
+      </section>

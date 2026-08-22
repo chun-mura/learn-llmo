@@ -1,0 +1,111 @@
+      <section class="step">
+        <h2>三つの役割</h2>
+        <p>主要ベンダーはボットをだいたい三種に分けます。設定は独立です。</p>
+        <table>
+          <thead><tr><th>役割</th><th>名前の例</th><th>止めると</th></tr></thead>
+          <tbody>
+            <tr><td>学習</td><td>GPTBot, ClaudeBot, Google-Extended</td><td>将来の学習（と、製品によってはアプリ側の接地）から外れる</td></tr>
+            <tr><td>検索インデックス</td><td>OAI-SearchBot, Claude-SearchBot, PerplexityBot, Googlebot</td><td>その製品の出典候補から外れる</td></tr>
+            <tr><td>ユーザー起動</td><td>ChatGPT-User, Claude-User, Perplexity-User</td><td>今この質問のためのライブ取得</td></tr>
+          </tbody>
+        </table>
+        <p>学習だけ拒否して検索は許可する、が公式に想定されています。</p>
+      </section>
+      <section class="step">
+        <h2>OpenAI</h2>
+        <ul class="plain">
+          <li><strong>OAI-SearchBot</strong> ChatGPT の検索回答に出す。拒否すると検索回答に出ない。ナビリンクは残る場合あり。反映は約 24 時間</li>
+          <li><strong>GPTBot</strong> 基盤モデルの学習</li>
+          <li><strong>ChatGPT-User</strong> ユーザー操作に応じた取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない</li>
+        </ul>
+        <pre>User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /</pre>
+        <p>ChatGPT-User を拒否しても、robots.txt を見ない取得がありうると書いてあります。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>OpenAI, Overview of OpenAI Crawlers</li>
+            <li>Introducing ChatGPT search</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Anthropic</h2>
+        <table>
+          <thead><tr><th>ボット</th><th>用途</th><th>無効化すると</th></tr></thead>
+          <tbody>
+            <tr><td>ClaudeBot</td><td>学習になりうる収集</td><td>今後の学習から外す合図</td></tr>
+            <tr><td>Claude-User</td><td>ユーザー質問に応じた取得</td><td>ユーザー起点の可視性が下がる</td></tr>
+            <tr><td>Claude-SearchBot</td><td>検索用クロール</td><td>検索インデックスから外れる</td></tr>
+          </tbody>
+        </table>
+        <p>robots.txt と Crawl-delay を尊重する、CAPTCHA を迂回しない、IP ブロックは robots.txt が読めず不安定、と書いてあります。</p>
+        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められる、と書いてあります。ベンダー間で一致しません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Anthropic Help Center, crawler FAQ（更新表示 2026-04-07）</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Perplexity</h2>
+        <ul class="plain">
+          <li><strong>PerplexityBot</strong> 検索結果に出してリンクする。基盤モデル学習のためのクロールではない</li>
+          <li><strong>Perplexity-User</strong> ユーザーの質問に応じてページを取る。学習用ではない。<strong>一般に robots.txt を無視する</strong></li>
+        </ul>
+        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は User-Agent と公開 IP の両方を見ることを勧めています。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Perplexity Crawlers ドキュメント</li>
+            <li>GEO 論文 §6（実世界エンジンとして Perplexity.ai）</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Google</h2>
+        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけ別ボット、ではありません。</p>
+        <p>適格条件: インデックスされ、スニペット付きで Search に出せること。追加の技術要件はありません。</p>
+        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した User-Agent はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
+        <p>AI 面だけ止めたい場合は Search Console の生成 AI 制御です（第 8 課）。プレビューは nosnippet 系です。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Google, AI features and your website</li>
+            <li>Google's common crawlers</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>作業例</h2>
+        <p>方針: 学習には使われたくない。ChatGPT・Perplexity・Claude の回答には出てよい。Google Search（AI 含む）も出してよい。</p>
+        <pre>User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /</pre>
+        <p>Googlebot は触りません。Perplexity-User と ChatGPT-User は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>GPTBot だけ Disallow したサイトが ChatGPT search に出ない、は正しい推論か。</li>
+            <li>Google-Extended を拒否したのに AI Overviews に出るのはバグか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. 誤りです。検索掲載は OAI-SearchBot です。</p>
+            <p>2. バグではありません。Google-Extended は Search に使いません。</p>
+          </details>
+        </div>
+      </section>

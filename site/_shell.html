@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}} · LLMO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Fragment+Mono&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/learn.css">
+</head>
+<body class="desk" data-lesson="{{id}}">
+  <a class="skip" href="#steps">本文へ</a>
+  <aside class="rail" data-rail></aside>
+  <main class="stage">
+    <header class="lesson-head">
+      <p class="kicker">第{{n}}課</p>
+      <h1>{{title}}</h1>
+      <p class="goal"><span>この課のゴール</span>{{goal}}</p>
+    </header>
+    <p class="chunk-meter" data-meter>塊</p>
+    <div class="steps" id="steps">
+{{steps}}
+    </div>
+    <nav class="step-nav" aria-label="塊の移動">
+      <button type="button" class="ghost" data-prev>前の塊</button>
+      <button type="button" data-next>次の塊</button>
+      <span class="grow"></span>
+      <button type="button" class="ghost" data-all>全部見る</button>
+    </nav>
+  </main>
+  <script src="../js/learn.js"></script>
+</body>
+</html>

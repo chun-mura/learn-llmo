@@ -1,0 +1,76 @@
+      <section class="step">
+        <h2>三層を混ぜない</h2>
+        <div class="flow">
+          <b>1 届く</b><i>→</i><b>2 意味が付く</b><i>→</i><b>3 エージェントの地図</b>
+        </div>
+        <p>1 が Search と AI 出典の入場です。2 はリッチリザルト用の手がかりです。3 は llms.txt で、Search とは別系統です。</p>
+      </section>
+      <section class="step">
+        <h2>1. 届く</h2>
+        <p>Google の AI 機能に出典として出る条件は、通常 Search と同じです。インデックスされ、スニペット表示可能であること。追加要件はありません。</p>
+        <ul class="plain">
+          <li>検索ボットが robots.txt と WAF で止まっていない</li>
+          <li>対象 URL が 200 で本文を返す</li>
+          <li>重要情報が HTML テキストとして存在する</li>
+          <li>内部リンクで辿れる</li>
+        </ul>
+        <p>プレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が見た HTML にそのタグがあるかを見ます。</p>
+        <details class="source"><summary>出典</summary><ul><li>Google, AI features and your website</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>2. プレビューと構造化データ</h2>
+        <ul class="plain">
+          <li><code>noindex</code> Search 全体から外す。AI 出典にも使えない</li>
+          <li><code>nosnippet</code> 系 プレビューに出す量。厳しいほど AI 面も細くなる</li>
+        </ul>
+        <p>構造化データはページ内容の手がかりで、リッチリザルトの適格化に使います。推奨は JSON-LD。マークアップは見える本文と一致させます。空ページに JSON-LD だけは不可です。</p>
+        <p>生成 AI 検索のために特別な schema は不要です。必須でもありません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>succeeding in AI search</li>
+            <li>Intro to structured data</li>
+            <li>Google AI optimization guide, Mythbusting</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>3. llms.txt</h2>
+        <p>Jeremy Howard の提案です。サイトの地図を Markdown で置きます。必須は H1 の名前です。詳細はリンク先の <code>.md</code> に置きます。</p>
+        <p>Chrome Lighthouse はサーバーエラーならフラグ、404 なら N/A（任意）です。</p>
+        <p class="note">Google Search は llms.txt を使いません。ドキュメントをエージェントに案内する用途と、AI Overviews の出典選定は別です。</p>
+        <pre># Example Cloud Billing API
+
+&gt; 請求イベントを REST で送受信する。
+
+## Docs
+- [Authentication](https://example.com/docs/auth.html.md)</pre>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>llmstxt.org v2</li>
+            <li>Lighthouse llms.txt audit</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>点検順</h2>
+        <ol class="plain">
+          <li>200 とテキスト本文と内部リンク</li>
+          <li>検索用ボットの許可（学習用とは別）</li>
+          <li>意図せず noindex / nosnippet していないか</li>
+          <li>JSON-LD が見える本文と一致するか</li>
+          <li>ドキュメントサイトなら llms.txt</li>
+        </ol>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>FAQ の JSON-LD だけ正しく、画面の FAQ が空。何の違反か。AI Overviews の必須条件か。</li>
+            <li>Lighthouse が llms.txt で N/A。Search の失敗か。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. 見える内容と一致せよ、という構造化データのガイドライン違反です。AI Overviews の入場条件（インデックスとスニペット）とは別です。</p>
+            <p>2. 失敗ではありません。任意なので 404 は N/A です。</p>
+          </details>
+        </div>
+      </section>

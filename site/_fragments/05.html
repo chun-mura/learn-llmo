@@ -1,0 +1,67 @@
+      <section class="step">
+        <h2>何を測ったか</h2>
+        <p>論文: Aggarwal et al., GEO, KDD 2024。arXiv:2311.09735。</p>
+        <p>検索の「平均順位」は、出典が文中に散らばる生成回答には使えません。論文は impression を定義しました。</p>
+        <ul class="plain">
+          <li><strong>Word Count</strong> その出典に紐づく文の単語数の割合</li>
+          <li><strong>Position-Adjusted Word Count</strong> 先頭ほど重い</li>
+          <li><strong>Subjective Impression</strong> 関連性・影響・独自性など。LLM 採点を正規化</li>
+        </ul>
+        <p>改善率は、同じクエリでソースの 1 つだけを改変した前後の相対差です。</p>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>実験の条件</h2>
+        <div class="seal paper"><small>ここを外すと数字は使えない</small>内部 GE は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
+        <p>プロンプトは「検索結果だけを使え。文の直後に引用を付けよ」です。</p>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §3.1, §6</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>9 つの改変</h2>
+        <p>効いた側と、効かなかった側を先に分けます。</p>
+        <table>
+          <thead><tr><th>効いた（論文）</th><th>弱かった</th></tr></thead>
+          <tbody>
+            <tr><td>統計を足す、引用文、出典、流暢さ</td><td>キーワード詰め込み、独特な語</td></tr>
+            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（押しは弱い）</td></tr>
+          </tbody>
+        </table>
+        <p>3, 4, 5（キーワード・出典・引用）以外は、既存文の見せ方を変えるだけでよい、と著者は述べます。</p>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2.2</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>内部 GE の結果</h2>
+        <p>ベースラインの Overall は 19.3。トップ手法の相対改善は、位置補正単語数で約 41%、主観で約 28% です。</p>
+        <table>
+          <thead><tr><th>手法</th><th class="num">Overall</th><th>位置づけ</th></tr></thead>
+          <tbody>
+            <tr><td>改変なし</td><td class="num">19.3</td><td>ベースライン</td></tr>
+            <tr><td>Keyword Stuffing</td><td class="num">17.7</td><td>単語数系は悪化</td></tr>
+            <tr><td>Cite Sources</td><td class="num">24.6</td><td>高</td></tr>
+            <tr><td>Statistics Addition</td><td class="num">25.2</td><td>高</td></tr>
+            <tr><td>Quotation Addition</td><td class="num">27.2</td><td>最高</td></tr>
+          </tbody>
+        </table>
+        <p>Cite Sources は 5 位ソースで +115.1%、1 位は −30.3%。すでに上位 5 件に入っている 5 位の話であり、圏外ページの話ではありません。</p>
+        <details class="source"><summary>出典</summary><ul><li>Table 1, Table 2, §4, §5.2</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>Perplexity と限界</h2>
+        <p>Quotation は位置補正で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing はまた単語数系が悪化します。</p>
+        <p>著者自身の限界: エンジンが変われば手法も更新が要る。従来検索の順位への影響は未評価。クエリ分布は将来変わる。</p>
+        <p class="note">可視性は著者が定義した impression であり、クリックや売上ではありません。Google 公式は、この種のハックの多くを Search では無効と述べています。</p>
+        <details class="source"><summary>出典</summary><ul><li>Table 5, §6, §9</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>「引用を足したら 115% 上がる」を、誰のどの順位の、どの指標か、に直せ。</li>
+            <li>Keyword Stuffing の主観が Perplexity で上がり、位置補正単語数は下がる。論文の主指標はどれか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. Cite Sources。内部 GE。すでに上位 5 件の 5 位ソース。相対の可視性。</p>
+            <p>2. Position-Adjusted Word Count を主に見ます。主観だけ上がっても「効いた」とは言い切りません。</p>
+          </details>
+        </div>
+      </section>

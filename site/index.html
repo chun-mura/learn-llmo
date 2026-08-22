@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLMO を一塊ずつ読む</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Fragment+Mono&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/learn.css">
+</head>
+<body class="desk" data-lesson="00">
+  <a class="skip" href="#stage">本文へ</a>
+  <aside class="rail" data-rail>
+    <a class="rail-brand" href="#l00">LLMO 教材<strong>一塊ずつ読む</strong></a>
+    <nav aria-label="課の順">
+    <ol>
+      <li><a href="#l01"><span class="num">01</span><span>何を最適化するか</span></a></li>
+      <li><a href="#l02"><span class="num">02</span><span>検索してから書く</span></a></li>
+      <li><a href="#l03"><span class="num">03</span><span>SEO GEO LLMO AEO</span></a></li>
+      <li><a href="#l04"><span class="num">04</span><span>学習と検索は別</span></a></li>
+      <li><a href="#l05"><span class="num">05</span><span>数字の条件</span></a></li>
+      <li><a href="#l06"><span class="num">06</span><span>引用される塊</span></a></li>
+      <li><a href="#l07"><span class="num">07</span><span>届く・意味・地図</span></a></li>
+      <li><a href="#l08"><span class="num">08</span><span>スイッチを混ぜない</span></a></li>
+      <li><a href="#l09"><span class="num">09</span><span>一次情報で止める</span></a></li>
+      <li><a href="#l10"><span class="num">10</span><span>手を動かす</span></a></li>
+    </ol>
+    </nav>
+    <div class="rail-foot"><a href="#lg">用語集</a></div>
+  </aside>
+  <div class="stage" id="stage">
+
+    <section class="view is-on" id="l00" data-view="00">
+      <div class="home-hero">
+        <p class="kicker">調査日 2026-08-21 · 一次情報のみ</p>
+        <h1>一度に一塊だけ読む</h1>
+        <p>Markdown の長文を、机の上の教科書に組み直したものです。各課は 5〜7 の塊に切ってあり、次へを押すまで次の塊は出ません。出典は閉じてあります。</p>
+        <div class="pair">
+          <div class="seal paper"><small>朱 · 論文</small>GEO（KDD 2024）。すでに検索上位に入ったページを、生成が厚く引用するか。</div>
+          <div class="seal official"><small>藍 · 公式</small>Google Search。入場はインデックスとスニペット。SEO の土台が先。</div>
+        </div>
+        <p>二つは同じ「AI に載せる」でも、層が違います。混ぜないことが、この教材の核です。</p>
+        <p><a class="btn" href="#l01">第 1 課から始める</a></p>
+      </div>
+      <nav class="path" id="path" aria-label="課の順">
+        <a href="#l01"><span class="n">01</span><strong>LLMO とは何か</strong><em>何を最適化するか</em></a>
+        <a href="#l02"><span class="n">02</span><strong>生成エンジン</strong><em>検索してから書く</em></a>
+        <a href="#l03"><span class="n">03</span><strong>用語の地図</strong><em>SEO GEO LLMO AEO</em></a>
+        <a href="#l04"><span class="n">04</span><strong>ボットを分ける</strong><em>学習と検索は別</em></a>
+        <a href="#l05"><span class="n">05</span><strong>GEO 論文</strong><em>数字の条件</em></a>
+        <a href="#l06"><span class="n">06</span><strong>中身</strong><em>引用される塊</em></a>
+        <a href="#l07"><span class="n">07</span><strong>技術</strong><em>届く · 意味 · 地図</em></a>
+        <a href="#l08"><span class="n">08</span><strong>測定</strong><em>スイッチを混ぜない</em></a>
+        <a href="#l09"><span class="n">09</span><strong>誤解</strong><em>一次情報で止める</em></a>
+        <a href="#l10"><span class="n">10</span><strong>演習</strong><em>手を動かす</em></a>
+      </nav>
+      <p class="note home-note">キーボード: J / 右で次の塊、K / 左で戻る、A で全部表示。進捗はこのブラウザにだけ残ります。</p>
+    </section>
+
+    <section class="view" id="l01" data-view="01" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第1課</p>
+        <h1>LLMO とは何か</h1>
+        <p class="goal"><span>この課のゴール</span>「何を最適化するのか」を、SEO の順位と混ぜずに言える。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>先に一文</h2>
+        <p><span data-term="LLMO">LLMO</span> は、生成 AI が返す回答の中で、自社のページやブランドが <span data-term="言及">言及</span>・<span data-term="引用">引用</span>される状態を改善する取り組みです。</p>
+        <p>学術側の呼び名は <span data-term="GEO">GEO</span> です。Aggarwal らが KDD 2024 で定式化しました。</p>
+        <div class="pair">
+          <div class="seal paper"><small>論文</small>回答の中の出典の厚さを変える。</div>
+          <div class="seal official"><small>Google 公式</small>Search の土台（クロール・独自コンテンツ）が先。</div>
+        </div>
+        <p>二つは同じ現象を、別の条件で見ています。対象プロダクトを決めてから手を動かします。</p>
+      </section>
+      <section class="step">
+        <h2>何が変わったか</h2>
+        <p>従来の検索は、クエリに対してページのリストを返します。クリックされなければ中身は読まれません。</p>
+        <p>生成エンジンは、複数のページから文を組み立てて一つの回答を返し、途中に出典リンクを埋めます。</p>
+        <div class="flow">
+          <b>質問</b><i>→</i><b>文書を取る</b><i>→</i><b>一つの回答</b><i>→</i><b>出典リンク</b>
+        </div>
+        <p>サイト運営者が見る単位は「何位か」ではなく「回答のどの文が自分のページに紐づいたか」です。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 Abstract, §1</li>
+            <li>OpenAI, Introducing ChatGPT search（2024-10-31）</li>
+            <li>Google, New opportunities…（2026-06-03）。AI Overviews 月間 25 億 MAU は自己報告</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>名前は揃えない</h2>
+        <p>会話では相手の語に合わせます。社内では言及と引用を分けて測ります。</p>
+        <ul class="plain">
+          <li><strong>LLMO</strong> 日本の実務、英語のマーケ記事</li>
+          <li><strong>GEO</strong> 論文と海外ツール</li>
+          <li><strong>AEO</strong> 質問に直接答える面。強調スニペット時代からの言い回し</li>
+          <li><strong>AIO</strong> 文脈で全体を指したり、AI Overviews だけを指したりする</li>
+        </ul>
+        <p>Google は呼び方自体は否定しません。Search の生成 AI 面で効くとされるハックの多くは、仕組みと一致しない、と書いています。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 Abstract</li>
+            <li>Google AI optimization guide, Mythbusting</li>
+            <li>Search Engine Land の LLMO ガイド（流通記録。実験ではない）</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>SEO との関係</h2>
+        <p><span data-term="SEO">SEO</span> は、クロールされ、インデックスされ、クエリに対してページが選ばれるまでの最適化です。</p>
+        <p>Google の AI 機能は、同じ Search インデックスからページを取り出します（<span data-term="RAG">RAG</span>）。Search に出る資格がなければ、AI Overviews の出典候補にもなりません。</p>
+        <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラ方針が乗ります。</p>
+        <p>ChatGPT や Perplexity は Google のインデックスとは別経路です。第 4 課で扱います。</p>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Google, AI features and your website</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>可視性を三つに分ける</h2>
+        <ol class="plain">
+          <li><strong>取得された</strong> クローラや検索がページに届いた</li>
+          <li><strong>言及された</strong> 回答文にブランド名がある。リンクは無いこともある</li>
+          <li><strong>引用された</strong> 出典 URL が付いている</li>
+        </ol>
+        <p>1 は 3 の前提ですが、1 でも 3 にならないことは普通にあります。Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページが、画面上のリンクと一致するとは限らない書き方をしています。</p>
+        <p>生成回答では、同じ URL でも先頭か末尾か、何文が紐づくか、リンクを辿りそうかが変わります。論文はこれを <span data-term="impression">impression</span> と呼びました。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 §2.2</li>
+            <li>Google, AI features and your website</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>「Google で 3 位なのに ChatGPT に出ない」は LLMO の失敗か。何を調べて切り分けるか。</li>
+            <li>自分のブランド名で、言及と引用を一文ずつ書け。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. 別インデックス・別ボットの問題であることが多い。先に OAI-SearchBot の許可と WAF を見る。</p>
+            <p>2. 言及は回答文に店名が出る。引用は出典一覧に自社 URL がある。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l02" data-view="02" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第2課</p>
+        <h1>生成エンジンの仕組み</h1>
+        <p class="goal"><span>この課のゴール</span>処理の段取りを書き起こせる。fan-out で引用元がずれる理由を言える。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>共通の骨格</h2>
+        <p>生成エンジンは、だいたいこの順です。</p>
+        <div class="flow">
+          <b>1 分解</b><i>→</i><b>2 検索</b><i>→</i><b>3 要約</b><i>→</i><b>4 引用つき回答</b>
+        </div>
+        <ol class="plain">
+          <li>クエリを、検索しやすい部分クエリに分ける</li>
+          <li>検索エンジンが文書を返す</li>
+          <li>文書を要約する（実装によっては全文を渡す）</li>
+          <li>応答モデルが、出典つきの一つの回答を書く</li>
+        </ol>
+        <p>論文の実験はさらに単純です。Google の上位 5 件を取り、GPT-3.5 に「この結果だけを使え。文ごとに引用を付けよ」と指示しています。要約は省略しています。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 §2.1, §3.1, Listing 1</li>
+            <li>Google AI optimization guide（RAG / grounding）</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Query fan-out</h2>
+        <p>Google は AI Overviews と AI Mode の両方で、一つの質問から関連検索を複数出すことがある、と書いています。</p>
+        <p>公式の例: 元が「雑草だらけの芝生の直し方」なら、ファンアウト側は「芝生向けの除草剤」「化学薬品なしで雑草を取る」「雑草の予防」などです。</p>
+        <p class="note">引用されたページは、元クエリの SERP 上位である必要がありません。部分クエリで強く、その段落を支えられるページが選ばれる余地があります。逆に、元クエリで 1 位でも落ちます。</p>
+        <p>AI Overviews は、通常検索に追加価値があると判断されたときだけ出ます。常時ではありません。AI Mode と Overviews はモデルも手法も違い、リンク集合は一致しません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Google, AI features and your website</li>
+            <li>Google AI optimization guide</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>なぜ引用が付くか</h2>
+        <p>生成モデルは根拠のない文を書きます。製品側は、文を検索結果に紐づける制約を入れます。</p>
+        <p>論文のプロンプトは「すべての文の直後に、その文を完全に支える検索結果の引用を付けよ」とまで書いています。実際の製品はもっと緩いことがあります。</p>
+        <p>それでも、自己完結していて検証可能な主張がある塊は、引用の単位になりやすい、という作業仮説は論文の設計と矛盾しません。</p>
+        <p>Google は、重要な情報はテキストとして存在する必要がある、と繰り返しています。画像や動画は補助です。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 Listing 1</li>
+            <li>Google, AI features and your website</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>会話になると</h2>
+        <p>フォローアップ（比較、価格、次の手順）でも言及が起きます。ChatGPT search も、会話全体の文脈を使うと述べています。</p>
+        <p>測定するなら、初回クエリだけで終わらせません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 Appendix A</li>
+            <li>OpenAI, Introducing ChatGPT search</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>元クエリでは 40 位、関連する部分クエリでは 3 位。fan-out があるエンジンで引用候補になりうるか。</li>
+            <li>論文の +40% を Google AI Overviews にそのまま当てはめられない理由は、検索結果の取り方の違いか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. なりうる。fan-out は部分クエリの結果からページを足す、と Google が書いています。</p>
+            <p>2. その通りです。論文は上位 5 件固定と GPT-3.5。Google はコア Search の RAG と fan-out です。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l03" data-view="03" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第3課</p>
+        <h1>SEO · GEO · LLMO · AEO</h1>
+        <p class="goal"><span>この課のゴール</span>四つの略語を対象面で使い分けられる。Google が Search で SEO と言う範囲を言える。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>四つのラベル</h2>
+        <table>
+          <thead><tr><th>呼び名</th><th>よく指す面</th><th>測るもの</th></tr></thead>
+          <tbody>
+            <tr><td>SEO</td><td>ウェブ検索の発見・掲載・順位</td><td>掲載、クリック、コンバージョン</td></tr>
+            <tr><td>GEO</td><td>生成エンジンの回答内可視性</td><td>引用の位置・分量（論文）、言及率（実務）</td></tr>
+            <tr><td>LLMO</td><td>LLM 製品の回答全般</td><td>言及、引用、正確さ</td></tr>
+            <tr><td>AEO</td><td>「答え」そのものが出る面</td><td>スニペット、AI 概要</td></tr>
+          </tbody>
+        </table>
+        <p>論文は、生成エンジンはキーワード一致に閉じないので従来 SEO はそのままでは足りない、と書きます。</p>
+        <p>Google は、生成 AI 機能はコアのランキングに根ざしているので SEO のベストプラクティスは今も妥当、と先に答えます。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>GEO 論文 §7</li>
+            <li>Google AI optimization guide, Is SEO still relevant</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>矛盾に見える理由</h2>
+        <div class="pair">
+          <div class="seal paper"><small>論文が見ている層</small>すでに検索結果の上位 5 件に入ったページを、生成プロンプトの中でどう見せるか。</div>
+          <div class="seal official"><small>Google が見ている層</small>その上位に入るまでのシステム。生成 AI 面に特別な別技術は要らないこと。</div>
+        </div>
+        <p>上位 5 件に入れないページに、論文の文体変更だけを施しても、RAG がそのページを取らなければ実験の前提に乗りません。</p>
+      </section>
+      <section class="step">
+        <h2>Google Search でしなくていいこと</h2>
+        <p>公式ガイドの Mythbusting です。対象は Google Search（生成 AI 機能を含む）です。</p>
+        <ul class="plain">
+          <li>llms.txt や AI 専用マークアップ。Search は使わない</li>
+          <li>AI 向けにコンテンツを細切れにすること。長さは読者に合わせる</li>
+          <li>AI 向けに書き直すこと。同義語は理解する。薄いページの量産は scaled content abuse になりうる</li>
+          <li>不自然な言及集め</li>
+          <li>構造化データへの過剰な期待。生成 AI 検索に必須ではない。リッチリザルト用としては従来どおり有用</li>
+        </ul>
+        <p class="note">Google の AI に出たいなら、第 6 課の独自コンテンツと第 7 課の技術要件が先です。論文の 9 手法は後です。</p>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Google AI optimization guide, Mythbusting</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>ChatGPT に出たいとき</h2>
+        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。掲載の可否は <span data-term="OAI-SearchBot">OAI-SearchBot</span> の robots.txt です。</p>
+        <p>こちらは論文の「検索結果に載ったあと、生成がどの出典を厚く書くか」に近い条件です。ただし論文の内部エンジンは GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>OpenAI, Introducing ChatGPT search</li>
+            <li>OpenAI crawlers</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>チケットを分ける</h2>
+        <p>例: 採用サイトを「この会社のリモート方針は？」に載せたい。</p>
+        <ul class="plain">
+          <li>Google AI Overviews: インデックスとスニペット。方針が本文に平文。一次情報か</li>
+          <li>ChatGPT: OAI-SearchBot の許可。公式ページが一意か。第三者でも同じ事実か</li>
+          <li>論文由来の改稿: 数値と日付、出典を本文に置く</li>
+        </ul>
+        <p>三つを一つの「LLMO 施策」にまとめません。</p>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>「GEO 論文で +40% だから llms.txt を全ページに置け」。どの行で止めるか。</li>
+            <li>SEO を捨てて LLMO だけやる、が成り立たない理由を RAG から書け。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. Google は Search で llms.txt を使わない、と書いています。+40% は論文の内部 GE の話です。</p>
+            <p>2. Google の生成 AI は Search インデックスから取ります。入場できなければ出典候補になりません。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l04" data-view="04" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第4課</p>
+        <h1>ボットを分ける</h1>
+        <p class="goal"><span>この課のゴール</span>学習用と検索用を分けて robots.txt を書ける。ユーザー起動フェッチャの差を言える。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>三つの役割</h2>
+        <p>主要ベンダーはボットをだいたい三種に分けます。設定は独立です。</p>
+        <table>
+          <thead><tr><th>役割</th><th>名前の例</th><th>止めると</th></tr></thead>
+          <tbody>
+            <tr><td>学習</td><td>GPTBot, ClaudeBot, Google-Extended</td><td>将来の学習（と、製品によってはアプリ側の接地）から外れる</td></tr>
+            <tr><td>検索インデックス</td><td>OAI-SearchBot, Claude-SearchBot, PerplexityBot, Googlebot</td><td>その製品の出典候補から外れる</td></tr>
+            <tr><td>ユーザー起動</td><td>ChatGPT-User, Claude-User, Perplexity-User</td><td>今この質問のためのライブ取得</td></tr>
+          </tbody>
+        </table>
+        <p>学習だけ拒否して検索は許可する、が公式に想定されています。</p>
+      </section>
+      <section class="step">
+        <h2>OpenAI</h2>
+        <ul class="plain">
+          <li><strong>OAI-SearchBot</strong> ChatGPT の検索回答に出す。拒否すると検索回答に出ない。ナビリンクは残る場合あり。反映は約 24 時間</li>
+          <li><strong>GPTBot</strong> 基盤モデルの学習</li>
+          <li><strong>ChatGPT-User</strong> ユーザー操作に応じた取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない</li>
+        </ul>
+        <pre>User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /</pre>
+        <p>ChatGPT-User を拒否しても、robots.txt を見ない取得がありうると書いてあります。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>OpenAI, Overview of OpenAI Crawlers</li>
+            <li>Introducing ChatGPT search</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Anthropic</h2>
+        <table>
+          <thead><tr><th>ボット</th><th>用途</th><th>無効化すると</th></tr></thead>
+          <tbody>
+            <tr><td>ClaudeBot</td><td>学習になりうる収集</td><td>今後の学習から外す合図</td></tr>
+            <tr><td>Claude-User</td><td>ユーザー質問に応じた取得</td><td>ユーザー起点の可視性が下がる</td></tr>
+            <tr><td>Claude-SearchBot</td><td>検索用クロール</td><td>検索インデックスから外れる</td></tr>
+          </tbody>
+        </table>
+        <p>robots.txt と Crawl-delay を尊重する、CAPTCHA を迂回しない、IP ブロックは robots.txt が読めず不安定、と書いてあります。</p>
+        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められる、と書いてあります。ベンダー間で一致しません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Anthropic Help Center, crawler FAQ（更新表示 2026-04-07）</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Perplexity</h2>
+        <ul class="plain">
+          <li><strong>PerplexityBot</strong> 検索結果に出してリンクする。基盤モデル学習のためのクロールではない</li>
+          <li><strong>Perplexity-User</strong> ユーザーの質問に応じてページを取る。学習用ではない。<strong>一般に robots.txt を無視する</strong></li>
+        </ul>
+        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は User-Agent と公開 IP の両方を見ることを勧めています。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Perplexity Crawlers ドキュメント</li>
+            <li>GEO 論文 §6（実世界エンジンとして Perplexity.ai）</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Google</h2>
+        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけ別ボット、ではありません。</p>
+        <p>適格条件: インデックスされ、スニペット付きで Search に出せること。追加の技術要件はありません。</p>
+        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した User-Agent はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
+        <p>AI 面だけ止めたい場合は Search Console の生成 AI 制御です（第 8 課）。プレビューは nosnippet 系です。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Google, AI features and your website</li>
+            <li>Google's common crawlers</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>作業例</h2>
+        <p>方針: 学習には使われたくない。ChatGPT・Perplexity・Claude の回答には出てよい。Google Search（AI 含む）も出してよい。</p>
+        <pre>User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /</pre>
+        <p>Googlebot は触りません。Perplexity-User と ChatGPT-User は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>GPTBot だけ Disallow したサイトが ChatGPT search に出ない、は正しい推論か。</li>
+            <li>Google-Extended を拒否したのに AI Overviews に出るのはバグか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. 誤りです。検索掲載は OAI-SearchBot です。</p>
+            <p>2. バグではありません。Google-Extended は Search に使いません。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l05" data-view="05" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第5課</p>
+        <h1>GEO 論文を読む</h1>
+        <p class="goal"><span>この課のゴール</span>「最大 40%」を、指標・エンジン・改変対象つきで引用できる。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>何を測ったか</h2>
+        <p>論文: Aggarwal et al., GEO, KDD 2024。arXiv:2311.09735。</p>
+        <p>検索の「平均順位」は、出典が文中に散らばる生成回答には使えません。論文は impression を定義しました。</p>
+        <ul class="plain">
+          <li><strong>Word Count</strong> その出典に紐づく文の単語数の割合</li>
+          <li><strong>Position-Adjusted Word Count</strong> 先頭ほど重い</li>
+          <li><strong>Subjective Impression</strong> 関連性・影響・独自性など。LLM 採点を正規化</li>
+        </ul>
+        <p>改善率は、同じクエリでソースの 1 つだけを改変した前後の相対差です。</p>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>実験の条件</h2>
+        <div class="seal paper"><small>ここを外すと数字は使えない</small>内部 GE は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
+        <p>プロンプトは「検索結果だけを使え。文の直後に引用を付けよ」です。</p>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §3.1, §6</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>9 つの改変</h2>
+        <p>効いた側と、効かなかった側を先に分けます。</p>
+        <table>
+          <thead><tr><th>効いた（論文）</th><th>弱かった</th></tr></thead>
+          <tbody>
+            <tr><td>統計を足す、引用文、出典、流暢さ</td><td>キーワード詰め込み、独特な語</td></tr>
+            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（押しは弱い）</td></tr>
+          </tbody>
+        </table>
+        <p>3, 4, 5（キーワード・出典・引用）以外は、既存文の見せ方を変えるだけでよい、と著者は述べます。</p>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2.2</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>内部 GE の結果</h2>
+        <p>ベースラインの Overall は 19.3。トップ手法の相対改善は、位置補正単語数で約 41%、主観で約 28% です。</p>
+        <table>
+          <thead><tr><th>手法</th><th class="num">Overall</th><th>位置づけ</th></tr></thead>
+          <tbody>
+            <tr><td>改変なし</td><td class="num">19.3</td><td>ベースライン</td></tr>
+            <tr><td>Keyword Stuffing</td><td class="num">17.7</td><td>単語数系は悪化</td></tr>
+            <tr><td>Cite Sources</td><td class="num">24.6</td><td>高</td></tr>
+            <tr><td>Statistics Addition</td><td class="num">25.2</td><td>高</td></tr>
+            <tr><td>Quotation Addition</td><td class="num">27.2</td><td>最高</td></tr>
+          </tbody>
+        </table>
+        <p>Cite Sources は 5 位ソースで +115.1%、1 位は −30.3%。すでに上位 5 件に入っている 5 位の話であり、圏外ページの話ではありません。</p>
+        <details class="source"><summary>出典</summary><ul><li>Table 1, Table 2, §4, §5.2</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>Perplexity と限界</h2>
+        <p>Quotation は位置補正で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing はまた単語数系が悪化します。</p>
+        <p>著者自身の限界: エンジンが変われば手法も更新が要る。従来検索の順位への影響は未評価。クエリ分布は将来変わる。</p>
+        <p class="note">可視性は著者が定義した impression であり、クリックや売上ではありません。Google 公式は、この種のハックの多くを Search では無効と述べています。</p>
+        <details class="source"><summary>出典</summary><ul><li>Table 5, §6, §9</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>「引用を足したら 115% 上がる」を、誰のどの順位の、どの指標か、に直せ。</li>
+            <li>Keyword Stuffing の主観が Perplexity で上がり、位置補正単語数は下がる。論文の主指標はどれか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. Cite Sources。内部 GE。すでに上位 5 件の 5 位ソース。相対の可視性。</p>
+            <p>2. Position-Adjusted Word Count を主に見ます。主観だけ上がっても「効いた」とは言い切りません。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l06" data-view="06" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第6課</p>
+        <h1>中身が引用される条件</h1>
+        <p class="goal"><span>この課のゴール</span>対象エンジンを決めたうえで、ページを答えの材料として直せる。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>Google が先に置けと言うこと</h2>
+        <p>公式ガイドの中心は、unique / non-commodity / people-first です。</p>
+        <ul class="plain">
+          <li>一人称の経験や一次データがある</li>
+          <li>読者が直接来ても満たされる</li>
+          <li>見出しは内容の要約で、煽りではない</li>
+          <li>出典が本文から辿れる</li>
+          <li>事実誤認がすぐ見つかる書き方をしていない</li>
+        </ul>
+        <p>ファンアウトクエリごとに薄いページを量産するのは、効果がなくポリシー違反になりうると公式が書いています。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Google AI optimization guide</li>
+            <li>Creating helpful, people-first content</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>論文が、候補に入ったページで効いた改変</h2>
+        <p>対象は、検索で既に拾われているページです。</p>
+        <ul class="plain">
+          <li>統計を足す。「人気」を「n と年つきの数」に変える</li>
+          <li>出典を本文に書く。誰がいつ言ったか</li>
+          <li>一次資料の短い引用文</li>
+          <li>読みやすくする。権威的トーンだけは押しが弱い</li>
+          <li>キーワードを詰め込まない</li>
+        </ul>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §4, Table 4</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>作業例: 請求書ツールの比較</h2>
+        <p>改稿前（誰でも書ける）:</p>
+        <blockquote>請求書ツールを選ぶときは、使いやすさ、価格、サポートが大切です。クラウド型がおすすめです。</blockquote>
+        <p>改稿後（検証できる）:</p>
+        <blockquote>2026 年 6 月、当社が既存顧客 40 社に聞いた切り替え理由では、28 社が月額の比較を最初の軸にしていた。導入期間の中央値は 11 営業日（最短 3、最長 47）だった。</blockquote>
+        <p>同じ事実を、見出し直下の短い段落に自己完結させて置きます。Google はチャンク分割を必須とは言いません。読者にとっても引用単位としても、段落が質問に答えている方が使いやすい、というだけです。</p>
+        <p>やってはいけない例: ファンアウト用に 200 文字のハブを 50 本生やす。「専門家によると」だけで名前も年も無い統計。</p>
+      </section>
+      <section class="step">
+        <h2>対象で優先順位を変える</h2>
+        <table>
+          <thead><tr><th>目的</th><th>先に直すもの</th></tr></thead>
+          <tbody>
+            <tr><td>Google AI Overviews / AI Mode</td><td>インデックス、本文の一次情報、ページ体験。論文の文体は二次</td></tr>
+            <tr><td>ChatGPT / Perplexity / Claude 検索</td><td>検索ボットの許可、公式事実の一意なページ。そのうえで統計・出典</td></tr>
+            <tr><td>両方</td><td>一次情報を一つの正規 URL に置く</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>自社 FAQ を 1 件、数値か日付か出典つきの一文に直せるか。作れないなら引用材料になっていない。</li>
+            <li>ファンアウト用にページを増やしていないか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>作れない事実は、まだ一次情報がない、ということです。薄い量産は公式が止めています。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l07" data-view="07" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第7課</p>
+        <h1>技術的な準備</h1>
+        <p class="goal"><span>この課のゴール</span>届く・意味が付く・エージェント用地図を混ぜずに点検できる。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>三層を混ぜない</h2>
+        <div class="flow">
+          <b>1 届く</b><i>→</i><b>2 意味が付く</b><i>→</i><b>3 エージェントの地図</b>
+        </div>
+        <p>1 が Search と AI 出典の入場です。2 はリッチリザルト用の手がかりです。3 は llms.txt で、Search とは別系統です。</p>
+      </section>
+      <section class="step">
+        <h2>1. 届く</h2>
+        <p>Google の AI 機能に出典として出る条件は、通常 Search と同じです。インデックスされ、スニペット表示可能であること。追加要件はありません。</p>
+        <ul class="plain">
+          <li>検索ボットが robots.txt と WAF で止まっていない</li>
+          <li>対象 URL が 200 で本文を返す</li>
+          <li>重要情報が HTML テキストとして存在する</li>
+          <li>内部リンクで辿れる</li>
+        </ul>
+        <p>プレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が見た HTML にそのタグがあるかを見ます。</p>
+        <details class="source"><summary>出典</summary><ul><li>Google, AI features and your website</li></ul></details>
+      </section>
+      <section class="step">
+        <h2>2. プレビューと構造化データ</h2>
+        <ul class="plain">
+          <li><code>noindex</code> Search 全体から外す。AI 出典にも使えない</li>
+          <li><code>nosnippet</code> 系 プレビューに出す量。厳しいほど AI 面も細くなる</li>
+        </ul>
+        <p>構造化データはページ内容の手がかりで、リッチリザルトの適格化に使います。推奨は JSON-LD。マークアップは見える本文と一致させます。空ページに JSON-LD だけは不可です。</p>
+        <p>生成 AI 検索のために特別な schema は不要です。必須でもありません。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>succeeding in AI search</li>
+            <li>Intro to structured data</li>
+            <li>Google AI optimization guide, Mythbusting</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>3. llms.txt</h2>
+        <p>Jeremy Howard の提案です。サイトの地図を Markdown で置きます。必須は H1 の名前です。詳細はリンク先の <code>.md</code> に置きます。</p>
+        <p>Chrome Lighthouse はサーバーエラーならフラグ、404 なら N/A（任意）です。</p>
+        <p class="note">Google Search は llms.txt を使いません。ドキュメントをエージェントに案内する用途と、AI Overviews の出典選定は別です。</p>
+        <pre># Example Cloud Billing API
+
+&gt; 請求イベントを REST で送受信する。
+
+## Docs
+- [Authentication](https://example.com/docs/auth.html.md)</pre>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>llmstxt.org v2</li>
+            <li>Lighthouse llms.txt audit</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>点検順</h2>
+        <ol class="plain">
+          <li>200 とテキスト本文と内部リンク</li>
+          <li>検索用ボットの許可（学習用とは別）</li>
+          <li>意図せず noindex / nosnippet していないか</li>
+          <li>JSON-LD が見える本文と一致するか</li>
+          <li>ドキュメントサイトなら llms.txt</li>
+        </ol>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>FAQ の JSON-LD だけ正しく、画面の FAQ が空。何の違反か。AI Overviews の必須条件か。</li>
+            <li>Lighthouse が llms.txt で N/A。Search の失敗か。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. 見える内容と一致せよ、という構造化データのガイドライン違反です。AI Overviews の入場条件（インデックスとスニペット）とは別です。</p>
+            <p>2. 失敗ではありません。任意なので 404 は N/A です。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l08" data-view="08" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第8課</p>
+        <h1>測定とコントロール</h1>
+        <p class="goal"><span>この課のゴール</span>学習・AI 面・青リンクを別スイッチで扱える。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>Google で測る</h2>
+        <ul class="plain">
+          <li>AI 機能の掲載も Search Console の Web 検索タイプに含まれる</li>
+          <li>Generative AI performance report で生成 AI 面を見る</li>
+          <li>AI Overviews 経由のクリックは滞在が長い、という Google 側の観察。クリック数だけ見るとこの面の価値を落とします</li>
+        </ul>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>AI features and your website</li>
+            <li>succeeding in AI search</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>スイッチを混ぜない</h2>
+        <table>
+          <thead><tr><th>スイッチ</th><th>止まると</th><th>止まらない</th></tr></thead>
+          <tbody>
+            <tr><td>Googlebot / noindex</td><td>Search 全体</td><td>—</td></tr>
+            <tr><td>nosnippet 系</td><td>プレビューと AI 面の本文量</td><td>インデックス（noindex 以外）</td></tr>
+            <tr><td>Search generative AI control</td><td>AI Overviews / AI Mode / Discover の生成 AI</td><td>通常検索の順位。学習は止まらない</td></tr>
+            <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地</td><td>Search の掲載と順位</td></tr>
+          </tbody>
+        </table>
+        <p>生成 AI control の既定は掲載する、です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
+        <p class="note">学習だけ止めたいのに生成 AI control を除外する、は取り違えです。</p>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Search Console, Search generative AI control</li>
+            <li>Google, New opportunities…（2026-06-03）</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>ChatGPT · Claude · Perplexity</h2>
+        <p>ChatGPT の掲載オプトアウトは OAI-SearchBot。約 24 時間。ChatGPT-User は検索掲載の判定に使いません。</p>
+        <p>公式コンソールが無い面は、固定プロンプトの定点観測です。言及、引用 URL、誤情報、日付、モデル名を残します。</p>
+        <p>「ブロックしたのに引用された」なら、まず公式の「robots.txt を無視しうる」行に当たります。</p>
+      </section>
+      <section class="step">
+        <h2>最小の指標</h2>
+        <ol class="plain">
+          <li>技術準備度（200 で本文を取れているか）。これは引用率ではない</li>
+          <li>言及率</li>
+          <li>引用率</li>
+          <li>正確性（価格・拠点の誤り）</li>
+          <li>Search Console（通常検索と、使えるなら生成 AI レポート）</li>
+        </ol>
+        <p>1 が落ちているのに、2 をコンテンツ改稿で取りに行きません。</p>
+      </section>
+      <section class="step">
+        <h2>確認</h2>
+        <div class="quiz">
+          <ol>
+            <li>学習されたくないが、AI Overviews には出したい。どのスイッチか。</li>
+            <li>生成 AI control で除外したあと、通常検索 3 位のまま。矛盾するか。</li>
+          </ol>
+          <details class="hint"><summary>指針を見る</summary>
+            <p>1. Google-Extended を Disallow。生成 AI control は触らない。Googlebot は許可。</p>
+            <p>2. 矛盾しません。公式は通常検索の順位シグナルに使わない、と書いています。</p>
+          </details>
+        </div>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l09" data-view="09" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第9課</p>
+        <h1>よくある誤解</h1>
+        <p class="goal"><span>この課のゴール</span>一次情報で止められる誤解を、自分の言葉で潰せる。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>止められる誤解だけ書く</h2>
+        <p>一次情報で止められない噂は、次の塊の末尾で「未検証」とラベルします。</p>
+      </section>
+      <section class="step">
+        <div class="myth">
+          <h2>1. LLMO をやれば SEO は不要</h2>
+          <p>Google の生成 AI は Search インデックスからの RAG です。スニペット可能なインデックスが入場条件です。</p>
+        </div>
+        <div class="myth">
+          <h2>2. 論文の最大 40% は Google の公式効果</h2>
+          <p>内部エンジンは GPT-3.5 と Google 上位 5 件です。指標は著者が定義した impression です。</p>
+        </div>
+      </section>
+      <section class="step">
+        <div class="myth">
+          <h2>3. キーワードを増やせば生成 AI にも効く</h2>
+          <p>論文では Keyword Stuffing が位置補正単語数を下げました。Google は薄いバリエーションページを scaled content abuse になりうると案内しています。</p>
+        </div>
+        <div class="myth">
+          <h2>4. llms.txt を置けば ChatGPT と Google に載る</h2>
+          <p>提案仕様です。Google Search は使わないと明記しています。</p>
+        </div>
+      </section>
+      <section class="step">
+        <div class="myth">
+          <h2>5. 構造化データを入れれば AI に引用される</h2>
+          <p>リッチリザルト用です。生成 AI 検索に必須ではありません。本文に無い情報を JSON-LD だけに書くのはガイドライン違反です。</p>
+        </div>
+        <div class="myth">
+          <h2>6. GPTBot を拒否すると ChatGPT search に出ない</h2>
+          <p>GPTBot は学習、OAI-SearchBot は検索です。独立です。</p>
+        </div>
+      </section>
+      <section class="step">
+        <div class="myth">
+          <h2>7. Google-Extended を拒否すると AI Overviews に出ない</h2>
+          <p>Gemini アプリと Vertex の話です。Search の掲載には使いません。</p>
+        </div>
+        <div class="myth">
+          <h2>8. robots.txt で全 AI を止められる</h2>
+          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Claude-User は尊重すると書いてあります。秘密 URL は認証します。</p>
+        </div>
+      </section>
+      <section class="step">
+        <div class="myth">
+          <h2>9. 権威的な文体にすれば選ばれる</h2>
+          <p>論文では統計・引用・流暢さの方が強いです。</p>
+        </div>
+        <div class="myth">
+          <h2>10. AI Overviews に出ないのは常に失敗</h2>
+          <p>追加価値があるときだけ出ます。出ないクエリでは青リンクが本戦です。</p>
+        </div>
+        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、UGC の引用割合。</p>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="l10" data-view="10" hidden>
+      <header class="lesson-head">
+        <p class="kicker">第10課</p>
+        <h1>演習</h1>
+        <p class="goal"><span>この課のゴール</span>自サイト（または架空の店）で点検できる。</p>
+      </header>
+      <p class="chunk-meter" data-meter>塊</p>
+      <div class="steps">
+      <section class="step">
+        <h2>演習 A · 用語</h2>
+        <p>自社、または架空の「京都の小さな工具店」について、各 1 文。</p>
+        <ol class="plain">
+          <li>SEO が成功した状態</li>
+          <li>LLMO が成功した状態（言及と引用を分けてよい）</li>
+          <li>両方成功しているがクリックが減っている状態が起きうる理由</li>
+        </ol>
+        <details class="hint"><summary>指針を見る</summary>
+          <p>1 は順位または掲載。2 は回答文の中。3 はゼロクリックと、滞在の長いクリックの両方を検討します。</p>
+        </details>
+      </section>
+      <section class="step">
+        <h2>演習 B · robots.txt</h2>
+        <p>意図を 3 行で説明し、ChatGPT search に出たいのに出ない原因になりうる行を指摘してください。</p>
+        <pre>User-agent: *
+Disallow: /
+
+User-agent: GPTBot
+Allow: /</pre>
+        <details class="hint"><summary>指針を見る</summary>
+          <p><code>*</code> の Disallow は、名前付きグループが無いボットに効きます。OAI-SearchBot 専用が無いと検索ボットまで止まります。GPTBot の Allow は検索掲載ではありません。</p>
+        </details>
+      </section>
+      <section class="step">
+        <h2>演習 C · 論文の数字</h2>
+        <blockquote>GEO をやると誰でも 40% 上がる。5 位でも 1 位を殴れる。</blockquote>
+        <p>正確な一文に直してください。</p>
+        <details class="hint"><summary>指針を見る</summary>
+          <p>内部 GE、Position-Adjusted Word Count の上限、ソースはすでに上位 5 件。Cite Sources の +115% は 5 位の相対改善。1 位は平均で減りうる。クリックではない。</p>
+        </details>
+      </section>
+      <section class="step">
+        <h2>演習 D · ページ添削</h2>
+        <p>公開ページを 1 つ選び、表を埋めてください。個人情報は書かない。</p>
+        <table>
+          <thead><tr><th>点検</th><th>現状</th><th>直すなら</th></tr></thead>
+          <tbody>
+            <tr><td>検索ボットは 200 で本文を取るか</td><td></td><td></td></tr>
+            <tr><td>見出し直下が質問に自己完結するか</td><td></td><td></td></tr>
+            <tr><td>数値・日付・出典があるか</td><td></td><td></td></tr>
+            <tr><td>JSON-LD が見える本文と一致するか</td><td></td><td></td></tr>
+            <tr><td>公式が空で、他サイトだけ正しいか</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="step">
+        <h2>演習 E · スイッチ</h2>
+        <p>On / Off だけ決めてください。実装手順は書かない。</p>
+        <ol class="plain">
+          <li>通常検索には出したい。AI Overviews には出したくない。Gemini アプリの学習にも使われたくない</li>
+          <li>ChatGPT search には出したい。将来の GPT 学習には使われたくない</li>
+          <li>Perplexity の回答には出したいが、ライブ取得の負荷は下げたい</li>
+        </ol>
+        <details class="hint"><summary>指針を見る</summary>
+          <p>1. 生成 AI control が使えるなら除外。Google-Extended は Disallow。Googlebot は許可。</p>
+          <p>2. GPTBot Disallow、OAI-SearchBot Allow。</p>
+          <p>3. PerplexityBot は許可。Perplexity-User は一般に robots.txt を無視します。負荷はキャッシュ側の話になります。</p>
+        </details>
+      </section>
+      <section class="step">
+        <h2>演習 F · 定点観測</h2>
+        <p>プロンプトを 10 個。半分は「〜とは」、半分は比較・購入型。</p>
+        <p>記録する列: 日付、製品、検索の On/Off、モデル名、言及、引用 URL、誤情報、保存場所。</p>
+        <p>1 週間後に同じ 10 個を再実行します。変化を「コンテンツを変えたから」と因果づけないでください。エンジン側の変動があります。</p>
+        <p class="note">10 課はここまでです。原文はリポジトリの research/SOURCES.md から辿れます。</p>
+      </section>
+
+      </div>
+      <nav class="step-nav" aria-label="塊の移動">
+        <button type="button" class="ghost" data-prev>前の塊</button>
+        <button type="button" data-next>次の塊</button>
+        <span class="grow"></span>
+        <button type="button" class="ghost" data-all>全部見る</button>
+      </nav>
+    </section>
+
+    <section class="view" id="lg" data-view="g" hidden>
+      <header class="lesson-head">
+        <p class="kicker">付録</p>
+        <h1>用語集</h1>
+        <p class="goal"><span>使い方</span>作業用の定義です。法令上の定義ではありません。点線の語にマウスを置くと同じ説明が出ます。</p>
+      </header>
+      <dl class="dl" style="max-width:38rem">
+        <dt>AEO</dt><dd>質問に対する直接回答面への最適化という業界用語。Google の製品名ではない。</dd>
+        <dt>AI Mode / AI Overviews</dt><dd>Google Search の生成 AI 面。両者はモデルも手法も違い、出るリンクも一致しない。Overviews は追加価値があるときだけ出る。</dd>
+        <dt>ChatGPT-User</dt><dd>ユーザー起動の取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない。</dd>
+        <dt>ClaudeBot / SearchBot / User</dt><dd>Anthropic の学習 / 検索 / ユーザー起動。robots.txt を尊重すると公式が述べる。</dd>
+        <dt>E-E-A-T</dt><dd>経験・専門性・権威性・信頼性。単一のランキング因子ではない。</dd>
+        <dt>GEO</dt><dd>Generative Engine Optimization。KDD 2024 の枠組み。</dd>
+        <dt>Google-Extended</dt><dd>Gemini アプリと Vertex の学習・接地。Search の掲載・順位には使わない。</dd>
+        <dt>GPTBot</dt><dd>OpenAI の学習用。検索掲載とは独立。</dd>
+        <dt>grounding / RAG</dt><dd>検索で取ったページに回答を接地する。</dd>
+        <dt>impression</dt><dd>論文の可視性。単語数、位置補正単語数、主観印象。</dd>
+        <dt>llms.txt</dt><dd>エージェント向けの Markdown 地図。Google Search は使わない。</dd>
+        <dt>LLMO</dt><dd>LLM の回答で言及・引用される状態を改善する実務用語。</dd>
+        <dt>言及 / 引用</dt><dd>言及は名前が出ること。引用は出典 URL が付くこと。</dd>
+        <dt>OAI-SearchBot</dt><dd>ChatGPT search 用インデックス。拒否すると検索回答に出ない。</dd>
+        <dt>PerplexityBot / User</dt><dd>検索掲載 / ユーザー起動。後者は一般に robots.txt を無視する。</dd>
+        <dt>query fan-out</dt><dd>一つの質問から複数の関連検索を同時に出すこと。</dd>
+        <dt>Search generative AI control</dt><dd>Search Console の生成 AI 面トグル。学習オプトアウトではない。</dd>
+        <dt>SEO</dt><dd>検索向けの発見・理解・掲載。Google は生成 AI 面でも土台だとする。</dd>
+        <dt>構造化データ</dt><dd>JSON-LD 等。リッチリザルト用。生成 AI 検索の必須条件ではない。</dd>
+      </dl>
+    </section>
+
+  </div>
+  <script src="js/learn.js"></script>
+</body>
+</html>
