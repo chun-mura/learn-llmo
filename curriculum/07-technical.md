@@ -76,6 +76,19 @@ Google の公式ガイド末尾は、ブラウザエージェントがスクリ�
 
 これは LLMO（回答内引用）より一段先の、操作可能なサイトの話である。混線させない。
 
+## Bing / Copilot の別スイッチ
+
+Google の話をそのまま Bing に持っていくと外す。Bing は 2023-09-22 の [Webmaster Blog](https://blogs.bing.com/webmaster/september-2023/Announcing-new-options-for-webmasters-to-control-usage-of-their-content-in-Bing-Chat) で、既存のメタタグを AI 側の制御に転用すると発表している。
+
+| タグ | Copilot / Bing Chat の回答 | 学習 | 通常の Bing 検索表示 |
+|---|---|---|---|
+| `NOCACHE` | "may be included in Bing Chat answers. We will only display URL/Snippet/Title" | URL・タイトル・スニペットのみ使われうる | 変わらない |
+| `NOARCHIVE` | "will not be included in Bing Chat answers, not be linked to in the answers" | 使わない | 変わらない |
+
+両方あるときは NOCACHE として扱う、と明記されている。
+
+IndexNow は、参加検索エンジンに URL の更新を通知する仕組みで、"submitted URLs will be automatically shared with all other participating search engines" と書かれている。**公式文書に AI 回答との関係の記述は無く、Google も出てこない**。AI 対策として売られている場合、その根拠は一次情報に無い。
+
 ## 点検順
 
 1. 200 とテキスト本文と内部リンク

@@ -16,6 +16,19 @@
 
 設定は独立である。学習だけ拒否して検索は許可する、が公式に想定されている。
 
+## robots.txt が約束していないこと（RFC 9309）
+
+robots.txt は [RFC 9309](https://www.rfc-editor.org/rfc/rfc9309.html) として標準化されている。読むべきは、そこに書かれていないことである。
+
+- **アクセス認可ではない**。"These rules are not a form of access authorization."（§1.4）。守るかどうかは相手次第
+- **用途の区別が無い**。学習か検索かエージェントか、という概念は規格に無い。ベンダーが UA 名を分けて実現しているだけ
+- **最長一致**。"The most specific match found MUST be used. The most specific match is the match that has the most octets."（§2.2.2）
+- **大小の扱いが逆**。パスの照合は case sensitive（SHOULD, §2.2.2）、UA トークンの照合は case-insensitive（MUST, §2.2.1）
+- **4xx と 5xx で振る舞いが逆**。4xx なら "the crawler MAY access any resources on the server."（§2.3.1.3）、5xx なら "the crawler MUST assume complete disallow."（§2.3.1.4）
+- キャッシュは 24 時間まで（§2.4）。パーサは最低 500 KiB を読む（§2.5）
+
+秘密の URL を robots.txt で隠すのは筋が悪い、という話がここに繋がる。止めたいものは認証で止める。
+
 ## OpenAI
 
 [Overview of OpenAI Crawlers](https://developers.openai.com/api/docs/bots) より。
@@ -109,6 +122,30 @@ Allow: /
 ```
 
 Googlebot は触らない（デフォルト許可）。`Perplexity-User` と `ChatGPT-User` は、公式どおり robots.txt だけでは止まらない／止まらないことがある。秘密のパスは認証と `noindex` で守る。
+
+## 四社の外側
+
+同じ三分類が、他社の公式文書にも出てくる。名前と、公式が明記していることだけ拾う。
+
+| 提供元 | UA | 公式が書いていること |
+|---|---|---|
+| Meta | Meta-ExternalAgent / Meta-WebIndexer / Meta-ExternalFetcher | 学習・インデックス / Meta AI の検索品質 / ユーザー起動。ExternalFetcher は "may bypass robots.txt rules"。反映は最大 24 時間 |
+| Apple | Applebot-Extended | 生成モデルの学習利用だけを制御する。"Applebot-Extended does not crawl webpages."。拒否しても検索結果には残る |
+| Amazon | Amazonbot / Amzn-SearchBot / Amzn-User | Amazonbot は学習に使われうる。ページ単位の `noarchive` で学習から外せる。robots.txt のキャッシュは最大 30 日 |
+| Mistral | MistralAI-Training / -Index / -User | 学習用だけが生成 AI 学習に使われる。残り二つは学習に使わないと明記 |
+| DuckDuckGo | DuckAssistBot | AI 回答用のライブ取得。"This data is not used in any way to train AI models."。反映は 72 時間。検索順位には影響しない |
+| Common Crawl | CCBot | 公開アーカイブ用。なりすましがあるため UA だけで判定しない。IP は `https://index.commoncrawl.org/ccbot.json` |
+
+Bytespider（ByteDance）は、到達可能な公式ドキュメントを確認できなかった。robots.txt の遵守についても一次情報が無い。**未確認**として扱う。
+
+## robots.txt の外側で動いているもの
+
+「用途を書けない」という RFC の穴を、二方向から埋めようとしている。どちらもまだ標準ではない。
+
+- **IETF aipref WG**。`Content-Usage` を HTTP レスポンスヘッダと robots.txt の双方に付け、取得と利用を二段に分ける。draft-ietf-aipref-attach は **Internet-Draft** であり RFC ではない（Proposed Standard 志向）
+- **Cloudflare**。ボットを Search / Agent / Training に分類し、2026-09-15 から、新規に載せるドメインの広告掲載ページで Training と Agent を既定でブロックする（Search は許可のまま）。robots.txt 用の `Content-Signal:` ディレクティブも出している（例: `Content-Signal: search=yes,ai-train=no`）
+
+実務の含意は一つ。自分が robots.txt に何も書いていなくても、CDN 側の既定でブロックが入ることがある。「許可したつもり」を確かめる先が増えた。
 
 ## 確認問題
 

@@ -65,6 +65,51 @@ GEO 論文の主指標の一つ。先頭の引用ほど重い。
 **query fan-out**  
 一つの質問から複数の関連検索を同時に出すこと。Google 公式用語。
 
+**Amazonbot / Amzn-SearchBot / Amzn-User**  
+Amazon の収集 / 検索 / ユーザー起動。Amazonbot は学習に使われうる。ページ単位の `noarchive` で学習から外せる。
+
+**Applebot-Extended**  
+Apple の学習利用だけを制御する二次トークン。自身はクロールしない。拒否しても検索結果には残る。
+
+**C-SEO Bench**  
+Puerto ら NeurIPS 2025 のベンチマーク。競合採用と複数ドメインの条件で、多くの C-SEO 手法が無効か逆効果だったと報告。
+
+**CCBot**  
+Common Crawl のクローラ。公開アーカイブ用。なりすましがあるため UA だけで判定しない。
+
+**Content-Signal**  
+Cloudflare が提案する robots.txt のディレクティブ。`search` / `ai-input` / `ai-train` の可否を書く。
+
+**Content-Usage**  
+IETF aipref が定義中の利用意向フィールド。HTTP ヘッダと robots.txt の双方に付ける。Internet-Draft であり RFC ではない。
+
+**DuckAssistBot**  
+DuckDuckGo の AI 回答用クローラ。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。
+
+**faithfulness（引用の忠実性）**  
+引用がその文書を実際に根拠にしているか。引用が正しく見えること（correctness）とは別の性質。
+
+**IndexNow**  
+参加検索エンジンに URL の更新を通知する仕組み。公式文書に AI 回答との関係の記述はなく、Google も出てこない。
+
+**lost in the middle**  
+長い入力文脈の中央に置かれた情報の利用が落ちる現象。Liu ら TACL 2023。
+
+**Meta-ExternalAgent / -WebIndexer / -ExternalFetcher**  
+Meta の学習・インデックス / 検索品質 / ユーザー起動。ExternalFetcher は robots.txt を迂回しうると公式が書く。
+
+**MistralAI-Training / -Index / -User**  
+Mistral の学習 / 検索 / ユーザー起動。学習用だけが生成 AI 学習に使われる。
+
+**NOCACHE / NOARCHIVE**  
+Bing のメタタグ。NOARCHIVE は Copilot の回答にも学習にも使われない。どちらも通常の Bing 検索表示は変えない。
+
+**post-rationalization**  
+生成したあとで、それらしい出典を後付けすること。
+
+**RFC 9309**  
+robots.txt を標準化した RFC。規則はアクセス認可ではないと明記し、用途（学習・検索）の区別も持たない。4xx は許可、5xx は全面禁止とみなす。
+
 **Search generative AI control**  
 Search Console の、生成 AI 面への掲載・接地を止めるトグル。学習オプトアウトではない。展開は段階的。
 

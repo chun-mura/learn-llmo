@@ -10,6 +10,8 @@ const LESSONS = [
   { id: "08", title: "測定", short: "スイッチを混ぜない" },
   { id: "09", title: "誤解", short: "一次情報で止める" },
   { id: "10", title: "演習", short: "手を動かす" },
+  { id: "11", title: "引用と根拠", short: "引用は根拠ではない" },
+  { id: "r", title: "復習", short: "間隔をあけて思い出す" },
   { id: "g", title: "用語集", short: "定義" },
 ];
 
@@ -27,27 +29,272 @@ const TERMS = {
   "Google-Extended": "Gemini アプリと Vertex の学習・接地用トークン。Search の掲載・順位には使わない。",
   "llms.txt": "Jeremy Howard 提案の Markdown 地図。Google Search は使わない。",
   impression: "GEO 論文の可視性。単語数、位置補正単語数、主観印象。",
+  "RFC 9309": "robots.txt を標準化した RFC。規則はアクセス認可ではない、と明記している。",
+  "Content-Usage": "IETF aipref が定義中の利用意向フィールド。Internet-Draft であり RFC ではない。",
+  "Content-Signal": "Cloudflare の robots.txt 用ディレクティブ。search / ai-input / ai-train の可否を書く。",
+  NOARCHIVE: "Bing のメタタグ。Copilot の回答に含めず、学習にも使わせない。通常の検索表示は残る。",
+  faithfulness: "引用がその文書を実際に根拠にしているか。正しく見えることとは別の性質。",
+  "C-SEO Bench": "Puerto ら NeurIPS 2025 のベンチマーク。競合下では C-SEO 手法が効かない、と報告した。",
+  "post-rationalization": "生成したあとで、それらしい出典を後付けすること。",
 };
 
-const STORE = "llmo-learn-v1";
+/* 間隔反復。箱 1〜5 の日数。Cepeda et al. 2006 / 2008 の「間隔を広げる」原理だけを取る。
+   アルゴリズムの巧拙（SM-2 / FSRS）を比べた人対象の対照試験は乏しいため、Leitner で足りる。 */
+const BOX_DAYS = [1, 3, 7, 16, 35];
+const STORE = "llmo-learn-v2";
+const STORE_V1 = "llmo-learn-v1";
+
+function today() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+function addDays(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+function daysUntil(date) {
+  const ms = new Date(`${date}T00:00:00`) - new Date(`${today()}T00:00:00`);
+  return Math.round(ms / 86400000);
+}
+
+function migrateV1() {
+  const state = { v: 2, read: {}, done: {}, cards: {} };
+  try {
+    const old = JSON.parse(localStorage.getItem(STORE_V1) || "{}");
+    Object.keys(old).forEach((k) => {
+      if (k === "done") state.done = Object.assign({}, old.done);
+      else if (typeof old[k] === "number") state.read[k] = old[k];
+    });
+  } catch {
+    /* 旧データが壊れていても初期状態で続ける */
+  }
+  return state;
+}
 
 function loadState() {
+  let state;
   try {
-    return JSON.parse(localStorage.getItem(STORE) || "{}");
+    state = JSON.parse(localStorage.getItem(STORE) || "null");
   } catch {
-    return {};
+    state = null;
   }
+  if (!state) state = migrateV1();
+  state.read = state.read || {};
+  state.done = state.done || {};
+  state.cards = state.cards || {};
+  return state;
 }
 
 function saveState(state) {
-  localStorage.setItem(STORE, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORE, JSON.stringify(state));
+  } catch {
+    /* 保存できなくても学習自体は続けられる */
+  }
 }
 
 function markProgress(id, chunk, total) {
   const state = loadState();
-  state[id] = Math.max(state[id] || 0, chunk);
-  if (chunk >= total) state.done = Object.assign({}, state.done, { [id]: true });
+  state.read[id] = Math.max(state.read[id] || 0, chunk);
+  if (chunk >= total) state.done[id] = true;
   saveState(state);
+}
+
+/* --- カード（想起練習） --- */
+
+function cardState(id) {
+  return loadState().cards[id] || null;
+}
+
+function gradeCard(id, good) {
+  const state = loadState();
+  const card = state.cards[id] || { box: 0, due: today(), r: 0, w: 0 };
+  if (good) {
+    card.box = Math.min(card.box + 1, BOX_DAYS.length);
+    card.due = addDays(BOX_DAYS[card.box - 1]);
+    card.r += 1;
+  } else {
+    card.box = 0;
+    card.due = today();
+    card.w += 1;
+  }
+  card.seen = today();
+  state.cards[id] = card;
+  saveState(state);
+  return card;
+}
+
+function dueCards() {
+  const state = loadState();
+  const now = today();
+  return [...document.querySelectorAll("[data-card]")]
+    .map((el) => el.dataset.card)
+    .filter((id, i, all) => all.indexOf(id) === i)
+    .filter((id) => {
+      const card = state.cards[id];
+      return card && card.due <= now;
+    });
+}
+
+function cardStats() {
+  const state = loadState();
+  const ids = [...new Set([...document.querySelectorAll("[data-card]")].map((el) => el.dataset.card))];
+  const seen = ids.filter((id) => state.cards[id]);
+  const held = seen.filter((id) => state.cards[id].box >= 2);
+  return { total: ids.length, seen: seen.length, held: held.length, due: dueCards().length };
+}
+
+/* 課をまたいで混ぜる。同じ課が続かないよう並べ替える。
+   Brunmair & Richter 2019 の効果量は中程度で、万能ではない。順序だけの工夫と割り切る。 */
+function interleave(ids) {
+  const shuffled = ids.slice();
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const lessonOf = (id) => id.split("-")[1];
+  const left = {};
+  shuffled.forEach((id) => {
+    left[lessonOf(id)] = (left[lessonOf(id)] || 0) + 1;
+  });
+  const out = [];
+  const rest = shuffled.slice();
+  while (rest.length) {
+    const last = out.length ? lessonOf(out[out.length - 1]) : null;
+    // 残りが多い課から先に出す。ここを最初に見つけた候補にすると、
+    // 終盤に同じ課だけが残って連続してしまう。
+    let pick = -1;
+    rest.forEach((id, i) => {
+      if (lessonOf(id) === last) return;
+      if (pick < 0 || left[lessonOf(id)] > left[lessonOf(rest[pick])]) pick = i;
+    });
+    if (pick < 0) pick = 0;
+    const [id] = rest.splice(pick, 1);
+    left[lessonOf(id)] -= 1;
+    out.push(id);
+  }
+  return out;
+}
+
+function resetCard(el) {
+  el.classList.remove("is-open", "is-good", "is-again");
+  const answer = el.querySelector(".a");
+  const grade = el.querySelector(".grade");
+  const sched = el.querySelector("[data-sched]");
+  const field = el.querySelector("textarea");
+  const reveal = el.querySelector("[data-reveal]");
+  if (answer) answer.hidden = true;
+  if (grade) grade.hidden = true;
+  if (sched) sched.hidden = true;
+  if (field) field.value = "";
+  if (reveal) reveal.hidden = false;
+}
+
+function openCard(el) {
+  const answer = el.querySelector(".a");
+  const grade = el.querySelector(".grade");
+  const reveal = el.querySelector("[data-reveal]");
+  if (answer) answer.hidden = false;
+  if (grade) grade.hidden = false;
+  if (reveal) reveal.hidden = true;
+  el.classList.add("is-open");
+  grade?.querySelector("[data-grade]")?.focus({ preventScroll: true });
+}
+
+function paintSchedule(el, card) {
+  const sched = el.querySelector("[data-sched]");
+  if (!sched) return;
+  const gap = daysUntil(card.due);
+  sched.hidden = false;
+  sched.textContent =
+    card.box === 0 ? "この回の終わりにもう一度出ます。" : `次は ${gap} 日後（箱 ${card.box}）。`;
+}
+
+/* --- 復習面 --- */
+
+let reviewQueue = [];
+let reviewIndex = 0;
+let reviewAgain = [];
+
+function reviewSlot() {
+  return document.querySelector("[data-review-slot]");
+}
+
+function paintReview() {
+  const slot = reviewSlot();
+  const meter = document.querySelector("[data-review-meter]");
+  const emptyBox = document.querySelector("[data-review-empty]");
+  if (!slot) return;
+  slot.innerHTML = "";
+  const id = reviewQueue[reviewIndex];
+  if (!id) {
+    if (meter) meter.textContent = reviewQueue.length ? "この回は終わりです。" : "";
+    if (emptyBox) {
+      emptyBox.hidden = false;
+      emptyBox.querySelector("[data-review-done]").textContent = reviewQueue.length
+        ? `${reviewQueue.length} 枚やりました。続きはまた日をあけて。`
+        : "今日の期限のカードはありません。課を読み進めるか、日をあけて戻ってきてください。";
+    }
+    return;
+  }
+  if (emptyBox) emptyBox.hidden = true;
+  if (meter) meter.textContent = `${reviewIndex + 1} / ${reviewQueue.length} 枚目`;
+  const source = document.querySelector(`.view:not(.review) [data-card="${id}"]`);
+  if (!source) {
+    reviewIndex += 1;
+    paintReview();
+    return;
+  }
+  const clone = source.cloneNode(true);
+  resetCard(clone);
+  const lesson = id.split("-")[1];
+  const meta = LESSONS.find((l) => l.id === lesson);
+  if (meta) {
+    const tag = document.createElement("p");
+    tag.className = "card-from";
+    tag.textContent = `第${Number(lesson)}課 ${meta.title}`;
+    clone.prepend(tag);
+  }
+  slot.appendChild(clone);
+  clone.querySelector("textarea")?.focus({ preventScroll: true });
+}
+
+function startReview() {
+  reviewQueue = interleave(dueCards());
+  reviewIndex = 0;
+  reviewAgain = [];
+  paintReview();
+}
+
+function advanceReview(id, good) {
+  if (!good && !reviewAgain.includes(id)) {
+    reviewAgain.push(id);
+    reviewQueue.push(id);
+  }
+  reviewIndex += 1;
+  paintReview();
+}
+
+/* --- ダッシュボード --- */
+
+function paintDash() {
+  const dash = document.querySelector("[data-dash]");
+  if (!dash) return;
+  const stats = cardStats();
+  const readChunks = Object.values(loadState().read).reduce((a, b) => a + b, 0);
+  dash.innerHTML = `
+    <a class="dash-cell ${stats.due ? "is-due" : ""}" href="#lr">
+      <b>${stats.due}</b><span>今日の復習</span>
+    </a>
+    <div class="dash-cell"><b>${stats.held}</b><span>間をあけて言えた</span></div>
+    <div class="dash-cell"><b>${stats.seen} / ${stats.total}</b><span>手をつけたカード</span></div>
+    <div class="dash-cell quiet"><b>${readChunks}</b><span>読んだ塊</span></div>
+  `;
 }
 
 function hashFor(id, chunk) {
@@ -57,7 +304,7 @@ function hashFor(id, chunk) {
 }
 
 function parseHash() {
-  const m = location.hash.match(/^#l(\d{2}|g)(?:\/c(\d+))?/);
+  const m = location.hash.match(/^#l(\d{2}|g|r)(?:\/c(\d+))?/);
   if (!m) return { id: "00", chunk: 1 };
   return { id: m[1], chunk: m[2] ? Number(m[2]) : 1 };
 }
@@ -66,19 +313,21 @@ function renderRail(currentId) {
   const rail = document.querySelector("[data-rail]");
   if (!rail) return;
   const state = loadState();
-  const items = LESSONS.filter((l) => l.id !== "00" && l.id !== "g")
+  const due = dueCards().length;
+  const items = LESSONS.filter((l) => !["00", "g", "r"].includes(l.id))
     .map((l) => {
       const current = l.id === currentId ? ' aria-current="page"' : "";
-      const done = state.done && state.done[l.id] ? " done" : "";
+      const done = state.done[l.id] ? " done" : "";
       return `<li><a class="${done.trim()}" href="${hashFor(l.id)}"${current}><span class="num">${l.id}</span><span>${l.short}</span></a></li>`;
     })
     .join("");
   rail.innerHTML = `
-    <a class="rail-brand" href="#l00">LLMO 教材<strong>一塊ずつ読む</strong></a>
+    <a class="rail-brand" href="#l00">LLMO 教材<strong>思い出して覚える</strong></a>
     <nav aria-label="課の順">
       <ol>${items}</ol>
     </nav>
     <div class="rail-foot">
+      <a class="rail-review${due ? " is-due" : ""}" href="#lr">復習${due ? `<b>${due}</b>` : ""}</a>
       <a href="#lg">用語集</a>
       <p class="kb">J / K で塊を移動 · A で全部表示</p>
     </div>
@@ -93,8 +342,10 @@ function showView(id) {
   });
   document.body.dataset.lesson = id;
   const meta = LESSONS.find((l) => l.id === id);
-  document.title = meta && id !== "00" ? `${meta.title} · LLMO` : "LLMO を一塊ずつ読む";
+  document.title = meta && id !== "00" ? `${meta.title} · LLMO` : "LLMO を思い出しながら読む";
   renderRail(id);
+  if (id === "00") paintDash();
+  if (id === "r") startReview();
 }
 
 let stepIndex = 0;
@@ -162,8 +413,27 @@ function nextLesson(id) {
 
 function initControls() {
   document.addEventListener("click", (e) => {
+    const reveal = e.target.closest("[data-reveal]");
+    const grade = e.target.closest("[data-grade]");
+    if (reveal) {
+      openCard(reveal.closest(".card"));
+      return;
+    }
+    if (grade) {
+      const card = grade.closest(".card");
+      const good = grade.dataset.grade === "good";
+      const next = gradeCard(card.dataset.card, good);
+      card.classList.add(good ? "is-good" : "is-again");
+      paintSchedule(card, next);
+      renderRail(document.body.dataset.lesson);
+      if (card.closest(".review")) {
+        advanceReview(card.dataset.card, good);
+      }
+      return;
+    }
+
     const prev = e.target.closest("[data-prev]");
-    const next = e.target.closest("[data-next]");
+    const nextBtn = e.target.closest("[data-next]");
     const allBtn = e.target.closest("[data-all]");
     const id = document.body.dataset.lesson;
     if (prev) {
@@ -172,7 +442,7 @@ function initControls() {
         paintSteps(id, false);
       }
     }
-    if (next) {
+    if (nextBtn) {
       if (stepIndex < stepNodes.length - 1) {
         stepIndex += 1;
         paintSteps(id, false);
@@ -191,6 +461,17 @@ function initControls() {
   document.addEventListener("keydown", (e) => {
     if (e.target.closest("textarea, input, summary, .term")) return;
     const id = document.body.dataset.lesson;
+    if (id === "r") {
+      const card = document.querySelector(".review .card");
+      if (!card) return;
+      if (e.key === " ") {
+        e.preventDefault();
+        card.querySelector("[data-reveal]")?.click();
+      }
+      if (e.key === "1") card.querySelector('[data-grade="again"]')?.click();
+      if (e.key === "2") card.querySelector('[data-grade="good"]')?.click();
+      return;
+    }
     if (e.key === "j" || e.key === "ArrowRight") {
       e.preventDefault();
       document.querySelector(`[data-view="${id}"] [data-next]`)?.click();
@@ -202,6 +483,13 @@ function initControls() {
     if (e.key === "a") {
       document.querySelector(`[data-view="${id}"] [data-all]`)?.click();
     }
+  });
+}
+
+function initCards() {
+  document.querySelectorAll("[data-card]").forEach((el) => {
+    const card = cardState(el.dataset.card);
+    if (card) el.classList.add("is-known");
   });
 }
 
@@ -257,5 +545,6 @@ function applyHash() {
 
 window.addEventListener("hashchange", applyHash);
 initControls();
+initCards();
 initTerms();
 applyHash();

@@ -4,6 +4,10 @@
           <b>1 届く</b><i>→</i><b>2 意味が付く</b><i>→</i><b>3 エージェントの地図</b>
         </div>
         <p>1 が Search と AI 出典の入場です。2 はリッチリザルト用の手がかりです。3 は llms.txt で、Search とは別系統です。</p>
+        <card id="c-07-1">
+          <q>技術面の三層を挙げ、それぞれが何のためのものか言ってください。</q>
+          <ans><p>1 届く（Search と AI 出典の入場。インデックスとスニペット）。2 意味が付く（構造化データ。リッチリザルトの適格化）。3 エージェントの地図（llms.txt。Search とは別系統）。混ぜない。</p></ans>
+        </card>
       </section>
       <section class="step">
         <h2>1. 届く</h2>
@@ -15,6 +19,10 @@
           <li>内部リンクで辿れる</li>
         </ul>
         <p>プレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が見た HTML にそのタグがあるかを見ます。</p>
+        <card id="c-07-2">
+          <q>Google の AI 機能に出典として出る条件を言ってください。追加の技術要件はありますか。</q>
+          <ans><p>インデックスされ、スニペット表示が可能であること。通常の Search と同じで、追加の技術要件はない。前提として 200 で本文が返り、重要情報が HTML テキストとしてあり、内部リンクで辿れること。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary><ul><li>Google, AI features and your website</li></ul></details>
       </section>
       <section class="step">
@@ -25,11 +33,38 @@
         </ul>
         <p>構造化データはページ内容の手がかりで、リッチリザルトの適格化に使います。推奨は JSON-LD。マークアップは見える本文と一致させます。空ページに JSON-LD だけは不可です。</p>
         <p>生成 AI 検索のために特別な schema は不要です。必須でもありません。</p>
+        <card id="c-07-3">
+          <q>構造化データは生成 AI 検索の必須条件ですか。マークアップの原則は。</q>
+          <ans><p>必須ではない。用途はリッチリザルトの適格化。原則は、マークアップを見える本文と一致させること。空ページに JSON-LD だけ置くのはガイドライン違反。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>succeeding in AI search</li>
             <li>Intro to structured data</li>
             <li>Google AI optimization guide, Mythbusting</li>
+          </ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>Bing には別のスイッチがある</h2>
+        <p>Google の話をそのまま Bing / Copilot に持っていくと外します。Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しています。</p>
+        <table>
+          <thead><tr><th>タグ</th><th>Copilot / Bing Chat の回答</th><th>学習</th><th>通常の検索表示</th></tr></thead>
+          <tbody>
+            <tr><td><code>NOCACHE</code></td><td>URL・タイトル・スニペットだけ出る</td><td>URL・タイトル・スニペットのみ使われうる</td><td>変わらない</td></tr>
+            <tr><td><code>NOARCHIVE</code></td><td>回答に含めない。リンクもしない</td><td>使わない</td><td>変わらない</td></tr>
+          </tbody>
+        </table>
+        <p>両方あるときは NOCACHE として扱う、と書いてあります。</p>
+        <p class="note">IndexNow は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。AI 対策として売られていたら、そこは一次情報にありません。</p>
+        <card id="c-07-4">
+          <q>Bing の <span data-term="NOARCHIVE">NOARCHIVE</span> は何を止めますか。通常の Bing 検索の表示はどうなりますか。</q>
+          <ans><p>Copilot / Bing Chat の回答に含めず、リンクもせず、学習にも使わない。通常の Bing 検索結果の表示は変わらない。NOCACHE との併記時は NOCACHE 扱い。</p></ans>
+        </card>
+        <details class="source"><summary>出典</summary>
+          <ul>
+            <li>Bing Webmaster Blog, Announcing new options for webmasters to control usage of their content in Bing Chat（2023-09-22）</li>
+            <li>IndexNow ドキュメント</li>
           </ul>
         </details>
       </section>
@@ -44,6 +79,10 @@
 
 ## Docs
 - [Authentication](https://example.com/docs/auth.html.md)</pre>
+        <card id="c-07-5">
+          <q><span data-term="llms.txt">llms.txt</span> は誰の何のための提案ですか。Google Search は使いますか。</q>
+          <ans><p>Jeremy Howard の提案仕様で、サイトの地図を Markdown で置き、エージェントに案内するもの。Google Search は使わないと明記している。Lighthouse の監査は任意で、404 は N/A。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>llmstxt.org v2</li>
@@ -55,22 +94,20 @@
         <h2>点検順</h2>
         <ol class="plain">
           <li>200 とテキスト本文と内部リンク</li>
-          <li>検索用ボットの許可（学習用とは別）</li>
-          <li>意図せず noindex / nosnippet していないか</li>
+          <li>検索用ボットの許可（学習用とは別）。CDN 側の既定ブロックも見る</li>
+          <li>意図せず noindex / nosnippet していないか。Bing 向けに NOARCHIVE を撒いていないか</li>
           <li>JSON-LD が見える本文と一致するか</li>
           <li>ドキュメントサイトなら llms.txt</li>
         </ol>
       </section>
       <section class="step">
-        <h2>確認</h2>
-        <div class="quiz">
-          <ol>
-            <li>FAQ の JSON-LD だけ正しく、画面の FAQ が空。何の違反か。AI Overviews の必須条件か。</li>
-            <li>Lighthouse が llms.txt で N/A。Search の失敗か。</li>
-          </ol>
-          <details class="hint"><summary>指針を見る</summary>
-            <p>1. 見える内容と一致せよ、という構造化データのガイドライン違反です。AI Overviews の入場条件（インデックスとスニペット）とは別です。</p>
-            <p>2. 失敗ではありません。任意なので 404 は N/A です。</p>
-          </details>
-        </div>
+        <h2>閉じてから答える</h2>
+        <card id="c-07-6">
+          <q>FAQ の JSON-LD だけ正しく、画面の FAQ が空です。何の違反ですか。AI Overviews の必須条件を満たしていないという話ですか。</q>
+          <ans><p>「見える内容と一致させよ」という構造化データのガイドライン違反。AI Overviews の入場条件はインデックスとスニペットなので、そちらとは別の問題。</p></ans>
+        </card>
+        <card id="c-07-7">
+          <q>Lighthouse が llms.txt で N/A と出ました。Search の失敗ですか。</q>
+          <ans><p>失敗ではない。llms.txt は任意なので、404 のときは N/A になる。フラグが立つのはサーバーエラーのとき。そもそも Google Search は llms.txt を使わない。</p></ans>
+        </card>
       </section>

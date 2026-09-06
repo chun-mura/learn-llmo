@@ -84,4 +84,7 @@ Allow: /
 1. なりうる。fan-out は部分クエリの検索結果からページを足す、と Google が書いている。
 2. なる。論文は上位 5 件固定＋GPT-3.5。Google はコア Search の RAG と fan-out で、件数もモデルも違う。
 
-これで 10 課は一通り終わる。原文は `research/SOURCES.md` から辿る。
+## 次の課
+
+引用は根拠とは限らない。[11-inyou-to-konkyo.md](11-inyou-to-konkyo.md)
+

@@ -1,16 +1,23 @@
 /* Single CSS strategy: one vanilla stylesheet. Paper desk, not a dashboard. */
 
+/* 色は意味に割り当てる。明度は構造に割り当てる。
+   地（paper → paper-deep → card）は明度だけで層を分け、色相は
+   朱＝論文 / 藍＝公式 / 緑＝できた / 橙＝もう一度 に固定する。 */
 :root {
-  --paper: oklch(0.965 0.018 88);
-  --paper-deep: oklch(0.915 0.024 82);
-  --ink: oklch(0.28 0.028 55);
-  --ink-soft: oklch(0.36 0.022 58);
-  --rule: oklch(0.82 0.02 80);
-  --paper-seal: oklch(0.48 0.12 35);
-  --official: oklch(0.40 0.07 250);
-  --ok: oklch(0.38 0.08 150);
-  --warn: oklch(0.48 0.1 55);
-  --focus: oklch(0.55 0.12 35);
+  --paper: oklch(0.985 0.004 250);
+  --paper-deep: oklch(0.955 0.009 250);
+  --card: oklch(0.925 0.006 260);
+  --card-edge: oklch(0.845 0.012 255);
+  --ink: oklch(0.235 0.022 262);
+  --ink-soft: oklch(0.435 0.022 262);
+  --rule: oklch(0.855 0.014 250);
+  --paper-seal: oklch(0.475 0.17 25);
+  --official: oklch(0.43 0.13 252);
+  --seal-tint: oklch(0.945 0.038 25);
+  --official-tint: oklch(0.945 0.036 252);
+  --ok: oklch(0.435 0.105 152);
+  --warn: oklch(0.48 0.125 60);
+  --focus: oklch(0.475 0.17 25);
   --r-sm: 2px;
   --r-md: 6px;
   --r-lg: 12px;
@@ -27,6 +34,12 @@
   box-sizing: border-box;
 }
 
+/* .btn と .grade が display を持つため、UA の [hidden] 既定を上書きしてしまう。
+   採点前の答えと採点ボタンはここで確実に閉じる。 */
+[hidden] {
+  display: none !important;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,9 +49,7 @@ html {
 body {
   margin: 0;
   min-height: 100dvh;
-  background:
-    radial-gradient(1200px 480px at 8% -10%, color-mix(in oklch, var(--paper-seal) 7%, var(--paper)), transparent 55%),
-    var(--paper);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -182,7 +193,7 @@ a:hover {
 
 .rail .num {
   font-variant-numeric: tabular-nums;
-  color: var(--paper-seal);
+  color: var(--ink-soft);
   font-size: 0.72rem;
 }
 
@@ -239,7 +250,7 @@ body:has(.view:target) .view.is-on:not(:target) {
   display: block;
   width: 2.25rem;
   height: 2px;
-  background: var(--paper-seal);
+  background: var(--ink-soft);
   margin-top: 0.55rem;
 }
 
@@ -255,7 +266,7 @@ body:has(.view:target) .view.is-on:not(:target) {
   font-family: var(--font-ui);
   font-size: 0.88rem;
   line-height: 1.65;
-  background: color-mix(in oklch, var(--official) 8%, var(--paper));
+  background: var(--official-tint);
   color: var(--ink);
   padding: 0.7rem 0.85rem;
   border-radius: var(--r-md);
@@ -350,11 +361,11 @@ body.is-all .step-nav [data-next] {
 }
 
 .seal.paper {
-  background: color-mix(in oklch, var(--paper-seal) 12%, var(--paper));
+  background: var(--seal-tint);
 }
 
 .seal.official {
-  background: color-mix(in oklch, var(--official) 10%, var(--paper));
+  background: var(--official-tint);
 }
 
 .seal small {
@@ -427,8 +438,8 @@ code {
 }
 
 pre {
-  background: oklch(0.27 0.02 250);
-  color: oklch(0.93 0.01 90);
+  background: oklch(0.25 0.025 262);
+  color: oklch(0.93 0.008 250);
   padding: 0.9rem 1rem;
   border-radius: var(--r-md);
   overflow: auto;
@@ -439,6 +450,7 @@ pre {
 blockquote {
   margin: 0.5rem 0 1rem;
   padding: 0.2rem 0 0.2rem 0.9rem;
+  border-left: 2px solid var(--rule);
   color: var(--ink-soft);
 }
 
@@ -585,14 +597,14 @@ a.btn {
   align-self: start;
   padding-top: 0.15rem;
   font-variant-numeric: tabular-nums;
-  color: var(--paper-seal);
+  color: var(--ink-soft);
   font-size: 0.8rem;
 }
 
 .path strong {
   font-size: 0.95rem;
   text-decoration: underline;
-  text-decoration-color: color-mix(in oklch, var(--paper-seal) 55%, transparent);
+  text-decoration-color: var(--rule);
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
 }
@@ -657,6 +669,204 @@ a.btn {
 .dl dd {
   margin: 0.2rem 0 0;
   color: var(--ink-soft);
+}
+
+/* 想起カード。読んだあとに閉じて思い出す一手。答えは採点を押すまで出さない。 */
+.card {
+  max-width: var(--measure);
+  margin: 1.2rem 0 0;
+  padding: 0.9rem 1rem 1rem;
+  border: 1px solid var(--card-edge);
+  border-left: 4px solid var(--paper-seal);
+  border-radius: var(--r-sm);
+  background: var(--card);
+}
+
+.card::before {
+  content: "思い出す";
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  color: var(--paper-seal);
+  margin-bottom: 0.35rem;
+}
+
+.card.is-known::before {
+  content: "思い出す · 履歴あり";
+}
+
+.card .q {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
+.card textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--card-edge);
+  border-radius: var(--r-sm);
+  padding: 0.5rem 0.6rem;
+  margin-bottom: 0.6rem;
+  resize: vertical;
+}
+
+.card .try p {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  margin: 0.45rem 0 0;
+}
+
+.card.is-open .try p {
+  display: none;
+}
+
+.card .a {
+  border-top: 1px solid var(--card-edge);
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+}
+
+.card .a p:last-child {
+  margin-bottom: 0;
+}
+
+.card .grade {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  font-family: var(--font-ui);
+}
+
+.card [data-sched] {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  margin: 0.7rem 0 0;
+}
+
+.card.is-good {
+  border-left-color: var(--ok);
+}
+
+.card.is-again {
+  border-left-color: var(--warn);
+}
+
+.card-from {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+
+/* 課の入口に置く先出しの問い。外してよい。答えを見る前に一度考えることが目的。 */
+.prime {
+  max-width: var(--measure);
+  margin: 0 0 1.4rem;
+  padding: 0.8rem 1rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--r-sm);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
+
+.prime b {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  margin-bottom: 0.3rem;
+}
+
+.prime p {
+  margin: 0;
+}
+
+.method {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.method h2 {
+  font-size: 1rem;
+}
+
+.review {
+  max-width: 42rem;
+}
+
+.review-empty {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
+
+.dash {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.6rem;
+  max-width: 42rem;
+  margin: 1.4rem 0;
+  font-family: var(--font-ui);
+}
+
+.dash-cell {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: 0.7rem 0.8rem;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.dash-cell b {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-cell span {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.dash-cell.is-due {
+  border-color: var(--paper-seal);
+  color: var(--paper-seal);
+}
+
+.dash-cell.quiet {
+  background: transparent;
+  border-style: dashed;
+  color: var(--ink-soft);
+}
+
+.rail-review {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-right: 0.6rem;
+}
+
+.rail-review.is-due {
+  color: var(--paper-seal);
+  font-weight: 700;
+}
+
+.rail-review b {
+  font-variant-numeric: tabular-nums;
+  margin-left: 0.3rem;
 }
 
 @media (max-width: 860px) {

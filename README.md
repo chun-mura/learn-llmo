@@ -1,8 +1,10 @@
 # LLMO を理解する
 
-公開されている一次情報（論文、公式ドキュメント、仕様）をもとに、Large Language Model Optimization（LLMO）を自分の言葉で説明できるようにする教材です。調査日は **2026-08-21**。
+公開されている一次情報（論文、公式ドキュメント、仕様）をもとに、Large Language Model Optimization（LLMO）を自分の言葉で説明できるようにする教材です。調査日は **2026-08-21**、追補は **2026-09-06**。
 
 **学習用の画面は HTML です。** [`site/index.html`](site/index.html) をブラウザで開いてください。教材は 1 ファイルで、左の課名や番号をクリックすると同じページ内で移動します。各課は一塊ずつ出ます。Markdown 原文は `curriculum/` に残してあります。
+
+読むだけで終わらない作りにしてあります。各塊の終わりに、閉じた状態の問い（想起カード）が入っています。答えは採点を押すまで出ません。採点すると次の出題日が 1 → 3 → 7 → 16 → 35 日と伸び、期限が来たカードだけが「復習」面に、課をまたいで混ぜて出ます。根拠は画面のホームと `research/SOURCES.md` の学習科学の節にあります。
 
 ## 誰向けか
 
@@ -21,7 +23,7 @@ Google Search の公式見解では、AI Overviews や AI Mode に出るため�
 
 ## 読み方
 
-[`site/index.html`](site/index.html) をブラウザで開きます。順番どおり、一塊ずつです。各課 20〜40 分。全部見たいときは画面下の「全部見る」、または `A` キー。
+[`site/index.html`](site/index.html) をブラウザで開きます。順番どおり、一塊ずつです。各課 20〜40 分。全部見たいときは画面下の「全部見る」、または `A` キー。復習面では Space で答え合わせ、`1` でもう一度、`2` で言えた。進捗と復習の期限はブラウザの localStorage にだけ残ります。
 
 | 課 | 画面 | 終わったときにできること |
 |---|---|---|
@@ -35,13 +37,16 @@ Google Search の公式見解では、AI Overviews や AI Mode に出るため�
 | 8 | [site/index.html#l08](site/index.html#l08) | 測定面と、掲載を止めるスイッチを混同しない |
 | 9 | [site/index.html#l09](site/index.html#l09) | よく出回る誤解を一次情報で潰せる |
 | 10 | [site/index.html#l10](site/index.html#l10) | 自サイトで点検できる |
+| 11 | [site/index.html#l11](site/index.html#l11) | 引用が根拠とは限らないことを、数字つきで言える |
+| 復習 | [site/index.html#lr](site/index.html#lr) | 期限の来たカードを、日をあけて思い出す |
 
 用語は画面左の「用語集」、または点線の語にマウスを置くと出ます。Markdown 原文は `curriculum/` です。
 
 ## このリポジトリの中身
 
 ```
-site/                学習用 HTML（ここを開く）
+site/                学習用 HTML（ここを開く。index.html は build.py の生成物）
+site/_fragments/     各課の本文。ここを直して `python3 site/build.py`
 curriculum/          Markdown 原文
 glossary.md          用語（HTML 版は site/index.html#lg）
 research/SOURCES.md  一次情報の目録
@@ -57,8 +62,9 @@ research/sources/    取得した原文
 1. [Google: Optimizing for generative AI features](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) — Search の生成 AI 面で公式が勧めること／しなくてよいこと。ここから始める。
 2. [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features) — 適格条件と query fan-out。
 3. [GEO 論文 (arXiv:2311.09735)](https://arxiv.org/abs/2311.09735) — 可視性の定義と実験。数字は §3 の条件とセットで読む。
-4. [OpenAI crawlers](https://developers.openai.com/api/docs/bots) / [Anthropic crawlers](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler) / [Perplexity crawlers](https://docs.perplexity.ai/docs/resources/perplexity-crawlers) — 学習と検索を分ける一次情報。
-5. [llms.txt 仕様](https://llmstxt.org/) — エージェント向け地図。Search の出典選定とは別物だと分かったうえで読む。
+4. [C-SEO Bench (arXiv:2506.11097)](https://arxiv.org/abs/2506.11097) — 上の追試。競合も同じ手を打つ条件では結果が変わる。3 とセットで読む。
+5. [OpenAI crawlers](https://developers.openai.com/api/docs/bots) / [Anthropic crawlers](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler) / [Perplexity crawlers](https://docs.perplexity.ai/docs/resources/perplexity-crawlers) — 学習と検索を分ける一次情報。
+6. [llms.txt 仕様](https://llmstxt.org/) — エージェント向け地図。Search の出典選定とは別物だと分かったうえで読む。
 
 ## 出典の読み方
 

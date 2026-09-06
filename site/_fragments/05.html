@@ -8,12 +8,20 @@
           <li><strong>Subjective Impression</strong> 関連性・影響・独自性など。LLM 採点を正規化</li>
         </ul>
         <p>改善率は、同じクエリでソースの 1 つだけを改変した前後の相対差です。</p>
+        <card id="c-05-1">
+          <q>論文はなぜ「順位」を使わなかったのですか。代わりに定義した三つの指標は。</q>
+          <ans><p>生成回答では出典が文中に散らばるため、平均順位が使えない。代わりに impression として Word Count（紐づく文の単語数の割合）、Position-Adjusted Word Count（先頭ほど重い）、Subjective Impression（関連性・影響・独自性などを LLM 採点で正規化）を定義した。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2</li></ul></details>
       </section>
       <section class="step">
         <h2>実験の条件</h2>
         <div class="seal paper"><small>ここを外すと数字は使えない</small>内部 GE は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
         <p>プロンプトは「検索結果だけを使え。文の直後に引用を付けよ」です。</p>
+        <card id="c-05-2">
+          <q>論文の内部エンジンは、何と何でできていましたか。改変されるのは何本のソースですか。</q>
+          <ans><p>Google の上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai、GEO-bench は約 1 万クエリ。改変するのは 5 件のうち 1 つだけで、その前後の相対差を見る。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary><ul><li>GEO 論文 §3.1, §6</li></ul></details>
       </section>
       <section class="step">
@@ -27,6 +35,10 @@
           </tbody>
         </table>
         <p>3, 4, 5（キーワード・出典・引用）以外は、既存文の見せ方を変えるだけでよい、と著者は述べます。</p>
+        <card id="c-05-3">
+          <q>論文で効いた改変と、効かなかった改変を、二つずつ挙げてください。</q>
+          <ans><p>効いた側は統計の追加、引用文の追加、出典の明記、流暢さ。効かなかった／弱かった側はキーワード詰め込み、独特な語、権威的トーン。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2.2</li></ul></details>
       </section>
       <section class="step">
@@ -43,6 +55,10 @@
           </tbody>
         </table>
         <p>Cite Sources は 5 位ソースで +115.1%、1 位は −30.3%。すでに上位 5 件に入っている 5 位の話であり、圏外ページの話ではありません。</p>
+        <card id="c-05-4">
+          <q>「引用を足したら 115% 上がる」を、誰のどの順位の、どの指標の話か、に直してください。</q>
+          <ans><p>Cite Sources の話。論文の内部 GE で、すでに Google 上位 5 件に入っているソースのうち 5 位のものの相対改善が +115.1%。1 位のソースでは −30.3%。指標は著者が定義した可視性であり、クリックでも売上でもない。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary><ul><li>Table 1, Table 2, §4, §5.2</li></ul></details>
       </section>
       <section class="step">
@@ -50,18 +66,38 @@
         <p>Quotation は位置補正で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing はまた単語数系が悪化します。</p>
         <p>著者自身の限界: エンジンが変われば手法も更新が要る。従来検索の順位への影響は未評価。クエリ分布は将来変わる。</p>
         <p class="note">可視性は著者が定義した impression であり、クリックや売上ではありません。Google 公式は、この種のハックの多くを Search では無効と述べています。</p>
+        <card id="c-05-5">
+          <q>著者自身が挙げた限界を二つ言ってください。</q>
+          <ans><p>エンジンが変われば手法の更新が要ること、従来検索の順位への影響を評価していないこと、クエリ分布が将来変わること。加えて、可視性は著者が定義した impression であってクリックや売上ではない。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary><ul><li>Table 5, §6, §9</li></ul></details>
       </section>
       <section class="step">
-        <h2>確認</h2>
-        <div class="quiz">
-          <ol>
-            <li>「引用を足したら 115% 上がる」を、誰のどの順位の、どの指標か、に直せ。</li>
-            <li>Keyword Stuffing の主観が Perplexity で上がり、位置補正単語数は下がる。論文の主指標はどれか。</li>
-          </ol>
-          <details class="hint"><summary>指針を見る</summary>
-            <p>1. Cite Sources。内部 GE。すでに上位 5 件の 5 位ソース。相対の可視性。</p>
-            <p>2. Position-Adjusted Word Count を主に見ます。主観だけ上がっても「効いた」とは言い切りません。</p>
-          </details>
-        </div>
+        <h2>追試された</h2>
+        <p>2025 年、同じ問いを別の条件で測ったベンチマークが出ました。C-SEO Bench（NeurIPS 2025 Datasets &amp; Benchmarks）です。</p>
+        <p>足した条件は二つです。</p>
+        <ul class="plain">
+          <li>単一のタスク・ドメインではなく、質問応答と商品推薦の 2 タスク × 各 3 ドメイン</li>
+          <li>1 者だけが改変する状況ではなく、<strong>競合も同じ手法を採用していく</strong>状況</li>
+        </ul>
+        <p>結果は、既存の C-SEO 手法の多くが効かないどころか、順位に負の影響を与えることがしばしばあった、というものです。従来の SEO 的な手法のほうが有効でした。採用が広がるほど混雑し、ゼロサムに近づくとも書いています。</p>
+        <p class="note">GEO 論文が間違っていた、という話ではありません。GEO 論文が測ったのは「他が動かないときに 1 者が動いたら」です。C-SEO Bench はそこに競合と多様性を足しました。実務が置かれているのは後者の条件です。</p>
+        <card id="c-05-6">
+          <q>C-SEO Bench の結果を一文で。GEO 論文と条件はどう違いますか。</q>
+          <ans><p>多くの C-SEO 手法は効かないばかりか順位を下げることが多く、従来 SEO 的手法のほうが有効だった。GEO 論文は 1 者だけが改変する単一設定、C-SEO Bench は複数タスク・複数ドメインで競合も同じ手法を採用していく設定。実務は後者に近い。</p></ans>
+        </card>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Puerto, Gubri, Green, Oh &amp; Yun, <em>C-SEO Bench: Does Conversational SEO Work?</em>, NeurIPS 2025 Datasets &amp; Benchmarks / arXiv:2506.11097</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>閉じてから答える</h2>
+        <card id="c-05-7">
+          <q>Keyword Stuffing は Perplexity で主観印象が上がり、位置補正単語数は下がりました。論文の主指標はどちらですか。どう読みますか。</q>
+          <ans><p>主に見るのは Position-Adjusted Word Count。主観だけ上がっても「効いた」とは言い切らない。指標が食い違うときは、どの指標で言っているかを明示する。</p></ans>
+        </card>
+        <card id="c-05-8">
+          <q>社内で GEO 論文を引くとき、必ず一緒に言うべきことを二つ。</q>
+          <ans><p>実験条件（GPT-3.5 + Google 上位 5 件の自作エンジン、指標は著者定義の impression、改変対象はすでに上位 5 件のページ）と、追試の結果（C-SEO Bench では競合下で多くの手法が無効〜逆効果）。</p></ans>
+        </card>
       </section>

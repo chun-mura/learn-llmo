@@ -55,6 +55,22 @@ Search generative AI control の公式注意:
 
 ユーザー起動フェッチャを robots.txt で止められるかは第 4 課のとおりベンダー差がある。測定結果が「ブロックしたのに引用された」なら、まず公式の「無視しうる」行に当たる。
 
+## 何が測れて、何が測れないか
+
+Search Console の生成 AI パフォーマンスレポート（[ヘルプ](https://support.google.com/webmasters/answer/16984139)）は、対象が AI Overviews と AI Mode である。
+
+| 測れる | 測れない |
+|---|---|
+| 表示回数（自サイトのリンクが生成 AI 面に出た回数） | クリック数 |
+| ページ・国・デバイス・日付での内訳 | 掲載順位、CTR |
+| AI Overviews と AI Mode の合算 | 両者の内訳 |
+
+Bing 側には Bing Webmaster Tools の AI Performance レポートがある（2026-02-10 公開、Public Preview）。対象は Microsoft Copilot、Bing の AI 生成要約、一部の提携。指標は Total Citations、Average Cited Pages、Grounding Queries、URL 単位の引用回数。Grounding Queries は "represents a sample of overall citation activity" と明記されている。
+
+Google 側は「表示回数」、Bing 側は「引用回数」で、指標が違う。並べるときに足さない。
+
+流入側では、GA4 の既定チャネルに **AI Assistant** がある。定義は "AI Assistant is the channel by which users arrive at your site from sources like ChatGPT, Gemini, Deepseek, Copilot, or Grok. It excludes Google's AI Overviews and AI Mode."。Google 自身の AI 面はここに入らず、Organic Search 側で数えられる。「AI 流入」を一つの数字にまとめると Google の AI 面が抜け落ちる。
+
 ## 指標の分け方（最小セット）
 
 1. **技術準備度**: 検索ボットが 200 で本文を取れているか。構造化データが本文と一致するか。これは引用率ではない

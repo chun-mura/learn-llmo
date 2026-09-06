@@ -1,0 +1,82 @@
+      <section class="step">
+        <h2>引用は「読んだ証拠」ではない</h2>
+        <p>生成回答に出典リンクが付いていると、その文はその文書から書かれた、と読みたくなります。研究はそこを分けます。</p>
+        <ul class="plain">
+          <li><strong>correctness</strong> 引用先を読むと、その文と矛盾しない</li>
+          <li><strong>faithfulness</strong> モデルが実際にその文書を使って書いた</li>
+        </ul>
+        <p>Wallat らは、正しく見える引用のうち最大 57% が <span data-term="post-rationalization">post-rationalization</span>、つまり生成したあとに付けた後付けだったと報告しています。</p>
+        <p class="note">この数字は特定の実装を測ったものです。「どの製品でも 57%」ではありません。読み方は「引用の存在は根拠の存在を保証しない」まで。</p>
+        <card id="c-11-1">
+          <q>引用の correctness と <span data-term="faithfulness">faithfulness</span> の違いを言ってください。研究は何と報告しましたか。</q>
+          <ans><p>correctness は引用先が文と矛盾しないこと。faithfulness はモデルが実際にその文書を使って書いたこと。Wallat らは正しく見える引用の最大 57% が後付け（post-rationalization）だったと報告した。引用の存在は根拠の存在を保証しない。</p></ans>
+        </card>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Wallat, Heuss, de Rijke &amp; Anand, <em>Correctness is not Faithfulness in RAG Attributions</em>, arXiv:2412.18004（2024-12-23 提出）</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>文脈の中央は落ちる</h2>
+        <p>取られた文書は、モデルへの入力の中に並べられます。並べる位置は効きます。</p>
+        <p>Liu らは、関連情報が入力の先頭か末尾にあるときに成績が最も高く、中央に置かれると大きく落ちることを示しました。長文脈をうたうモデルでも起きます。</p>
+        <div class="flow">
+          <b>先頭</b><i>強</i><b>中央</b><i>弱</i><b>末尾</b>
+        </div>
+        <p class="note">実務への含意は限定的です。各製品が取得した文書をどう並べるかは公開されていません。言えるのは「同じ文書でも置かれ方で使われ方が変わりうる」までで、「見出し直下 40〜60 語」のような具体値はここからは出ません。</p>
+        <card id="c-11-2">
+          <q>lost in the middle とは何ですか。そこから実務に言えること、言えないことは。</q>
+          <ans><p>入力文脈の先頭と末尾にある情報はよく使われ、中央に置かれた情報の利用が落ちる現象（Liu ら, TACL 2023）。言えるのは「置かれ方で使われ方が変わりうる」まで。各製品の並べ方は非公開なので、具体的な語数や位置の指示は出せない。</p></ans>
+        </card>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Liu et al., <em>Lost in the Middle: How Language Models Use Long Contexts</em>, TACL 2023 / arXiv:2307.03172</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>全員が同じ手を打つと</h2>
+        <p>GEO 論文は、1 つのソースだけを改変した前後を比べています。競合が同じ手を打つ状況は測っていません。</p>
+        <p>C-SEO Bench はそこを測りました。複数タスク・複数ドメイン・採用率を変えた条件で、既存の C-SEO 手法の多くは効かないだけでなく、順位を下げることがしばしばあった、と報告しています。従来の SEO 的な手法のほうが有効でした。</p>
+        <p>採用が広がるほど混雑し、ゼロサムに近づく、とも書いています。</p>
+        <card id="c-11-3">
+          <q>C-SEO Bench は、GEO 論文の何を条件として足しましたか。結論は。</q>
+          <ans><p>複数タスク・複数ドメインと、競合も同じ手法を採用する状況を足した。結論は、多くの C-SEO 手法は効かないどころか順位を下げることが多く、従来の SEO 的手法のほうが有効。採用が広がるほどゼロサムに近づく。</p></ans>
+        </card>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Puerto, Gubri, Green, Oh &amp; Yun, <em>C-SEO Bench: Does Conversational SEO Work?</em>, NeurIPS 2025 Datasets &amp; Benchmarks / arXiv:2506.11097</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>自分のサイトが入口になる</h2>
+        <p>ここは施策ではなく防御の話です。生成エンジンは web の本文をそのままモデルに渡します。つまり、本文は入力です。</p>
+        <p>Zhang らは、検索対象に毒入りテキストを <strong>1 件</strong>入れるだけで RAG の出力を操作できる攻撃を示しました。多数の注入を前提にした従来手法より現実的だ、というのが論文の主張です。</p>
+        <p>自社側で見るところは、自分が書いた本文ではなく、<strong>他人が書ける面</strong>です。</p>
+        <ul class="plain">
+          <li>レビュー、コメント、Q&amp;A、掲示板などの UGC</li>
+          <li>ユーザーが本文を作れるプロフィールページ</li>
+          <li>外部から取り込んで丸ごと出している一覧やフィード</li>
+        </ul>
+        <p class="note">対策は普通のやつです。投稿の審査、インデックスさせない、<code>noindex</code>、公開前の目視。攻撃の作り方はここでは扱いません。</p>
+        <card id="c-11-4">
+          <q>自社サイトが RAG ポイズニングの入口になりうるのは、どういう面ですか。</q>
+          <ans><p>他人が本文を書ける面。レビュー・コメント・Q&amp;A などの UGC、ユーザーが作れるプロフィール、外部から取り込んで丸ごと出している一覧。研究では毒入りテキスト 1 件でも出力を操作できたと報告されている。対策は投稿の審査、noindex、公開前の目視。</p></ans>
+        </card>
+        <details class="source"><summary>出典</summary>
+          <ul><li>Zhang et al., <em>Practical Poisoning Attacks against Retrieval-Augmented Generation</em>（CorruptRAG）, ACM SACMAT 2026 / arXiv:2504.03957</li></ul>
+        </details>
+      </section>
+      <section class="step">
+        <h2>ここまでを踏まえた線引き</h2>
+        <p>やること、やらないことを分けます。</p>
+        <table>
+          <thead><tr><th>やる</th><th>やらない</th></tr></thead>
+          <tbody>
+            <tr><td>引用されたら、引用先の文が本当にその主張を支えているか読む</td><td>引用があることを根拠の証拠として社内に報告する</td></tr>
+            <tr><td>競合も同じ改稿をする前提で、独自の一次情報を作る</td><td>文体テンプレートを全ページに一括適用する</td></tr>
+            <tr><td>他人が書ける面を点検する</td><td>他社の回答を操作しにいく</td></tr>
+          </tbody>
+        </table>
+        <p class="note">未検証として残す: 日本語圏での再現、各製品が文書をどう並べるか、UGC 経由の実被害の規模。</p>
+        <card id="c-11-5">
+          <q>「AI 回答に自社が引用された」と報告を受けました。次に確認することを二つ。</q>
+          <ans><p>(1) 引用先の文が、回答文の主張を実際に支えているか読む（引用の存在＝根拠ではない）。(2) 同じ質問を日をあけて、別のモデルでも再実行する。エンジン側の変動があるので、一度の観測を効果と読まない。</p></ans>
+        </card>
+      </section>

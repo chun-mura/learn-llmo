@@ -7,6 +7,10 @@
           <div class="seal official"><small>Google 公式</small>Search の土台（クロール・独自コンテンツ）が先。</div>
         </div>
         <p>二つは同じ現象を、別の条件で見ています。対象プロダクトを決めてから手を動かします。</p>
+        <card id="c-01-1">
+          <q>LLMO が改善しようとしている「状態」を、順位という語を使わずに一文で言ってください。学術側の呼び名も。</q>
+          <ans><p>生成 AI が返す回答の中で、自社のページやブランドが言及・引用される状態を改善すること。学術側の呼び名は GEO（Generative Engine Optimization、Aggarwal ら KDD 2024）。</p></ans>
+        </card>
       </section>
       <section class="step">
         <h2>何が変わったか</h2>
@@ -16,6 +20,10 @@
           <b>質問</b><i>→</i><b>文書を取る</b><i>→</i><b>一つの回答</b><i>→</i><b>出典リンク</b>
         </div>
         <p>サイト運営者が見る単位は「何位か」ではなく「回答のどの文が自分のページに紐づいたか」です。</p>
+        <card id="c-01-2">
+          <q>生成エンジンでは、サイト運営者が見る単位はどう変わりますか。</q>
+          <ans><p>「何位か」ではなく「回答のどの文が自分のページに紐づいたか」。ページのリストではなく、組み立てられた一つの回答の中の位置と分量を見る。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>GEO 論文 Abstract, §1</li>
@@ -34,6 +42,10 @@
           <li><strong>AIO</strong> 文脈で全体を指したり、AI Overviews だけを指したりする</li>
         </ul>
         <p>Google は呼び方自体は否定しません。Search の生成 AI 面で効くとされるハックの多くは、仕組みと一致しない、と書いています。</p>
+        <card id="c-01-3">
+          <q>Google 公式は「GEO / AEO のハック」をどう扱っていますか。呼び名を否定していますか。</q>
+          <ans><p>呼び名自体は否定していない。効くとされるハックの多くが Search の仕組みと一致しない、と書いている。否定しているのは手法であって語ではない。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>GEO 論文 Abstract</li>
@@ -48,6 +60,10 @@
         <p>Google の AI 機能は、同じ Search インデックスからページを取り出します（<span data-term="RAG">RAG</span>）。Search に出る資格がなければ、AI Overviews の出典候補にもなりません。</p>
         <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラ方針が乗ります。</p>
         <p>ChatGPT や Perplexity は Google のインデックスとは別経路です。第 4 課で扱います。</p>
+        <card id="c-01-4">
+          <q>Google の AI 機能は、どこからページを取り出しますか。出典候補になる条件は。</q>
+          <ans><p>同じ Search インデックスから取り出す（RAG）。条件はインデックスされ、スニペット付きで Search に出せること。Search に出る資格がなければ AI Overviews の出典候補にもならない。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary>
           <ul><li>Google, AI features and your website</li></ul>
         </details>
@@ -61,6 +77,10 @@
         </ol>
         <p>1 は 3 の前提ですが、1 でも 3 にならないことは普通にあります。Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページが、画面上のリンクと一致するとは限らない書き方をしています。</p>
         <p>生成回答では、同じ URL でも先頭か末尾か、何文が紐づくか、リンクを辿りそうかが変わります。論文はこれを <span data-term="impression">impression</span> と呼びました。</p>
+        <card id="c-01-5">
+          <q>可視性を三つに分けてください。そのうち二つの違いを、リンクの有無で説明できますか。</q>
+          <ans><p>取得された（クローラが届いた）／言及された（回答文に名前が出る。リンクは無いこともある）／引用された（出典 URL が付いている）。1 は 3 の前提だが、1 でも 3 にならないことは普通にある。</p></ans>
+        </card>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>GEO 論文 §2.2</li>
@@ -69,15 +89,14 @@
         </details>
       </section>
       <section class="step">
-        <h2>確認</h2>
-        <div class="quiz">
-          <ol>
-            <li>「Google で 3 位なのに ChatGPT に出ない」は LLMO の失敗か。何を調べて切り分けるか。</li>
-            <li>自分のブランド名で、言及と引用を一文ずつ書け。</li>
-          </ol>
-          <details class="hint"><summary>指針を見る</summary>
-            <p>1. 別インデックス・別ボットの問題であることが多い。先に OAI-SearchBot の許可と WAF を見る。</p>
-            <p>2. 言及は回答文に店名が出る。引用は出典一覧に自社 URL がある。</p>
-          </details>
-        </div>
+        <h2>閉じてから答える</h2>
+        <p>ここから先は、本文を見ずに答えてください。外れたカードは、この回の終わりにもう一度出ます。</p>
+        <card id="c-01-6">
+          <q>「Google で 3 位なのに ChatGPT に出ない」。これは LLMO の失敗ですか。先に何を調べますか。</q>
+          <ans><p>失敗と決めつけられない。ChatGPT は Google のインデックスとは別経路なので、まず OAI-SearchBot の robots.txt 許可と WAF のブロックを見る。順位の問題ではなく、別インデックス・別ボットの問題であることが多い。</p></ans>
+        </card>
+        <card id="c-01-7">
+          <q>自分のブランドについて、言及されている一文と、引用されている一文を、それぞれ作ってください。</q>
+          <ans><p>言及は回答文に名前が出る例（「たとえば〇〇という店があります」）。引用は出典一覧に自社 URL が並ぶ例。名前が出ていてもリンクが無ければ引用ではない。</p></ans>
+        </card>
       </section>

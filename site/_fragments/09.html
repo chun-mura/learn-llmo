@@ -1,6 +1,6 @@
       <section class="step">
         <h2>止められる誤解だけ書く</h2>
-        <p>一次情報で止められない噂は、次の塊の末尾で「未検証」とラベルします。</p>
+        <p>一次情報で止められない噂は、この課の末尾で「未検証」とラベルします。</p>
       </section>
       <section class="step">
         <div class="myth">
@@ -11,6 +11,10 @@
           <h2>2. 論文の最大 40% は Google の公式効果</h2>
           <p>内部エンジンは GPT-3.5 と Google 上位 5 件です。指標は著者が定義した impression です。</p>
         </div>
+        <card id="c-09-1">
+          <q>「LLMO をやれば SEO は不要」を、一次情報で一文で止めてください。</q>
+          <ans><p>Google の生成 AI は Search インデックスからの RAG なので、インデックスされスニペット表示できることが入場条件。SEO を捨てると出典候補にすらならない。</p></ans>
+        </card>
       </section>
       <section class="step">
         <div class="myth">
@@ -21,6 +25,10 @@
           <h2>4. llms.txt を置けば ChatGPT と Google に載る</h2>
           <p>提案仕様です。Google Search は使わないと明記しています。</p>
         </div>
+        <card id="c-09-2">
+          <q>「llms.txt を置けば AI に載る」を止める一文を。</q>
+          <ans><p>llms.txt は提案仕様で、Google Search は使わないと明記している。エージェントに案内する用途と、AI Overviews の出典選定は別。</p></ans>
+        </card>
       </section>
       <section class="step">
         <div class="myth">
@@ -39,8 +47,12 @@
         </div>
         <div class="myth">
           <h2>8. robots.txt で全 AI を止められる</h2>
-          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Claude-User は尊重すると書いてあります。秘密 URL は認証します。</p>
+          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Meta-ExternalFetcher も迂回しうると書いてあります。Claude-User は尊重すると書いてあります。秘密 URL は認証します。</p>
         </div>
+        <card id="c-09-3">
+          <q>「robots.txt で全 AI を止められる」。どのベンダーの文言で止めますか。</q>
+          <ans><p>Perplexity-User は一般に robots.txt を無視する、ChatGPT-User は適用されない場合がある、Meta-ExternalFetcher は迂回しうる、と各社が自分で書いている。止めたいものは認証で止める。</p></ans>
+        </card>
       </section>
       <section class="step">
         <div class="myth">
@@ -51,5 +63,23 @@
           <h2>10. AI Overviews に出ないのは常に失敗</h2>
           <p>追加価値があるときだけ出ます。出ないクエリでは青リンクが本戦です。</p>
         </div>
-        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、UGC の引用割合。</p>
+      </section>
+      <section class="step">
+        <div class="myth">
+          <h2>11. robots.txt に書けば、利用を禁止したことになる</h2>
+          <p>RFC 9309 は "These rules are not a form of access authorization." と書いています。規格の側に、学習か検索かという用途の区別もありません。用途はベンダーが UA を分けて実現しているだけです。</p>
+        </div>
+        <div class="myth">
+          <h2>12. 引用が付いている＝その文書を根拠に生成した</h2>
+          <p>正しく見える引用のうち最大 57% が後付けだった、という報告があります（第 11 課）。引用の存在は根拠の存在を保証しません。</p>
+        </div>
+        <div class="myth">
+          <h2>13. 論文で効いた改変は、競合も同じことをしても効く</h2>
+          <p>C-SEO Bench は、競合採用と複数ドメインの条件で、多くの手法が効かないどころか順位を下げると報告しました（第 5 課）。</p>
+        </div>
+        <card id="c-09-4">
+          <q>誤解 11・12・13 を、それぞれ一次情報の一言で潰してください。</q>
+          <ans><p>11: RFC 9309 は規則がアクセス認可ではないと明記。12: 正しく見える引用の最大 57% が後付け（Wallat ら）。13: C-SEO Bench は競合採用下で多くの手法が無効〜逆効果と報告。</p></ans>
+        </card>
+        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、UGC の引用割合、Bytespider の robots.txt 遵守。</p>
       </section>

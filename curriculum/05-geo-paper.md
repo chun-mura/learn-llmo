@@ -99,6 +99,19 @@ Position-Adjusted Word Count / Subjective Impression:
 - 可視性は著者が定義した impression であり、クリックや売上ではない
 - Google 公式は、この種の GEO ハックの多くを Search では無効と述べている（第 3 課）
 
+## 追試（C-SEO Bench, NeurIPS 2025）
+
+GEO 論文は「他が動かないときに 1 者が動いたら」を測っている。競合も同じ手を打つ状況は測っていない。
+
+C-SEO Bench（Puerto, Gubri, Green, Oh & Yun, NeurIPS 2025 Datasets & Benchmarks / [arXiv:2506.11097](https://arxiv.org/abs/2506.11097)）は、そこに二つの条件を足した。
+
+- 質問応答と商品推薦の 2 タスク × 各 3 ドメイン
+- 競合も同じ手法を採用していく状況（採用率を変える）
+
+結果は "most current C-SEO methods are not only largely ineffective but also frequently have a negative impact on document ranking"。従来の SEO 的手法のほうが有効で、採用が広がるほど混雑しゼロサムに近づく、とも書いている。
+
+GEO 論文が間違っていた、という読み方はしない。条件が違う。実務が置かれているのは C-SEO Bench 側の条件である。社内で GEO の数字を引くときは、実験条件とこの追試をセットで言う。
+
 ## 確認問題
 
 1. 「引用を足したら 115% 上がる」を、誰のどの順位のソースの、どの指標の話か、に直して書け。
