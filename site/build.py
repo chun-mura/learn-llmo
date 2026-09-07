@@ -88,7 +88,7 @@ HEAD = """<!DOCTYPE html>
       <li><a href="#l03"><span class="num">03</span><span>SEO GEO LLMO AEO</span></a></li>
       <li><a href="#l04"><span class="num">04</span><span>学習と検索は別</span></a></li>
       <li><a href="#l05"><span class="num">05</span><span>数字の条件</span></a></li>
-      <li><a href="#l06"><span class="num">06</span><span>引用される塊</span></a></li>
+      <li><a href="#l06"><span class="num">06</span><span>引用される単位</span></a></li>
       <li><a href="#l07"><span class="num">07</span><span>届く・意味・地図</span></a></li>
       <li><a href="#l08"><span class="num">08</span><span>スイッチを混ぜない</span></a></li>
       <li><a href="#l09"><span class="num">09</span><span>一次情報で止める</span></a></li>
@@ -106,7 +106,7 @@ HOME = """
       <div class="home-hero">
         <p class="kicker">調査日 2026-08-21 · 追補 2026-09-06 · 一次情報のみ</p>
         <h1>読むより、思い出す</h1>
-        <p>Markdown の長文を、机の上の教科書に組み直したものです。各課は塊に切ってあり、次へを押すまで次の塊は出ません。塊の終わりには、閉じた状態の問いが 1 枚ずつ入っています。</p>
+        <p>Markdown の長文を、机の上の教科書に組み直したものです。各課は節に切ってあり、次へを押すまで次の節は出ません。節の終わりには、閉じた状態の問いが 1 枚ずつ入っています。</p>
         <div class="dash" data-dash></div>
         <div class="boxes" data-boxes></div>
         <p><a class="btn" href="#l01">第 1 課から始める</a></p>
@@ -122,7 +122,7 @@ HOME = """
         <a href="#l03"><span class="n">03</span><strong>用語の地図</strong><em>SEO GEO LLMO AEO</em></a>
         <a href="#l04"><span class="n">04</span><strong>ボットを分ける</strong><em>学習と検索は別</em></a>
         <a href="#l05"><span class="n">05</span><strong>GEO 論文</strong><em>数字の条件と追試</em></a>
-        <a href="#l06"><span class="n">06</span><strong>中身</strong><em>引用される塊</em></a>
+        <a href="#l06"><span class="n">06</span><strong>中身</strong><em>引用される単位</em></a>
         <a href="#l07"><span class="n">07</span><strong>技術</strong><em>届く · 意味 · 地図</em></a>
         <a href="#l08"><span class="n">08</span><strong>測定</strong><em>スイッチを混ぜない</em></a>
         <a href="#l09"><span class="n">09</span><strong>誤解</strong><em>一次情報で止める</em></a>
@@ -136,7 +136,7 @@ HOME = """
           <li><strong>答えは採点を押すまで出しません。</strong>外れてもよいので、先に自分の答えを出してください。生成効果のメタ分析で d ≈ 0.40。</li>
           <li><strong>復習の間隔は 1 → 3 → 7 → 16 → 35 日と広げます。</strong>間隔をあけるほど長く残るという分散学習の結果に沿わせています。</li>
           <li><strong>復習は課をまたいで混ぜます。</strong>ただし交互配置の効果量は中程度で、条件によって反転します。順序の工夫として使います。</li>
-          <li><strong>進捗の主指標は「読んだ塊」ではなく「間をあけて言えたカード」です。</strong>読めた感じは、覚えた証拠になりません。</li>
+          <li><strong>進捗の主指標は「読んだ節」ではなく「間をあけて言えたカード」です。</strong>読めた感じは、覚えた証拠になりません。</li>
           <li><strong>やらないこと</strong>：学習タイプ別モード（効果の根拠がない）、忘却曲線の飾り図（よく描かれる滑らかな指数曲線は原データの単純化）、独自の高度な復習アルゴリズム（人を対象にした比較試験が乏しい）。</li>
         </ul>
         <details class="source"><summary>出典</summary>
@@ -151,7 +151,7 @@ HOME = """
           </ul>
         </details>
       </div>
-      <p class="note home-note">キーボード: J / 右で次の塊、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザーにだけ残ります。</p>
+      <p class="note home-note">キーボード: J / 右で次の節、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザーにだけ残ります。</p>
     </section>
 """
 
@@ -292,6 +292,7 @@ BANNED = [
     (r"ユーザ(?!ー)", "ユーザー（長音符を付ける）"),
     (r"ブラウザ(?!ー)", "ブラウザー（長音符を付ける）"),
     (r"フェッチャ(?!ー)", "フェッチャー（長音符を付ける）"),
+    (r"塊", "段落（UI の読み進み単位は「節」）"),
 ]
 
 
@@ -325,14 +326,14 @@ for lid, (title, goal, prime) in META.items():
         <p class="goal"><span>この課のゴール</span>{goal}</p>
         <div class="prime"><b>読む前に一度だけ</b><p>{prime}</p></div>
       </header>
-      <p class="chunk-meter" data-meter>塊</p>
+      <p class="chunk-meter" data-meter>節</p>
       <div class="steps">
 {steps}
       </div>
       <section class="finish" data-finish hidden aria-live="polite"></section>
-      <nav class="step-nav" aria-label="塊の移動">
-        <button type="button" class="ghost" data-prev>前の塊</button>
-        <button type="button" data-next>次の塊</button>
+      <nav class="step-nav" aria-label="節の移動">
+        <button type="button" class="ghost" data-prev>前の節</button>
+        <button type="button" data-next>次の節</button>
         <span class="grow"></span>
         <button type="button" class="ghost" data-all>全部見る</button>
       </nav>

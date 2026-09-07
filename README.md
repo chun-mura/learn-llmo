@@ -2,9 +2,9 @@
 
 公開されている一次情報（論文、公式ドキュメント、仕様）をもとに、Large Language Model Optimization（LLMO）を自分の言葉で説明できるようにする教材です。調査日は **2026-08-21**、追補は **2026-09-06**。
 
-**学習用の画面は HTML です。** [`site/index.html`](site/index.html) をブラウザで開いてください。教材は 1 ファイルで、左の課名や番号をクリックすると同じページ内で移動します。各課は一塊ずつ出ます。Markdown 原文は `curriculum/` に残してあります。
+**学習用の画面は HTML です。** [`site/index.html`](site/index.html) をブラウザで開いてください。教材は 1 ファイルで、左の課名や番号をクリックすると同じページ内で移動します。各課は一節ずつ出ます。Markdown 原文は `curriculum/` に残してあります。
 
-読むだけで終わらない作りにしてあります。各塊の終わりに、閉じた状態の問い（想起カード）が入っています。答えは採点を押すまで出ません。採点すると次の出題日が 1 → 3 → 7 → 16 → 35 日と伸び、期限が来たカードだけが「復習」面に、課をまたいで混ぜて出ます。根拠は画面のホームと `research/SOURCES.md` の学習科学の節にあります。
+読むだけで終わらない作りにしてあります。各節の終わりに、閉じた状態の問い（想起カード）が入っています。答えは採点を押すまで出ません。採点すると次の出題日が 1 → 3 → 7 → 16 → 35 日と伸び、期限が来たカードだけが「復習」面に、課をまたいで混ぜて出ます。根拠は画面のホームと `research/SOURCES.md` の学習科学の節にあります。
 
 ## 誰向けか
 
@@ -23,7 +23,7 @@ Google Search の公式見解では、AI Overviews や AI Mode に出るため�
 
 ## 読み方
 
-[`site/index.html`](site/index.html) をブラウザで開きます。順番どおり、一塊ずつです。各課 20〜40 分。全部見たいときは画面下の「全部見る」、または `A` キー。復習面では Space で答え合わせ、`1` でもう一度、`2` で言えた。進捗と復習の期限はブラウザの localStorage にだけ残ります。
+[`site/index.html`](site/index.html) をブラウザで開きます。順番どおり、一節ずつです。各課 20〜40 分。全部見たいときは画面下の「全部見る」、または `A` キー。復習面では Space で答え合わせ、`1` でもう一度、`2` で言えた。進捗と復習の期限はブラウザの localStorage にだけ残ります。
 
 | 課 | 画面 | 終わったときにできること |
 |---|---|---|
@@ -32,7 +32,7 @@ Google Search の公式見解では、AI Overviews や AI Mode に出るため�
 | 3 | [site/index.html#l03](site/index.html#l03) | SEO / GEO / LLMO / AEO を混ぜずに使える |
 | 4 | [site/index.html#l04](site/index.html#l04) | 学習用ボットと検索用ボットを分けて robots.txt を書ける |
 | 5 | [site/index.html#l05](site/index.html#l05) | GEO 論文の数字を、実験条件つきで引用できる |
-| 6 | [site/index.html#l06](site/index.html#l06) | ページを「引用されうる塊」として直せる |
+| 6 | [site/index.html#l06](site/index.html#l06) | ページを「引用されうる単位」として直せる |
 | 7 | [site/index.html#l07](site/index.html#l07) | インデックス、構造化データ、llms.txt の役割を切り分けられる |
 | 8 | [site/index.html#l08](site/index.html#l08) | 測定面と、掲載を止めるスイッチを混同しない |
 | 9 | [site/index.html#l09](site/index.html#l09) | よく出回る誤解を一次情報で潰せる |

@@ -886,7 +886,7 @@ a.btn {
   font-family: var(--font-ui);
 }
 
-/* 修了面を出しているあいだは、塊と塊の移動ボタンを引っ込める。 */
+/* 修了面を出しているあいだは、節と節の移動ボタンを引っ込める。 */
 body.is-finish .steps,
 body.is-finish .step-nav,
 body.is-finish .chunk-meter,

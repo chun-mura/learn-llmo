@@ -5,7 +5,7 @@ const LESSONS = [
   { id: "03", title: "用語の地図", short: "SEO GEO LLMO AEO" },
   { id: "04", title: "ボットを分ける", short: "学習と検索は別" },
   { id: "05", title: "GEO 論文", short: "数字の条件" },
-  { id: "06", title: "中身", short: "引用される塊" },
+  { id: "06", title: "中身", short: "引用される単位" },
   { id: "07", title: "技術", short: "届く・意味・地図" },
   { id: "08", title: "測定", short: "スイッチを混ぜない" },
   { id: "09", title: "誤解", short: "一次情報で止める" },
@@ -339,7 +339,7 @@ function advanceReview(id, good) {
 }
 
 /* --- 課の修了面 ---
-   最後の塊で「この課を終える」を押したとき、黙って次の課へ飛ばさない。
+   最後の節で「この課を終える」を押したとき、黙って次の課へ飛ばさない。
    何を言えるようになったか、カードがいつ戻ってくるかを見せてから送り出す。 */
 
 function lessonGoal(id) {
@@ -386,7 +386,7 @@ function paintFinish(id) {
     }</p>
     <div class="finish-nav">
       <button type="button" class="btn" data-finish-next>${nextLabel}</button>
-      <button type="button" class="btn ghost" data-finish-back>最後の塊に戻る</button>
+      <button type="button" class="btn ghost" data-finish-back>最後の節に戻る</button>
       ${stats.due ? `<a class="btn ghost" href="#lr">期限のカード ${stats.due} 枚</a>` : ""}
     </div>
   `;
@@ -436,7 +436,7 @@ function paintDash() {
     <div class="dash-cell"><b>${stats.rate === null ? "—" : `${stats.rate}<small>%</small>`}</b><span>言えた率（${stats.right + stats.wrong} 回中）</span></div>
     <div class="dash-cell"><b>${stats.held}</b><span>間をあけて言えた</span></div>
     <div class="dash-cell"><b>${stats.seen} / ${stats.total}</b><span>手をつけたカード</span></div>
-    <div class="dash-cell quiet"><b>${readChunks}</b><span>読んだ塊</span></div>
+    <div class="dash-cell quiet"><b>${readChunks}</b><span>読んだ節</span></div>
   `;
   const boxes = document.querySelector("[data-boxes]");
   if (boxes) {
@@ -482,7 +482,7 @@ function renderRail(currentId) {
     <div class="rail-foot">
       <a class="rail-review${due ? " is-due" : ""}" href="#lr">復習${due ? `<b>${due}</b>` : ""}</a>
       <a href="#lg">用語集</a>
-      <p class="kb">J / K で塊を移動 · A で全部表示</p>
+      <p class="kb">J / K で節を移動 · A で全部表示</p>
     </div>
   `;
 }
@@ -527,13 +527,13 @@ function paintSteps(id, first) {
   if (meter && stepNodes.length) {
     const ratio = (stepIndex + 1) / stepNodes.length;
     meter.innerHTML =
-      `いま読む塊 <b>${stepIndex + 1}</b> / ${stepNodes.length}` +
+      `いま読む節 <b>${stepIndex + 1}</b> / ${stepNodes.length}` +
       `<span class="bar" aria-hidden="true"><i style="transform:scaleX(${ratio})"></i></span>`;
   }
   if (prev) prev.disabled = stepIndex === 0;
   if (next) {
     next.disabled = false;
-    next.textContent = stepIndex === stepNodes.length - 1 ? "この課を終える" : "次の塊";
+    next.textContent = stepIndex === stepNodes.length - 1 ? "この課を終える" : "次の節";
   }
   if (stepNodes.length) {
     const nextHash = hashFor(id, stepIndex + 1);
@@ -626,7 +626,7 @@ function initControls() {
     }
     if (allBtn) {
       document.body.classList.toggle("is-all");
-      allBtn.textContent = document.body.classList.contains("is-all") ? "一塊ずつに戻す" : "全部見る";
+      allBtn.textContent = document.body.classList.contains("is-all") ? "一節ずつに戻す" : "全部見る";
       paintSteps(id, true);
     }
   });
