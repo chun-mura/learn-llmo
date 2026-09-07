@@ -3,10 +3,10 @@
         <p><span data-term="LLMO">LLMO</span> は、生成 AI が返す回答の中で、自社のページやブランドが <span data-term="言及">言及</span>・<span data-term="引用">引用</span>される状態を改善する取り組みです。</p>
         <p>学術側の呼び名は <span data-term="GEO">GEO</span> です。Aggarwal らが KDD 2024 で定式化しました。</p>
         <div class="pair">
-          <div class="seal paper"><small>論文</small>回答の中の出典の厚さを変える。</div>
+          <div class="seal paper"><small>論文</small>回答文のうち、その出典に紐づく分量と位置を変える。</div>
           <div class="seal official"><small>Google 公式</small>Search の土台（クロール・独自コンテンツ）が先。</div>
         </div>
-        <p>二つは同じ現象を、別の条件で見ています。対象プロダクトを決めてから手を動かします。</p>
+        <p>論文と Google 公式は、同じ現象を別の条件から見ています。どちらの話をしているのかを混ぜないために、まず対象プロダクト（Google Search なのか ChatGPT なのか）を決めてから作業を始めてください。</p>
         <card id="c-01-1">
           <q>LLMO が改善しようとしている「状態」を、順位という語を使わずに一文で言ってください。学術側の呼び名も。</q>
           <ans><p>生成 AI が返す回答の中で、自社のページやブランドが言及・引用される状態を改善すること。学術側の呼び名は GEO（Generative Engine Optimization、Aggarwal ら KDD 2024）。</p></ans>
@@ -28,20 +28,20 @@
           <ul>
             <li>GEO 論文 Abstract, §1</li>
             <li>OpenAI, Introducing ChatGPT search（2024-10-31）</li>
-            <li>Google, New opportunities…（2026-06-03）。AI Overviews 月間 25 億 MAU は自己報告</li>
+            <li>Google, New opportunities…（2026-06-03）。AI Overviews 月間アクティブユーザー 25 億は自己報告</li>
           </ul>
         </details>
       </section>
       <section class="step">
         <h2>名前は揃えない</h2>
-        <p>会話では相手の語に合わせます。社内では言及と引用を分けて測ります。</p>
+        <p>会話では相手の語に合わせてください。社内では言及と引用を分けて測ってください。</p>
         <ul class="plain">
           <li><strong>LLMO</strong> 日本の実務、英語のマーケ記事</li>
           <li><strong>GEO</strong> 論文と海外ツール</li>
           <li><strong>AEO</strong> 質問に直接答える面。強調スニペット時代からの言い回し</li>
           <li><strong>AIO</strong> 文脈で全体を指したり、AI Overviews だけを指したりする</li>
         </ul>
-        <p>Google は呼び方自体は否定しません。Search の生成 AI 面で効くとされるハックの多くは、仕組みと一致しない、と書いています。</p>
+        <p>Google は呼び方自体は否定していません。Search の生成 AI 面で効くとされるハックの多くが、Search の仕組みと一致しないと書いています。</p>
         <card id="c-01-3">
           <q>Google 公式は「GEO / AEO のハック」をどう扱っていますか。呼び名を否定していますか。</q>
           <ans><p>呼び名自体は否定していない。効くとされるハックの多くが Search の仕組みと一致しない、と書いている。否定しているのは手法であって語ではない。</p></ans>
@@ -57,8 +57,8 @@
       <section class="step">
         <h2>SEO との関係</h2>
         <p><span data-term="SEO">SEO</span> は、クロールされ、インデックスされ、クエリに対してページが選ばれるまでの最適化です。</p>
-        <p>Google の AI 機能は、同じ Search インデックスからページを取り出します（<span data-term="RAG">RAG</span>）。Search に出る資格がなければ、AI Overviews の出典候補にもなりません。</p>
-        <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラ方針が乗ります。</p>
+        <p>Google の AI 機能は、同じ Search インデックスからページを取り出します（<span data-term="RAG">RAG</span>）。Search に出る資格がなければ、AI Overviews（AI 概要）の出典候補にもなりません。本教材ではこれを「入場条件」と呼びます。Search インデックスに載り、スニペットを出せる状態のことです。</p>
+        <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラー方針が乗ります。</p>
         <p>ChatGPT や Perplexity は Google のインデックスとは別経路です。第 4 課で扱います。</p>
         <card id="c-01-4">
           <q>Google の AI 機能は、どこからページを取り出しますか。出典候補になる条件は。</q>
@@ -71,15 +71,15 @@
       <section class="step">
         <h2>可視性を三つに分ける</h2>
         <ol class="plain">
-          <li><strong>取得された</strong> クローラや検索がページに届いた</li>
+          <li><strong>取得された</strong> クローラーや検索がページに届いた</li>
           <li><strong>言及された</strong> 回答文にブランド名がある。リンクは無いこともある</li>
           <li><strong>引用された</strong> 出典 URL が付いている</li>
         </ol>
-        <p>1 は 3 の前提ですが、1 でも 3 にならないことは普通にあります。Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページが、画面上のリンクと一致するとは限らない書き方をしています。</p>
+        <p>「取得された」は「引用された」の前提ですが、取得されても引用されないことは普通にあります。Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページと、画面に表示されるリンクは必ずしも一致しない、という書き方をしています。</p>
         <p>生成回答では、同じ URL でも先頭か末尾か、何文が紐づくか、リンクを辿りそうかが変わります。論文はこれを <span data-term="impression">impression</span> と呼びました。</p>
         <card id="c-01-5">
           <q>可視性を三つに分けてください。そのうち二つの違いを、リンクの有無で説明できますか。</q>
-          <ans><p>取得された（クローラが届いた）／言及された（回答文に名前が出る。リンクは無いこともある）／引用された（出典 URL が付いている）。1 は 3 の前提だが、1 でも 3 にならないことは普通にある。</p></ans>
+          <ans><p>取得された（クローラーが届いた）／言及された（回答文に名前が出る。リンクは無いこともある）／引用された（出典 URL が付いている）。取得されたことは引用されたことの前提だが、取得されても引用されないことは普通にある。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
           <ul>
@@ -93,7 +93,7 @@
         <p>ここから先は、本文を見ずに答えてください。外れたカードは、この回の終わりにもう一度出ます。</p>
         <card id="c-01-6">
           <q>「Google で 3 位なのに ChatGPT に出ない」。これは LLMO の失敗ですか。先に何を調べますか。</q>
-          <ans><p>失敗と決めつけられない。ChatGPT は Google のインデックスとは別経路なので、まず OAI-SearchBot の robots.txt 許可と WAF のブロックを見る。順位の問題ではなく、別インデックス・別ボットの問題であることが多い。</p></ans>
+          <ans><p>失敗と決めつけられない。ChatGPT は Google のインデックスとは別経路なので、まず OAI-SearchBot の robots.txt 許可と WAF（Web Application Firewall）のブロックを見る。順位の問題ではなく、別インデックス・別ボットの問題であることが多い。</p></ans>
         </card>
         <card id="c-01-7">
           <q>自分のブランドについて、言及されている一文と、引用されている一文を、それぞれ作ってください。</q>

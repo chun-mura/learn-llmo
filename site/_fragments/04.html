@@ -9,7 +9,8 @@
             <tr><td>ユーザー起動</td><td>ChatGPT-User, Claude-User, Perplexity-User</td><td>今この質問のためのライブ取得</td></tr>
           </tbody>
         </table>
-        <p>学習だけ拒否して検索は許可する、が公式に想定されています。</p>
+        <p class="note">接地（grounding）は、モデルが回答を書くときに外部の文書を根拠として参照することです。</p>
+        <p>学習用ボットだけを拒否し、検索用ボットは許可するという設定は、公式に想定されています。</p>
         <card id="c-04-1">
           <q>ボットの三つの役割を挙げ、それぞれを止めると何が起きるか言ってください。</q>
           <ans><p>学習（止めると将来の学習や製品によってはアプリ側の接地から外れる）、検索インデックス（止めるとその製品の出典候補から外れる）、ユーザー起動（止めると今この質問のためのライブ取得が止まる）。三つの設定は独立で、学習だけ拒否して検索は許可できる。</p></ans>
@@ -20,16 +21,16 @@
         <p>robots.txt は RFC 9309 として標準化されています。読むべきは、そこに書いていないことです。</p>
         <ul class="plain">
           <li><strong>アクセス認可ではない。</strong><span data-term="RFC 9309">RFC 9309</span> は "These rules are not a form of access authorization." と書きます。守るかどうかは相手次第です</li>
-          <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが UA 名を分けて実現しているだけです</li>
+          <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが User-Agent（以下 UA）名を分けて実現しているだけです</li>
           <li><strong>最長一致。</strong>複数の規則が当たったら、オクテット数が最も多い規則が使われます</li>
           <li><strong>パスは大小を区別し、UA トークンは区別しない。</strong>パスの照合は case sensitive（SHOULD）、UA の照合は case-insensitive（MUST）</li>
-          <li><strong>4xx と 5xx は逆に働く。</strong>robots.txt が 4xx なら「どのリソースにもアクセスしてよい」、5xx なら「全面禁止とみなす」</li>
-          <li>キャッシュは 24 時間まで。パーサは最低 500 KiB を読む</li>
+          <li><strong>4xx と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、クローラーは「どのリソースにもアクセスしてよい」と解釈します。5xx を返したときは「全面禁止」とみなします</li>
+          <li>キャッシュは 24 時間まで。パーサーは最低 500 KiB を読む</li>
         </ul>
-        <p class="note">秘密の URL を robots.txt で隠すのは筋が悪い、という話がここに繋がります。止めたいものは認証で止めます。</p>
+        <p class="note">秘密の URL を robots.txt で隠すのは筋が悪いという話が、ここに繋がります。止めたいものは認証で止めてください。</p>
         <card id="c-04-2">
-          <q>robots.txt が 5xx を返しているとき、規格上クローラはどう振る舞いますか。4xx のときは。</q>
-          <ans><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。逆に働くので、サーバ障害中は正規のクローラも止まる。</p></ans>
+          <q>robots.txt が 5xx を返しているとき、規格上クローラーはどう振る舞いますか。4xx のときは。</q>
+          <ans><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。</p></ans>
         </card>
         <card id="c-04-3">
           <q>RFC 9309 は robots.txt の規則を何ではないと明記していますか。</q>
@@ -51,7 +52,7 @@ Disallow: /
 
 User-agent: OAI-SearchBot
 Allow: /</pre>
-        <p>ChatGPT-User を拒否しても、robots.txt を見ない取得がありうると書いてあります。</p>
+        <p>OpenAI の公式ドキュメントには、ChatGPT-User を拒否しても robots.txt を見ない取得がありうると書かれています。</p>
         <card id="c-04-4">
           <q>OpenAI の三つの UA を、役割つきで挙げてください。</q>
           <ans><p>OAI-SearchBot（検索回答への掲載。拒否すると出ない。反映は約 24 時間）、GPTBot（基盤モデルの学習）、ChatGPT-User（ユーザー操作に応じた取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない）。</p></ans>
@@ -73,10 +74,10 @@ Allow: /</pre>
             <tr><td>Claude-SearchBot</td><td>検索用クロール</td><td>検索インデックスから外れる</td></tr>
           </tbody>
         </table>
-        <p>robots.txt と Crawl-delay を尊重する、CAPTCHA を迂回しない、IP ブロックは robots.txt が読めず不安定、と書いてあります。</p>
-        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められる、と書いてあります。ベンダー間で一致しません。</p>
+        <p>Anthropic の公式ドキュメントには、robots.txt と Crawl-delay を尊重すること、CAPTCHA を迂回しないこと、IP ブロックは robots.txt が読めず不安定であることが書かれています。</p>
+        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められると書かれています。ベンダー間で一致しません。</p>
         <card id="c-04-5">
-          <q>ユーザー起動のフェッチャと robots.txt の関係は、ベンダー間で揃っていますか。三社で言ってください。</q>
+          <q>ユーザー起動のフェッチャーと robots.txt の関係は、ベンダー間で揃っていますか。三社で言ってください。</q>
           <ans><p>揃っていない。Anthropic の Claude-User は robots.txt を尊重すると書く。OpenAI の ChatGPT-User は適用されない場合があると書く。Perplexity-User は一般に robots.txt を無視すると書く。矛盾を消さずに覚える。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -89,10 +90,10 @@ Allow: /</pre>
           <li><strong>PerplexityBot</strong> 検索結果に出してリンクする。基盤モデル学習のためのクロールではない</li>
           <li><strong>Perplexity-User</strong> ユーザーの質問に応じてページを取る。学習用ではない。<strong>一般に robots.txt を無視する</strong></li>
         </ul>
-        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は User-Agent と公開 IP の両方を見ることを勧めています。</p>
+        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は UA と公開 IP の両方を見ることを勧めています。</p>
         <card id="c-04-6">
           <q>robots.txt で検索ボットを許可したのに、そのエンジンに一切出ません。次に見るのはどこですか。</q>
-          <ans><p>WAF やボット対策の一括拒否。robots.txt で許可しても手前で落ちていれば届かない。公式は User-Agent と公開 IP の両方で判定することを勧めている。</p></ans>
+          <ans><p>WAF やボット対策の一括拒否。robots.txt で許可しても手前で落ちていれば届かない。公式は UA と公開 IP の両方で判定することを勧めている。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
           <ul>
@@ -103,10 +104,10 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Google</h2>
-        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけ別ボット、ではありません。</p>
+        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけを別のボットが担当するわけではありません。</p>
         <p>適格条件: インデックスされ、スニペット付きで Search に出せること。追加の技術要件はありません。</p>
-        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した User-Agent はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
-        <p>AI 面だけ止めたい場合は Search Console の生成 AI 制御です（第 8 課）。プレビューは nosnippet 系です。</p>
+        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した UA はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
+        <p>AI 面だけ止めたい場合は Search Console の生成 AI control です（第 8 課）。プレビューは nosnippet 系です。</p>
         <card id="c-04-7">
           <q>AI Overviews に出るかどうかを制御するのは、どのボットですか。Google-Extended は何に効きますか。</q>
           <ans><p>Googlebot。AI 機能専用のボットはない。Google-Extended は独立した UA を持たない robots.txt のトークンで、効くのは Gemini アプリと Vertex の学習・接地。Search の掲載や順位には使わない。</p></ans>
@@ -120,7 +121,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>四社の外側</h2>
-        <p>同じ三分類が、他社の文書にも出てきます。名前だけ覚えます。</p>
+        <p>同じ三分類が、他社の文書にも出てきます。名前だけ覚えてください。</p>
         <table>
           <thead><tr><th>提供元</th><th>UA</th><th>公式が書いていること</th></tr></thead>
           <tbody>
@@ -146,7 +147,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>robots.txt の外側で動いているもの</h2>
-        <p>用途を書けない、という RFC の穴を、二方向から埋めようとしています。どちらもまだ標準ではありません。</p>
+        <p>robots.txt には利用目的を書けません。この欠落を、IETF と Cloudflare が別々の方向から埋めようとしています。どちらもまだ標準ではありません。</p>
         <div class="pair">
           <div class="seal official"><small>IETF</small>aipref WG。<span data-term="Content-Usage">Content-Usage</span> を HTTP ヘッダと robots.txt の両方に付け、取得と利用を二段に分ける。<strong>Internet-Draft であり RFC ではない</strong></div>
           <div class="seal paper"><small>Cloudflare</small>Search / Agent / Training の三分類。2026-09-15 から、新規ドメインの広告掲載ページで Training と Agent を既定でブロック。Search は許可のまま</div>
@@ -194,7 +195,7 @@ Allow: /
 
 User-agent: PerplexityBot
 Allow: /</pre>
-        <p>Googlebot は触りません。Perplexity-User と ChatGPT-User と Meta-ExternalFetcher は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
+        <p>この例では Googlebot に対する規則を書いていません。Perplexity-User と ChatGPT-User と Meta-ExternalFetcher は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
       </section>
       <section class="step">
         <h2>閉じてから答える</h2>
@@ -204,6 +205,6 @@ Allow: /</pre>
         </card>
         <card id="c-04-12">
           <q>Google-Extended を拒否したのに AI Overviews に出ます。バグですか。</q>
-          <ans><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI 制御。</p></ans>
+          <ans><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></ans>
         </card>
       </section>

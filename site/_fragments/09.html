@@ -1,6 +1,6 @@
       <section class="step">
         <h2>止められる誤解だけ書く</h2>
-        <p>一次情報で止められない噂は、この課の末尾で「未検証」とラベルします。</p>
+        <p>以下では、誤解に一次情報をぶつけて反論することを「止める」と呼びます。一次情報で止められない噂は、この課の末尾で「未検証」とラベルします。</p>
       </section>
       <section class="step">
         <div class="myth">
@@ -9,7 +9,7 @@
         </div>
         <div class="myth">
           <h2>2. 論文の最大 40% は Google の公式効果</h2>
-          <p>内部エンジンは GPT-3.5 と Google 上位 5 件です。指標は著者が定義した impression です。</p>
+          <p>内部 GE は GPT-3.5 と Google 上位 5 件です。指標は著者が定義した impression です。</p>
         </div>
         <card id="c-09-1">
           <q>「LLMO をやれば SEO は不要」を、一次情報で一文で止めてください。</q>
@@ -37,21 +37,21 @@
         </div>
         <div class="myth">
           <h2>6. GPTBot を拒否すると ChatGPT search に出ない</h2>
-          <p>GPTBot は学習、OAI-SearchBot は検索です。独立です。</p>
+          <p>GPTBot は学習用、OAI-SearchBot は検索用です。GPTBot の設定と OAI-SearchBot の設定は独立しています。</p>
         </div>
       </section>
       <section class="step">
         <div class="myth">
           <h2>7. Google-Extended を拒否すると AI Overviews に出ない</h2>
-          <p>Gemini アプリと Vertex の話です。Search の掲載には使いません。</p>
+          <p>Google-Extended は Gemini アプリと Vertex 向けの設定です。Google Search の掲載判断には使われません。</p>
         </div>
         <div class="myth">
           <h2>8. robots.txt で全 AI を止められる</h2>
-          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Meta-ExternalFetcher も迂回しうると書いてあります。Claude-User は尊重すると書いてあります。秘密 URL は認証します。</p>
+          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Meta-ExternalFetcher も迂回しうると書いてあります。Claude-User は尊重すると書いてあります。公開したくない URL は、認証で保護してください。</p>
         </div>
         <card id="c-09-3">
           <q>「robots.txt で全 AI を止められる」。どのベンダーの文言で止めますか。</q>
-          <ans><p>Perplexity-User は一般に robots.txt を無視する、ChatGPT-User は適用されない場合がある、Meta-ExternalFetcher は迂回しうる、と各社が自分で書いている。止めたいものは認証で止める。</p></ans>
+          <ans><p>Perplexity-User は一般に robots.txt を無視する、ChatGPT-User は適用されない場合がある、Meta-ExternalFetcher は迂回しうる、と各社が自分で書いている。アクセスさせたくないものは認証で保護する。</p></ans>
         </card>
       </section>
       <section class="step">
@@ -61,7 +61,7 @@
         </div>
         <div class="myth">
           <h2>10. AI Overviews に出ないのは常に失敗</h2>
-          <p>追加価値があるときだけ出ます。出ないクエリでは青リンクが本戦です。</p>
+          <p>AI Overviews は、通常の検索結果より追加の価値があると判断されたときだけ出ます。出ないクエリでは、従来どおり検索結果一覧のリンクが勝負どころです。</p>
         </div>
       </section>
       <section class="step">
@@ -78,8 +78,8 @@
           <p>C-SEO Bench は、競合採用と複数ドメインの条件で、多くの手法が効かないどころか順位を下げると報告しました（第 5 課）。</p>
         </div>
         <card id="c-09-4">
-          <q>誤解 11・12・13 を、それぞれ一次情報の一言で潰してください。</q>
-          <ans><p>11: RFC 9309 は規則がアクセス認可ではないと明記。12: 正しく見える引用の最大 57% が後付け（Wallat ら）。13: C-SEO Bench は競合採用下で多くの手法が無効〜逆効果と報告。</p></ans>
+          <q>「robots.txt に書けば利用を禁止したことになる」「引用が付いている＝その文書を根拠に生成した」「論文で効いた改変は競合も同じことをしても効く」の 3 つを、それぞれ一次情報の一言で止めてください。</q>
+          <ans><p>robots.txt の話は、RFC 9309 が規則はアクセス認可ではないと明記。引用の話は、正しく見える引用の最大 57% が後付け（Wallat ら）。競合採用の話は、C-SEO Bench が競合採用下で多くの手法が無効〜逆効果と報告。</p></ans>
         </card>
-        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、UGC の引用割合、Bytespider の robots.txt 遵守。</p>
+        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、ユーザー投稿コンテンツ（UGC）の引用割合、Bytespider の robots.txt 遵守。</p>
       </section>

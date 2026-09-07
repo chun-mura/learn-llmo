@@ -191,6 +191,31 @@ a:hover {
   font-weight: 700;
 }
 
+/* 課ごとの読み進み具合。--p は learn.js が 0〜1 で入れる。 */
+.rail ol a {
+  position: relative;
+}
+
+.rail ol a::after {
+  content: "";
+  position: absolute;
+  left: 0.45rem;
+  right: 0.45rem;
+  bottom: 0.12rem;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--ink-soft) calc(var(--p, 0) * 100%),
+    transparent calc(var(--p, 0) * 100%)
+  );
+  opacity: 0.55;
+}
+
+.rail ol a.done::after {
+  background: linear-gradient(to right, var(--ok) 100%, transparent 100%);
+  opacity: 0.75;
+}
+
 .rail .num {
   font-variant-numeric: tabular-nums;
   color: var(--ink-soft);
@@ -292,6 +317,25 @@ body:has(.view:target) .view.is-on:not(:target) {
 .chunk-meter b {
   color: var(--ink);
   font-weight: 700;
+}
+
+/* 進捗バー。地の罫線と同じ 1px の線を、読んだ分だけ濃くする。 */
+.bar {
+  display: block;
+  height: 2px;
+  margin-top: 0.4rem;
+  max-width: var(--measure);
+  background: var(--rule);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--ink-soft);
+  transform-origin: left center;
+  transition: transform 320ms var(--ease);
 }
 
 .steps {
@@ -759,6 +803,98 @@ a.btn {
   border-left-color: var(--warn);
 }
 
+/* 課の修了面。本文と同じ紙のまま、区切りだけをはっきりさせる。 */
+.finish {
+  max-width: var(--measure);
+  margin: 0.5rem 0 0;
+  padding: 1.4rem 1.4rem 1.5rem;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--ok);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  animation: finish-in 320ms var(--ease) both;
+}
+
+@keyframes finish-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.finish h2 {
+  margin: 0.1rem 0 0.9rem;
+  font-size: 1.35rem;
+}
+
+.finish-goal {
+  margin: 0 0 1.1rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--ok);
+}
+
+.finish-goal span {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--ok);
+  margin-bottom: 0.1rem;
+}
+
+.finish-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-ui);
+}
+
+.finish-stats div {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: 0.6rem 0.7rem;
+}
+
+.finish-stats div.quiet {
+  border-style: dashed;
+  color: var(--ink-soft);
+}
+
+.finish-stats b {
+  display: block;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.finish-stats span {
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+}
+
+.finish-note {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.1rem;
+}
+
+.finish-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-ui);
+}
+
+/* 修了面を出しているあいだは、塊と塊の移動ボタンを引っ込める。 */
+body.is-finish .steps,
+body.is-finish .step-nav,
+body.is-finish .chunk-meter,
+body.is-finish .prime,
+body.is-finish .lesson-head .goal {
+  display: none;
+}
+
 .card-from {
   font-family: var(--font-ui);
   font-size: 0.7rem;
@@ -850,6 +986,79 @@ a.btn {
   background: transparent;
   border-style: dashed;
   color: var(--ink-soft);
+}
+
+.dash-cell b small {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-left: 0.1rem;
+}
+
+/* 箱の分布。右へ行くほど長い間隔で言えたカード。 */
+.boxes {
+  max-width: 42rem;
+  margin: 0 0 1.6rem;
+  font-family: var(--font-ui);
+}
+
+.boxes-head {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.35rem;
+}
+
+.boxes-head small {
+  display: block;
+  opacity: 0.8;
+}
+
+.boxes-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+  align-items: end;
+  height: 4.9rem;
+  padding-top: 1.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.box-bar {
+  display: block;
+  position: relative;
+  height: max(2px, calc(var(--h, 0) * 100%));
+  background: var(--paper-deep);
+  border: 1px solid var(--card-edge);
+  border-bottom: 0;
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  transition: height 320ms var(--ease);
+}
+
+.boxes-row .box-bar:last-child {
+  background: color-mix(in oklch, var(--ok) 18%, var(--paper));
+  border-color: var(--ok);
+}
+
+.box-bar em {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1.1rem;
+  text-align: center;
+  font-style: normal;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.boxes-foot {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.64rem;
+  color: var(--ink-soft);
+  text-align: center;
 }
 
 .rail-review {
@@ -955,9 +1164,61 @@ a.btn {
   }
 }
 
+/* 状態が変わったことを、色だけでなく動きでも示す。長さは 120〜320ms に収める。 */
+.card {
+  transition: border-color 200ms var(--ease), background-color 200ms var(--ease);
+}
+
+.card .a,
+.card .grade,
+.card [data-sched] {
+  animation: reveal-in 200ms var(--ease) both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.step.is-on {
+  animation: step-in 240ms var(--ease) both;
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+body.is-all .step.is-on {
+  animation: none;
+}
+
+.dash-cell {
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .step-nav button,
   .btn {
     transition: none;
+  }
+
+  .bar i,
+  .box-bar,
+  .card,
+  .dash-cell {
+    transition: none;
+  }
+
+  .finish,
+  .step.is-on,
+  .card .a,
+  .card .grade,
+  .card [data-sched] {
+    animation: none;
   }
 }

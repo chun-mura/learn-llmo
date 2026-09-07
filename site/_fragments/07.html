@@ -3,10 +3,10 @@
         <div class="flow">
           <b>1 届く</b><i>→</i><b>2 意味が付く</b><i>→</i><b>3 エージェントの地図</b>
         </div>
-        <p>1 が Search と AI 出典の入場です。2 はリッチリザルト用の手がかりです。3 は llms.txt で、Search とは別系統です。</p>
+        <p>「届く」は Search と AI 出典の入場条件です。「意味が付く」はリッチリザルト用の手がかりです。「エージェントの地図」は llms.txt で、Search とは別系統です。</p>
         <card id="c-07-1">
           <q>技術面の三層を挙げ、それぞれが何のためのものか言ってください。</q>
-          <ans><p>1 届く（Search と AI 出典の入場。インデックスとスニペット）。2 意味が付く（構造化データ。リッチリザルトの適格化）。3 エージェントの地図（llms.txt。Search とは別系統）。混ぜない。</p></ans>
+          <ans><p>届く（Search と AI 出典の入場条件。インデックスとスニペット）。意味が付く（構造化データ。リッチリザルトの適格化）。エージェントの地図（llms.txt。Search とは別系統）。混ぜない。</p></ans>
         </card>
       </section>
       <section class="step">
@@ -18,7 +18,7 @@
           <li>重要情報が HTML テキストとして存在する</li>
           <li>内部リンクで辿れる</li>
         </ul>
-        <p>プレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が見た HTML にそのタグがあるかを見ます。</p>
+        <p><code>nosnippet</code> などのプレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が実際に取得した HTML にそのメタタグが含まれているかを、自分で確認してください。</p>
         <card id="c-07-2">
           <q>Google の AI 機能に出典として出る条件を言ってください。追加の技術要件はありますか。</q>
           <ans><p>インデックスされ、スニペット表示が可能であること。通常の Search と同じで、追加の技術要件はない。前提として 200 で本文が返り、重要情報が HTML テキストとしてあり、内部リンクで辿れること。</p></ans>
@@ -46,8 +46,8 @@
         </details>
       </section>
       <section class="step">
-        <h2>Bing には別のスイッチがある</h2>
-        <p>Google の話をそのまま Bing / Copilot に持っていくと外します。Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しています。</p>
+        <h2>Bing には別の設定がある</h2>
+        <p>Google についての説明を、そのまま Bing や Copilot に当てはめると間違います。Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しています。</p>
         <table>
           <thead><tr><th>タグ</th><th>Copilot / Bing Chat の回答</th><th>学習</th><th>通常の検索表示</th></tr></thead>
           <tbody>
@@ -55,8 +55,8 @@
             <tr><td><code>NOARCHIVE</code></td><td>回答に含めない。リンクもしない</td><td>使わない</td><td>変わらない</td></tr>
           </tbody>
         </table>
-        <p>両方あるときは NOCACHE として扱う、と書いてあります。</p>
-        <p class="note">IndexNow は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。AI 対策として売られていたら、そこは一次情報にありません。</p>
+        <p>NOCACHE と NOARCHIVE の両方が指定されているときは NOCACHE として扱われる、と公式ブログに書かれています。</p>
+        <p class="note">IndexNow は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。IndexNow が AI 対策として売られていても、その根拠は一次情報にありません。</p>
         <card id="c-07-4">
           <q>Bing の <span data-term="NOARCHIVE">NOARCHIVE</span> は何を止めますか。通常の Bing 検索の表示はどうなりますか。</q>
           <ans><p>Copilot / Bing Chat の回答に含めず、リンクもせず、学習にも使わない。通常の Bing 検索結果の表示は変わらない。NOCACHE との併記時は NOCACHE 扱い。</p></ans>
@@ -71,7 +71,7 @@
       <section class="step">
         <h2>3. llms.txt</h2>
         <p>Jeremy Howard の提案です。サイトの地図を Markdown で置きます。必須は H1 の名前です。詳細はリンク先の <code>.md</code> に置きます。</p>
-        <p>Chrome Lighthouse はサーバーエラーならフラグ、404 なら N/A（任意）です。</p>
+        <p>Chrome Lighthouse の llms.txt 監査は、サーバーエラーのときは警告を出し、404 のときは N/A（任意）になります。</p>
         <p class="note">Google Search は llms.txt を使いません。ドキュメントをエージェントに案内する用途と、AI Overviews の出典選定は別です。</p>
         <pre># Example Cloud Billing API
 

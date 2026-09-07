@@ -50,11 +50,15 @@ function today() {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 
-function addDays(days) {
-  const d = new Date();
-  d.setDate(d.getDate() + days);
+function shiftDate(date, delta) {
+  const d = new Date(`${date}T00:00:00`);
+  d.setDate(d.getDate() + delta);
   const p = (n) => String(n).padStart(2, "0");
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+function addDays(days) {
+  return shiftDate(today(), days);
 }
 
 function daysUntil(date) {
@@ -87,6 +91,7 @@ function loadState() {
   state.read = state.read || {};
   state.done = state.done || {};
   state.cards = state.cards || {};
+  state.days = state.days || {};
   return state;
 }
 
@@ -100,9 +105,28 @@ function saveState(state) {
 
 function markProgress(id, chunk, total) {
   const state = loadState();
-  state.read[id] = Math.max(state.read[id] || 0, chunk);
+  const before = state.read[id] || 0;
+  state.read[id] = Math.max(before, chunk);
   if (chunk >= total) state.done[id] = true;
+  /* 連続日数は「その日に何かしたか」だけを見る。読み進めた日と採点した日を同じ扱いにする。 */
+  if (chunk > before) state.days[today()] = true;
   saveState(state);
+}
+
+/* 連続日数。今日の記録が無ければ昨日から数える（その日はまだ手をつけていないだけ）。 */
+function streakDays() {
+  const days = loadState().days || {};
+  let cursor = today();
+  if (!days[cursor]) {
+    cursor = shiftDate(cursor, -1);
+    if (!days[cursor]) return 0;
+  }
+  let n = 0;
+  while (days[cursor]) {
+    n += 1;
+    cursor = shiftDate(cursor, -1);
+  }
+  return n;
 }
 
 /* --- カード（想起練習） --- */
@@ -124,6 +148,7 @@ function gradeCard(id, good) {
     card.w += 1;
   }
   card.seen = today();
+  state.days[today()] = true;
   state.cards[id] = card;
   saveState(state);
   return card;
@@ -141,12 +166,40 @@ function dueCards() {
     });
 }
 
-function cardStats() {
+function cardIds(lesson) {
+  const scope = lesson ? `[data-view="${lesson}"] [data-card]` : "[data-card]";
+  return [...new Set([...document.querySelectorAll(scope)].map((el) => el.dataset.card))];
+}
+
+function cardStats(lesson) {
   const state = loadState();
-  const ids = [...new Set([...document.querySelectorAll("[data-card]")].map((el) => el.dataset.card))];
+  const ids = cardIds(lesson);
   const seen = ids.filter((id) => state.cards[id]);
   const held = seen.filter((id) => state.cards[id].box >= 2);
-  return { total: ids.length, seen: seen.length, held: held.length, due: dueCards().length };
+  /* 箱ごとの枚数。箱 0 は「次も当日に出る」、箱 5 は「35 日あけて言えた」。 */
+  const boxes = [0, 0, 0, 0, 0, 0];
+  let right = 0;
+  let wrong = 0;
+  let soonest = null;
+  seen.forEach((id) => {
+    const card = state.cards[id];
+    boxes[Math.min(card.box, 5)] += 1;
+    right += card.r || 0;
+    wrong += card.w || 0;
+    if (!soonest || card.due < soonest) soonest = card.due;
+  });
+  const graded = right + wrong;
+  return {
+    total: ids.length,
+    seen: seen.length,
+    held: held.length,
+    due: lesson ? ids.filter((id) => state.cards[id] && state.cards[id].due <= today()).length : dueCards().length,
+    boxes,
+    right,
+    wrong,
+    rate: graded ? Math.round((right / graded) * 100) : null,
+    soonest,
+  };
 }
 
 /* 課をまたいで混ぜる。同じ課が続かないよう並べ替える。
@@ -243,7 +296,12 @@ function paintReview() {
     return;
   }
   if (emptyBox) emptyBox.hidden = true;
-  if (meter) meter.textContent = `${reviewIndex + 1} / ${reviewQueue.length} 枚目`;
+  if (meter) {
+    const ratio = (reviewIndex + 1) / reviewQueue.length;
+    meter.innerHTML =
+      `${reviewIndex + 1} / ${reviewQueue.length} 枚目` +
+      `<span class="bar" aria-hidden="true"><i style="transform:scaleX(${ratio})"></i></span>`;
+  }
   const source = document.querySelector(`.view:not(.review) [data-card="${id}"]`);
   if (!source) {
     reviewIndex += 1;
@@ -280,6 +338,81 @@ function advanceReview(id, good) {
   paintReview();
 }
 
+/* --- 課の修了面 ---
+   最後の塊で「この課を終える」を押したとき、黙って次の課へ飛ばさない。
+   何を言えるようになったか、カードがいつ戻ってくるかを見せてから送り出す。 */
+
+function lessonGoal(id) {
+  const el = document.querySelector(`[data-view="${id}"] .goal`);
+  if (!el) return "";
+  const clone = el.cloneNode(true);
+  clone.querySelector("span")?.remove();
+  return clone.textContent.trim();
+}
+
+function nextLessonMeta(id) {
+  const idx = LESSONS.findIndex((l) => l.id === id);
+  return LESSONS[idx + 1] || null;
+}
+
+function paintFinish(id) {
+  const box = document.querySelector(`[data-view="${id}"] [data-finish]`);
+  if (!box) return;
+  const heading = document.querySelector(`[data-view="${id}"] .lesson-head h1`);
+  const stats = cardStats(id);
+  const nxt = nextLessonMeta(id);
+  const goal = lessonGoal(id);
+  const gap = stats.soonest === null ? null : Math.max(0, daysUntil(stats.soonest));
+  const back = stats.soonest === null ? "—" : gap === 0 ? "今日" : `${gap} 日後`;
+  const untouched = stats.total - stats.seen;
+  const nextLabel = nxt
+    ? nxt.id === "r"
+      ? "復習へ"
+      : `第${Number(nxt.id)}課「${nxt.title}」へ`
+    : "ホームへ";
+  box.innerHTML = `
+    <p class="kicker">第${Number(id)}課 おわり</p>
+    <h2>${heading ? heading.textContent : ""}</h2>
+    ${goal ? `<p class="finish-goal"><span>言えるようになったこと</span>${goal}</p>` : ""}
+    <div class="finish-stats">
+      <div><b>${stats.seen} / ${stats.total}</b><span>この課のカードに答えた</span></div>
+      <div><b>${back}</b><span>次にこの課のカードが出る日</span></div>
+      <div class="quiet"><b>${untouched}</b><span>まだ答えていないカード</span></div>
+    </div>
+    <p class="finish-note">${
+      untouched
+        ? "答えていないカードは復習に出てきません。戻って先に自分の答えを出してください。"
+        : "読み返すより、間をあけて思い出すほうが残ります。期限の日に復習面へ戻ってください。"
+    }</p>
+    <div class="finish-nav">
+      <button type="button" class="btn" data-finish-next>${nextLabel}</button>
+      <button type="button" class="btn ghost" data-finish-back>最後の塊に戻る</button>
+      ${stats.due ? `<a class="btn ghost" href="#lr">期限のカード ${stats.due} 枚</a>` : ""}
+    </div>
+  `;
+}
+
+function showFinish(id) {
+  const box = document.querySelector(`[data-view="${id}"] [data-finish]`);
+  if (!box) {
+    nextLesson(id);
+    return;
+  }
+  paintFinish(id);
+  document.body.classList.add("is-finish");
+  box.hidden = false;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduce ? "instant" : "smooth" });
+  box.querySelector("[data-finish-next]")?.focus({ preventScroll: true });
+}
+
+function hideFinish() {
+  document.body.classList.remove("is-finish");
+  document.querySelectorAll("[data-finish]").forEach((el) => {
+    el.hidden = true;
+  });
+}
+
 /* --- ダッシュボード --- */
 
 function paintDash() {
@@ -287,14 +420,31 @@ function paintDash() {
   if (!dash) return;
   const stats = cardStats();
   const readChunks = Object.values(loadState().read).reduce((a, b) => a + b, 0);
+  const streak = streakDays();
+  const boxMax = Math.max(1, ...stats.boxes);
+  const boxBars = stats.boxes
+    .map((n, i) => {
+      const label = i === 0 ? "当日にもう一度" : `${BOX_DAYS[i - 1]} 日あけて言えた`;
+      return `<i class="box-bar" style="--h:${n / boxMax}" title="${label}: ${n} 枚"><em>${n}</em></i>`;
+    })
+    .join("");
   dash.innerHTML = `
     <a class="dash-cell ${stats.due ? "is-due" : ""}" href="#lr">
       <b>${stats.due}</b><span>今日の復習</span>
     </a>
+    <div class="dash-cell"><b>${streak}<small> 日</small></b><span>続けている日数</span></div>
+    <div class="dash-cell"><b>${stats.rate === null ? "—" : `${stats.rate}<small>%</small>`}</b><span>言えた率（${stats.right + stats.wrong} 回中）</span></div>
     <div class="dash-cell"><b>${stats.held}</b><span>間をあけて言えた</span></div>
     <div class="dash-cell"><b>${stats.seen} / ${stats.total}</b><span>手をつけたカード</span></div>
     <div class="dash-cell quiet"><b>${readChunks}</b><span>読んだ塊</span></div>
   `;
+  const boxes = document.querySelector("[data-boxes]");
+  if (boxes) {
+    boxes.innerHTML =
+      `<p class="boxes-head">箱の分布<small>右へ行くほど長い間隔で言えたカード</small></p>` +
+      `<div class="boxes-row">${boxBars}</div>` +
+      `<p class="boxes-foot"><span>当日</span><span>1 日</span><span>3 日</span><span>7 日</span><span>16 日</span><span>35 日</span></p>`;
+  }
 }
 
 function hashFor(id, chunk) {
@@ -318,7 +468,10 @@ function renderRail(currentId) {
     .map((l) => {
       const current = l.id === currentId ? ' aria-current="page"' : "";
       const done = state.done[l.id] ? " done" : "";
-      return `<li><a class="${done.trim()}" href="${hashFor(l.id)}"${current}><span class="num">${l.id}</span><span>${l.short}</span></a></li>`;
+      const total = document.querySelectorAll(`[data-view="${l.id}"] .step`).length;
+      const read = Math.min(state.read[l.id] || 0, total);
+      const ratio = total ? read / total : 0;
+      return `<li><a class="${done.trim()}" href="${hashFor(l.id)}"${current} style="--p:${ratio}"><span class="num">${l.id}</span><span>${l.short}</span></a></li>`;
     })
     .join("");
   rail.innerHTML = `
@@ -372,7 +525,10 @@ function paintSteps(id, first) {
   const prev = document.querySelector(`[data-view="${id}"] [data-prev]`);
   const next = document.querySelector(`[data-view="${id}"] [data-next]`);
   if (meter && stepNodes.length) {
-    meter.innerHTML = `いま読む塊 <b>${stepIndex + 1}</b> / ${stepNodes.length}`;
+    const ratio = (stepIndex + 1) / stepNodes.length;
+    meter.innerHTML =
+      `いま読む塊 <b>${stepIndex + 1}</b> / ${stepNodes.length}` +
+      `<span class="bar" aria-hidden="true"><i style="transform:scaleX(${ratio})"></i></span>`;
   }
   if (prev) prev.disabled = stepIndex === 0;
   if (next) {
@@ -398,6 +554,7 @@ function paintSteps(id, first) {
 }
 
 function go(id, chunk) {
+  hideFinish();
   document.body.classList.remove("is-all");
   const allBtn = document.querySelector(`[data-view="${id}"] [data-all]`);
   if (allBtn) allBtn.textContent = "全部見る";
@@ -426,9 +583,24 @@ function initControls() {
       card.classList.add(good ? "is-good" : "is-again");
       paintSchedule(card, next);
       renderRail(document.body.dataset.lesson);
+      if (document.body.classList.contains("is-finish")) paintFinish(document.body.dataset.lesson);
       if (card.closest(".review")) {
         advanceReview(card.dataset.card, good);
       }
+      return;
+    }
+
+    const finishNext = e.target.closest("[data-finish-next]");
+    const finishBack = e.target.closest("[data-finish-back]");
+    if (finishNext) {
+      const id = document.body.dataset.lesson;
+      hideFinish();
+      nextLesson(id);
+      return;
+    }
+    if (finishBack) {
+      hideFinish();
+      paintSteps(document.body.dataset.lesson, false);
       return;
     }
 
@@ -448,7 +620,8 @@ function initControls() {
         paintSteps(id, false);
       } else if (stepNodes.length) {
         markProgress(id, stepNodes.length, stepNodes.length);
-        nextLesson(id);
+        renderRail(id);
+        showFinish(id);
       }
     }
     if (allBtn) {
@@ -461,6 +634,17 @@ function initControls() {
   document.addEventListener("keydown", (e) => {
     if (e.target.closest("textarea, input, summary, .term")) return;
     const id = document.body.dataset.lesson;
+    if (document.body.classList.contains("is-finish")) {
+      if (e.key === "j" || e.key === "ArrowRight") {
+        e.preventDefault();
+        document.querySelector("[data-finish-next]")?.click();
+      }
+      if (e.key === "k" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        document.querySelector("[data-finish-back]")?.click();
+      }
+      return;
+    }
     if (id === "r") {
       const card = document.querySelector(".review .card");
       if (!card) return;

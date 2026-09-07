@@ -38,13 +38,14 @@
         <h1>読むより、思い出す</h1>
         <p>Markdown の長文を、机の上の教科書に組み直したものです。各課は塊に切ってあり、次へを押すまで次の塊は出ません。塊の終わりには、閉じた状態の問いが 1 枚ずつ入っています。</p>
         <div class="dash" data-dash></div>
+        <div class="boxes" data-boxes></div>
         <p><a class="btn" href="#l01">第 1 課から始める</a></p>
       </div>
       <div class="pair" style="max-width:42rem">
         <div class="seal paper"><small>朱 · 論文</small>GEO（KDD 2024）。すでに検索上位に入ったページを、生成が厚く引用するか。追試の C-SEO Bench（NeurIPS 2025）もここに入ります。</div>
-        <div class="seal official"><small>藍 · 公式</small>Google Search。入場はインデックスとスニペット。SEO の土台が先。ベンダー各社のクローラ方針もここ。</div>
+        <div class="seal official"><small>藍 · 公式</small>Google Search。入場条件はインデックスとスニペット。SEO の土台が先。ベンダー各社のクローラー方針もここ。</div>
       </div>
-      <p style="max-width:42rem">二つは同じ「AI に載せる」でも、層が違います。混ぜないことが、この教材の核です。</p>
+      <p style="max-width:42rem">論文と公式は同じ「AI に載せる」を指していても、見ている層が違います。混ぜないことが、この教材の核です。</p>
       <nav class="path" id="path" aria-label="課の順">
         <a href="#l01"><span class="n">01</span><strong>LLMO とは何か</strong><em>何を最適化するか</em></a>
         <a href="#l02"><span class="n">02</span><strong>生成エンジン</strong><em>検索してから書く</em></a>
@@ -80,7 +81,7 @@
           </ul>
         </details>
       </div>
-      <p class="note home-note">キーボード: J / 右で次の塊、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザにだけ残ります。</p>
+      <p class="note home-note">キーボード: J / 右で次の塊、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザーにだけ残ります。</p>
     </section>
 
     <section class="view" id="l01" data-view="01" hidden>
@@ -97,10 +98,10 @@
         <p><span data-term="LLMO">LLMO</span> は、生成 AI が返す回答の中で、自社のページやブランドが <span data-term="言及">言及</span>・<span data-term="引用">引用</span>される状態を改善する取り組みです。</p>
         <p>学術側の呼び名は <span data-term="GEO">GEO</span> です。Aggarwal らが KDD 2024 で定式化しました。</p>
         <div class="pair">
-          <div class="seal paper"><small>論文</small>回答の中の出典の厚さを変える。</div>
+          <div class="seal paper"><small>論文</small>回答文のうち、その出典に紐づく分量と位置を変える。</div>
           <div class="seal official"><small>Google 公式</small>Search の土台（クロール・独自コンテンツ）が先。</div>
         </div>
-        <p>二つは同じ現象を、別の条件で見ています。対象プロダクトを決めてから手を動かします。</p>
+        <p>論文と Google 公式は、同じ現象を別の条件から見ています。どちらの話をしているのかを混ぜないために、まず対象プロダクト（Google Search なのか ChatGPT なのか）を決めてから作業を始めてください。</p>
         <div class="card" data-card="c-01-1">
           <p class="q">LLMO が改善しようとしている「状態」を、順位という語を使わずに一文で言ってください。学術側の呼び名も。</p>
           <div class="try">
@@ -142,20 +143,20 @@
           <ul>
             <li>GEO 論文 Abstract, §1</li>
             <li>OpenAI, Introducing ChatGPT search（2024-10-31）</li>
-            <li>Google, New opportunities…（2026-06-03）。AI Overviews 月間 25 億 MAU は自己報告</li>
+            <li>Google, New opportunities…（2026-06-03）。AI Overviews 月間アクティブユーザー 25 億は自己報告</li>
           </ul>
         </details>
       </section>
       <section class="step">
         <h2>名前は揃えない</h2>
-        <p>会話では相手の語に合わせます。社内では言及と引用を分けて測ります。</p>
+        <p>会話では相手の語に合わせてください。社内では言及と引用を分けて測ってください。</p>
         <ul class="plain">
           <li><strong>LLMO</strong> 日本の実務、英語のマーケ記事</li>
           <li><strong>GEO</strong> 論文と海外ツール</li>
           <li><strong>AEO</strong> 質問に直接答える面。強調スニペット時代からの言い回し</li>
           <li><strong>AIO</strong> 文脈で全体を指したり、AI Overviews だけを指したりする</li>
         </ul>
-        <p>Google は呼び方自体は否定しません。Search の生成 AI 面で効くとされるハックの多くは、仕組みと一致しない、と書いています。</p>
+        <p>Google は呼び方自体は否定していません。Search の生成 AI 面で効くとされるハックの多くが、Search の仕組みと一致しないと書いています。</p>
         <div class="card" data-card="c-01-3">
           <p class="q">Google 公式は「GEO / AEO のハック」をどう扱っていますか。呼び名を否定していますか。</p>
           <div class="try">
@@ -181,8 +182,8 @@
       <section class="step">
         <h2>SEO との関係</h2>
         <p><span data-term="SEO">SEO</span> は、クロールされ、インデックスされ、クエリに対してページが選ばれるまでの最適化です。</p>
-        <p>Google の AI 機能は、同じ Search インデックスからページを取り出します（<span data-term="RAG">RAG</span>）。Search に出る資格がなければ、AI Overviews の出典候補にもなりません。</p>
-        <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラ方針が乗ります。</p>
+        <p>Google の AI 機能は、同じ Search インデックスからページを取り出します（<span data-term="RAG">RAG</span>）。Search に出る資格がなければ、AI Overviews（AI 概要）の出典候補にもなりません。本教材ではこれを「入場条件」と呼びます。Search インデックスに載り、スニペットを出せる状態のことです。</p>
+        <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラー方針が乗ります。</p>
         <p>ChatGPT や Perplexity は Google のインデックスとは別経路です。第 4 課で扱います。</p>
         <div class="card" data-card="c-01-4">
           <p class="q">Google の AI 機能は、どこからページを取り出しますか。出典候補になる条件は。</p>
@@ -205,11 +206,11 @@
       <section class="step">
         <h2>可視性を三つに分ける</h2>
         <ol class="plain">
-          <li><strong>取得された</strong> クローラや検索がページに届いた</li>
+          <li><strong>取得された</strong> クローラーや検索がページに届いた</li>
           <li><strong>言及された</strong> 回答文にブランド名がある。リンクは無いこともある</li>
           <li><strong>引用された</strong> 出典 URL が付いている</li>
         </ol>
-        <p>1 は 3 の前提ですが、1 でも 3 にならないことは普通にあります。Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページが、画面上のリンクと一致するとは限らない書き方をしています。</p>
+        <p>「取得された」は「引用された」の前提ですが、取得されても引用されないことは普通にあります。Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページと、画面に表示されるリンクは必ずしも一致しない、という書き方をしています。</p>
         <p>生成回答では、同じ URL でも先頭か末尾か、何文が紐づくか、リンクを辿りそうかが変わります。論文はこれを <span data-term="impression">impression</span> と呼びました。</p>
         <div class="card" data-card="c-01-5">
           <p class="q">可視性を三つに分けてください。そのうち二つの違いを、リンクの有無で説明できますか。</p>
@@ -218,7 +219,7 @@
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>取得された（クローラが届いた）／言及された（回答文に名前が出る。リンクは無いこともある）／引用された（出典 URL が付いている）。1 は 3 の前提だが、1 でも 3 にならないことは普通にある。</p></div>
+          <div class="a" hidden><p>取得された（クローラーが届いた）／言及された（回答文に名前が出る。リンクは無いこともある）／引用された（出典 URL が付いている）。取得されたことは引用されたことの前提だが、取得されても引用されないことは普通にある。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -242,7 +243,7 @@
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>失敗と決めつけられない。ChatGPT は Google のインデックスとは別経路なので、まず OAI-SearchBot の robots.txt 許可と WAF のブロックを見る。順位の問題ではなく、別インデックス・別ボットの問題であることが多い。</p></div>
+          <div class="a" hidden><p>失敗と決めつけられない。ChatGPT は Google のインデックスとは別経路なので、まず OAI-SearchBot の robots.txt 許可と WAF（Web Application Firewall）のブロックを見る。順位の問題ではなく、別インデックス・別ボットの問題であることが多い。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -266,6 +267,7 @@
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -320,8 +322,8 @@
       <section class="step">
         <h2>Query fan-out</h2>
         <p>Google は AI Overviews と AI Mode の両方で、一つの質問から関連検索を複数出すことがある、と書いています。</p>
-        <p>公式の例: 元が「雑草だらけの芝生の直し方」なら、ファンアウト側は「芝生向けの除草剤」「化学薬品なしで雑草を取る」「雑草の予防」などです。</p>
-        <p class="note">引用されたページは、元クエリの SERP 上位である必要がありません。部分クエリで強く、その段落を支えられるページが選ばれる余地があります。逆に、元クエリで 1 位でも落ちます。</p>
+        <p>公式の例: 元が「雑草だらけの芝生の直し方」なら、query fan-out で出る下位クエリは「芝生向けの除草剤」「化学薬品なしで雑草を取る」「雑草の予防」などです。</p>
+        <p class="note">引用されたページは、元クエリの SERP（検索結果ページ）上位である必要がありません。部分クエリで強く、その段落を支えられるページが選ばれる余地があります。逆に、元クエリで 1 位でも落ちます。</p>
         <p>AI Overviews は、通常検索に追加価値があると判断されたときだけ出ます。常時ではありません。AI Mode と Overviews はモデルも手法も違い、リンク集合は一致しません。</p>
         <div class="card" data-card="c-02-2">
           <p class="q"><span data-term="query fan-out">query fan-out</span> があるとき、引用されるページは元クエリの上位である必要がありますか。理由も。</p>
@@ -348,9 +350,9 @@
         <h2>なぜ引用が付くか</h2>
         <p>生成モデルは根拠のない文を書きます。製品側は、文を検索結果に紐づける制約を入れます。</p>
         <p>論文のプロンプトは「すべての文の直後に、その文を完全に支える検索結果の引用を付けよ」とまで書いています。実際の製品はもっと緩いことがあります。</p>
-        <p>それでも、自己完結していて検証可能な主張がある塊は、引用の単位になりやすい、という作業仮説は論文の設計と矛盾しません。</p>
+        <p>それでも、それだけで意味が通り、事実として確かめられる主張を含んだ段落は、引用の単位になりやすい。これは作業仮説ですが、論文のプロンプト設計とは矛盾しません。</p>
         <p>Google は、重要な情報はテキストとして存在する必要がある、と繰り返しています。画像や動画は補助です。</p>
-        <p class="note">ここで止めます。引用が付いていることと、その文書を根拠に書かれたことは別です。第 11 課で扱います。</p>
+        <p class="note">ここでは踏み込みません。引用が付いていることと、その文書を根拠に書かれたことは別です。第 11 課で扱います。</p>
         <div class="card" data-card="c-02-3">
           <p class="q">製品はなぜ文に引用を紐づけるのですか。Google が「テキストとして存在する必要がある」と言うのは何ですか。</p>
           <div class="try">
@@ -375,7 +377,7 @@
       <section class="step">
         <h2>会話になると</h2>
         <p>フォローアップ（比較、価格、次の手順）でも言及が起きます。ChatGPT search も、会話全体の文脈を使うと述べています。</p>
-        <p>測定するなら、初回クエリだけで終わらせません。</p>
+        <p>定点観測をするなら、初回クエリだけで終わらせないでください。</p>
         <div class="card" data-card="c-02-4">
           <p class="q">定点観測を初回クエリだけで終わらせてはいけないのはなぜですか。</p>
           <div class="try">
@@ -401,13 +403,13 @@
         <h2>閉じてから答える</h2>
         <p>本文に戻らずに答えてください。</p>
         <div class="card" data-card="c-02-5">
-          <p class="q">元クエリでは 40 位、関連する部分クエリでは 3 位。fan-out があるエンジンで引用候補になりえますか。</p>
+          <p class="q">元クエリでは 40 位、関連する部分クエリでは 3 位。query fan-out があるエンジンで引用候補になりえますか。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>なりうる。Google は fan-out で出た部分クエリの結果からページを足す、と書いている。元クエリの順位だけで候補かどうかは決まらない。</p></div>
+          <div class="a" hidden><p>なりうる。Google は query fan-out で出た部分クエリの結果からページを足すと書いている。元クエリの順位だけで候補かどうかは決まらない。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -421,7 +423,7 @@
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>取り方も違うし、生成側も違う。論文は Google 上位 5 件固定 + GPT-3.5 という自作エンジン。Google はコア Search の RAG と fan-out で、指標も違う（論文の指標は著者が定義した impression）。</p></div>
+          <div class="a" hidden><p>取り方も違うし、生成側も違う。論文は Google 上位 5 件固定 + GPT-3.5 という、論文が自作した生成エンジン（内部 GE）を使っている。Google はコア Search の RAG と fan-out で、指標も違う（論文の指標は著者が定義した impression）。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -431,6 +433,7 @@
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -456,11 +459,11 @@
             <tr><td>SEO</td><td>ウェブ検索の発見・掲載・順位</td><td>掲載、クリック、コンバージョン</td></tr>
             <tr><td>GEO</td><td>生成エンジンの回答内可視性</td><td>引用の位置・分量（論文）、言及率（実務）</td></tr>
             <tr><td>LLMO</td><td>LLM 製品の回答全般</td><td>言及、引用、正確さ</td></tr>
-            <tr><td>AEO</td><td>「答え」そのものが出る面</td><td>スニペット、AI 概要</td></tr>
+            <tr><td>AEO</td><td>「答え」そのものが出る面</td><td>スニペット、AI Overviews</td></tr>
           </tbody>
         </table>
-        <p>論文は、生成エンジンはキーワード一致に閉じないので従来 SEO はそのままでは足りない、と書きます。</p>
-        <p>Google は、生成 AI 機能はコアのランキングに根ざしているので SEO のベストプラクティスは今も妥当、と先に答えます。</p>
+        <p>論文は、生成エンジンがキーワード一致に閉じないため従来の SEO ではそのままでは足りないと書いています。</p>
+        <p>Google は、生成 AI 機能がコアのランキングに根ざしているため SEO のベストプラクティスは今も妥当だと答えています。</p>
         <div class="card" data-card="c-03-1">
           <p class="q">四つのうち、論文で定義された語はどれですか。残りはどこ由来ですか。</p>
           <div class="try">
@@ -535,8 +538,8 @@
       </section>
       <section class="step">
         <h2>ChatGPT に出たいとき</h2>
-        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。掲載の可否は <span data-term="OAI-SearchBot">OAI-SearchBot</span> の robots.txt です。</p>
-        <p>こちらは論文の「検索結果に載ったあと、生成がどの出典を厚く書くか」に近い条件です。ただし論文の内部エンジンは GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。</p>
+        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。掲載されるかどうかは、robots.txt で <span data-term="OAI-SearchBot">OAI-SearchBot</span> を許可しているかで決まります。</p>
+        <p>こちらは論文の「検索結果に載ったあと、生成がどの出典を厚く書くか」に近い条件です。ただし論文の内部 GE は GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。</p>
         <div class="card" data-card="c-03-4">
           <p class="q">ChatGPT search に出るかどうかを決めるのは、どのボットの許可ですか。</p>
           <div class="try">
@@ -566,7 +569,7 @@
           <li>ChatGPT: OAI-SearchBot の許可。公式ページが一意か。第三者でも同じ事実か</li>
           <li>論文由来の改稿: 数値と日付、出典を本文に置く</li>
         </ul>
-        <p>三つを一つの「LLMO 施策」にまとめません。</p>
+        <p>この三つを一つの「LLMO 施策」にまとめないでください。</p>
         <div class="card" data-card="c-03-5">
           <p class="q">「LLMO 施策」を一つのチケットにまとめてはいけないのはなぜですか。</p>
           <div class="try">
@@ -585,13 +588,13 @@
       <section class="step">
         <h2>閉じてから答える</h2>
         <div class="card" data-card="c-03-6">
-          <p class="q">「GEO 論文で +40% だから llms.txt を全ページに置け」。どの行で止めますか。</p>
+          <p class="q">「GEO 論文で +40% だから llms.txt を全ページに置け」。どの行に反論しますか。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>両方の行で止まる。Google は Search で llms.txt を使わないと書いている。+40% は論文の内部 GE（GPT-3.5 + Google 上位 5 件）の話で、llms.txt とは無関係。</p></div>
+          <div class="a" hidden><p>両方の行に反論できる。Google は Search で llms.txt を使わないと書いている。+40% は論文の内部 GE（GPT-3.5 + Google 上位 5 件）の話で、llms.txt とは無関係。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -605,7 +608,7 @@
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>Google の生成 AI は Search インデックスから取る（RAG）。インデックスされスニペット表示できなければ、そもそも出典候補にならない。入場が SEO の側にある。</p></div>
+          <div class="a" hidden><p>Google の生成 AI は Search インデックスから取る（RAG）。インデックスされスニペット表示できなければ、そもそも出典候補にならない。AI 回答の出典候補になる入場条件そのものが、SEO 側の作業でしか満たせない。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -615,6 +618,7 @@
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -627,7 +631,7 @@
       <header class="lesson-head">
         <p class="kicker">第4課</p>
         <h1>ボットを分ける</h1>
-        <p class="goal"><span>この課のゴール</span>学習用と検索用を分けて robots.txt を書ける。ユーザー起動フェッチャの差を言える。</p>
+        <p class="goal"><span>この課のゴール</span>学習用と検索用を分けて robots.txt を書ける。ユーザー起動フェッチャーとの差を言える。</p>
         <div class="prime"><b>読む前に一度だけ</b><p>robots.txt で GPTBot を拒否したサイトは、ChatGPT の検索回答に出なくなりますか。</p></div>
       </header>
       <p class="chunk-meter" data-meter>塊</p>
@@ -643,7 +647,8 @@
             <tr><td>ユーザー起動</td><td>ChatGPT-User, Claude-User, Perplexity-User</td><td>今この質問のためのライブ取得</td></tr>
           </tbody>
         </table>
-        <p>学習だけ拒否して検索は許可する、が公式に想定されています。</p>
+        <p class="note">接地（grounding）は、モデルが回答を書くときに外部の文書を根拠として参照することです。</p>
+        <p>学習用ボットだけを拒否し、検索用ボットは許可するという設定は、公式に想定されています。</p>
         <div class="card" data-card="c-04-1">
           <p class="q">ボットの三つの役割を挙げ、それぞれを止めると何が起きるか言ってください。</p>
           <div class="try">
@@ -664,21 +669,21 @@
         <p>robots.txt は RFC 9309 として標準化されています。読むべきは、そこに書いていないことです。</p>
         <ul class="plain">
           <li><strong>アクセス認可ではない。</strong><span data-term="RFC 9309">RFC 9309</span> は "These rules are not a form of access authorization." と書きます。守るかどうかは相手次第です</li>
-          <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが UA 名を分けて実現しているだけです</li>
+          <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが User-Agent（以下 UA）名を分けて実現しているだけです</li>
           <li><strong>最長一致。</strong>複数の規則が当たったら、オクテット数が最も多い規則が使われます</li>
           <li><strong>パスは大小を区別し、UA トークンは区別しない。</strong>パスの照合は case sensitive（SHOULD）、UA の照合は case-insensitive（MUST）</li>
-          <li><strong>4xx と 5xx は逆に働く。</strong>robots.txt が 4xx なら「どのリソースにもアクセスしてよい」、5xx なら「全面禁止とみなす」</li>
-          <li>キャッシュは 24 時間まで。パーサは最低 500 KiB を読む</li>
+          <li><strong>4xx と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、クローラーは「どのリソースにもアクセスしてよい」と解釈します。5xx を返したときは「全面禁止」とみなします</li>
+          <li>キャッシュは 24 時間まで。パーサーは最低 500 KiB を読む</li>
         </ul>
-        <p class="note">秘密の URL を robots.txt で隠すのは筋が悪い、という話がここに繋がります。止めたいものは認証で止めます。</p>
+        <p class="note">秘密の URL を robots.txt で隠すのは筋が悪いという話が、ここに繋がります。止めたいものは認証で止めてください。</p>
         <div class="card" data-card="c-04-2">
-          <p class="q">robots.txt が 5xx を返しているとき、規格上クローラはどう振る舞いますか。4xx のときは。</p>
+          <p class="q">robots.txt が 5xx を返しているとき、規格上クローラーはどう振る舞いますか。4xx のときは。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。逆に働くので、サーバ障害中は正規のクローラも止まる。</p></div>
+          <div class="a" hidden><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -715,7 +720,7 @@ Disallow: /
 
 User-agent: OAI-SearchBot
 Allow: /</pre>
-        <p>ChatGPT-User を拒否しても、robots.txt を見ない取得がありうると書いてあります。</p>
+        <p>OpenAI の公式ドキュメントには、ChatGPT-User を拒否しても robots.txt を見ない取得がありうると書かれています。</p>
         <div class="card" data-card="c-04-4">
           <p class="q">OpenAI の三つの UA を、役割つきで挙げてください。</p>
           <div class="try">
@@ -747,10 +752,10 @@ Allow: /</pre>
             <tr><td>Claude-SearchBot</td><td>検索用クロール</td><td>検索インデックスから外れる</td></tr>
           </tbody>
         </table>
-        <p>robots.txt と Crawl-delay を尊重する、CAPTCHA を迂回しない、IP ブロックは robots.txt が読めず不安定、と書いてあります。</p>
-        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められる、と書いてあります。ベンダー間で一致しません。</p>
+        <p>Anthropic の公式ドキュメントには、robots.txt と Crawl-delay を尊重すること、CAPTCHA を迂回しないこと、IP ブロックは robots.txt が読めず不安定であることが書かれています。</p>
+        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められると書かれています。ベンダー間で一致しません。</p>
         <div class="card" data-card="c-04-5">
-          <p class="q">ユーザー起動のフェッチャと robots.txt の関係は、ベンダー間で揃っていますか。三社で言ってください。</p>
+          <p class="q">ユーザー起動のフェッチャーと robots.txt の関係は、ベンダー間で揃っていますか。三社で言ってください。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
@@ -773,7 +778,7 @@ Allow: /</pre>
           <li><strong>PerplexityBot</strong> 検索結果に出してリンクする。基盤モデル学習のためのクロールではない</li>
           <li><strong>Perplexity-User</strong> ユーザーの質問に応じてページを取る。学習用ではない。<strong>一般に robots.txt を無視する</strong></li>
         </ul>
-        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は User-Agent と公開 IP の両方を見ることを勧めています。</p>
+        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は UA と公開 IP の両方を見ることを勧めています。</p>
         <div class="card" data-card="c-04-6">
           <p class="q">robots.txt で検索ボットを許可したのに、そのエンジンに一切出ません。次に見るのはどこですか。</p>
           <div class="try">
@@ -781,7 +786,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>WAF やボット対策の一括拒否。robots.txt で許可しても手前で落ちていれば届かない。公式は User-Agent と公開 IP の両方で判定することを勧めている。</p></div>
+          <div class="a" hidden><p>WAF やボット対策の一括拒否。robots.txt で許可しても手前で落ちていれば届かない。公式は UA と公開 IP の両方で判定することを勧めている。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -797,10 +802,10 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Google</h2>
-        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけ別ボット、ではありません。</p>
+        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけを別のボットが担当するわけではありません。</p>
         <p>適格条件: インデックスされ、スニペット付きで Search に出せること。追加の技術要件はありません。</p>
-        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した User-Agent はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
-        <p>AI 面だけ止めたい場合は Search Console の生成 AI 制御です（第 8 課）。プレビューは nosnippet 系です。</p>
+        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した UA はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
+        <p>AI 面だけ止めたい場合は Search Console の生成 AI control です（第 8 課）。プレビューは nosnippet 系です。</p>
         <div class="card" data-card="c-04-7">
           <p class="q">AI Overviews に出るかどうかを制御するのは、どのボットですか。Google-Extended は何に効きますか。</p>
           <div class="try">
@@ -824,7 +829,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>四社の外側</h2>
-        <p>同じ三分類が、他社の文書にも出てきます。名前だけ覚えます。</p>
+        <p>同じ三分類が、他社の文書にも出てきます。名前だけ覚えてください。</p>
         <table>
           <thead><tr><th>提供元</th><th>UA</th><th>公式が書いていること</th></tr></thead>
           <tbody>
@@ -860,7 +865,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>robots.txt の外側で動いているもの</h2>
-        <p>用途を書けない、という RFC の穴を、二方向から埋めようとしています。どちらもまだ標準ではありません。</p>
+        <p>robots.txt には利用目的を書けません。この欠落を、IETF と Cloudflare が別々の方向から埋めようとしています。どちらもまだ標準ではありません。</p>
         <div class="pair">
           <div class="seal official"><small>IETF</small>aipref WG。<span data-term="Content-Usage">Content-Usage</span> を HTTP ヘッダと robots.txt の両方に付け、取得と利用を二段に分ける。<strong>Internet-Draft であり RFC ではない</strong></div>
           <div class="seal paper"><small>Cloudflare</small>Search / Agent / Training の三分類。2026-09-15 から、新規ドメインの広告掲載ページで Training と Agent を既定でブロック。Search は許可のまま</div>
@@ -928,7 +933,7 @@ Allow: /
 
 User-agent: PerplexityBot
 Allow: /</pre>
-        <p>Googlebot は触りません。Perplexity-User と ChatGPT-User と Meta-ExternalFetcher は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
+        <p>この例では Googlebot に対する規則を書いていません。Perplexity-User と ChatGPT-User と Meta-ExternalFetcher は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
       </section>
       <section class="step">
         <h2>閉じてから答える</h2>
@@ -953,7 +958,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI 制御。</p></div>
+          <div class="a" hidden><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -963,6 +968,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -986,7 +992,7 @@ Allow: /</pre>
         <p>検索の「平均順位」は、出典が文中に散らばる生成回答には使えません。論文は impression を定義しました。</p>
         <ul class="plain">
           <li><strong>Word Count</strong> その出典に紐づく文の単語数の割合</li>
-          <li><strong>Position-Adjusted Word Count</strong> 先頭ほど重い</li>
+          <li><strong>位置補正単語数（Position-Adjusted Word Count）</strong> 先頭ほど重い</li>
           <li><strong>Subjective Impression</strong> 関連性・影響・独自性など。LLM 採点を正規化</li>
         </ul>
         <p>改善率は、同じクエリでソースの 1 つだけを改変した前後の相対差です。</p>
@@ -997,7 +1003,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>生成回答では出典が文中に散らばるため、平均順位が使えない。代わりに impression として Word Count（紐づく文の単語数の割合）、Position-Adjusted Word Count（先頭ほど重い）、Subjective Impression（関連性・影響・独自性などを LLM 採点で正規化）を定義した。</p></div>
+          <div class="a" hidden><p>生成回答では出典が文中に散らばるため、平均順位が使えない。代わりに impression として Word Count（紐づく文の単語数の割合）、位置補正単語数（先頭ほど重い）、Subjective Impression（関連性・影響・独自性などを LLM 採点で正規化）を定義した。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1008,10 +1014,10 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>実験の条件</h2>
-        <div class="seal paper"><small>ここを外すと数字は使えない</small>内部 GE は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
+        <div class="seal paper"><small>ここを外すと数字は使えない</small>論文が自作した生成エンジン（以下、内部 GE）は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
         <p>プロンプトは「検索結果だけを使え。文の直後に引用を付けよ」です。</p>
         <div class="card" data-card="c-05-2">
-          <p class="q">論文の内部エンジンは、何と何でできていましたか。改変されるのは何本のソースですか。</p>
+          <p class="q">論文の内部 GE は、何と何でできていましたか。改変されるのは何本のソースですか。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
@@ -1028,15 +1034,15 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>9 つの改変</h2>
-        <p>効いた側と、効かなかった側を先に分けます。</p>
+        <p>以下では、効いた側と効かなかった側を分けて示します。</p>
         <table>
           <thead><tr><th>効いた（論文）</th><th>弱かった</th></tr></thead>
           <tbody>
             <tr><td>統計を足す、引用文、出典、流暢さ</td><td>キーワード詰め込み、独特な語</td></tr>
-            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（押しは弱い）</td></tr>
+            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（効果は弱い）</td></tr>
           </tbody>
         </table>
-        <p>3, 4, 5（キーワード・出典・引用）以外は、既存文の見せ方を変えるだけでよい、と著者は述べます。</p>
+        <p>論文の 9 手法のうち、キーワード詰め込み・出典の明記・引用文の追加の 3 つだけは新しい情報を足す必要があり、残りは既存の文の見せ方を変えるだけでよい、と著者は述べます。</p>
         <div class="card" data-card="c-05-3">
           <p class="q">論文で効いた改変と、効かなかった改変を、二つずつ挙げてください。</p>
           <div class="try">
@@ -1060,7 +1066,7 @@ Allow: /</pre>
           <thead><tr><th>手法</th><th class="num">Overall</th><th>位置づけ</th></tr></thead>
           <tbody>
             <tr><td>改変なし</td><td class="num">19.3</td><td>ベースライン</td></tr>
-            <tr><td>Keyword Stuffing</td><td class="num">17.7</td><td>単語数系は悪化</td></tr>
+            <tr><td>Keyword Stuffing</td><td class="num">17.7</td><td>単語数にもとづく指標が悪化</td></tr>
             <tr><td>Cite Sources</td><td class="num">24.6</td><td>高</td></tr>
             <tr><td>Statistics Addition</td><td class="num">25.2</td><td>高</td></tr>
             <tr><td>Quotation Addition</td><td class="num">27.2</td><td>最高</td></tr>
@@ -1085,7 +1091,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Perplexity と限界</h2>
-        <p>Quotation は位置補正で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing はまた単語数系が悪化します。</p>
+        <p>Quotation は位置補正単語数で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing では、内部 GE と同じく、単語数にもとづく指標（Word Count と位置補正単語数）が悪化しました。</p>
         <p>著者自身の限界: エンジンが変われば手法も更新が要る。従来検索の順位への影響は未評価。クエリ分布は将来変わる。</p>
         <p class="note">可視性は著者が定義した impression であり、クリックや売上ではありません。Google 公式は、この種のハックの多くを Search では無効と述べています。</p>
         <div class="card" data-card="c-05-5">
@@ -1106,14 +1112,14 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>追試された</h2>
-        <p>2025 年、同じ問いを別の条件で測ったベンチマークが出ました。C-SEO Bench（NeurIPS 2025 Datasets &amp; Benchmarks）です。</p>
+        <p>2025 年、同じ問いを別の条件で測ったベンチマークが出ました。C-SEO Bench（NeurIPS 2025 Datasets &amp; Benchmarks）です。C-SEO は competitive SEO、つまり競合が同じ手法を採る条件下の SEO を指します。</p>
         <p>足した条件は二つです。</p>
         <ul class="plain">
           <li>単一のタスク・ドメインではなく、質問応答と商品推薦の 2 タスク × 各 3 ドメイン</li>
           <li>1 者だけが改変する状況ではなく、<strong>競合も同じ手法を採用していく</strong>状況</li>
         </ul>
-        <p>結果は、既存の C-SEO 手法の多くが効かないどころか、順位に負の影響を与えることがしばしばあった、というものです。従来の SEO 的な手法のほうが有効でした。採用が広がるほど混雑し、ゼロサムに近づくとも書いています。</p>
-        <p class="note">GEO 論文が間違っていた、という話ではありません。GEO 論文が測ったのは「他が動かないときに 1 者が動いたら」です。C-SEO Bench はそこに競合と多様性を足しました。実務が置かれているのは後者の条件です。</p>
+        <p>既存の C-SEO 手法の多くは、効かないどころか順位に負の影響を与えることがしばしばありました。従来の SEO 的な手法のほうが有効でした。著者は、採用が広がるほど混雑しゼロサムに近づくとも書いています。</p>
+        <p class="note">GEO 論文が間違っていた、という話ではありません。GEO 論文が測ったのは「他が動かないときに 1 者が動いたらどうなるか」です。C-SEO Bench はそこに競合と多様性を足しました。実務が置かれているのは後者の条件です。</p>
         <div class="card" data-card="c-05-6">
           <p class="q">C-SEO Bench の結果を一文で。GEO 論文と条件はどう違いますか。</p>
           <div class="try">
@@ -1141,7 +1147,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>主に見るのは Position-Adjusted Word Count。主観だけ上がっても「効いた」とは言い切らない。指標が食い違うときは、どの指標で言っているかを明示する。</p></div>
+          <div class="a" hidden><p>主に見るのは位置補正単語数。主観だけ上がっても「効いた」とは言い切らない。指標が食い違うときは、どの指標で言っているかを明示する。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1155,7 +1161,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>実験条件（GPT-3.5 + Google 上位 5 件の自作エンジン、指標は著者定義の impression、改変対象はすでに上位 5 件のページ）と、追試の結果（C-SEO Bench では競合下で多くの手法が無効〜逆効果）。</p></div>
+          <div class="a" hidden><p>実験条件（GPT-3.5 + Google 上位 5 件の内部 GE、指標は著者定義の impression、改変対象はすでに上位 5 件のページ）と、追試の結果（C-SEO Bench では競合下で多くの手法が無効〜逆効果）。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1165,6 +1171,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -1190,11 +1197,11 @@ Allow: /</pre>
           <li>読者が直接来ても満たされる</li>
           <li>見出しは内容の要約で、煽りではない</li>
           <li>出典が本文から辿れる</li>
-          <li>事実誤認がすぐ見つかる書き方をしていない</li>
+          <li>読者が確かめられる形で書かれており、事実の誤りが残っていない</li>
         </ul>
-        <p>ファンアウトクエリごとに薄いページを量産するのは、効果がなくポリシー違反になりうると公式が書いています。</p>
+        <p>query fan-out で出る下位クエリごとに中身の薄いページを量産するのは、効果がなくポリシー違反になりうると公式が書いています。</p>
         <div class="card" data-card="c-06-1">
-          <p class="q">ファンアウトのクエリごとに薄いページを量産すると、公式は何と言いますか。</p>
+          <p class="q">query fan-out の下位クエリごとに中身の薄いページを量産すると、公式は何と言いますか。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
@@ -1248,7 +1255,7 @@ Allow: /</pre>
         <p>改稿後（検証できる）:</p>
         <blockquote>2026 年 6 月、当社が既存顧客 40 社に聞いた切り替え理由では、28 社が月額の比較を最初の軸にしていた。導入期間の中央値は 11 営業日（最短 3、最長 47）だった。</blockquote>
         <p>同じ事実を、見出し直下の短い段落に自己完結させて置きます。Google はチャンク分割を必須とは言いません。読者にとっても引用単位としても、段落が質問に答えている方が使いやすい、というだけです。</p>
-        <p>やってはいけない例: ファンアウト用に 200 文字のハブを 50 本生やす。「専門家によると」だけで名前も年も無い統計。</p>
+        <p>やってはいけない例: query fan-out で出る下位クエリごとに、200 文字程度の中身の薄いまとめページを 50 本量産する。「専門家によると」だけで名前も年も無い統計。</p>
         <div class="card" data-card="c-06-3">
           <p class="q">「人気の高いツールです」を、引用の材料になる一文に直してください。何を足しますか。</p>
           <div class="try">
@@ -1308,6 +1315,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -1330,7 +1338,7 @@ Allow: /</pre>
         <div class="flow">
           <b>1 届く</b><i>→</i><b>2 意味が付く</b><i>→</i><b>3 エージェントの地図</b>
         </div>
-        <p>1 が Search と AI 出典の入場です。2 はリッチリザルト用の手がかりです。3 は llms.txt で、Search とは別系統です。</p>
+        <p>「届く」は Search と AI 出典の入場条件です。「意味が付く」はリッチリザルト用の手がかりです。「エージェントの地図」は llms.txt で、Search とは別系統です。</p>
         <div class="card" data-card="c-07-1">
           <p class="q">技術面の三層を挙げ、それぞれが何のためのものか言ってください。</p>
           <div class="try">
@@ -1338,7 +1346,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>1 届く（Search と AI 出典の入場。インデックスとスニペット）。2 意味が付く（構造化データ。リッチリザルトの適格化）。3 エージェントの地図（llms.txt。Search とは別系統）。混ぜない。</p></div>
+          <div class="a" hidden><p>届く（Search と AI 出典の入場条件。インデックスとスニペット）。意味が付く（構造化データ。リッチリザルトの適格化）。エージェントの地図（llms.txt。Search とは別系統）。混ぜない。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1355,7 +1363,7 @@ Allow: /</pre>
           <li>重要情報が HTML テキストとして存在する</li>
           <li>内部リンクで辿れる</li>
         </ul>
-        <p>プレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が見た HTML にそのタグがあるかを見ます。</p>
+        <p><code>nosnippet</code> などのプレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が実際に取得した HTML にそのメタタグが含まれているかを、自分で確認してください。</p>
         <div class="card" data-card="c-07-2">
           <p class="q">Google の AI 機能に出典として出る条件を言ってください。追加の技術要件はありますか。</p>
           <div class="try">
@@ -1403,8 +1411,8 @@ Allow: /</pre>
         </details>
       </section>
       <section class="step">
-        <h2>Bing には別のスイッチがある</h2>
-        <p>Google の話をそのまま Bing / Copilot に持っていくと外します。Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しています。</p>
+        <h2>Bing には別の設定がある</h2>
+        <p>Google についての説明を、そのまま Bing や Copilot に当てはめると間違います。Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しています。</p>
         <table>
           <thead><tr><th>タグ</th><th>Copilot / Bing Chat の回答</th><th>学習</th><th>通常の検索表示</th></tr></thead>
           <tbody>
@@ -1412,8 +1420,8 @@ Allow: /</pre>
             <tr><td><code>NOARCHIVE</code></td><td>回答に含めない。リンクもしない</td><td>使わない</td><td>変わらない</td></tr>
           </tbody>
         </table>
-        <p>両方あるときは NOCACHE として扱う、と書いてあります。</p>
-        <p class="note">IndexNow は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。AI 対策として売られていたら、そこは一次情報にありません。</p>
+        <p>NOCACHE と NOARCHIVE の両方が指定されているときは NOCACHE として扱われる、と公式ブログに書かれています。</p>
+        <p class="note">IndexNow は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。IndexNow が AI 対策として売られていても、その根拠は一次情報にありません。</p>
         <div class="card" data-card="c-07-4">
           <p class="q">Bing の <span data-term="NOARCHIVE">NOARCHIVE</span> は何を止めますか。通常の Bing 検索の表示はどうなりますか。</p>
           <div class="try">
@@ -1438,7 +1446,7 @@ Allow: /</pre>
       <section class="step">
         <h2>3. llms.txt</h2>
         <p>Jeremy Howard の提案です。サイトの地図を Markdown で置きます。必須は H1 の名前です。詳細はリンク先の <code>.md</code> に置きます。</p>
-        <p>Chrome Lighthouse はサーバーエラーならフラグ、404 なら N/A（任意）です。</p>
+        <p>Chrome Lighthouse の llms.txt 監査は、サーバーエラーのときは警告を出し、404 のときは N/A（任意）になります。</p>
         <p class="note">Google Search は llms.txt を使いません。ドキュメントをエージェントに案内する用途と、AI Overviews の出典選定は別です。</p>
         <pre># Example Cloud Billing API
 
@@ -1510,6 +1518,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -1522,14 +1531,14 @@ Allow: /</pre>
       <header class="lesson-head">
         <p class="kicker">第8課</p>
         <h1>測定とコントロール</h1>
-        <p class="goal"><span>この課のゴール</span>学習・AI 面・青リンクを別スイッチで扱える。何が測れて何が測れないかを言える。</p>
+        <p class="goal"><span>この課のゴール</span>学習・AI 面・通常の検索結果を、別の設定として扱える。何が測れて何が測れないかを言える。</p>
         <div class="prime"><b>読む前に一度だけ</b><p>Search Console の生成 AI レポートで、クリック数は見られると思いますか。</p></div>
       </header>
       <p class="chunk-meter" data-meter>塊</p>
       <div class="steps">
       <section class="step">
         <h2>Google で測る</h2>
-        <p>Search Console の生成 AI パフォーマンスレポートは、AI Overviews と AI Mode での掲載を扱います。何が測れないかを先に覚えます。</p>
+        <p>Search Console の生成 AI パフォーマンスレポートは、AI Overviews と AI Mode での掲載を扱います。何が測れないかを先に覚えてください。</p>
         <table>
           <thead><tr><th>測れる</th><th>測れない</th></tr></thead>
           <tbody>
@@ -1538,7 +1547,7 @@ Allow: /</pre>
             <tr><td>AI Overviews と AI Mode の合算</td><td>AI Overviews と AI Mode の内訳</td></tr>
           </tbody>
         </table>
-        <p>AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。AI Overviews 経由のクリックは滞在が長い、という Google 側の観察もあります。クリック数だけ見るとこの面の価値を落とします。</p>
+        <p>AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。AI Overviews 経由のクリックは滞在が長い、という Google 側の観察もあります。クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
         <div class="card" data-card="c-08-1">
           <p class="q">Search Console の生成 AI パフォーマンスレポートで、測れるものと測れないものを言ってください。</p>
           <div class="try">
@@ -1562,6 +1571,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>スイッチを混ぜない</h2>
+        <p>以下では、AI 面の挙動を切り替える設定をまとめて「スイッチ」と呼びます。実体はメタタグ、robots.txt のトークン、Search Console の設定の三種類です。</p>
         <table>
           <thead><tr><th>スイッチ</th><th>止まると</th><th>止まらない</th></tr></thead>
           <tbody>
@@ -1571,8 +1581,8 @@ Allow: /</pre>
             <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地</td><td>Search の掲載と順位</td></tr>
           </tbody>
         </table>
-        <p>生成 AI control の既定は掲載する、です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
-        <p class="note">学習だけ止めたいのに生成 AI control を除外する、は取り違えです。</p>
+        <p>Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
+        <p class="note">学習だけを止めたいときに生成 AI control で除外するのは、取り違えです。</p>
         <div class="card" data-card="c-08-2">
           <p class="q">学習には使われたくないが AI Overviews には出したい。どのスイッチをどう倒しますか。</p>
           <div class="try">
@@ -1648,8 +1658,8 @@ Allow: /</pre>
       <section class="step">
         <h2>公式コンソールが無い面</h2>
         <p>ChatGPT の掲載オプトアウトは OAI-SearchBot。約 24 時間。ChatGPT-User は検索掲載の判定に使いません。</p>
-        <p>公式コンソールが無い面は、固定プロンプトの定点観測です。言及、引用 URL、誤情報、日付、モデル名を残します。</p>
-        <p>「ブロックしたのに引用された」なら、まず公式の「robots.txt を無視しうる」行に当たります。</p>
+        <p>公式コンソールが無い面は、固定プロンプトの定点観測です。言及、引用 URL、誤情報、日付、モデル名を記録してください。</p>
+        <p>「ブロックしたのに引用された」なら、まず各社の公式ドキュメントで「robots.txt を無視することがある」と書かれている箇所を確認してください。</p>
         <div class="card" data-card="c-08-5">
           <p class="q">公式コンソールが無い面を測るとき、記録に残す列を四つ以上挙げてください。</p>
           <div class="try">
@@ -1674,7 +1684,7 @@ Allow: /</pre>
           <li>正確性（価格・拠点の誤り）</li>
           <li>コンソール（Search Console の表示回数、Bing の引用回数、GA4 の AI Assistant）</li>
         </ol>
-        <p>1 が落ちているのに、2 をコンテンツ改稿で取りに行きません。</p>
+        <p>技術準備度（200 で本文を取れているか）が満たせていない状態で、言及率をコンテンツ改稿で上げようとしても意味がありません。まず技術面を直してください。</p>
         <div class="card" data-card="c-08-6">
           <p class="q">生成 AI control で除外したあと、通常検索は 3 位のままでした。矛盾していますか。</p>
           <div class="try">
@@ -1692,6 +1702,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -1711,7 +1722,7 @@ Allow: /</pre>
       <div class="steps">
       <section class="step">
         <h2>止められる誤解だけ書く</h2>
-        <p>一次情報で止められない噂は、この課の末尾で「未検証」とラベルします。</p>
+        <p>以下では、誤解に一次情報をぶつけて反論することを「止める」と呼びます。一次情報で止められない噂は、この課の末尾で「未検証」とラベルします。</p>
       </section>
       <section class="step">
         <div class="myth">
@@ -1720,7 +1731,7 @@ Allow: /</pre>
         </div>
         <div class="myth">
           <h2>2. 論文の最大 40% は Google の公式効果</h2>
-          <p>内部エンジンは GPT-3.5 と Google 上位 5 件です。指標は著者が定義した impression です。</p>
+          <p>内部 GE は GPT-3.5 と Google 上位 5 件です。指標は著者が定義した impression です。</p>
         </div>
         <div class="card" data-card="c-09-1">
           <p class="q">「LLMO をやれば SEO は不要」を、一次情報で一文で止めてください。</p>
@@ -1768,17 +1779,17 @@ Allow: /</pre>
         </div>
         <div class="myth">
           <h2>6. GPTBot を拒否すると ChatGPT search に出ない</h2>
-          <p>GPTBot は学習、OAI-SearchBot は検索です。独立です。</p>
+          <p>GPTBot は学習用、OAI-SearchBot は検索用です。GPTBot の設定と OAI-SearchBot の設定は独立しています。</p>
         </div>
       </section>
       <section class="step">
         <div class="myth">
           <h2>7. Google-Extended を拒否すると AI Overviews に出ない</h2>
-          <p>Gemini アプリと Vertex の話です。Search の掲載には使いません。</p>
+          <p>Google-Extended は Gemini アプリと Vertex 向けの設定です。Google Search の掲載判断には使われません。</p>
         </div>
         <div class="myth">
           <h2>8. robots.txt で全 AI を止められる</h2>
-          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Meta-ExternalFetcher も迂回しうると書いてあります。Claude-User は尊重すると書いてあります。秘密 URL は認証します。</p>
+          <p>Perplexity-User は一般に無視します。ChatGPT-User は適用されない場合があります。Meta-ExternalFetcher も迂回しうると書いてあります。Claude-User は尊重すると書いてあります。公開したくない URL は、認証で保護してください。</p>
         </div>
         <div class="card" data-card="c-09-3">
           <p class="q">「robots.txt で全 AI を止められる」。どのベンダーの文言で止めますか。</p>
@@ -1787,7 +1798,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>Perplexity-User は一般に robots.txt を無視する、ChatGPT-User は適用されない場合がある、Meta-ExternalFetcher は迂回しうる、と各社が自分で書いている。止めたいものは認証で止める。</p></div>
+          <div class="a" hidden><p>Perplexity-User は一般に robots.txt を無視する、ChatGPT-User は適用されない場合がある、Meta-ExternalFetcher は迂回しうる、と各社が自分で書いている。アクセスさせたくないものは認証で保護する。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1802,7 +1813,7 @@ Allow: /</pre>
         </div>
         <div class="myth">
           <h2>10. AI Overviews に出ないのは常に失敗</h2>
-          <p>追加価値があるときだけ出ます。出ないクエリでは青リンクが本戦です。</p>
+          <p>AI Overviews は、通常の検索結果より追加の価値があると判断されたときだけ出ます。出ないクエリでは、従来どおり検索結果一覧のリンクが勝負どころです。</p>
         </div>
       </section>
       <section class="step">
@@ -1819,23 +1830,24 @@ Allow: /</pre>
           <p>C-SEO Bench は、競合採用と複数ドメインの条件で、多くの手法が効かないどころか順位を下げると報告しました（第 5 課）。</p>
         </div>
         <div class="card" data-card="c-09-4">
-          <p class="q">誤解 11・12・13 を、それぞれ一次情報の一言で潰してください。</p>
+          <p class="q">「robots.txt に書けば利用を禁止したことになる」「引用が付いている＝その文書を根拠に生成した」「論文で効いた改変は競合も同じことをしても効く」の 3 つを、それぞれ一次情報の一言で止めてください。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>11: RFC 9309 は規則がアクセス認可ではないと明記。12: 正しく見える引用の最大 57% が後付け（Wallat ら）。13: C-SEO Bench は競合採用下で多くの手法が無効〜逆効果と報告。</p></div>
+          <div class="a" hidden><p>robots.txt の話は、RFC 9309 が規則はアクセス認可ではないと明記。引用の話は、正しく見える引用の最大 57% が後付け（Wallat ら）。競合採用の話は、C-SEO Bench が競合採用下で多くの手法が無効〜逆効果と報告。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
           </div>
           <p data-sched hidden></p>
         </div>
-        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、UGC の引用割合、Bytespider の robots.txt 遵守。</p>
+        <p class="note">未検証として残す: 日英での効果差、2026 年の ChatGPT 検索プロバイダの中身、「見出し直下 40〜60 語」、ユーザー投稿コンテンツ（UGC）の引用割合、Bytespider の robots.txt 遵守。</p>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -1855,7 +1867,7 @@ Allow: /</pre>
       <div class="steps">
       <section class="step">
         <h2>演習 A · 用語</h2>
-        <p>自社、または架空の「京都の小さな工具店」について、各 1 文。</p>
+        <p>自社、または架空の「京都の小さな工具店」について、各 1 文で書いてください。</p>
         <ol class="plain">
           <li>SEO が成功した状態</li>
           <li>LLMO が成功した状態（言及と引用を分けてよい）</li>
@@ -1868,7 +1880,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>1 は順位または掲載。2 は回答文の中に名前が出る（言及）／出典 URL が付く（引用）。3 はゼロクリックで用が足りる場合があるため。ただし AI Overviews 経由のクリックは滞在が長い、という観察もあるので、クリック数だけで判断しない。</p></div>
+          <div class="a" hidden><p>SEO の成功は順位または掲載。LLMO の成功は回答文の中に名前が出る（言及）／出典 URL が付く（引用）。クリックが減る理由は、ゼロクリックで用が足りる場合があるため。ただし AI Overviews 経由のクリックは滞在が長い、という観察もあるので、クリック数だけで判断しない。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1910,7 +1922,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>論文の内部 GE（Google 上位 5 件 + GPT-3.5）で、すでに上位 5 件に入っているソースを 1 つだけ改変したとき、Position-Adjusted Word Count で最大約 41%、Cite Sources では 5 位ソースが +115%、1 位ソースは平均で −30% だった。指標は著者定義の可視性でクリックではない。競合も同じ手法を採る条件では、追試（C-SEO Bench）が無効〜逆効果を報告している。</p></div>
+          <div class="a" hidden><p>論文の内部 GE（Google 上位 5 件 + GPT-3.5）で、すでに上位 5 件に入っているソースを 1 つだけ改変したとき、位置補正単語数で最大約 41%、Cite Sources では 5 位ソースが +115%、1 位ソースは平均で −30% だった。指標は著者定義の可視性でクリックではない。競合も同じ手法を採る条件では、追試（C-SEO Bench）が無効〜逆効果を報告している。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1920,7 +1932,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>演習 D · ページ添削</h2>
-        <p>公開ページを 1 つ選び、表を埋めてください。個人情報は書かない。</p>
+        <p>公開ページを 1 つ選び、表を埋めてください。個人情報は書かないでください。</p>
         <table>
           <thead><tr><th>点検</th><th>現状</th><th>直すなら</th></tr></thead>
           <tbody>
@@ -1935,7 +1947,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>演習 E · スイッチ</h2>
-        <p>On / Off だけ決めてください。実装手順は書かない。</p>
+        <p>On / Off だけ決めてください。実装手順は書かないでください。</p>
         <ol class="plain">
           <li>通常検索には出したい。AI Overviews には出したくない。Gemini アプリの学習にも使われたくない</li>
           <li>ChatGPT search には出したい。将来の GPT 学習には使われたくない</li>
@@ -1943,13 +1955,13 @@ Allow: /</pre>
           <li>Copilot の回答には出したくない。Bing の通常検索には出したい</li>
         </ol>
         <div class="card" data-card="c-10-4">
-          <p class="q">四つのスイッチの答えを言ってください。</p>
+          <p class="q">四つの場面について、AI 面の設定（スイッチ）の答えを言ってください。</p>
           <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>1. 生成 AI control が使えるなら除外、Google-Extended を Disallow、Googlebot は許可。2. GPTBot を Disallow、OAI-SearchBot を Allow。3. PerplexityBot は許可。Perplexity-User は一般に robots.txt を無視するので、負荷はキャッシュや配信側の話になる。4. Bing に NOARCHIVE。通常の Bing 検索表示は変わらない。</p></div>
+          <div class="a" hidden><p>AI Overviews と Gemini アプリを避ける場面は、生成 AI control が使えるなら除外、Google-Extended を Disallow、Googlebot は許可。ChatGPT search には出して GPT 学習を避ける場面は、GPTBot を Disallow、OAI-SearchBot を Allow。Perplexity の負荷を下げる場面は、PerplexityBot は許可。Perplexity-User は一般に robots.txt を無視するので、負荷はキャッシュや配信側の話になる。Copilot を避ける場面は、Bing に NOARCHIVE。通常の Bing 検索表示は変わらない。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -1959,9 +1971,9 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>演習 F · 定点観測</h2>
-        <p>プロンプトを 10 個。半分は「〜とは」、半分は比較・購入型。</p>
+        <p>プロンプトを 10 個作ってください。半分は「〜とは」、半分は比較・購入型にします。</p>
         <p>記録する列: 日付、製品、検索の On/Off、モデル名、言及、引用 URL、誤情報、保存場所。</p>
-        <p>1 週間後に同じ 10 個を再実行します。変化を「コンテンツを変えたから」と因果づけないでください。エンジン側の変動があります。</p>
+        <p>1 週間後に同じ 10 個を再実行してください。変化を「コンテンツを変えたから」と因果づけないでください。エンジン側の変動があります。</p>
         <div class="card" data-card="c-10-5">
           <p class="q">定点観測で「先週より引用が増えた」。改稿の効果と言ってよいですか。</p>
           <div class="try">
@@ -1986,7 +1998,7 @@ Allow: /</pre>
           <li>論文の数字を引くとき、必ず添える条件</li>
           <li>引用が付いていても言えないこと</li>
         </ol>
-        <p>書き終えてから、第 1・4・5・11 課に戻って穴を埋めます。埋めた場所が、次の復習で出てきます。</p>
+        <p>書き終えてから、第 1・4・5・11 課に戻って穴を埋めてください。埋めた場所が、次の復習で出てきます。</p>
         <div class="card" data-card="c-10-6">
           <p class="q">四つの見出しだけを頼りに、この教材の骨格を口に出して言えますか。</p>
           <div class="try">
@@ -1994,7 +2006,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>(1) LLMO は回答内の言及・引用を改善する実務用語、学術側が GEO、SEO は入場。(2) 学習・検索・ユーザー起動は独立した設定で、止める先を間違えると意図と逆になる。(3) 数字には内部 GE・指標・改変対象・追試を添える。(4) 引用の存在は根拠の存在を保証しない。</p></div>
+          <div class="a" hidden><p>三つの用語の関係は、LLMO が回答内の言及・引用を改善する実務用語、学術側が GEO、SEO は入場条件を満たすための作業。ボットを分ける理由は、学習・検索・ユーザー起動が独立した設定で、拒否する先を間違えると意図と逆になるため。論文の数字に添える条件は、内部 GE・指標・改変対象・追試。引用が付いていても言えないことは、根拠が存在すること。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -2005,6 +2017,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -2030,7 +2043,7 @@ Allow: /</pre>
           <li><strong>faithfulness</strong> モデルが実際にその文書を使って書いた</li>
         </ul>
         <p>Wallat らは、正しく見える引用のうち最大 57% が <span data-term="post-rationalization">post-rationalization</span>、つまり生成したあとに付けた後付けだったと報告しています。</p>
-        <p class="note">この数字は特定の実装を測ったものです。「どの製品でも 57%」ではありません。読み方は「引用の存在は根拠の存在を保証しない」まで。</p>
+        <p class="note">この数字は特定の実装を測ったものです。「どの製品でも 57%」ではありません。ここから言えるのは「引用が付いていることは、根拠があることの保証にならない」というところまでです。それ以上には広げないでください。</p>
         <div class="card" data-card="c-11-1">
           <p class="q">引用の correctness と <span data-term="faithfulness">faithfulness</span> の違いを言ってください。研究は何と報告しましたか。</p>
           <div class="try">
@@ -2056,7 +2069,7 @@ Allow: /</pre>
         <div class="flow">
           <b>先頭</b><i>強</i><b>中央</b><i>弱</i><b>末尾</b>
         </div>
-        <p class="note">実務への含意は限定的です。各製品が取得した文書をどう並べるかは公開されていません。言えるのは「同じ文書でも置かれ方で使われ方が変わりうる」までで、「見出し直下 40〜60 語」のような具体値はここからは出ません。</p>
+        <p class="note">実務への含意は限定的です。各製品が取得した文書をどう並べるかは公開されていません。言えるのは「同じ文書でも置かれ方で使われ方が変わりうる」というところまでです。「見出し直下 40〜60 語」のような具体値はここからは出ません。</p>
         <div class="card" data-card="c-11-2">
           <p class="q">lost in the middle とは何ですか。そこから実務に言えること、言えないことは。</p>
           <div class="try">
@@ -2064,7 +2077,7 @@ Allow: /</pre>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
           </div>
-          <div class="a" hidden><p>入力文脈の先頭と末尾にある情報はよく使われ、中央に置かれた情報の利用が落ちる現象（Liu ら, TACL 2023）。言えるのは「置かれ方で使われ方が変わりうる」まで。各製品の並べ方は非公開なので、具体的な語数や位置の指示は出せない。</p></div>
+          <div class="a" hidden><p>入力文脈の先頭と末尾にある情報はよく使われ、中央に置かれた情報の利用が落ちる現象（Liu ら, TACL 2023）。言えるのは「置かれ方で使われ方が変わりうる」というところまで。各製品の並べ方は非公開なので、具体的な語数や位置の指示は出せない。</p></div>
           <div class="grade" hidden>
             <button type="button" class="btn ghost" data-grade="again">もう一度</button>
             <button type="button" class="btn" data-grade="good">言えた</button>
@@ -2108,7 +2121,7 @@ Allow: /</pre>
           <li>ユーザーが本文を作れるプロフィールページ</li>
           <li>外部から取り込んで丸ごと出している一覧やフィード</li>
         </ul>
-        <p class="note">対策は普通のやつです。投稿の審査、インデックスさせない、<code>noindex</code>、公開前の目視。攻撃の作り方はここでは扱いません。</p>
+        <p class="note">対策は、一般的な UGC 管理と同じです。投稿を公開前に審査する、<code>noindex</code> を付けてインデックスさせない、公開前に目視する、の三つです。攻撃の作り方はここでは扱いません。</p>
         <div class="card" data-card="c-11-4">
           <p class="q">自社サイトが RAG ポイズニングの入口になりうるのは、どういう面ですか。</p>
           <div class="try">
@@ -2156,6 +2169,7 @@ Allow: /</pre>
       </section>
 
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -2190,7 +2204,7 @@ Allow: /</pre>
         <dt>Amazonbot / Amzn-SearchBot / Amzn-User</dt><dd>Amazon の収集 / 検索 / ユーザー起動。Amazonbot は学習に使われうる。ページ単位の <code>noarchive</code> で学習から外せる。</dd>
         <dt>Applebot-Extended</dt><dd>Apple の学習利用だけを制御する二次トークン。自身はクロールしない。拒否しても検索結果には残る。</dd>
         <dt>C-SEO Bench</dt><dd>Puerto ら NeurIPS 2025 のベンチマーク。競合下では多くの C-SEO 手法が無効か逆効果だったと報告。</dd>
-        <dt>CCBot</dt><dd>Common Crawl のクローラ。公開アーカイブ用。なりすましがあるため UA だけで判定しない。</dd>
+        <dt>CCBot</dt><dd>Common Crawl のクローラー。公開アーカイブ用。なりすましがあるため UA だけで判定しない。</dd>
         <dt>ChatGPT-User</dt><dd>ユーザー起動の取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない。</dd>
         <dt>ClaudeBot / SearchBot / User</dt><dd>Anthropic の学習 / 検索 / ユーザー起動。robots.txt を尊重すると公式が述べる。</dd>
         <dt>Content-Signal</dt><dd>Cloudflare が提案する robots.txt のディレクティブ。search / ai-input / ai-train の可否を書く。</dd>

@@ -26,7 +26,7 @@ META = {
     ),
     "04": (
         "ボットを分ける",
-        "学習用と検索用を分けて robots.txt を書ける。ユーザー起動フェッチャの差を言える。",
+        "学習用と検索用を分けて robots.txt を書ける。ユーザー起動フェッチャーとの差を言える。",
         "robots.txt で GPTBot を拒否したサイトは、ChatGPT の検索回答に出なくなりますか。",
     ),
     "05": (
@@ -46,7 +46,7 @@ META = {
     ),
     "08": (
         "測定とコントロール",
-        "学習・AI 面・青リンクを別スイッチで扱える。何が測れて何が測れないかを言える。",
+        "学習・AI 面・通常の検索結果を、別の設定として扱える。何が測れて何が測れないかを言える。",
         "Search Console の生成 AI レポートで、クリック数は見られると思いますか。",
     ),
     "09": (
@@ -108,13 +108,14 @@ HOME = """
         <h1>読むより、思い出す</h1>
         <p>Markdown の長文を、机の上の教科書に組み直したものです。各課は塊に切ってあり、次へを押すまで次の塊は出ません。塊の終わりには、閉じた状態の問いが 1 枚ずつ入っています。</p>
         <div class="dash" data-dash></div>
+        <div class="boxes" data-boxes></div>
         <p><a class="btn" href="#l01">第 1 課から始める</a></p>
       </div>
       <div class="pair" style="max-width:42rem">
         <div class="seal paper"><small>朱 · 論文</small>GEO（KDD 2024）。すでに検索上位に入ったページを、生成が厚く引用するか。追試の C-SEO Bench（NeurIPS 2025）もここに入ります。</div>
-        <div class="seal official"><small>藍 · 公式</small>Google Search。入場はインデックスとスニペット。SEO の土台が先。ベンダー各社のクローラ方針もここ。</div>
+        <div class="seal official"><small>藍 · 公式</small>Google Search。入場条件はインデックスとスニペット。SEO の土台が先。ベンダー各社のクローラー方針もここ。</div>
       </div>
-      <p style="max-width:42rem">二つは同じ「AI に載せる」でも、層が違います。混ぜないことが、この教材の核です。</p>
+      <p style="max-width:42rem">論文と公式は同じ「AI に載せる」を指していても、見ている層が違います。混ぜないことが、この教材の核です。</p>
       <nav class="path" id="path" aria-label="課の順">
         <a href="#l01"><span class="n">01</span><strong>LLMO とは何か</strong><em>何を最適化するか</em></a>
         <a href="#l02"><span class="n">02</span><strong>生成エンジン</strong><em>検索してから書く</em></a>
@@ -150,7 +151,7 @@ HOME = """
           </ul>
         </details>
       </div>
-      <p class="note home-note">キーボード: J / 右で次の塊、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザにだけ残ります。</p>
+      <p class="note home-note">キーボード: J / 右で次の塊、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザーにだけ残ります。</p>
     </section>
 """
 
@@ -183,7 +184,7 @@ GLOSSARY = r"""
         <dt>Amazonbot / Amzn-SearchBot / Amzn-User</dt><dd>Amazon の収集 / 検索 / ユーザー起動。Amazonbot は学習に使われうる。ページ単位の <code>noarchive</code> で学習から外せる。</dd>
         <dt>Applebot-Extended</dt><dd>Apple の学習利用だけを制御する二次トークン。自身はクロールしない。拒否しても検索結果には残る。</dd>
         <dt>C-SEO Bench</dt><dd>Puerto ら NeurIPS 2025 のベンチマーク。競合下では多くの C-SEO 手法が無効か逆効果だったと報告。</dd>
-        <dt>CCBot</dt><dd>Common Crawl のクローラ。公開アーカイブ用。なりすましがあるため UA だけで判定しない。</dd>
+        <dt>CCBot</dt><dd>Common Crawl のクローラー。公開アーカイブ用。なりすましがあるため UA だけで判定しない。</dd>
         <dt>ChatGPT-User</dt><dd>ユーザー起動の取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない。</dd>
         <dt>ClaudeBot / SearchBot / User</dt><dd>Anthropic の学習 / 検索 / ユーザー起動。robots.txt を尊重すると公式が述べる。</dd>
         <dt>Content-Signal</dt><dd>Cloudflare が提案する robots.txt のディレクティブ。search / ai-input / ai-train の可否を書く。</dd>
@@ -273,10 +274,47 @@ def expand_cards(html):
     return out, count
 
 
+
+# 表記チェック（_fragments/STYLE.md のルール 5・6）。警告のみでビルドは止めない。
+BANNED = [
+    (r"ファンアウト", "query fan-out に統一"),
+    (r"(?<!Overviews（)AI 概要", "AI Overviews に統一（初出のみ「AI Overviews（AI 概要）」）"),
+    (r"内部エンジン", "内部 GE に統一"),
+    (r"生成 AI 制御", "生成 AI control に統一"),
+    (r"(?<!位置補正単語数（)Position-Adjusted Word Count", "位置補正単語数に統一（初出のみ英語併記）"),
+    (r"MAU", "月間アクティブユーザー と書く"),
+    (r"青リンク", "検索結果一覧のリンク と書く"),
+    (r"本戦", "勝負どころ と書く"),
+    (r"入場(?!条件)", "入場条件 と書く"),
+    (r"サーバ(?!ー)", "サーバー（長音符を付ける）"),
+    (r"クローラ(?!ー)", "クローラー（長音符を付ける）"),
+    (r"パーサ(?!ー)", "パーサー（長音符を付ける）"),
+    (r"ユーザ(?!ー)", "ユーザー（長音符を付ける）"),
+    (r"ブラウザ(?!ー)", "ブラウザー（長音符を付ける）"),
+    (r"フェッチャ(?!ー)", "フェッチャー（長音符を付ける）"),
+]
+
+
+def lint_notation(lid, text):
+    """禁止表記を行番号つきで警告する。件数を返す。"""
+    hits = 0
+    for n, line in enumerate(text.splitlines(), 1):
+        for pattern, hint in BANNED:
+            if re.search(pattern, line):
+                where = f"_fragments/{lid}.html:{n}" if lid.isdigit() else f"build.py の {lid}:{n} 行目"
+                print(f"  表記: {where} {pattern} → {hint}")
+                hits += 1
+    return hits
+
+
 parts = [HEAD, HOME]
 total_cards = 0
+lint_hits = 0
 for lid, (title, goal, prime) in META.items():
-    steps, made = expand_cards((FRAG / f"{lid}.html").read_text(encoding="utf-8"))
+    raw = (FRAG / f"{lid}.html").read_text(encoding="utf-8")
+    lint_hits += lint_notation(lid, raw)
+    lint_hits += lint_notation(f"META {lid}", "\n".join((title, goal, prime)))
+    steps, made = expand_cards(raw)
     total_cards += made
     parts.append(
         f"""
@@ -291,6 +329,7 @@ for lid, (title, goal, prime) in META.items():
       <div class="steps">
 {steps}
       </div>
+      <section class="finish" data-finish hidden aria-live="polite"></section>
       <nav class="step-nav" aria-label="塊の移動">
         <button type="button" class="ghost" data-prev>前の塊</button>
         <button type="button" data-next>次の塊</button>
@@ -305,6 +344,9 @@ for lid, (title, goal, prime) in META.items():
     )
     print("redirect", lid)
 
+for name, chunk in (("HOME", HOME), ("REVIEW", REVIEW), ("GLOSSARY", GLOSSARY)):
+    lint_hits += lint_notation(name, chunk)
+
 parts.append(REVIEW)
 parts.append(GLOSSARY)
 parts.append(FOOT)
@@ -314,3 +356,5 @@ parts.append(FOOT)
 )
 (OUT / "review.html").write_text(REDIRECT.replace("{hash}", "lr"), encoding="utf-8")
 print(f"wrote index.html ({total_cards} cards)")
+if lint_hits:
+    print(f"表記の警告 {lint_hits} 件（_fragments/STYLE.md 参照）")

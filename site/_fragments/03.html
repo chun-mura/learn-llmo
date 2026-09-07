@@ -6,11 +6,11 @@
             <tr><td>SEO</td><td>ウェブ検索の発見・掲載・順位</td><td>掲載、クリック、コンバージョン</td></tr>
             <tr><td>GEO</td><td>生成エンジンの回答内可視性</td><td>引用の位置・分量（論文）、言及率（実務）</td></tr>
             <tr><td>LLMO</td><td>LLM 製品の回答全般</td><td>言及、引用、正確さ</td></tr>
-            <tr><td>AEO</td><td>「答え」そのものが出る面</td><td>スニペット、AI 概要</td></tr>
+            <tr><td>AEO</td><td>「答え」そのものが出る面</td><td>スニペット、AI Overviews</td></tr>
           </tbody>
         </table>
-        <p>論文は、生成エンジンはキーワード一致に閉じないので従来 SEO はそのままでは足りない、と書きます。</p>
-        <p>Google は、生成 AI 機能はコアのランキングに根ざしているので SEO のベストプラクティスは今も妥当、と先に答えます。</p>
+        <p>論文は、生成エンジンがキーワード一致に閉じないため従来の SEO ではそのままでは足りないと書いています。</p>
+        <p>Google は、生成 AI 機能がコアのランキングに根ざしているため SEO のベストプラクティスは今も妥当だと答えています。</p>
         <card id="c-03-1">
           <q>四つのうち、論文で定義された語はどれですか。残りはどこ由来ですか。</q>
           <ans><p>GEO だけが論文由来（Aggarwal ら KDD 2024）。LLMO は日本の実務と英語のマーケ記事、AEO は強調スニペット時代からの業界用語、AIO は文脈次第で全体か AI Overviews を指す。いずれも Google の製品名ではない。</p></ans>
@@ -55,8 +55,8 @@
       </section>
       <section class="step">
         <h2>ChatGPT に出たいとき</h2>
-        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。掲載の可否は <span data-term="OAI-SearchBot">OAI-SearchBot</span> の robots.txt です。</p>
-        <p>こちらは論文の「検索結果に載ったあと、生成がどの出典を厚く書くか」に近い条件です。ただし論文の内部エンジンは GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。</p>
+        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。掲載されるかどうかは、robots.txt で <span data-term="OAI-SearchBot">OAI-SearchBot</span> を許可しているかで決まります。</p>
+        <p>こちらは論文の「検索結果に載ったあと、生成がどの出典を厚く書くか」に近い条件です。ただし論文の内部 GE は GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。</p>
         <card id="c-03-4">
           <q>ChatGPT search に出るかどうかを決めるのは、どのボットの許可ですか。</q>
           <ans><p>OAI-SearchBot。ChatGPT search は Google のインデックスではなく、第三者検索プロバイダと提携メディアを使う。GPTBot（学習用）とは別。</p></ans>
@@ -76,7 +76,7 @@
           <li>ChatGPT: OAI-SearchBot の許可。公式ページが一意か。第三者でも同じ事実か</li>
           <li>論文由来の改稿: 数値と日付、出典を本文に置く</li>
         </ul>
-        <p>三つを一つの「LLMO 施策」にまとめません。</p>
+        <p>この三つを一つの「LLMO 施策」にまとめないでください。</p>
         <card id="c-03-5">
           <q>「LLMO 施策」を一つのチケットにまとめてはいけないのはなぜですか。</q>
           <ans><p>対象面ごとに前提が違うから。Google AI Overviews はインデックスとスニペット、ChatGPT は OAI-SearchBot の許可、論文由来の改稿は本文の書き方。効いたかどうかの見方も別なので、混ぜると何が効いたか分からなくなる。</p></ans>
@@ -85,11 +85,11 @@
       <section class="step">
         <h2>閉じてから答える</h2>
         <card id="c-03-6">
-          <q>「GEO 論文で +40% だから llms.txt を全ページに置け」。どの行で止めますか。</q>
-          <ans><p>両方の行で止まる。Google は Search で llms.txt を使わないと書いている。+40% は論文の内部 GE（GPT-3.5 + Google 上位 5 件）の話で、llms.txt とは無関係。</p></ans>
+          <q>「GEO 論文で +40% だから llms.txt を全ページに置け」。どの行に反論しますか。</q>
+          <ans><p>両方の行に反論できる。Google は Search で llms.txt を使わないと書いている。+40% は論文の内部 GE（GPT-3.5 + Google 上位 5 件）の話で、llms.txt とは無関係。</p></ans>
         </card>
         <card id="c-03-7">
           <q>「SEO を捨てて LLMO だけやる」が成り立たない理由を、RAG から説明してください。</q>
-          <ans><p>Google の生成 AI は Search インデックスから取る（RAG）。インデックスされスニペット表示できなければ、そもそも出典候補にならない。入場が SEO の側にある。</p></ans>
+          <ans><p>Google の生成 AI は Search インデックスから取る（RAG）。インデックスされスニペット表示できなければ、そもそも出典候補にならない。AI 回答の出典候補になる入場条件そのものが、SEO 側の作業でしか満たせない。</p></ans>
         </card>
       </section>

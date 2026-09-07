@@ -4,37 +4,37 @@
         <p>検索の「平均順位」は、出典が文中に散らばる生成回答には使えません。論文は impression を定義しました。</p>
         <ul class="plain">
           <li><strong>Word Count</strong> その出典に紐づく文の単語数の割合</li>
-          <li><strong>Position-Adjusted Word Count</strong> 先頭ほど重い</li>
+          <li><strong>位置補正単語数（Position-Adjusted Word Count）</strong> 先頭ほど重い</li>
           <li><strong>Subjective Impression</strong> 関連性・影響・独自性など。LLM 採点を正規化</li>
         </ul>
         <p>改善率は、同じクエリでソースの 1 つだけを改変した前後の相対差です。</p>
         <card id="c-05-1">
           <q>論文はなぜ「順位」を使わなかったのですか。代わりに定義した三つの指標は。</q>
-          <ans><p>生成回答では出典が文中に散らばるため、平均順位が使えない。代わりに impression として Word Count（紐づく文の単語数の割合）、Position-Adjusted Word Count（先頭ほど重い）、Subjective Impression（関連性・影響・独自性などを LLM 採点で正規化）を定義した。</p></ans>
+          <ans><p>生成回答では出典が文中に散らばるため、平均順位が使えない。代わりに impression として Word Count（紐づく文の単語数の割合）、位置補正単語数（先頭ほど重い）、Subjective Impression（関連性・影響・独自性などを LLM 採点で正規化）を定義した。</p></ans>
         </card>
         <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2</li></ul></details>
       </section>
       <section class="step">
         <h2>実験の条件</h2>
-        <div class="seal paper"><small>ここを外すと数字は使えない</small>内部 GE は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
+        <div class="seal paper"><small>ここを外すと数字は使えない</small>論文が自作した生成エンジン（以下、内部 GE）は Google 上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai。GEO-bench は約 1 万クエリ。</div>
         <p>プロンプトは「検索結果だけを使え。文の直後に引用を付けよ」です。</p>
         <card id="c-05-2">
-          <q>論文の内部エンジンは、何と何でできていましたか。改変されるのは何本のソースですか。</q>
+          <q>論文の内部 GE は、何と何でできていましたか。改変されるのは何本のソースですか。</q>
           <ans><p>Google の上位 5 件 + gpt-3.5-turbo。実世界チェックは Perplexity.ai、GEO-bench は約 1 万クエリ。改変するのは 5 件のうち 1 つだけで、その前後の相対差を見る。</p></ans>
         </card>
         <details class="source"><summary>出典</summary><ul><li>GEO 論文 §3.1, §6</li></ul></details>
       </section>
       <section class="step">
         <h2>9 つの改変</h2>
-        <p>効いた側と、効かなかった側を先に分けます。</p>
+        <p>以下では、効いた側と効かなかった側を分けて示します。</p>
         <table>
           <thead><tr><th>効いた（論文）</th><th>弱かった</th></tr></thead>
           <tbody>
             <tr><td>統計を足す、引用文、出典、流暢さ</td><td>キーワード詰め込み、独特な語</td></tr>
-            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（押しは弱い）</td></tr>
+            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（効果は弱い）</td></tr>
           </tbody>
         </table>
-        <p>3, 4, 5（キーワード・出典・引用）以外は、既存文の見せ方を変えるだけでよい、と著者は述べます。</p>
+        <p>論文の 9 手法のうち、キーワード詰め込み・出典の明記・引用文の追加の 3 つだけは新しい情報を足す必要があり、残りは既存の文の見せ方を変えるだけでよい、と著者は述べます。</p>
         <card id="c-05-3">
           <q>論文で効いた改変と、効かなかった改変を、二つずつ挙げてください。</q>
           <ans><p>効いた側は統計の追加、引用文の追加、出典の明記、流暢さ。効かなかった／弱かった側はキーワード詰め込み、独特な語、権威的トーン。</p></ans>
@@ -48,7 +48,7 @@
           <thead><tr><th>手法</th><th class="num">Overall</th><th>位置づけ</th></tr></thead>
           <tbody>
             <tr><td>改変なし</td><td class="num">19.3</td><td>ベースライン</td></tr>
-            <tr><td>Keyword Stuffing</td><td class="num">17.7</td><td>単語数系は悪化</td></tr>
+            <tr><td>Keyword Stuffing</td><td class="num">17.7</td><td>単語数にもとづく指標が悪化</td></tr>
             <tr><td>Cite Sources</td><td class="num">24.6</td><td>高</td></tr>
             <tr><td>Statistics Addition</td><td class="num">25.2</td><td>高</td></tr>
             <tr><td>Quotation Addition</td><td class="num">27.2</td><td>最高</td></tr>
@@ -63,7 +63,7 @@
       </section>
       <section class="step">
         <h2>Perplexity と限界</h2>
-        <p>Quotation は位置補正で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing はまた単語数系が悪化します。</p>
+        <p>Quotation は位置補正単語数で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing では、内部 GE と同じく、単語数にもとづく指標（Word Count と位置補正単語数）が悪化しました。</p>
         <p>著者自身の限界: エンジンが変われば手法も更新が要る。従来検索の順位への影響は未評価。クエリ分布は将来変わる。</p>
         <p class="note">可視性は著者が定義した impression であり、クリックや売上ではありません。Google 公式は、この種のハックの多くを Search では無効と述べています。</p>
         <card id="c-05-5">
@@ -74,14 +74,14 @@
       </section>
       <section class="step">
         <h2>追試された</h2>
-        <p>2025 年、同じ問いを別の条件で測ったベンチマークが出ました。C-SEO Bench（NeurIPS 2025 Datasets &amp; Benchmarks）です。</p>
+        <p>2025 年、同じ問いを別の条件で測ったベンチマークが出ました。C-SEO Bench（NeurIPS 2025 Datasets &amp; Benchmarks）です。C-SEO は competitive SEO、つまり競合が同じ手法を採る条件下の SEO を指します。</p>
         <p>足した条件は二つです。</p>
         <ul class="plain">
           <li>単一のタスク・ドメインではなく、質問応答と商品推薦の 2 タスク × 各 3 ドメイン</li>
           <li>1 者だけが改変する状況ではなく、<strong>競合も同じ手法を採用していく</strong>状況</li>
         </ul>
-        <p>結果は、既存の C-SEO 手法の多くが効かないどころか、順位に負の影響を与えることがしばしばあった、というものです。従来の SEO 的な手法のほうが有効でした。採用が広がるほど混雑し、ゼロサムに近づくとも書いています。</p>
-        <p class="note">GEO 論文が間違っていた、という話ではありません。GEO 論文が測ったのは「他が動かないときに 1 者が動いたら」です。C-SEO Bench はそこに競合と多様性を足しました。実務が置かれているのは後者の条件です。</p>
+        <p>既存の C-SEO 手法の多くは、効かないどころか順位に負の影響を与えることがしばしばありました。従来の SEO 的な手法のほうが有効でした。著者は、採用が広がるほど混雑しゼロサムに近づくとも書いています。</p>
+        <p class="note">GEO 論文が間違っていた、という話ではありません。GEO 論文が測ったのは「他が動かないときに 1 者が動いたらどうなるか」です。C-SEO Bench はそこに競合と多様性を足しました。実務が置かれているのは後者の条件です。</p>
         <card id="c-05-6">
           <q>C-SEO Bench の結果を一文で。GEO 論文と条件はどう違いますか。</q>
           <ans><p>多くの C-SEO 手法は効かないばかりか順位を下げることが多く、従来 SEO 的手法のほうが有効だった。GEO 論文は 1 者だけが改変する単一設定、C-SEO Bench は複数タスク・複数ドメインで競合も同じ手法を採用していく設定。実務は後者に近い。</p></ans>
@@ -94,10 +94,10 @@
         <h2>閉じてから答える</h2>
         <card id="c-05-7">
           <q>Keyword Stuffing は Perplexity で主観印象が上がり、位置補正単語数は下がりました。論文の主指標はどちらですか。どう読みますか。</q>
-          <ans><p>主に見るのは Position-Adjusted Word Count。主観だけ上がっても「効いた」とは言い切らない。指標が食い違うときは、どの指標で言っているかを明示する。</p></ans>
+          <ans><p>主に見るのは位置補正単語数。主観だけ上がっても「効いた」とは言い切らない。指標が食い違うときは、どの指標で言っているかを明示する。</p></ans>
         </card>
         <card id="c-05-8">
           <q>社内で GEO 論文を引くとき、必ず一緒に言うべきことを二つ。</q>
-          <ans><p>実験条件（GPT-3.5 + Google 上位 5 件の自作エンジン、指標は著者定義の impression、改変対象はすでに上位 5 件のページ）と、追試の結果（C-SEO Bench では競合下で多くの手法が無効〜逆効果）。</p></ans>
+          <ans><p>実験条件（GPT-3.5 + Google 上位 5 件の内部 GE、指標は著者定義の impression、改変対象はすでに上位 5 件のページ）と、追試の結果（C-SEO Bench では競合下で多くの手法が無効〜逆効果）。</p></ans>
         </card>
       </section>
