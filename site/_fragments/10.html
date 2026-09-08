@@ -1,19 +1,23 @@
       <section class="step">
         <h2>演習 A · 用語</h2>
-        <p>自社、または架空の「京都の小さな工具店」について、各 1 文で書いてください。</p>
+        <p>最初は、用語を自分の言葉に置き直す演習です。SEO と LLMO は説明できるつもりでも、書き出すと境目がぼやけていることが多いからです。自社、または架空の「京都の小さな工具店」について、次の 3 つを各 1 文で書いてください。</p>
         <ol class="plain">
           <li>SEO が成功した状態</li>
           <li>LLMO が成功した状態（言及と引用を分けてよい）</li>
           <li>両方成功しているがクリックが減っている状態が起きうる理由</li>
         </ol>
         <card id="c-10-1">
-          <q>SEO の成功、LLMO の成功、そして両方成功してもクリックが減る理由。三つを言ってください。</q>
+          <q>SEO の成功、LLMO の成功、そして両方成功してもクリックが減る理由。三つの組み合わせとして正しいものはどれですか。</q>
+          <opt correct>SEO は順位または掲載／LLMO は回答文に名前が出る言及と出典 URL が付く引用／減る理由はゼロクリックで用が足りる場合があるため</opt>
+          <opt>SEO は回答文に名前が出ること／LLMO は順位または掲載／減る理由は AI Overviews 経由のクリックは滞在が短いため</opt>
+          <opt>SEO は順位または掲載／LLMO は言及と引用／減る理由は AI Overviews に出るとインデックスから外れるため</opt>
+          <opt>SEO は順位または掲載／LLMO は言及と引用／減る理由はクリック数が可視性の唯一の指標になるため</opt>
           <ans><p>SEO の成功は順位または掲載。LLMO の成功は回答文の中に名前が出る（言及）／出典 URL が付く（引用）。クリックが減る理由は、ゼロクリックで用が足りる場合があるため。ただし AI Overviews 経由のクリックは滞在が長い、という観察もあるので、クリック数だけで判断しない。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>演習 B · robots.txt</h2>
-        <p>意図を 3 行で説明し、ChatGPT search に出たいのに出ない原因になりうる行を指摘してください。</p>
+        <p>次は設定ファイルを読む演習です。robots.txt はボットごとのグループ単位で効くので、どのボットがどのグループに入るかを追えないと、意図と逆の結果になります。下の robots.txt について、意図を 3 行で説明し、ChatGPT search に出たいのに出ない原因になりうる行を指摘してください。</p>
         <pre>User-agent: *
 Disallow: /
 
@@ -21,21 +25,30 @@ User-agent: GPTBot
 Allow: /</pre>
         <card id="c-10-2">
           <q>上の robots.txt で、ChatGPT search に出ない原因になっている行はどれですか。</q>
+          <opt correct>User-agent: * の Disallow: / 。名前付きグループが無い OAI-SearchBot まで止まる</opt>
+          <opt>User-agent: GPTBot の Allow: / 。学習を許可すると検索用の掲載が排他的に止まる</opt>
+          <opt>User-agent: * の Disallow: / 。ただし GPTBot の Allow が検索ボットにも継承されるので実害は無い</opt>
+          <opt>原因になる行は無い。GPTBot を Allow していれば ChatGPT search には掲載される</opt>
           <ans><p><code>User-agent: *</code> の <code>Disallow: /</code>。名前付きグループが無いボットに効くので、OAI-SearchBot 専用のグループが無いと検索ボットまで止まる。GPTBot の Allow は学習用の許可であって、検索掲載とは関係しない。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>演習 C · 論文の数字</h2>
+        <p>ここでは、論文の数字に条件を戻す演習をします。数字は条件を落とすと一人歩きするからです。次の一文を読んでください。</p>
         <blockquote>GEO をやると誰でも 40% 上がる。5 位でも 1 位を殴れる。</blockquote>
-        <p>正確な一文に直してください。</p>
+        <p>この一文を、実験条件と指標を添えた正確な一文に直してください。</p>
         <card id="c-10-3">
-          <q>上の一文を、条件つきの正確な一文に直してください。</q>
+          <q>「GEO をやると誰でも 40% 上がる。5 位でも 1 位を殴れる」。実験条件と指標を戻した一文として正確なものはどれですか。</q>
+          <opt correct>内部 GE（Google 上位 5 件と GPT-3.5）で 1 ソースだけを改変したとき、位置補正単語数で最大約 41%、Cite Sources では 5 位が +115%、1 位は平均 −30%</opt>
+          <opt>Google の AI Overviews を測ったとき、クリック数で最大約 41%、Cite Sources では 5 位が +115%、1 位は平均 −30%</opt>
+          <opt>内部 GE（Google 上位 5 件と GPT-3.5）で全ソースを同時に改変したとき、位置補正単語数で最大約 41%、1 位ソースも +115%</opt>
+          <opt>内部 GE（Google 上位 5 件と GPT-3.5）で 1 ソースだけを改変したとき、著者定義のクリック率で最大約 57%、5 位が +115%</opt>
           <ans><p>論文の内部 GE（Google 上位 5 件 + GPT-3.5）で、すでに上位 5 件に入っているソースを 1 つだけ改変したとき、位置補正単語数で最大約 41%、Cite Sources では 5 位ソースが +115%、1 位ソースは平均で −30% だった。指標は著者定義の可視性でクリックではない。競合も同じ手法を採る条件では、追試（C-SEO Bench）が無効〜逆効果を報告している。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>演習 D · ページ添削</h2>
-        <p>公開ページを 1 つ選び、表を埋めてください。個人情報は書かないでください。</p>
+        <p>ここからは自分のページに当てはめます。観点を順に通していくと、直すべき場所が文章ではなく取得や設定の側にある場合を見つけられます。公開ページを 1 つ選び、下の表を埋めてください。個人情報は書かないでください。</p>
         <table>
           <thead><tr><th>点検</th><th>現状</th><th>直すなら</th></tr></thead>
           <tbody>
@@ -50,7 +63,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>演習 E · スイッチ</h2>
-        <p>On / Off だけ決めてください。実装手順は書かないでください。</p>
+        <p>この演習で確かめるのは、目的から AI 面の設定を逆算できるかどうかです。学習・検索・ユーザー起動のどれを断りたいかによって、書く行が変わるからです。次の四つの場面について、On / Off だけ決めてください。実装手順は書かないでください。</p>
         <ol class="plain">
           <li>通常検索には出したい。AI Overviews には出したくない。Gemini アプリの学習にも使われたくない</li>
           <li>ChatGPT search には出したい。将来の GPT 学習には使われたくない</li>
@@ -58,33 +71,45 @@ Allow: /</pre>
           <li>Copilot の回答には出したくない。Bing の通常検索には出したい</li>
         </ol>
         <card id="c-10-4">
-          <q>四つの場面について、AI 面の設定（スイッチ）の答えを言ってください。</q>
+          <q>四つの場面について、AI 面の設定（スイッチ）の組み合わせとして正しいものはどれですか。</q>
+          <opt correct>生成 AI control で除外し Google-Extended を Disallow、Googlebot は許可／GPTBot を Disallow、OAI-SearchBot を Allow／PerplexityBot は許可し負荷はキャッシュや配信側で／Bing に NOARCHIVE</opt>
+          <opt>Googlebot を Disallow／OAI-SearchBot を Disallow、GPTBot を Allow／Perplexity-User を Disallow／Bingbot を Disallow</opt>
+          <opt>Google-Extended を Disallow すれば AI Overviews からも外れる／GPTBot を Disallow すれば ChatGPT search からも外れる／PerplexityBot を Disallow／Bing に NOARCHIVE</opt>
+          <opt>生成 AI control で除外し Googlebot は許可／GPTBot を Disallow、OAI-SearchBot を Allow／Perplexity-User を Disallow すれば負荷が下がる／Bingbot を Disallow</opt>
           <ans><p>AI Overviews と Gemini アプリを避ける場面は、生成 AI control が使えるなら除外、Google-Extended を Disallow、Googlebot は許可。ChatGPT search には出して GPT 学習を避ける場面は、GPTBot を Disallow、OAI-SearchBot を Allow。Perplexity の負荷を下げる場面は、PerplexityBot は許可。Perplexity-User は一般に robots.txt を無視するので、負荷はキャッシュや配信側の話になる。Copilot を避ける場面は、Bing に NOARCHIVE。通常の Bing 検索表示は変わらない。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>演習 F · 定点観測</h2>
-        <p>プロンプトを 10 個作ってください。半分は「〜とは」、半分は比較・購入型にします。</p>
+        <p>ここでは観測の作り方を練習します。単発の観察では、変化が自分の改稿によるものか、エンジン側の変動かを切り分けられないからです。だから、同じ問いを同じ形で繰り返せるようにしておきます。プロンプトを 10 個作ってください。半分は「〜とは」、半分は比較・購入型にします。</p>
         <p>記録する列: 日付、製品、検索の On/Off、モデル名、言及、引用 URL、誤情報、保存場所。</p>
-        <p>1 週間後に同じ 10 個を再実行してください。変化を「コンテンツを変えたから」と因果づけないでください。エンジン側の変動があります。</p>
+        <p>1 週間後に同じ 10 個を再実行してください。そのうえで、変化を「コンテンツを変えたから」と因果づけないでください。エンジン側の変動があるからです。</p>
         <card id="c-10-5">
           <q>定点観測で「先週より引用が増えた」。改稿の効果と言ってよいですか。</q>
+          <opt correct>言えない。エンジン側の変動があるので、変えていない対照の URL やクエリと複数回・複数日の観測が要る</opt>
+          <opt>言える。同じプロンプトを同じ形で繰り返しているので、差分は改稿によるものと切り分けられている</opt>
+          <opt>言えない。ただし 1 週間後の再実行で同じ結果が出れば、その二点だけで因果と言ってよい</opt>
+          <opt>言える。引用は言及より強い指標なので、増えたぶんは改稿の効果として報告してよい</opt>
           <ans><p>言えない。エンジン側の変動があり、同じプロンプトでも結果は動く。因果を言うには、変えていない対照の URL やクエリを持ち、複数回・複数日の観測を並べる必要がある。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>演習 G · 何も見ずに書く</h2>
-        <p>ここが一番効きます。教材を閉じて、白紙に 3 分で書いてください。</p>
+        <p>ここが一番効きます。教材を見ながらだと、思い出したのか読んだだけなのかを自分で区別できないからです。教材を閉じて、次の四つについて白紙に 3 分で書いてください。</p>
         <ol class="plain">
           <li>LLMO と GEO と SEO の関係</li>
           <li>学習用ボットと検索用ボットを分ける理由</li>
           <li>論文の数字を引くとき、必ず添える条件</li>
           <li>引用が付いていても言えないこと</li>
         </ol>
-        <p>書き終えてから、第 1・4・5・11 課に戻って穴を埋めてください。埋めた場所が、次の復習で出てきます。</p>
+        <p>書き終えてから、第 1・4・5・11 章に戻って穴を埋めてください。埋めた場所が、次の復習で出てきます。</p>
         <card id="c-10-6">
-          <q>四つの見出しだけを頼りに、この教材の骨格を口に出して言えますか。</q>
+          <q>三つの用語の関係、ボットを分ける理由、論文の数字に添える条件、引用が付いていても言えないこと。この教材の骨格として正しいものはどれですか。</q>
+          <opt correct>LLMO は言及と引用を改善する実務用語で学術側が GEO、SEO は入場条件／学習・検索・ユーザー起動は独立した設定／内部 GE・指標・改変対象・追試を添える／根拠が存在することは言えない</opt>
+          <opt>GEO が実務用語で LLMO が学術側／robots.txt 一枚で全ボットを一括制御できる／論文の公開年を添える／根拠が存在することは言える</opt>
+          <opt>LLMO は言及と引用を改善する実務用語／学習・検索・ユーザー起動は独立した設定／内部 GE と指標を添える／引用があれば correctness だけは保証される</opt>
+          <opt>LLMO は SEO を置き換える用語／ボットは UA ごとに独立した設定／追試を添える／言えないのは順位が上がったこと</opt>
           <ans><p>三つの用語の関係は、LLMO が回答内の言及・引用を改善する実務用語、学術側が GEO、SEO は入場条件を満たすための作業。ボットを分ける理由は、学習・検索・ユーザー起動が独立した設定で、拒否する先を間違えると意図と逆になるため。論文の数字に添える条件は、内部 GE・指標・改変対象・追試。引用が付いていても言えないことは、根拠が存在すること。</p></ans>
         </card>
-        <p class="note">課はここまでです。原文はリポジトリの research/SOURCES.md から辿れます。あとは復習面に日をあけて戻ってください。</p>
+        <p class="note">本編はここまでです。原文はリポジトリの research/SOURCES.md から辿れます。あとは復習面に日をあけて戻ってください。</p>
       </section>

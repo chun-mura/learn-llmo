@@ -191,7 +191,7 @@ a:hover {
   font-weight: 700;
 }
 
-/* 課ごとの読み進み具合。--p は learn.js が 0〜1 で入れる。 */
+/* 章ごとの読み進み具合。--p は learn.js が 0〜1 で入れる。 */
 .rail ol a {
   position: relative;
 }
@@ -760,6 +760,151 @@ a.btn {
   resize: vertical;
 }
 
+/* 選択肢。紙の設問に寄せ、記号と本文を分けて並べる。 */
+.choices {
+  list-style: none;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.choice {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--card-edge);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  cursor: pointer;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  transition: border-color 160ms var(--ease), background-color 160ms var(--ease);
+}
+
+.choice:hover {
+  border-color: var(--ink-soft);
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.choice .key {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  border: 1px solid var(--card-edge);
+  border-radius: var(--r-sm);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.choice:has(input:checked) {
+  border-color: var(--ink);
+  background: var(--paper-deep);
+}
+
+.choice:has(input:checked) .key {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.choice:has(input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.choice.is-correct {
+  border-color: var(--ok);
+  background: color-mix(in oklch, var(--ok) 8%, var(--paper));
+}
+
+.choice.is-correct .key {
+  background: var(--ok);
+  border-color: var(--ok);
+  color: var(--paper);
+}
+
+.choice.is-wrong {
+  border-color: var(--warn);
+  background: color-mix(in oklch, var(--warn) 8%, var(--paper));
+}
+
+.choice.is-wrong .key {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: var(--paper);
+}
+
+.choice.is-correct::after,
+.choice.is-wrong::after {
+  grid-column: 2;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.choice.is-correct::after {
+  content: "正しい";
+  color: var(--ok);
+}
+
+.choice.is-wrong::after {
+  content: "あなたの答え";
+  color: var(--warn);
+}
+
+.choice input:disabled {
+  cursor: default;
+}
+
+.card .choice input:disabled + .key {
+  cursor: default;
+}
+
+/* 正誤の表示。色だけに頼らず文字でも出す。 */
+.verdict {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.verdict.is-right {
+  color: var(--ok);
+}
+
+.verdict.is-right::before {
+  content: "○ ";
+}
+
+.verdict.is-miss {
+  color: var(--warn);
+}
+
+.verdict.is-miss::before {
+  content: "× ";
+}
+
+.verdict.is-hint {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.card .after {
+  display: flex;
+  margin-top: 0.9rem;
+}
+
 .card .try p {
   font-family: var(--font-ui);
   font-size: 0.74rem;
@@ -803,7 +948,7 @@ a.btn {
   border-left-color: var(--warn);
 }
 
-/* 課の修了面。本文と同じ紙のまま、区切りだけをはっきりさせる。 */
+/* 章の修了面。本文と同じ紙のまま、区切りだけをはっきりさせる。 */
 .finish {
   max-width: var(--measure);
   margin: 0.5rem 0 0;
@@ -902,7 +1047,7 @@ body.is-finish .lesson-head .goal {
   margin: 0 0 0.5rem;
 }
 
-/* 課の入口に置く先出しの問い。外してよい。答えを見る前に一度考えることが目的。 */
+/* 章の入口に置く先出しの問い。外してよい。答えを見る前に一度考えることが目的。 */
 .prime {
   max-width: var(--measure);
   margin: 0 0 1.4rem;
@@ -1059,6 +1204,23 @@ body.is-finish .lesson-head .goal {
   font-size: 0.64rem;
   color: var(--ink-soft);
   text-align: center;
+}
+
+/* 章のリセット。押し間違いを戻せないので、目立たせず 2 度押しにする。 */
+.step-nav [data-reset],
+.finish-nav [data-reset] {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.step-nav [data-reset] {
+  margin-left: 0.5rem;
+}
+
+[data-reset].is-armed {
+  color: var(--paper-seal);
+  border-color: var(--paper-seal);
+  font-weight: 700;
 }
 
 .rail-review {

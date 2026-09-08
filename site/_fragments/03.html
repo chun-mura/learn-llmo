@@ -1,5 +1,6 @@
       <section class="step">
         <h2>四つのラベル</h2>
+        <p>四つの呼び名は、指す面と測るものが少しずつ違います。まず並べて違いを見ます。</p>
         <table>
           <thead><tr><th>呼び名</th><th>よく指す面</th><th>測るもの</th></tr></thead>
           <tbody>
@@ -9,10 +10,13 @@
             <tr><td>AEO</td><td>「答え」そのものが出る面</td><td>スニペット、AI Overviews</td></tr>
           </tbody>
         </table>
-        <p>論文は、生成エンジンがキーワード一致に閉じないため従来の SEO ではそのままでは足りないと書いています。</p>
-        <p>Google は、生成 AI 機能がコアのランキングに根ざしているため SEO のベストプラクティスは今も妥当だと答えています。</p>
+        <p>このうち論文と Google 公式は、SEO の扱いについて逆に見える言い方をしています。論文は、生成エンジンがキーワード一致に閉じないため従来の SEO ではそのままでは足りないと書いています。一方で Google は、生成 AI 機能がコアのランキングに根ざしているため SEO のベストプラクティスは今も妥当だと答えています。だから次の節では、この二つがなぜ両立するのかを見ます。</p>
         <card id="c-03-1">
           <q>四つのうち、論文で定義された語はどれですか。残りはどこ由来ですか。</q>
+          <opt correct>GEO だけが論文由来。LLMO は実務とマーケ記事、AEO は業界用語、AIO は文脈次第</opt>
+          <opt>AEO だけが論文由来。LLMO は実務とマーケ記事、GEO は業界用語、AIO は文脈次第</opt>
+          <opt>GEO と AEO が論文由来。LLMO は実務とマーケ記事、AIO は Google の製品名</opt>
+          <opt>LLMO だけが論文由来。GEO は海外ツール、AEO は業界用語、AIO は Google の製品名</opt>
           <ans><p>GEO だけが論文由来（Aggarwal ら KDD 2024）。LLMO は日本の実務と英語のマーケ記事、AEO は強調スニペット時代からの業界用語、AIO は文脈次第で全体か AI Overviews を指す。いずれも Google の製品名ではない。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -24,19 +28,24 @@
       </section>
       <section class="step">
         <h2>矛盾に見える理由</h2>
+        <p>二つが矛盾して見えるのは、見ている層が違うからです。</p>
         <div class="pair">
           <div class="seal paper"><small>論文が見ている層</small>すでに検索結果の上位 5 件に入ったページを、生成プロンプトの中でどう見せるか。</div>
           <div class="seal official"><small>Google が見ている層</small>その上位に入るまでのシステム。生成 AI 面に特別な別技術は要らないこと。</div>
         </div>
-        <p>上位 5 件に入れないページに、論文の文体変更だけを施しても、RAG がそのページを取らなければ実験の前提に乗りません。</p>
+        <p>層が違うと分かれば、片方だけを実行したときに何が起きるかも見えます。上位 5 件に入れないページに、論文の文体変更だけを施しても、RAG がそのページを取らなければ実験の前提に乗りません。たとえば noindex のままの製品ページに数値と日付を足しても、そもそも候補集合に入らないので、論文が測った差は出ようがありません。だから順序としては、まず取られる状態を作り、そのうえで見せ方を調整することになります。</p>
         <card id="c-03-2">
           <q>論文と Google 公式が矛盾して見えるのはなぜですか。二つが見ている層で説明してください。</q>
+          <opt correct>層が違う。論文は上位 5 件に入ったページの見せ方、Google はその上位に入るまでのシステム</opt>
+          <opt>層が違う。論文は上位に入るまでのシステム、Google は入ったあとの回答内の見せ方</opt>
+          <opt>層は同じで、調査時期が違う。論文のほうが古く、Google が新しい仕組みを説明している</opt>
+          <opt>層は同じで、対象面が違う。論文は ChatGPT、Google は AI Overviews を見ている</opt>
           <ans><p>層が違う。論文はすでに上位 5 件に入ったページを、生成プロンプトの中でどう見せるかを見ている。Google はその上位に入るまでのシステムを見ていて、生成 AI 面に特別な別技術は要らないと言っている。取られないページに文体変更をしても実験の前提に乗らない。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>Google Search でしなくていいこと</h2>
-        <p>公式ガイドの Mythbusting です。対象は Google Search（生成 AI 機能を含む）です。</p>
+        <p>Google は、生成 AI 向けとして流通している手法のうち、しなくてよいものを名指しで挙げています。公式ガイドの Mythbusting で、対象は Google Search（生成 AI 機能を含む）です。</p>
         <ul class="plain">
           <li>llms.txt や AI 専用マークアップ。Search は使わない</li>
           <li>AI 向けにコンテンツを細切れにすること。長さは読者に合わせる</li>
@@ -44,9 +53,14 @@
           <li>不自然な言及集め</li>
           <li>構造化データへの過剰な期待。生成 AI 検索に必須ではない。リッチリザルト用としては従来どおり有用</li>
         </ul>
-        <p class="note">Google の AI に出たいなら、第 6 課の独自コンテンツと第 7 課の技術要件が先です。論文の 9 手法は後です。</p>
+        <p class="note">Google の AI に出たいなら、第 6 章の独自コンテンツと第 7 章の技術要件が先です。論文の 9 手法は後です。</p>
+        <p>ただし、ここで挙がっているのはあくまで Google Search の話です。対象面が変われば前提も変わるので、次に ChatGPT の場合を見ます。</p>
         <card id="c-03-3">
-          <q>Google が「Search ではしなくてよい」と書いていることを、三つ挙げてください。</q>
+          <q>次のうち、Google が「Search ではしなくてよい」と書いていることの組み合わせはどれですか。</q>
+          <opt correct>llms.txt や AI 専用マークアップ／AI 向けに細切れにすること／AI 向けの書き直し</opt>
+          <opt>llms.txt や AI 専用マークアップ／インデックス登録／スニペットの表示を許可すること</opt>
+          <opt>構造化データの利用全般／AI 向けの書き直し／重要な情報を本文に平文で置くこと</opt>
+          <opt>AI 向けに細切れにすること／不自然な言及集め／検索用ボットを robots.txt で許可すること</opt>
           <ans><p>llms.txt や AI 専用マークアップ／AI 向けに細切れにすること／AI 向けの書き直し。ほかに不自然な言及集め、構造化データへの過剰な期待。構造化データはリッチリザルト用としては従来どおり有用。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -55,10 +69,14 @@
       </section>
       <section class="step">
         <h2>ChatGPT に出たいとき</h2>
-        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。掲載されるかどうかは、robots.txt で <span data-term="OAI-SearchBot">OAI-SearchBot</span> を許可しているかで決まります。</p>
-        <p>こちらは論文の「検索結果に載ったあと、生成がどの出典を厚く書くか」に近い条件です。ただし論文の内部 GE は GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。</p>
+        <p>ChatGPT search は Google のインデックスではありません。第三者検索プロバイダと提携メディアを使います。だから掲載されるかどうかは Google 側の状態では決まらず、robots.txt で <span data-term="OAI-SearchBot">OAI-SearchBot</span> を許可しているかで決まります。たとえば Google では問題なく上位に出ているページでも、このボットを robots.txt で拒否していれば候補にすら入りません。</p>
+        <p>入場条件を満たしたあとの話は、論文の関心に近づきます。つまり「検索結果に載ったあと、生成がどの出典を厚く書くか」という条件です。ただし論文の内部 GE は GPT-3.5 と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。だから近いのは関心の位置であって、結果の数字ではありません。</p>
         <card id="c-03-4">
           <q>ChatGPT search に出るかどうかを決めるのは、どのボットの許可ですか。</q>
+          <opt correct>OAI-SearchBot。ChatGPT search は Google のインデックスを使わないため</opt>
+          <opt>GPTBot。ChatGPT search は学習用に集めた結果をそのまま検索に使うため</opt>
+          <opt>ChatGPT-User。ユーザーが起動した取得の可否が掲載の判定に使われるため</opt>
+          <opt>Google-Extended。ChatGPT search は Google の Search インデックスを使うため</opt>
           <ans><p>OAI-SearchBot。ChatGPT search は Google のインデックスではなく、第三者検索プロバイダと提携メディアを使う。GPTBot（学習用）とは別。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -70,26 +88,39 @@
       </section>
       <section class="step">
         <h2>チケットを分ける</h2>
-        <p>例: 採用サイトを「この会社のリモート方針は？」に載せたい。</p>
+        <p>ここまでの違いは、実務では作業の切り方に落ちます。例として、採用サイトを「この会社のリモート方針は？」に載せたい場合を考えます。やるべきことは対象面ごとに三つに分かれます。</p>
         <ul class="plain">
           <li>Google AI Overviews: インデックスとスニペット。方針が本文に平文。一次情報か</li>
           <li>ChatGPT: OAI-SearchBot の許可。公式ページが一意か。第三者でも同じ事実か</li>
           <li>論文由来の改稿: 数値と日付、出典を本文に置く</li>
         </ul>
-        <p>この三つを一つの「LLMO 施策」にまとめないでください。</p>
+        <p>この三つを一つの「LLMO 施策」にまとめないでください。というのも、前提も担当も、効いたかどうかの見方も別だからです。まとめてしまうと、たとえば三つを同時に入れて言及が増えたとき、robots.txt の修正が効いたのか本文の書き換えが効いたのかを、あとから切り分けられません。</p>
         <card id="c-03-5">
           <q>「LLMO 施策」を一つのチケットにまとめてはいけないのはなぜですか。</q>
+          <opt correct>対象面ごとに前提も効いたかどうかの見方も違い、混ぜると何が効いたか切り分けられないから</opt>
+          <opt>対象面ごとの前提は同じだが、担当部署が違うので承認の経路を分ける必要があるから</opt>
+          <opt>作業量が多くなり、一つのスプリントに収まらないので分割しないと着手できないから</opt>
+          <opt>三つを同時に入れると Google の scaled content abuse とみなされる可能性があるから</opt>
           <ans><p>対象面ごとに前提が違うから。Google AI Overviews はインデックスとスニペット、ChatGPT は OAI-SearchBot の許可、論文由来の改稿は本文の書き方。効いたかどうかの見方も別なので、混ぜると何が効いたか分からなくなる。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>閉じてから答える</h2>
+        <p>本文に戻らずに答えてください。どちらも、層と対象面を取り違えた主張への反論です。</p>
         <card id="c-03-6">
           <q>「GEO 論文で +40% だから llms.txt を全ページに置け」。どの行に反論しますか。</q>
+          <opt correct>両方。Google は Search で llms.txt を使わず、+40% は内部 GE の話で llms.txt と無関係</opt>
+          <opt>llms.txt の行だけ。+40% は Google の生成 AI 面でも再現された公式の効果量だから</opt>
+          <opt>+40% の行だけ。llms.txt は Google Search が読む地図として公式に認められているから</opt>
+          <opt>どちらにも反論できない。論文の内部 GE は llms.txt を置いたページで +40% を出したから</opt>
           <ans><p>両方の行に反論できる。Google は Search で llms.txt を使わないと書いている。+40% は論文の内部 GE（GPT-3.5 + Google 上位 5 件）の話で、llms.txt とは無関係。</p></ans>
         </card>
         <card id="c-03-7">
           <q>「SEO を捨てて LLMO だけやる」が成り立たない理由を、RAG から説明してください。</q>
+          <opt correct>Google の生成 AI は Search インデックスから取るので、そこに載らなければ出典候補にならない</opt>
+          <opt>Google の生成 AI は専用インデックスから取るので、入場条件を二つ別々に満たす必要がある</opt>
+          <opt>Google の生成 AI は学習した知識から書くので、Google-Extended を許可しないと出てこない</opt>
+          <opt>Google の生成 AI は llms.txt を地図に使うので、SEO 側の技術要件を先に満たす必要がある</opt>
           <ans><p>Google の生成 AI は Search インデックスから取る（RAG）。インデックスされスニペット表示できなければ、そもそも出典候補にならない。AI 回答の出典候補になる入場条件そのものが、SEO 側の作業でしか満たせない。</p></ans>
         </card>
       </section>

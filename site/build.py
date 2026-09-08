@@ -1,3 +1,6 @@
+import html
+import json
+import random
 import re
 from pathlib import Path
 
@@ -6,7 +9,7 @@ FRAG = ROOT / "_fragments"
 OUT = ROOT / "lessons"
 OUT.mkdir(exist_ok=True)
 
-# (題、この課のゴール、先出しの問い)
+# (題、この章のゴール、先出しの問い)
 # 先出しの問いは、読む前に一度自分で答えさせるためのもの。当たらなくてよい。
 META = {
     "01": (
@@ -57,7 +60,7 @@ META = {
     "10": (
         "演習",
         "自サイト（または架空の店）で点検できる。",
-        "いまの自分は、第 1 課から第 9 課のどれを一番あいまいに覚えていますか。",
+        "いまの自分は、第 1 章から第 9 章のどれを一番あいまいに覚えていますか。",
     ),
     "11": (
         "引用は根拠とは限らない",
@@ -65,6 +68,119 @@ META = {
         "AI の回答に出典リンクが付いていました。その文はその出典から書かれた、と言い切れますか。",
     ),
 }
+
+
+# --- 用語辞書 ---
+# _fragments/terms.json が唯一の定義元。ここから用語集ページ、マウスオーバー用の
+# 辞書、本文の自動マーキングの三つを作る。
+
+TERMS_PATH = FRAG / "terms.json"
+TERMS = json.loads(TERMS_PATH.read_text(encoding="utf-8")) if TERMS_PATH.exists() else {}
+
+# 長い表記から先に当てる。「C-SEO Bench」を「SEO」で切らないため。
+TERM_MATCHES = sorted(
+    [(name, name) for name in TERMS]
+    + [(alias, name) for name, spec in TERMS.items() for alias in spec.get("aliases", [])],
+    key=lambda pair: len(pair[0]),
+    reverse=True,
+)
+
+# 先頭 1 文字で候補を絞る。TERM_MATCHES は長い表記が先に並んでいる。
+TERM_BY_HEAD = {}
+for _surface, _canonical in TERM_MATCHES:
+    TERM_BY_HEAD.setdefault(_surface[0], []).append((_surface, _canonical))
+
+# 自動マーキングを止める範囲。出典・コード・見出し・表・想起カードには付けない。
+SKIP_TAGS = ("code", "pre", "h2", "h3", "details", "card", "table")
+TAG_RE = re.compile(r"<[^>]+>")
+WORDISH = re.compile(r"[A-Za-z0-9._-]")
+
+
+def mark_terms(text, seen):
+    """地の文を左から一度だけ走査し、その節での初出 1 回に span を付ける。
+    付けた span の中は読み直さない。「C-SEO Bench」の中の「C-SEO」のような
+    入れ子のマーキングを避けるため。"""
+    out = []
+    i = 0
+    size = len(text)
+    while i < size:
+        hit = None
+        for surface, canonical in TERM_BY_HEAD.get(text[i], ()):
+            if canonical in seen or not text.startswith(surface, i):
+                continue
+            after = text[i + len(surface)] if i + len(surface) < size else " "
+            before = text[i - 1] if i else " "
+            # 英数字の語の途中（C-SEO の中の SEO など）には付けない
+            if WORDISH.match(surface[0]) and (WORDISH.match(before) or WORDISH.match(after)):
+                continue
+            hit = (surface, canonical)
+            break
+        if hit:
+            surface, canonical = hit
+            out.append(f'<span data-term="{html.escape(canonical, quote=True)}">{surface}</span>')
+            seen.add(canonical)
+            i += len(surface)
+        else:
+            out.append(text[i])
+            i += 1
+    return "".join(out)
+
+
+def autolink_terms(fragment):
+    """節（section.step）ごとに、地の文の用語へ data-term を付ける。"""
+    if not TERM_MATCHES:
+        return fragment
+    parts = []
+    seen = set()
+    skip_depth = 0
+    in_marked_span = 0
+    pos = 0
+    for m in TAG_RE.finditer(fragment):
+        text = fragment[pos : m.start()]
+        tag = m.group(0)
+        parts.append(text if (skip_depth or in_marked_span) else mark_terms(text, seen))
+        parts.append(tag)
+        pos = m.end()
+
+        body = tag[1:-1].strip()
+        closing = body.startswith("/")
+        name = body.lstrip("/").split()[0].lower() if body.lstrip("/").split() else ""
+        if 'class="step"' in tag:
+            seen = set()
+        if "data-term=" in tag and not closing:
+            in_marked_span += 1
+            # 手で付けてある用語も、その節では既出として扱う
+            existing = re.search(r'data-term="([^"]+)"', tag)
+            if existing:
+                seen.add(existing.group(1))
+        elif name == "span" and closing and in_marked_span:
+            in_marked_span -= 1
+        elif name in SKIP_TAGS and not body.endswith("/"):
+            skip_depth = max(skip_depth + (-1 if closing else 1), 0)
+    tail = fragment[pos:]
+    parts.append(tail if (skip_depth or in_marked_span) else mark_terms(tail, seen))
+    return "".join(parts)
+
+
+def glossary_html():
+    """用語集ページ。terms.json が無いときは従来の静的な用語集を使う。"""
+    if not TERMS:
+        return GLOSSARY_STATIC
+    rows = "\n".join(
+        f"            <dt>{html.escape(name)}</dt><dd>{html.escape(spec.get('long') or spec['short'])}</dd>"
+        for name, spec in TERMS.items()
+    )
+    head, rest = GLOSSARY_STATIC.split("<dl ", 1)
+    attrs, body = rest.split(">", 1)
+    return f'{head}<dl {attrs}>\n{rows}\n      </dl>{body.split("</dl>", 1)[1]}'
+
+
+def terms_script():
+    """マウスオーバー用の辞書を learn.js へ渡す。"""
+    data = {name: spec["short"] for name, spec in TERMS.items()}
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f"  <script>window.LLMO_TERMS = {payload};</script>\n"
+
 
 HEAD = """<!DOCTYPE html>
 <html lang="ja">
@@ -76,12 +192,12 @@ HEAD = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Fragment+Mono&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/learn.css">
-</head>
+{{terms}}</head>
 <body class="desk" data-lesson="00">
   <a class="skip" href="#stage">本文へ</a>
   <aside class="rail" data-rail>
     <a class="rail-brand" href="#l00">LLMO 教材<strong>思い出して覚える</strong></a>
-    <nav aria-label="課の順">
+    <nav aria-label="章の順">
     <ol>
       <li><a href="#l01"><span class="num">01</span><span>何を最適化するか</span></a></li>
       <li><a href="#l02"><span class="num">02</span><span>検索してから書く</span></a></li>
@@ -106,17 +222,17 @@ HOME = """
       <div class="home-hero">
         <p class="kicker">調査日 2026-08-21 · 追補 2026-09-06 · 一次情報のみ</p>
         <h1>読むより、思い出す</h1>
-        <p>Markdown の長文を、机の上の教科書に組み直したものです。各課は節に切ってあり、次へを押すまで次の節は出ません。節の終わりには、閉じた状態の問いが 1 枚ずつ入っています。</p>
+        <p>Markdown の長文を、机の上の教科書に組み直したものです。各章は節に切ってあり、次へを押すまで次の節は出ません。節の終わりには、閉じた状態の問いが 1 枚ずつ入っています。</p>
         <div class="dash" data-dash></div>
         <div class="boxes" data-boxes></div>
-        <p><a class="btn" href="#l01">第 1 課から始める</a></p>
+        <p><a class="btn" href="#l01">第 1 章から始める</a></p>
       </div>
       <div class="pair" style="max-width:42rem">
         <div class="seal paper"><small>朱 · 論文</small>GEO（KDD 2024）。すでに検索上位に入ったページを、生成が厚く引用するか。追試の C-SEO Bench（NeurIPS 2025）もここに入ります。</div>
         <div class="seal official"><small>藍 · 公式</small>Google Search。入場条件はインデックスとスニペット。SEO の土台が先。ベンダー各社のクローラー方針もここ。</div>
       </div>
       <p style="max-width:42rem">論文と公式は同じ「AI に載せる」を指していても、見ている層が違います。混ぜないことが、この教材の核です。</p>
-      <nav class="path" id="path" aria-label="課の順">
+      <nav class="path" id="path" aria-label="章の順">
         <a href="#l01"><span class="n">01</span><strong>LLMO とは何か</strong><em>何を最適化するか</em></a>
         <a href="#l02"><span class="n">02</span><strong>生成エンジン</strong><em>検索してから書く</em></a>
         <a href="#l03"><span class="n">03</span><strong>用語の地図</strong><em>SEO GEO LLMO AEO</em></a>
@@ -133,9 +249,9 @@ HOME = """
         <h2>この作りにした理由</h2>
         <p>読み返す量を増やすより、閉じた状態から思い出す回数を増やすほうが、あとで残ります。練習テストは 272 件のメタ分析で再読その他すべての比較条件を上回りました（g = 0.61）。</p>
         <ul class="plain">
-          <li><strong>答えは採点を押すまで出しません。</strong>外れてもよいので、先に自分の答えを出してください。生成効果のメタ分析で d ≈ 0.40。</li>
+          <li><strong>正誤は答え合わせを押すまで出しません。</strong>選択肢から選ぶ形ですが、先に自分の言葉で答えを言い切ってから選んでください。自分で答えを作るほうが、選ぶだけよりも残ります（生成効果のメタ分析で d ≈ 0.40）。選択式は再認なので、この効果の分は割り引いて考えてください。</li>
           <li><strong>復習の間隔は 1 → 3 → 7 → 16 → 35 日と広げます。</strong>間隔をあけるほど長く残るという分散学習の結果に沿わせています。</li>
-          <li><strong>復習は課をまたいで混ぜます。</strong>ただし交互配置の効果量は中程度で、条件によって反転します。順序の工夫として使います。</li>
+          <li><strong>復習は章をまたいで混ぜます。</strong>ただし交互配置の効果量は中程度で、条件によって反転します。順序の工夫として使います。</li>
           <li><strong>進捗の主指標は「読んだ節」ではなく「間をあけて言えたカード」です。</strong>読めた感じは、覚えた証拠になりません。</li>
           <li><strong>やらないこと</strong>：学習タイプ別モード（効果の根拠がない）、忘却曲線の飾り図（よく描かれる滑らかな指数曲線は原データの単純化）、独自の高度な復習アルゴリズム（人を対象にした比較試験が乏しい）。</li>
         </ul>
@@ -151,7 +267,7 @@ HOME = """
           </ul>
         </details>
       </div>
-      <p class="note home-note">キーボード: J / 右で次の節、K / 左で戻る、A で全部表示。復習面では Space で答え合わせ、1 でもう一度、2 で言えた。進捗はこのブラウザーにだけ残ります。</p>
+      <p class="note home-note">キーボード: J / 右で次の節、K / 左で戻る、A で全部表示。復習面では 1〜4 で選択肢を選び、Space で答え合わせ、もう一度 Space で次のカードへ。進捗はこのブラウザーにだけ残ります。</p>
     </section>
 """
 
@@ -160,7 +276,7 @@ REVIEW = """
       <header class="lesson-head">
         <p class="kicker">復習</p>
         <h1>間をあけて思い出す</h1>
-        <p class="goal"><span>ここで起きること</span>期限が来たカードだけを、課をまたいで混ぜて出します。言えたカードは次の間隔が伸び、言えなかったカードはこの回の終わりにもう一度出ます。</p>
+        <p class="goal"><span>ここで起きること</span>期限が来たカードだけを、章をまたいで混ぜて出します。正解したカードは次の間隔が伸び、外したカードはこの回の終わりにもう一度出ます。</p>
       </header>
       <p class="chunk-meter" data-review-meter></p>
       <div data-review-slot></div>
@@ -171,7 +287,7 @@ REVIEW = """
     </section>
 """
 
-GLOSSARY = r"""
+GLOSSARY_STATIC = r"""
     <section class="view" id="lg" data-view="g" hidden>
       <header class="lesson-head">
         <p class="kicker">付録</p>
@@ -240,6 +356,24 @@ REDIRECT = """<!DOCTYPE html>
 CARD = """<div class="card" data-card="{cid}">
           <p class="q">{q}</p>
           <div class="try">
+            <ul class="choices">
+{choices}
+            </ul>
+            <button type="button" class="btn" data-reveal>答え合わせ</button>
+            <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
+          </div>
+          <p class="verdict" hidden></p>
+          <div class="a" hidden>{ans}</div>
+          <p data-sched hidden></p>
+          <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
+        </div>"""
+
+CHOICE = """              <li><label class="choice"><input type="radio" name="{cid}" value="{n}"{correct}><span class="key">{key}</span><span class="body">{text}</span></label></li>"""
+
+# 選択肢をまだ書いていないカードは、従来の自由記述のまま残す。
+CARD_FREE = """<div class="card" data-card="{cid}">
+          <p class="q">{q}</p>
+          <div class="try">
             <textarea rows="2" aria-label="思い出したことを書く"></textarea>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>書かずに、声か頭の中で言い切ってからでも構いません。</p>
@@ -253,26 +387,50 @@ CARD = """<div class="card" data-card="{cid}">
         </div>"""
 
 CARD_RE = re.compile(
-    r'<card id="(?P<cid>[^"]+)">\s*<q>(?P<q>.*?)</q>\s*<ans>(?P<ans>.*?)</ans>\s*</card>',
+    r'<card id="(?P<cid>[^"]+)">(?P<body>.*?)</card>',
     re.DOTALL,
 )
+PART_RE = re.compile(r"<(?P<tag>q|ans)>(?P<text>.*?)</(?P=tag)>", re.DOTALL)
+OPT_RE = re.compile(r"<opt(?P<correct>\s+correct)?>(?P<text>.*?)</opt>", re.DOTALL)
 
 
-def expand_cards(html):
-    """<card id><q>問い</q><ans>答え</ans></card> を想起カードの markup に開く。"""
+def expand_cards(html_text):
+    """<card id><q>問い</q><opt correct>…</opt><opt>…</opt><ans>解説</ans></card> を
+    多肢選択の想起カードに開く。<opt> が無いカードは自由記述のまま残す。"""
+    free = []
 
     def sub(m):
-        return CARD.format(
-            cid=m.group("cid"),
-            q=m.group("q").strip(),
-            ans=m.group("ans").strip(),
+        cid = m.group("cid")
+        body = m.group("body")
+        parts = {p.group("tag"): p.group("text").strip() for p in PART_RE.finditer(body)}
+        opts = [(bool(o.group("correct")), o.group("text").strip()) for o in OPT_RE.finditer(body)]
+        if "q" not in parts or "ans" not in parts:
+            raise SystemExit(f"card {cid}: <q> か <ans> がありません")
+        if not opts:
+            free.append(cid)
+            return CARD_FREE.format(cid=cid, q=parts["q"], ans=parts["ans"])
+        if sum(1 for correct, _ in opts if correct) != 1:
+            raise SystemExit(f"card {cid}: 正解の <opt correct> はちょうど 1 つにしてください")
+        if len(opts) < 3:
+            raise SystemExit(f"card {cid}: 選択肢は 3 つ以上にしてください")
+        # 並びはカード ID から決める。ビルドのたびに動くと覚え直しになるため。
+        random.Random(cid).shuffle(opts)
+        choices = "\n".join(
+            CHOICE.format(
+                cid=cid,
+                n=n,
+                key="ABCDE"[n],
+                text=text,
+                correct=' data-correct="1"' if correct else "",
+            )
+            for n, (correct, text) in enumerate(opts)
         )
+        return CARD.format(cid=cid, q=parts["q"], ans=parts["ans"], choices=choices)
 
-    out, count = CARD_RE.subn(sub, html)
+    out, count = CARD_RE.subn(sub, html_text)
     if "<card " in out:
         raise SystemExit("card タグの書式が違います: " + out.split("<card ")[1][:80])
-    return out, count
-
+    return out, count, free
 
 
 # 表記チェック（_fragments/STYLE.md のルール 5・6）。警告のみでビルドは止めない。
@@ -293,6 +451,7 @@ BANNED = [
     (r"ブラウザ(?!ー)", "ブラウザー（長音符を付ける）"),
     (r"フェッチャ(?!ー)", "フェッチャー（長音符を付ける）"),
     (r"塊", "段落（UI の読み進み単位は「節」）"),
+    (r"課", "章（章 → 節 → 想起カード）"),
 ]
 
 
@@ -308,22 +467,24 @@ def lint_notation(lid, text):
     return hits
 
 
-parts = [HEAD, HOME]
+parts = [HEAD.replace("{{terms}}", terms_script()), HOME]
 total_cards = 0
 lint_hits = 0
+free_cards = []
 for lid, (title, goal, prime) in META.items():
     raw = (FRAG / f"{lid}.html").read_text(encoding="utf-8")
     lint_hits += lint_notation(lid, raw)
     lint_hits += lint_notation(f"META {lid}", "\n".join((title, goal, prime)))
-    steps, made = expand_cards(raw)
+    steps, made, free = expand_cards(autolink_terms(raw))
+    free_cards.extend(free)
     total_cards += made
     parts.append(
         f"""
     <section class="view" id="l{lid}" data-view="{lid}" hidden>
       <header class="lesson-head">
-        <p class="kicker">第{int(lid)}課</p>
+        <p class="kicker">第{int(lid)}章</p>
         <h1>{title}</h1>
-        <p class="goal"><span>この課のゴール</span>{goal}</p>
+        <p class="goal"><span>この章のゴール</span>{goal}</p>
         <div class="prime"><b>読む前に一度だけ</b><p>{prime}</p></div>
       </header>
       <p class="chunk-meter" data-meter>節</p>
@@ -336,6 +497,7 @@ for lid, (title, goal, prime) in META.items():
         <button type="button" data-next>次の節</button>
         <span class="grow"></span>
         <button type="button" class="ghost" data-all>全部見る</button>
+        <button type="button" class="ghost quiet" data-reset>この章をリセット</button>
       </nav>
     </section>
 """
@@ -345,11 +507,11 @@ for lid, (title, goal, prime) in META.items():
     )
     print("redirect", lid)
 
-for name, chunk in (("HOME", HOME), ("REVIEW", REVIEW), ("GLOSSARY", GLOSSARY)):
+for name, chunk in (("HOME", HOME), ("REVIEW", REVIEW), ("GLOSSARY", GLOSSARY_STATIC)):
     lint_hits += lint_notation(name, chunk)
 
 parts.append(REVIEW)
-parts.append(GLOSSARY)
+parts.append(glossary_html())
 parts.append(FOOT)
 (ROOT / "index.html").write_text("".join(parts), encoding="utf-8")
 (OUT / "glossary.html").write_text(
@@ -357,5 +519,7 @@ parts.append(FOOT)
 )
 (OUT / "review.html").write_text(REDIRECT.replace("{hash}", "lr"), encoding="utf-8")
 print(f"wrote index.html ({total_cards} cards)")
+if free_cards:
+    print("選択肢が未作成のカード", len(free_cards), "枚:", ", ".join(free_cards[:8]))
 if lint_hits:
     print(f"表記の警告 {lint_hits} 件（_fragments/STYLE.md 参照）")

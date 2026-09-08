@@ -15,28 +15,9 @@ const LESSONS = [
   { id: "g", title: "用語集", short: "定義" },
 ];
 
-const TERMS = {
-  LLMO: "Large Language Model Optimization。生成 AI の回答で言及・引用される状態を改善する実務用語。",
-  GEO: "Generative Engine Optimization。Aggarwal ら KDD 2024 の枠組み。回答内の可視性をテキスト改変で上げる。",
-  SEO: "検索エンジン向けの発見・理解・掲載の最適化。Google は生成 AI 面でも土台だとする。",
-  AEO: "Answer Engine Optimization。直接回答面への最適化という業界用語。Google の製品名ではない。",
-  "query fan-out": "一つの質問から複数の関連検索を同時に出すこと。Google 公式。",
-  RAG: "検索で取ったページに回答を接地する手法。Google の生成 AI 機能の土台。",
-  言及: "回答文にブランド名が出ること。リンクは無いこともある。",
-  引用: "出典 URL が回答に付くこと。",
-  "OAI-SearchBot": "ChatGPT search 用のインデックスボット。拒否すると検索回答に出ない。",
-  GPTBot: "OpenAI の学習用クローラ。検索掲載とは独立。",
-  "Google-Extended": "Gemini アプリと Vertex の学習・接地用トークン。Search の掲載・順位には使わない。",
-  "llms.txt": "Jeremy Howard 提案の Markdown 地図。Google Search は使わない。",
-  impression: "GEO 論文の可視性。単語数、位置補正単語数、主観印象。",
-  "RFC 9309": "robots.txt を標準化した RFC。規則はアクセス認可ではない、と明記している。",
-  "Content-Usage": "IETF aipref が定義中の利用意向フィールド。Internet-Draft であり RFC ではない。",
-  "Content-Signal": "Cloudflare の robots.txt 用ディレクティブ。search / ai-input / ai-train の可否を書く。",
-  NOARCHIVE: "Bing のメタタグ。Copilot の回答に含めず、学習にも使わせない。通常の検索表示は残る。",
-  faithfulness: "引用がその文書を実際に根拠にしているか。正しく見えることとは別の性質。",
-  "C-SEO Bench": "Puerto ら NeurIPS 2025 のベンチマーク。競合下では C-SEO 手法が効かない、と報告した。",
-  "post-rationalization": "生成したあとで、それらしい出典を後付けすること。",
-};
+/* 用語の定義は _fragments/terms.json が持つ。build.py が index.html の head に
+   window.LLMO_TERMS として書き出し、本文の初出へ data-term を自動で付ける。 */
+const TERMS = window.LLMO_TERMS || {};
 
 /* 間隔反復。箱 1〜5 の日数。Cepeda et al. 2006 / 2008 の「間隔を広げる」原理だけを取る。
    アルゴリズムの巧拙（SM-2 / FSRS）を比べた人対象の対照試験は乏しいため、Leitner で足りる。 */
@@ -202,7 +183,7 @@ function cardStats(lesson) {
   };
 }
 
-/* 課をまたいで混ぜる。同じ課が続かないよう並べ替える。
+/* 章をまたいで混ぜる。同じ章が続かないよう並べ替える。
    Brunmair & Richter 2019 の効果量は中程度で、万能ではない。順序だけの工夫と割り切る。 */
 function interleave(ids) {
   const shuffled = ids.slice();
@@ -219,8 +200,8 @@ function interleave(ids) {
   const rest = shuffled.slice();
   while (rest.length) {
     const last = out.length ? lessonOf(out[out.length - 1]) : null;
-    // 残りが多い課から先に出す。ここを最初に見つけた候補にすると、
-    // 終盤に同じ課だけが残って連続してしまう。
+    // 残りが多い章から先に出す。ここを最初に見つけた候補にすると、
+    // 終盤に同じ章だけが残って連続してしまう。
     let pick = -1;
     rest.forEach((id, i) => {
       if (lessonOf(id) === last) return;
@@ -241,22 +222,86 @@ function resetCard(el) {
   const sched = el.querySelector("[data-sched]");
   const field = el.querySelector("textarea");
   const reveal = el.querySelector("[data-reveal]");
+  const verdict = el.querySelector(".verdict");
+  const after = el.querySelector(".after");
   if (answer) answer.hidden = true;
   if (grade) grade.hidden = true;
   if (sched) sched.hidden = true;
   if (field) field.value = "";
   if (reveal) reveal.hidden = false;
+  if (verdict) verdict.hidden = true;
+  if (after) after.hidden = true;
+  el.querySelectorAll(".choice").forEach((choice) => {
+    choice.classList.remove("is-correct", "is-wrong", "is-picked");
+    const input = choice.querySelector("input");
+    if (input) {
+      input.checked = false;
+      input.disabled = false;
+    }
+  });
+}
+
+/* 選択式のカードを採点する。選んだ肢が正解かどうかで、そのまま間隔反復の
+   成否にする。自己採点のボタンは置かない（選んだ時点で正誤が決まるため）。 */
+function judgeCard(el) {
+  const picked = el.querySelector(".choice input:checked");
+  const verdict = el.querySelector(".verdict");
+  if (!picked) {
+    if (verdict) {
+      verdict.hidden = false;
+      verdict.className = "verdict is-hint";
+      verdict.textContent = "選択肢を一つ選んでから押してください。";
+    }
+    return null;
+  }
+  const correct = picked.dataset.correct === "1";
+  el.querySelectorAll(".choice").forEach((choice) => {
+    const input = choice.querySelector("input");
+    input.disabled = true;
+    if (input.dataset.correct === "1") choice.classList.add("is-correct");
+    if (input.checked) {
+      choice.classList.add("is-picked");
+      if (!correct) choice.classList.add("is-wrong");
+    }
+  });
+  if (verdict) {
+    verdict.hidden = false;
+    verdict.className = `verdict ${correct ? "is-right" : "is-miss"}`;
+    verdict.textContent = correct ? "正解" : "不正解";
+  }
+  return correct;
 }
 
 function openCard(el) {
   const answer = el.querySelector(".a");
   const grade = el.querySelector(".grade");
   const reveal = el.querySelector("[data-reveal]");
+  const after = el.querySelector(".after");
+  const choices = el.querySelector(".choices");
+  /* 選択式は選んだ時点で正誤が決まる。自由記述のカードだけ自己採点を出す。 */
+  let correct = null;
+  if (choices) {
+    correct = judgeCard(el);
+    if (correct === null) return;
+  }
   if (answer) answer.hidden = false;
-  if (grade) grade.hidden = false;
+  if (grade) grade.hidden = !choices ? false : true;
   if (reveal) reveal.hidden = true;
   el.classList.add("is-open");
-  grade?.querySelector("[data-grade]")?.focus({ preventScroll: true });
+  if (choices) {
+    const next = gradeCard(el.dataset.card, correct);
+    el.dataset.result = correct ? "good" : "again";
+    el.classList.add(correct ? "is-good" : "is-again");
+    paintSchedule(el, next);
+    renderRail(document.body.dataset.lesson);
+    if (document.body.classList.contains("is-finish")) paintFinish(document.body.dataset.lesson);
+    if (el.closest(".review")) {
+      if (after) after.hidden = false;
+      after?.querySelector("[data-next-card]")?.focus({ preventScroll: true });
+    }
+  } else {
+    grade?.querySelector("[data-grade]")?.focus({ preventScroll: true });
+  }
 }
 
 function paintSchedule(el, card) {
@@ -291,7 +336,7 @@ function paintReview() {
       emptyBox.hidden = false;
       emptyBox.querySelector("[data-review-done]").textContent = reviewQueue.length
         ? `${reviewQueue.length} 枚やりました。続きはまた日をあけて。`
-        : "今日の期限のカードはありません。課を読み進めるか、日をあけて戻ってきてください。";
+        : "今日の期限のカードはありません。章を読み進めるか、日をあけて戻ってきてください。";
     }
     return;
   }
@@ -310,12 +355,15 @@ function paintReview() {
   }
   const clone = source.cloneNode(true);
   resetCard(clone);
+  clone.querySelectorAll('.choice input[type="radio"]').forEach((input) => {
+    input.name = `${id}-review`;
+  });
   const lesson = id.split("-")[1];
   const meta = LESSONS.find((l) => l.id === lesson);
   if (meta) {
     const tag = document.createElement("p");
     tag.className = "card-from";
-    tag.textContent = `第${Number(lesson)}課 ${meta.title}`;
+    tag.textContent = `第${Number(lesson)}章 ${meta.title}`;
     clone.prepend(tag);
   }
   slot.appendChild(clone);
@@ -338,8 +386,57 @@ function advanceReview(id, good) {
   paintReview();
 }
 
-/* --- 課の修了面 ---
-   最後の節で「この課を終える」を押したとき、黙って次の課へ飛ばさない。
+/* --- 章ごとのリセット ---
+   その章のカードの履歴と読み進みだけを消す。他の章の予定には触らない。 */
+
+function resetLesson(id) {
+  const state = loadState();
+  cardIds(id).forEach((cid) => {
+    delete state.cards[cid];
+  });
+  delete state.read[id];
+  delete state.done[id];
+  saveState(state);
+  document.querySelectorAll(`[data-view="${id}"] .card`).forEach((el) => {
+    resetCard(el);
+    el.classList.remove("is-known");
+    delete el.dataset.result;
+  });
+  renderRail(id);
+  paintDash();
+}
+
+/* 押し間違いを戻せないので、2 回押させる。5 秒で元に戻す。 */
+let resetArmed = null;
+
+function armReset(button) {
+  if (resetArmed && resetArmed.button === button) {
+    clearTimeout(resetArmed.timer);
+    resetArmed = null;
+    return true;
+  }
+  disarmReset();
+  const label = button.textContent;
+  button.textContent = "もう一度押すと消えます";
+  button.classList.add("is-armed");
+  resetArmed = {
+    button,
+    label,
+    timer: setTimeout(disarmReset, 5000),
+  };
+  return false;
+}
+
+function disarmReset() {
+  if (!resetArmed) return;
+  clearTimeout(resetArmed.timer);
+  resetArmed.button.textContent = resetArmed.label;
+  resetArmed.button.classList.remove("is-armed");
+  resetArmed = null;
+}
+
+/* --- 章の修了面 ---
+   最後の節で「この章を終える」を押したとき、黙って次の章へ飛ばさない。
    何を言えるようになったか、カードがいつ戻ってくるかを見せてから送り出す。 */
 
 function lessonGoal(id) {
@@ -368,15 +465,15 @@ function paintFinish(id) {
   const nextLabel = nxt
     ? nxt.id === "r"
       ? "復習へ"
-      : `第${Number(nxt.id)}課「${nxt.title}」へ`
+      : `第${Number(nxt.id)}章「${nxt.title}」へ`
     : "ホームへ";
   box.innerHTML = `
-    <p class="kicker">第${Number(id)}課 おわり</p>
+    <p class="kicker">第${Number(id)}章 おわり</p>
     <h2>${heading ? heading.textContent : ""}</h2>
     ${goal ? `<p class="finish-goal"><span>言えるようになったこと</span>${goal}</p>` : ""}
     <div class="finish-stats">
-      <div><b>${stats.seen} / ${stats.total}</b><span>この課のカードに答えた</span></div>
-      <div><b>${back}</b><span>次にこの課のカードが出る日</span></div>
+      <div><b>${stats.seen} / ${stats.total}</b><span>この章のカードに答えた</span></div>
+      <div><b>${back}</b><span>次にこの章のカードが出る日</span></div>
       <div class="quiet"><b>${untouched}</b><span>まだ答えていないカード</span></div>
     </div>
     <p class="finish-note">${
@@ -387,6 +484,7 @@ function paintFinish(id) {
     <div class="finish-nav">
       <button type="button" class="btn" data-finish-next>${nextLabel}</button>
       <button type="button" class="btn ghost" data-finish-back>最後の節に戻る</button>
+      <button type="button" class="btn ghost quiet" data-reset>この章をリセット</button>
       ${stats.due ? `<a class="btn ghost" href="#lr">期限のカード ${stats.due} 枚</a>` : ""}
     </div>
   `;
@@ -476,7 +574,7 @@ function renderRail(currentId) {
     .join("");
   rail.innerHTML = `
     <a class="rail-brand" href="#l00">LLMO 教材<strong>思い出して覚える</strong></a>
-    <nav aria-label="課の順">
+    <nav aria-label="章の順">
       <ol>${items}</ol>
     </nav>
     <div class="rail-foot">
@@ -533,7 +631,7 @@ function paintSteps(id, first) {
   if (prev) prev.disabled = stepIndex === 0;
   if (next) {
     next.disabled = false;
-    next.textContent = stepIndex === stepNodes.length - 1 ? "この課を終える" : "次の節";
+    next.textContent = stepIndex === stepNodes.length - 1 ? "この章を終える" : "次の節";
   }
   if (stepNodes.length) {
     const nextHash = hashFor(id, stepIndex + 1);
@@ -590,6 +688,29 @@ function initControls() {
       return;
     }
 
+    const reset = e.target.closest("[data-reset]");
+    if (reset) {
+      const id = document.body.dataset.lesson;
+      if (armReset(reset)) {
+        resetLesson(id);
+        if (document.body.classList.contains("is-finish")) {
+          paintFinish(id);
+        } else {
+          stepIndex = 0;
+          paintSteps(id, true);
+        }
+      }
+      return;
+    }
+    if (resetArmed) disarmReset();
+
+    const nextCard = e.target.closest("[data-next-card]");
+    if (nextCard) {
+      const card = nextCard.closest(".card");
+      advanceReview(card.dataset.card, card.dataset.result === "good");
+      return;
+    }
+
     const finishNext = e.target.closest("[data-finish-next]");
     const finishBack = e.target.closest("[data-finish-back]");
     if (finishNext) {
@@ -632,7 +753,9 @@ function initControls() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.target.closest("textarea, input, summary, .term")) return;
+    /* 選択肢のラジオは対象に含める。選んだ直後はラジオにフォーカスがあるため、
+       ここで弾くと数字キーと Space が効かなくなる。 */
+    if (e.target.closest("textarea, input:not([type=radio]), summary, .term")) return;
     const id = document.body.dataset.lesson;
     if (document.body.classList.contains("is-finish")) {
       if (e.key === "j" || e.key === "ArrowRight") {
@@ -648,12 +771,29 @@ function initControls() {
     if (id === "r") {
       const card = document.querySelector(".review .card");
       if (!card) return;
-      if (e.key === " ") {
-        e.preventDefault();
-        card.querySelector("[data-reveal]")?.click();
+      const choices = [...card.querySelectorAll('.choice input[type="radio"]')];
+      if (choices.length && /^[1-9]$/.test(e.key)) {
+        const input = choices[Number(e.key) - 1];
+        if (input && !input.disabled) {
+          e.preventDefault();
+          input.checked = true;
+          input.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+        return;
       }
-      if (e.key === "1") card.querySelector('[data-grade="again"]')?.click();
-      if (e.key === "2") card.querySelector('[data-grade="good"]')?.click();
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        const after = card.querySelector(".after");
+        const step =
+          after && !after.hidden
+            ? after.querySelector("[data-next-card]")
+            : card.querySelector("[data-reveal]");
+        step?.click();
+      }
+      if (!choices.length) {
+        if (e.key === "1") card.querySelector('[data-grade="again"]')?.click();
+        if (e.key === "2") card.querySelector('[data-grade="good"]')?.click();
+      }
       return;
     }
     if (e.key === "j" || e.key === "ArrowRight") {

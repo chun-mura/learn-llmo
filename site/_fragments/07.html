@@ -1,40 +1,54 @@
       <section class="step">
         <h2>三層を混ぜない</h2>
+        <p>技術面の話は、三つの層に分けてから読んでください。混ぜると、片方の層の失敗をもう片方の層の設定で直そうとすることになります。</p>
         <div class="flow">
           <b>1 届く</b><i>→</i><b>2 意味が付く</b><i>→</i><b>3 エージェントの地図</b>
         </div>
-        <p>「届く」は Search と AI 出典の入場条件です。「意味が付く」はリッチリザルト用の手がかりです。「エージェントの地図」は llms.txt で、Search とは別系統です。</p>
+        <p>「届く」は Search と AI 出典の入場条件です。「意味が付く」はリッチリザルト用の手がかりです。「エージェントの地図」は llms.txt で、Search とは別系統です。三つは目的が違うので、たとえば「届く」で落ちているページに構造化データを足しても、出典としては拾われません。以降の節では、この順に一層ずつ見ます。</p>
         <card id="c-07-1">
-          <q>技術面の三層を挙げ、それぞれが何のためのものか言ってください。</q>
+          <q>技術面の三層と、それぞれが何のためのものかの組み合わせとして正しいものはどれですか。</q>
+          <opt correct>届くは Search と AI 出典の入場条件、意味が付くは構造化データでリッチリザルトの適格化、エージェントの地図は llms.txt で Search とは別系統</opt>
+          <opt>届くは構造化データで内容の手がかりを付けること、意味が付くはインデックスとスニペット、エージェントの地図は llms.txt で Search とは別系統</opt>
+          <opt>届くは Search と AI 出典の入場条件、意味が付くは llms.txt でエージェントに案内すること、エージェントの地図は構造化データでリッチリザルトの適格化</opt>
+          <opt>届くはインデックスとスニペット、意味が付くは構造化データでリッチリザルトの適格化、エージェントの地図は llms.txt で AI Overviews の出典選定に使われる</opt>
           <ans><p>届く（Search と AI 出典の入場条件。インデックスとスニペット）。意味が付く（構造化データ。リッチリザルトの適格化）。エージェントの地図（llms.txt。Search とは別系統）。混ぜない。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>1. 届く</h2>
-        <p>Google の AI 機能に出典として出る条件は、通常 Search と同じです。インデックスされ、スニペット表示可能であること。追加要件はありません。</p>
+        <p>ここは一層目、「届く」の話です。Google の AI 機能に出典として出る条件は、通常 Search と同じで、インデックスされ、スニペット表示可能であることです。追加要件はありません。裏返すと、AI 面のために覚える特別な項目はなく、次の当たり前の前提が満たせているかどうかがすべてになります。</p>
         <ul class="plain">
           <li>検索ボットが robots.txt と WAF で止まっていない</li>
           <li>対象 URL が 200 で本文を返す</li>
           <li>重要情報が HTML テキストとして存在する</li>
           <li>内部リンクで辿れる</li>
         </ul>
-        <p><code>nosnippet</code> などのプレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が実際に取得した HTML にそのメタタグが含まれているかを、自分で確認してください。</p>
+        <p>だから、この層で起きる不具合は、設定した内容と実際に配信されている内容のずれとして現れます。たとえば <code>nosnippet</code> などのプレビュー制御を付けたのに AI 面に本文が出る場合は、Googlebot が実際に取得した HTML にそのメタタグが含まれているかを、自分で確認してください。管理画面で設定した状態と、ボットに返っている HTML は別物です。</p>
         <card id="c-07-2">
           <q>Google の AI 機能に出典として出る条件を言ってください。追加の技術要件はありますか。</q>
+          <opt correct>インデックスされ、スニペット表示が可能であること。追加の技術要件はない</opt>
+          <opt>インデックスされ、構造化データで適格化されていること。追加の技術要件はない</opt>
+          <opt>インデックスとスニペットに加えて、生成 AI 面向けの schema が要る</opt>
+          <opt>インデックスとスニペットに加えて、llms.txt を置くことが要る</opt>
           <ans><p>インデックスされ、スニペット表示が可能であること。通常の Search と同じで、追加の技術要件はない。前提として 200 で本文が返り、重要情報が HTML テキストとしてあり、内部リンクで辿れること。</p></ans>
         </card>
         <details class="source"><summary>出典</summary><ul><li>Google, AI features and your website</li></ul></details>
       </section>
       <section class="step">
         <h2>2. プレビューと構造化データ</h2>
+        <p>ここからは二層目、「意味が付く」の話に入ります。ただしその前に、一層目を止めてしまうメタタグを区別しておきます。</p>
         <ul class="plain">
           <li><code>noindex</code> Search 全体から外す。AI 出典にも使えない</li>
           <li><code>nosnippet</code> 系 プレビューに出す量。厳しいほど AI 面も細くなる</li>
         </ul>
-        <p>構造化データはページ内容の手がかりで、リッチリザルトの適格化に使います。推奨は JSON-LD。マークアップは見える本文と一致させます。空ページに JSON-LD だけは不可です。</p>
-        <p>生成 AI 検索のために特別な schema は不要です。必須でもありません。</p>
+        <p>二つの効き方は段違いです。<code>noindex</code> は「届く」ごと落とすので AI 出典の可能性も消えますが、<code>nosnippet</code> 系はインデックスは残したまま、見せる分量を絞ります。だから、AI 面の本文が細いという症状は、この二つのどちらが効いているかで対処が変わります。</p>
+        <p>そのうえで、二層目の構造化データです。これはページ内容の手がかりで、リッチリザルトの適格化に使います。推奨は JSON-LD で、マークアップは見える本文と一致させます。だから、空ページに JSON-LD だけ置くのは不可です。そして生成 AI 検索のために特別な schema は不要で、必須でもありません。つまり構造化データは、出典に選ばれるための条件ではなく、あくまでリッチリザルト側の仕事だということです。</p>
         <card id="c-07-3">
           <q>構造化データは生成 AI 検索の必須条件ですか。マークアップの原則は。</q>
+          <opt correct>必須ではない。用途はリッチリザルトの適格化で、マークアップは見える本文と一致させる</opt>
+          <opt>必須ではない。用途はエージェントへの案内で、マークアップは llms.txt と一致させる</opt>
+          <opt>必須ではない。用途はリッチリザルトの適格化で、空ページに JSON-LD だけ置いてもよい</opt>
+          <opt>必須である。用途は AI 出典の入場条件で、マークアップは見える本文と一致させる</opt>
           <ans><p>必須ではない。用途はリッチリザルトの適格化。原則は、マークアップを見える本文と一致させること。空ページに JSON-LD だけ置くのはガイドライン違反。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -47,7 +61,7 @@
       </section>
       <section class="step">
         <h2>Bing には別の設定がある</h2>
-        <p>Google についての説明を、そのまま Bing や Copilot に当てはめると間違います。Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しています。</p>
+        <p>ここまでは Google の話でした。同じ「届く」層でも、Bing には別系統の設定があります。Google についての説明を、そのまま Bing や Copilot に当てはめると間違います。というのも、Bing は 2023 年から、既存のメタタグを AI 側の制御に転用しているからです。</p>
         <table>
           <thead><tr><th>タグ</th><th>Copilot / Bing Chat の回答</th><th>学習</th><th>通常の検索表示</th></tr></thead>
           <tbody>
@@ -55,10 +69,14 @@
             <tr><td><code>NOARCHIVE</code></td><td>回答に含めない。リンクもしない</td><td>使わない</td><td>変わらない</td></tr>
           </tbody>
         </table>
-        <p>NOCACHE と NOARCHIVE の両方が指定されているときは NOCACHE として扱われる、と公式ブログに書かれています。</p>
+        <p>この表で見てほしいのは、右端の列が両方とも「変わらない」ことです。つまり、どちらのタグも通常の Bing 検索の表示には影響せず、効くのは AI 回答と学習の側だけです。なお、NOCACHE と NOARCHIVE の両方が指定されているときは NOCACHE として扱われる、と公式ブログに書かれています。</p>
         <p class="note">IndexNow は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。IndexNow が AI 対策として売られていても、その根拠は一次情報にありません。</p>
         <card id="c-07-4">
           <q>Bing の <span data-term="NOARCHIVE">NOARCHIVE</span> は何を止めますか。通常の Bing 検索の表示はどうなりますか。</q>
+          <opt correct>回答に含めずリンクもせず、学習にも使わない。通常の Bing 検索の表示は変わらない</opt>
+          <opt>回答には URL・タイトル・スニペットだけ出て、学習にも同じ範囲で使われうる。通常の Bing 検索の表示は変わらない</opt>
+          <opt>回答に含めずリンクもせず、学習にも使わない。通常の Bing 検索の表示からも消える</opt>
+          <opt>回答からは外れるが、学習には使われうる。通常の Bing 検索の表示は変わらない</opt>
           <ans><p>Copilot / Bing Chat の回答に含めず、リンクもせず、学習にも使わない。通常の Bing 検索結果の表示は変わらない。NOCACHE との併記時は NOCACHE 扱い。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -70,17 +88,21 @@
       </section>
       <section class="step">
         <h2>3. llms.txt</h2>
-        <p>Jeremy Howard の提案です。サイトの地図を Markdown で置きます。必須は H1 の名前です。詳細はリンク先の <code>.md</code> に置きます。</p>
-        <p>Chrome Lighthouse の llms.txt 監査は、サーバーエラーのときは警告を出し、404 のときは N/A（任意）になります。</p>
-        <p class="note">Google Search は llms.txt を使いません。ドキュメントをエージェントに案内する用途と、AI Overviews の出典選定は別です。</p>
+        <p>最後が三層目、「エージェントの地図」です。llms.txt は Jeremy Howard の提案で、サイトの地図を Markdown で置きます。必須は H1 の名前で、詳細はリンク先の <code>.md</code> に置きます。書式は次のようなものです。</p>
         <pre># Example Cloud Billing API
 
 &gt; 請求イベントを REST で送受信する。
 
 ## Docs
 - [Authentication](https://example.com/docs/auth.html.md)</pre>
+        <p>この層が前の二つと違うのは、そもそも Search の系統ではないところです。扱いが任意であることは監査ツールの挙動にも表れていて、Chrome Lighthouse の llms.txt 監査は、サーバーエラーのときは警告を出し、404 のときは N/A（任意）になります。つまり、置いていなくても Search 側の失敗にはなりません。</p>
+        <p class="note">Google Search は llms.txt を使いません。ドキュメントをエージェントに案内する用途と、AI Overviews の出典選定は別です。</p>
         <card id="c-07-5">
           <q><span data-term="llms.txt">llms.txt</span> は誰の何のための提案ですか。Google Search は使いますか。</q>
+          <opt correct>Jeremy Howard の提案仕様で、サイトの地図を Markdown で置く。Google Search は使わない</opt>
+          <opt>Jeremy Howard の提案仕様で、サイトの地図を Markdown で置く。Google Search は出典選定に使う</opt>
+          <opt>Google の提案仕様で、サイトの地図を Markdown で置く。Google Search は使わない</opt>
+          <opt>Jeremy Howard の提案仕様で、構造化データを JSON-LD で置く。Google Search は使わない</opt>
           <ans><p>Jeremy Howard の提案仕様で、サイトの地図を Markdown で置き、エージェントに案内するもの。Google Search は使わないと明記している。Lighthouse の監査は任意で、404 は N/A。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -92,6 +114,7 @@
       </section>
       <section class="step">
         <h2>点検順</h2>
+        <p>三層を実際に点検するときは、下の層から順に見てください。上の層をいくら直しても、下の層で落ちていれば結果は変わらないからです。</p>
         <ol class="plain">
           <li>200 とテキスト本文と内部リンク</li>
           <li>検索用ボットの許可（学習用とは別）。CDN 側の既定ブロックも見る</li>
@@ -104,10 +127,18 @@
         <h2>閉じてから答える</h2>
         <card id="c-07-6">
           <q>FAQ の JSON-LD だけ正しく、画面の FAQ が空です。何の違反ですか。AI Overviews の必須条件を満たしていないという話ですか。</q>
+          <opt correct>見える内容と一致させよという構造化データのガイドライン違反。AI Overviews の入場条件とは別の問題</opt>
+          <opt>AI Overviews の入場条件を満たしていないという問題。構造化データのガイドラインには触れない</opt>
+          <opt>noindex と同じく Search 全体から外れるという問題。構造化データのガイドラインには触れない</opt>
+          <opt>llms.txt と見える内容が一致していないという問題。AI Overviews の入場条件とは別の問題</opt>
           <ans><p>「見える内容と一致させよ」という構造化データのガイドライン違反。AI Overviews の入場条件はインデックスとスニペットなので、そちらとは別の問題。</p></ans>
         </card>
         <card id="c-07-7">
           <q>Lighthouse が llms.txt で N/A と出ました。Search の失敗ですか。</q>
+          <opt correct>失敗ではない。llms.txt は任意で、404 のときは N/A。フラグが立つのはサーバーエラーのとき</opt>
+          <opt>失敗ではない。llms.txt は任意で、サーバーエラーのときは N/A。フラグが立つのは 404 のとき</opt>
+          <opt>失敗である。llms.txt が無いと Google Search の出典選定から外れるので、置いてから測り直す</opt>
+          <opt>失敗ではないが、AI Overviews の入場条件が一つ欠けた状態なので、置くまで掲載は止まる</opt>
           <ans><p>失敗ではない。llms.txt は任意なので、404 のときは N/A になる。フラグが立つのはサーバーエラーのとき。そもそも Google Search は llms.txt を使わない。</p></ans>
         </card>
       </section>

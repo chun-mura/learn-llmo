@@ -1,0 +1,496 @@
+{
+  "LLMO": {
+    "short": "生成 AI の回答の中で、自社のページやブランドが言及・引用される状態を改善する実務用語です。論文が導入した語ではありません。",
+    "long": "Large Language Model Optimization。LLM 製品の回答で言及・引用される状態を改善する実務用語。日本の実務と英語のマーケティング記事に由来し、論文の導入語ではない。",
+    "aliases": [
+      "Large Language Model Optimization"
+    ]
+  },
+  "GEO": {
+    "short": "Aggarwal らが KDD 2024 で定式化した枠組みです。生成エンジンの回答内での可視性を、テキストの改変で上げることを扱います。",
+    "long": "Generative Engine Optimization。Aggarwal ら KDD 2024 の枠組み。生成エンジン回答内の可視性を、ブラックボックスなテキスト改変で上げる。",
+    "aliases": [
+      "Generative Engine Optimization"
+    ]
+  },
+  "SEO": {
+    "short": "検索エンジン向けに、発見・理解・掲載を最適化することです。Google は生成 AI 面でもこれが土台だとしています。",
+    "long": "検索エンジン向けの発見・理解・掲載の最適化。Google は生成 AI 面でも土台だとする。",
+    "aliases": []
+  },
+  "AEO": {
+    "short": "質問に直接答える面への最適化を指す業界用語です。強調スニペット時代からの言い回しで、Google の製品名ではありません。",
+    "long": "Answer Engine Optimization。質問に対する直接回答面（強調スニペット、AI Overviews など）への最適化という業界用語。Google 公式の製品名ではない。",
+    "aliases": [
+      "Answer Engine Optimization"
+    ]
+  },
+  "AIO": {
+    "short": "文脈によって、生成 AI 検索の全体を指したり、AI Overviews だけを指したりする業界用語です。Google の製品名ではありません。",
+    "long": "文脈で全体を指したり、AI Overviews だけを指したりする業界用語。Google の製品名ではない。",
+    "aliases": []
+  },
+  "言及": {
+    "short": "回答文にブランド名や製品名が出ることです。出典 URL のリンクが付かない場合もあるため、引用とは別に数えてください。",
+    "long": "言及は回答文に名前が出ること。引用は出典 URL が付くこと。この二つは別々に数える。",
+    "aliases": []
+  },
+  "引用": {
+    "short": "回答に出典 URL が付くことです。名前だけが出る言及とは別のできごとなので、測るときは分けて数えてください。",
+    "long": "引用は出典 URL が回答に付くこと。名前が出るだけの言及とは別に数える。",
+    "aliases": []
+  },
+  "impression": {
+    "short": "GEO 論文が定義した、生成回答における出典の可視性です。単語数、位置補正単語数、主観印象の三つに分けて測ります。",
+    "long": "生成回答における出典の可視性。GEO 論文が定義した。単語数、位置補正単語数、主観印象の三つからなる。",
+    "aliases": []
+  },
+  "Word Count": {
+    "short": "GEO 論文の可視性指標の一つです。その出典に紐づく文の単語数が、回答全体の単語数に占める割合を測ります。単純な分量の指標です。",
+    "long": "GEO 論文の impression を構成する指標の一つ。その出典に紐づく文の単語数の割合。",
+    "aliases": []
+  },
+  "位置補正単語数": {
+    "short": "GEO 論文の主指標の一つです。出典に紐づく単語数を、回答の先頭に近い引用ほど重くなるように補正して数えます。",
+    "long": "Position-Adjusted Word Count。GEO 論文の主指標の一つ。先頭の引用ほど重い。",
+    "aliases": [
+      "Position-Adjusted Word Count"
+    ]
+  },
+  "Subjective Impression": {
+    "short": "GEO 論文の可視性指標の一つです。関連性・影響・独自性などを LLM に採点させ、正規化した主観的な印象を指します。",
+    "long": "GEO 論文の impression を構成する指標の一つ。関連性・影響・独自性などを LLM が採点し、正規化した主観印象。",
+    "aliases": [
+      "主観印象"
+    ]
+  },
+  "GEO-bench": {
+    "short": "GEO 論文が可視性の改善率を測るために使った評価セットです。約 1 万クエリからなり、論文の数字はこの上で出ています。",
+    "long": "GEO 論文の約 1 万クエリの評価セット。",
+    "aliases": []
+  },
+  "内部 GE": {
+    "short": "GEO 論文が実験のために自作した生成エンジンです。Google 上位 5 件と gpt-3.5-turbo を組み合わせたもので、実在の製品ではありません。",
+    "long": "論文が自作した生成エンジン。Google 上位 5 件と gpt-3.5-turbo を組み合わせた実験装置であり、実在の製品ではない。",
+    "aliases": []
+  },
+  "生成エンジン": {
+    "short": "検索で文書を取り、LLM が引用つきの回答を書くシステムのことです。GEO 論文がこの呼び名を使っています。実装は製品ごとに違います。",
+    "long": "検索で文書を取り、LLM が引用つき回答を書くシステム。論文の呼称。",
+    "aliases": [
+      "Generative Engine"
+    ]
+  },
+  "C-SEO": {
+    "short": "competitive SEO の略で、競合が同じ手法を採る条件下の SEO を指します。C-SEO Bench が想定した条件です。",
+    "long": "competitive SEO。競合が同じ手法を採る条件下の SEO。C-SEO Bench が追加した実験条件を指す。",
+    "aliases": [
+      "competitive SEO"
+    ]
+  },
+  "C-SEO Bench": {
+    "short": "Puerto らが NeurIPS 2025 で出したベンチマークです。競合採用と複数ドメインの条件では、多くの C-SEO 手法が無効か逆効果だったと報告しています。",
+    "long": "Puerto ら NeurIPS 2025 のベンチマーク。競合採用と複数ドメインの条件で、多くの C-SEO 手法が無効か逆効果だったと報告。",
+    "aliases": []
+  },
+  "GPT-3.5": {
+    "short": "GEO 論文の内部 GE が回答生成に使ったモデルです。実験条件を述べるときは gpt-3.5-turbo と書きます。",
+    "long": "GEO 論文の内部 GE が回答生成に使ったモデル。実験条件を述べるときは gpt-3.5-turbo と表記する。",
+    "aliases": [
+      "gpt-3.5-turbo"
+    ]
+  },
+  "RAG": {
+    "short": "検索で取ったページに回答を接地する手法です。Google は自社の生成 AI 機能がこれに根ざすと説明しています。",
+    "long": "Retrieval-Augmented Generation。回答を検索インデックス上のページに接地する手法。接地（grounding）とは、モデルが回答を書くときに外部の文書を根拠として参照することを指す。",
+    "aliases": [
+      "grounding",
+      "接地",
+      "Retrieval-Augmented Generation"
+    ]
+  },
+  "query fan-out": {
+    "short": "一つの質問から複数の関連検索を同時に出すことです。Google の公式用語で、引用元は展開後の下位クエリ側で選ばれます。",
+    "long": "1 つの質問を複数の下位クエリに分けて同時に検索すること。Google 公式用語。引用されるページは元クエリの検索結果ページ上位でなくてよい。",
+    "aliases": [
+      "fan-out"
+    ]
+  },
+  "下位クエリ": {
+    "short": "query fan-out で元の質問から展開される、個々の検索クエリのことです。引用元はこの下位クエリ側で選ばれます。",
+    "long": "query fan-out で元の質問から展開される個々の検索クエリ。引用元は下位クエリ側で選ばれるため、元クエリの順位とはずれる。",
+    "aliases": [
+      "部分クエリ"
+    ]
+  },
+  "AI Overviews": {
+    "short": "Google Search の結果ページに出る生成概要です。通常検索に追加価値があると判断されたときだけ出ます。",
+    "long": "Google Search の結果ページ上の生成概要。通常検索に追加価値があると判断されたときだけ出る。query fan-out を使うことがある。",
+    "aliases": [
+      "AI 概要"
+    ]
+  },
+  "AI Mode": {
+    "short": "Google Search の対話型の生成 AI 面です。AI Overviews とはモデルも手法も違い、出るリンクも一致しないと公式が述べています。",
+    "long": "Google Search の対話型生成 AI 面。AI Overviews とモデル・手法が異なり、出るリンクも一致しないと公式が述べる。",
+    "aliases": []
+  },
+  "強調スニペット": {
+    "short": "検索結果ページの上部に、質問への答えを抜き出して直接示す枠です。AEO という言い回しはこの時代から使われています。",
+    "long": "検索結果ページの上部に、質問への答えを抜き出して直接示す枠。AEO という業界用語はこの面を対象に生まれた。",
+    "aliases": []
+  },
+  "SERP": {
+    "short": "Search Engine Results Page の略で、検索結果ページのことです。生成 AI 面の引用元は、元クエリの SERP 上位とは限りません。",
+    "long": "Search Engine Results Page（検索結果ページ）。生成 AI 面で引用されるページは、元クエリの SERP 上位である必要がない。",
+    "aliases": [
+      "検索結果ページ"
+    ]
+  },
+  "ゼロクリック": {
+    "short": "回答面だけで用が足り、検索結果のリンクがクリックされない状態です。クリック数だけで LLMO の成否を判断しない理由になります。",
+    "long": "回答面だけで用が足り、リンクがクリックされない状態。クリックが減る理由の一つ。ただし AI Overviews 経由のクリックは滞在が長いという観察もあるため、クリック数だけで判断しない。",
+    "aliases": []
+  },
+  "入場条件": {
+    "short": "本教材の用語で、Search インデックスに載り、スニペットを出せる状態のことです。ここを満たさないと AI 面の出典候補になりません。",
+    "long": "本教材の用語。Search インデックスに載り、スニペットを出せる状態。Search に出る資格がなければ AI Overviews の出典候補にもならない。",
+    "aliases": []
+  },
+  "インデックス": {
+    "short": "検索エンジンがページを登録し、クエリに対して取り出せるようにした索引です。Google の AI 機能は同じ Search インデックスからページを取り出します。",
+    "long": "検索エンジンがページを登録し、クエリに対して取り出せるようにした索引。Google の生成 AI 機能は同じ Search インデックスからページを取り出す。",
+    "aliases": [
+      "索引"
+    ]
+  },
+  "クロール": {
+    "short": "クローラーがページを巡回して取得することです。インデックスに載る前段の工程にあたり、ここで止まると掲載もされません。",
+    "long": "クローラーがページを巡回して取得すること。インデックス登録の前段の工程。",
+    "aliases": [
+      "クローラー"
+    ]
+  },
+  "スニペット": {
+    "short": "検索結果に出る本文の抜粋です。スニペットを出せる状態は、生成 AI 面の出典候補になるための入場条件に含まれます。",
+    "long": "検索結果に出る本文の抜粋。スニペットを出せる状態は入場条件に含まれる。プレビュー制御は nosnippet 系のメタタグで行う。",
+    "aliases": []
+  },
+  "noindex": {
+    "short": "そのページをインデックスから外すための指定です。公開したくない URL については、認証とあわせて使ってください。",
+    "long": "インデックス除外の指定。robots.txt だけでは止まらないボットがあるため、秘密のパスは認証と noindex で保護する。",
+    "aliases": []
+  },
+  "nosnippet": {
+    "short": "スニペットと AI 面のプレビューを出させないためのメタタグです。効かないときは、Googlebot が取得した HTML にそのタグが入っているかを確認してください。",
+    "long": "スニペット（および AI 面のプレビュー）を制限するメタタグ。付けたのに AI 面に本文が出る場合は、Googlebot が実際に取得した HTML にそのメタタグが含まれているかを確認する。",
+    "aliases": []
+  },
+  "NOARCHIVE": {
+    "short": "Bing のメタタグです。Copilot の回答にも学習にも使われなくなりますが、通常の Bing 検索表示は変わりません。",
+    "long": "Bing のメタタグ。NOARCHIVE を付けたページは Copilot の回答にも学習にも使われない。通常の Bing 検索表示は変わらない。Amazonbot にはページ単位の noarchive で学習から外す扱いがある。",
+    "aliases": [
+      "noarchive"
+    ]
+  },
+  "NOCACHE": {
+    "short": "Bing のメタタグです。URL・タイトル・スニペットだけが使われる状態になり、通常の Bing 検索表示は変わりません。",
+    "long": "Bing のメタタグ。URL・タイトル・スニペットだけが出る。通常の Bing 検索表示は変わらない。",
+    "aliases": []
+  },
+  "メタタグ": {
+    "short": "HTML の head に置いて、検索エンジンやボットへの指示を書くタグです。noindex、nosnippet、NOARCHIVE などが該当します。",
+    "long": "HTML の head に置き、検索エンジンやボットへの指示を書くタグ。noindex、nosnippet、NOCACHE、NOARCHIVE などが該当する。",
+    "aliases": []
+  },
+  "構造化データ": {
+    "short": "JSON-LD などで、ページの意味を機械に明示するマークアップです。リッチリザルト用であり、生成 AI 検索の必須条件ではありません。",
+    "long": "JSON-LD 等でページの意味を明示するマークアップ。リッチリザルト用。生成 AI 検索の必須条件ではない。本文に無い情報をマークアップだけに書くのはガイドライン違反になる。",
+    "aliases": []
+  },
+  "JSON-LD": {
+    "short": "構造化データを書くための推奨形式です。マークアップの内容は、読者に見える本文と一致させてください。本文に無い情報を書くことはできません。",
+    "long": "構造化データの推奨形式。マークアップは見える本文と一致させる。空ページに JSON-LD だけを置くことはできない。",
+    "aliases": []
+  },
+  "リッチリザルト": {
+    "short": "構造化データをもとに、検索結果を通常より豊かな見た目で出す表示です。構造化データの本来の用途はここにあり、生成 AI 検索の要件ではありません。",
+    "long": "構造化データをもとにした検索結果の拡張表示。構造化データの本来の用途はここにある。生成 AI 検索の必須条件ではない。",
+    "aliases": []
+  },
+  "robots.txt": {
+    "short": "サイトの root に置き、どのボットにどのパスを許すかを書くファイルです。RFC 9309 で標準化されています。",
+    "long": "どの User-Agent にどのパスを許すかを書くファイル。RFC 9309 で標準化されている。規則はアクセス認可ではなく、用途（学習・検索）の区別も規格には無い。",
+    "aliases": []
+  },
+  "RFC 9309": {
+    "short": "robots.txt を標準化した RFC です。規則はアクセス認可ではないと明記し、4xx は許可、5xx は全面禁止とみなします。",
+    "long": "robots.txt を標準化した RFC。規則はアクセス認可ではないと明記し、用途（学習・検索）の区別も持たない。4xx は許可、5xx は全面禁止とみなす。最長一致で規則が選ばれ、パスの照合は大小を区別し、UA の照合は区別しない。キャッシュは 24 時間まで。",
+    "aliases": []
+  },
+  "User-Agent": {
+    "short": "ボットが自分を名乗る文字列です。以下 UA と書きます。ベンダーは UA 名を分けることで、学習用と検索用を区別しています。",
+    "long": "ボットが自分を名乗る文字列（以下 UA）。学習か検索かエージェントかという用途の区別は規格に無く、ベンダーが UA 名を分けて実現している。なりすましがあるため、UA だけで判定しない。",
+    "aliases": [
+      "UA"
+    ]
+  },
+  "Crawl-delay": {
+    "short": "robots.txt に書く、取得間隔の指定です。Anthropic は公式ドキュメントでこれを尊重すると述べています。",
+    "long": "robots.txt に書く取得間隔の指定。Anthropic は robots.txt と Crawl-delay を尊重すると公式ドキュメントに書いている。",
+    "aliases": []
+  },
+  "4xx / 5xx": {
+    "short": "robots.txt を返すときの HTTP ステータスコードです。4xx なら全許可、5xx なら全面禁止と解釈され、結果が正反対になります。",
+    "long": "robots.txt を返すときの HTTP ステータスコード。RFC 9309 では、4xx のときクローラーはどのリソースにもアクセスしてよいと解釈し、5xx のときは全面禁止とみなす。",
+    "aliases": [
+      "4xx",
+      "5xx"
+    ]
+  },
+  "GPTBot": {
+    "short": "OpenAI の学習用クローラーです。検索掲載とは独立していて、拒否しても ChatGPT の検索回答からは外れません。",
+    "long": "OpenAI の学習用クローラー。検索掲載とは独立。",
+    "aliases": []
+  },
+  "OAI-SearchBot": {
+    "short": "ChatGPT search 用のインデックスボットです。拒否すると検索回答に出なくなり、反映には約 24 時間かかります。",
+    "long": "ChatGPT search 用のインデックスボット。拒否すると検索回答に出ない（ナビゲーションリンクは残る場合がある）。ChatGPT の掲載オプトアウトはこのボットで行い、反映は約 24 時間。",
+    "aliases": []
+  },
+  "ChatGPT-User": {
+    "short": "OpenAI のユーザー起動フェッチャーです。自動クロールではなく、検索掲載の判定にも使われません。robots.txt が適用されない場合があります。",
+    "long": "OpenAI のユーザー起動フェッチャ。自動クロールではない。robots.txt が適用されない場合がある。検索掲載の判定には使わない。",
+    "aliases": []
+  },
+  "ChatGPT search": {
+    "short": "ChatGPT の検索機能です。出典候補になるかどうかは OAI-SearchBot を許可しているかで決まります。",
+    "long": "ChatGPT の検索機能。出典候補になるかどうかは OAI-SearchBot の許可で決まる。会話全体の文脈を使うと OpenAI が述べている。",
+    "aliases": []
+  },
+  "ClaudeBot": {
+    "short": "Anthropic の学習用クローラーです。robots.txt と Crawl-delay を尊重すると公式が述べています。",
+    "long": "Anthropic の学習用クローラー。Claude-SearchBot が検索インデックス用、Claude-User がユーザー起動。robots.txt と Crawl-delay を尊重すると公式が述べる。",
+    "aliases": []
+  },
+  "Claude-SearchBot": {
+    "short": "Anthropic の検索インデックス用クローラーです。拒否すると Claude の検索インデックスから外れます。",
+    "long": "Anthropic の検索用クロール。拒否すると検索インデックスから外れる。",
+    "aliases": []
+  },
+  "Claude-User": {
+    "short": "Anthropic のユーザー起動フェッチャーです。拒否するとユーザー起点の可視性が下がります。robots.txt を尊重すると公式が述べています。",
+    "long": "Anthropic のユーザー起動フェッチャ。拒否するとユーザー起点の可視性が下がる。robots.txt を尊重すると公式が述べる。",
+    "aliases": []
+  },
+  "PerplexityBot": {
+    "short": "Perplexity の検索掲載用クローラーです。学習用ではなく、拒否すると Perplexity の回答の出典候補から外れます。",
+    "long": "Perplexity の検索掲載用クローラー。学習用ではない。",
+    "aliases": []
+  },
+  "Perplexity-User": {
+    "short": "Perplexity のユーザー起動フェッチャーです。一般に robots.txt を無視するため、robots.txt では止まりません。",
+    "long": "Perplexity のユーザー起動フェッチャ。一般に robots.txt を無視する。",
+    "aliases": []
+  },
+  "Perplexity": {
+    "short": "検索して引用つきの回答を書く生成 AI 製品です。GEO 論文は実世界のエンジンとして Perplexity.ai を使いました。",
+    "long": "検索して引用つきの回答を書く生成 AI 製品。GEO 論文は実世界チェックのエンジンとして Perplexity.ai を使った。",
+    "aliases": [
+      "Perplexity.ai"
+    ]
+  },
+  "Googlebot": {
+    "short": "Google Search の検索用クローラーです。AI 面に本文が出るかどうかは、Googlebot が取得した HTML の内容で決まります。",
+    "long": "Google Search の検索用クローラー。プレビュー制御が効いているかは、Googlebot が実際に取得した HTML にメタタグが含まれているかで確認する。",
+    "aliases": []
+  },
+  "Google-Extended": {
+    "short": "robots.txt のトークンです。Gemini アプリと Vertex AI の学習・接地に影響し、Search の掲載や順位には使いません。",
+    "long": "robots.txt のトークン。Gemini アプリと Vertex の学習・接地に影響する。Search の掲載・順位には使わない。独立した User-Agent 文字列は無い。拒否しても AI Overviews に出るかどうかは変わらない。",
+    "aliases": []
+  },
+  "Gemini": {
+    "short": "Google の生成 AI アプリです。Google-Extended の拒否は、このアプリと Vertex AI の学習・接地に効きます。",
+    "long": "Google の生成 AI アプリ。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地であり、Google Search の掲載判断ではない。",
+    "aliases": []
+  },
+  "Vertex AI": {
+    "short": "Google のクラウド向け AI プラットフォームです。Google-Extended の影響範囲に、Gemini アプリとあわせて含まれます。",
+    "long": "Google のクラウド向け AI プラットフォーム。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地。",
+    "aliases": [
+      "Vertex"
+    ]
+  },
+  "Applebot-Extended": {
+    "short": "Apple の学習利用だけを制御する二次トークンです。自身はクロールせず、拒否しても Apple の検索結果には残ります。",
+    "long": "Apple の学習利用だけを制御する二次トークン。自身はクロールしない。拒否しても検索結果には残る。",
+    "aliases": []
+  },
+  "Amazonbot": {
+    "short": "Amazon の収集用クローラーです。学習に使われうるため、ページ単位の noarchive で学習から外せます。",
+    "long": "Amazon の収集用クローラー。Amzn-SearchBot が検索、Amzn-User がユーザー起動。Amazonbot は学習に使われうる。ページ単位の noarchive で学習から外せる。robots.txt のキャッシュは最大 30 日。",
+    "aliases": [
+      "Amzn-SearchBot",
+      "Amzn-User"
+    ]
+  },
+  "MistralAI-Training": {
+    "short": "Mistral の学習用クローラーです。生成 AI の学習に使われるのはこれだけで、検索用とユーザー起動は学習に使わないと明記されています。",
+    "long": "Mistral の学習用クローラー。MistralAI-Index が検索、MistralAI-User がユーザー起動。学習用だけが生成 AI 学習に使われ、残り二つは学習に使わないと明記されている。",
+    "aliases": [
+      "MistralAI-Index",
+      "MistralAI-User"
+    ]
+  },
+  "Meta-ExternalAgent": {
+    "short": "Meta の学習・インデックス用クローラーです。ユーザー起動の Meta-ExternalFetcher は robots.txt を迂回しうると公式が書いています。",
+    "long": "Meta の学習・インデックス用クローラー。Meta-WebIndexer が検索品質、Meta-ExternalFetcher がユーザー起動。ExternalFetcher は robots.txt を迂回しうると公式が書いている。反映は 24 時間。",
+    "aliases": [
+      "Meta-WebIndexer",
+      "Meta-ExternalFetcher"
+    ]
+  },
+  "DuckAssistBot": {
+    "short": "DuckDuckGo の AI 回答用クローラーです。学習には使わないと明記されていて、拒否しても検索順位に影響しません。",
+    "long": "DuckDuckGo の AI 回答用のライブ取得。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。",
+    "aliases": []
+  },
+  "CCBot": {
+    "short": "Common Crawl のクローラーです。公開アーカイブ用で、なりすましがあるため UA だけで判定しないでください。",
+    "long": "Common Crawl のクローラー。公開アーカイブ用。なりすましがあるため UA だけで判定しない。IP は JSON で公開されている。",
+    "aliases": []
+  },
+  "Common Crawl": {
+    "short": "ウェブを収集して公開アーカイブを作る取り組みです。クローラーは CCBot で、学習データの供給元にもなります。",
+    "long": "ウェブを収集して公開アーカイブを作る取り組み。クローラーは CCBot。",
+    "aliases": []
+  },
+  "Bytespider": {
+    "short": "ByteDance のクローラーです。到達可能な公式ドキュメントを確認できず、robots.txt の遵守についても一次情報がないため、本教材では未確認として扱います。",
+    "long": "ByteDance のクローラー。到達可能な公式ドキュメントを確認できなかった。robots.txt の遵守についても一次情報が無いため、未確認として扱う。",
+    "aliases": []
+  },
+  "WAF": {
+    "short": "Web Application Firewall の略で、不正なアクセスを遮断する仕組みです。ボットを一括拒否していると、robots.txt で許可したつもりでも届きません。",
+    "long": "Web Application Firewall。ボットの一括拒否が入っていると、robots.txt で許可したつもりでもクローラーは届かない。公式は UA と公開 IP の両方を見ることを勧めている。",
+    "aliases": [
+      "Web Application Firewall"
+    ]
+  },
+  "CDN": {
+    "short": "配信を代行するネットワークです。自分が robots.txt に何も書いていなくても、CDN 側の既定でブロックが入ることがあります。",
+    "long": "配信を代行するネットワーク。自分が robots.txt に何も書いていなくても、CDN 側の既定設定でボットのブロックが入ることがある。",
+    "aliases": []
+  },
+  "Content-Signal": {
+    "short": "Cloudflare が提案する robots.txt のディレクティブです。search / ai-input / ai-train の可否を書きます。",
+    "long": "Cloudflare が提案する robots.txt のディレクティブ。search / ai-input / ai-train の可否を書く。",
+    "aliases": []
+  },
+  "Content-Usage": {
+    "short": "IETF の aipref ワーキンググループが定義中の利用意向フィールドです。Internet-Draft であり、RFC ではありません。",
+    "long": "IETF aipref が定義中の利用意向フィールド。HTTP ヘッダと robots.txt の双方に付け、取得と利用を二段に分ける。Internet-Draft であり RFC ではない。",
+    "aliases": []
+  },
+  "Internet-Draft": {
+    "short": "IETF で検討中の文書です。RFC として発行された標準ではないため、確定した仕様として扱わないでください。",
+    "long": "IETF で検討中の文書。RFC として発行された標準ではない。Content-Usage は現時点で Internet-Draft の段階にある。",
+    "aliases": []
+  },
+  "llms.txt": {
+    "short": "Jeremy Howard が提案した、エージェント向けの Markdown 地図です。Google Search は使わないと公式が述べています。",
+    "long": "Jeremy Howard 提案の Markdown 地図。エージェント向け。必須は H1 の名前。Google Search は使わないと公式が述べる。",
+    "aliases": []
+  },
+  "Lighthouse": {
+    "short": "Chrome に入っているページ検査ツールです。llms.txt の監査は、サーバーエラーのときに警告を出し、404 のときは N/A になります。",
+    "long": "Chrome のページ検査ツール。llms.txt の監査は、サーバーエラーのときは警告を出し、404 のときは N/A（任意）になる。",
+    "aliases": []
+  },
+  "IndexNow": {
+    "short": "参加している検索エンジンに URL の更新を通知する仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。",
+    "long": "参加検索エンジンに URL の更新を通知する仕組み。公式文書に AI 回答との関係の記述はなく、Google も出てこない。",
+    "aliases": []
+  },
+  "Search Console": {
+    "short": "Google のサイト所有者向け管理ツールです。生成 AI パフォーマンスレポートと、生成 AI control のトグルがここにあります。",
+    "long": "Google のサイト所有者向け管理ツール。生成 AI パフォーマンスレポートは AI Overviews と AI Mode での掲載を扱う。Search generative AI control のトグルもここにある。",
+    "aliases": []
+  },
+  "Search generative AI control": {
+    "short": "Search Console の、生成 AI 面への掲載・接地を止めるトグルです。学習のオプトアウトではありません。以下、生成 AI control と書きます。",
+    "long": "Search Console の、生成 AI 面への掲載・接地を止めるトグル（以下、生成 AI control）。既定値は「掲載する」。対象は AI Overviews / AI Mode / Discover の生成 AI で、通常検索の順位は変わらず、学習も止まらない。除外しても他サイトの似た内容は残る。反映は数日かかることがあり、展開は段階的。",
+    "aliases": [
+      "生成 AI control"
+    ]
+  },
+  "Discover": {
+    "short": "Google のフィード型の配信面です。生成 AI control の対象範囲に、AI Overviews と AI Mode とあわせて含まれます。",
+    "long": "Google のフィード型の配信面。生成 AI control の対象は AI Overviews / AI Mode / Discover の生成 AI。",
+    "aliases": []
+  },
+  "Bing Webmaster Tools": {
+    "short": "Bing のサイト所有者向け管理ツールです。Copilot などでの掲載を見る AI Performance レポートがここにあります。",
+    "long": "Bing のサイト所有者向け管理ツール。AI Performance レポートを提供する。",
+    "aliases": []
+  },
+  "AI Performance レポート": {
+    "short": "Bing Webmaster Tools のレポートです。Microsoft Copilot、Bing の AI 生成要約、一部の提携先を対象にしています。",
+    "long": "Bing Webmaster Tools のレポート（2026-02 公開、プレビュー）。対象は Microsoft Copilot、Bing の AI 生成要約、一部の提携。",
+    "aliases": [
+      "AI Performance"
+    ]
+  },
+  "Copilot": {
+    "short": "Microsoft の生成 AI 製品です。回答に出したくない場合は、Bing に NOARCHIVE を付けます。通常の Bing 検索表示は変わりません。",
+    "long": "Microsoft の生成 AI 製品。回答に出したくない場合は Bing 向けに NOARCHIVE を付ける。通常の Bing 検索表示は変わらない。",
+    "aliases": [
+      "Microsoft Copilot"
+    ]
+  },
+  "E-E-A-T": {
+    "short": "経験・専門性・権威性・信頼性という、Google の品質評価で使う観点の束です。それ自体は単一のランキング因子ではありません。",
+    "long": "Experience, Expertise, Authoritativeness, Trustworthiness（経験・専門性・権威性・信頼性）。Google の品質評価で使う観点の束。それ自体は単一のランキング因子ではない、と公式が書く。",
+    "aliases": []
+  },
+  "UGC": {
+    "short": "ユーザー投稿コンテンツのことです。レビュー、コメント、Q&A、掲示板など、自分以外の人が本文を書ける面が該当します。",
+    "long": "ユーザー投稿コンテンツ（User Generated Content）。レビュー、コメント、Q&A、掲示板、ユーザーが本文を作れるプロフィールページなどが該当する。",
+    "aliases": [
+      "ユーザー投稿コンテンツ"
+    ]
+  },
+  "faithfulness": {
+    "short": "引用がその文書を実際に根拠にしているかという性質です。引用が正しく見えること（correctness）とは別の性質になります。",
+    "long": "引用の忠実性。引用がその文書を実際に根拠にしているか。引用が正しく見えること（correctness）とは別の性質。",
+    "aliases": [
+      "引用の忠実性"
+    ]
+  },
+  "post-rationalization": {
+    "short": "文を生成したあとで、それらしい出典を後付けすることです。引用が付いていても根拠とは限らない理由の一つになります。",
+    "long": "生成したあとで、それらしい出典を後付けすること。",
+    "aliases": []
+  },
+  "lost in the middle": {
+    "short": "長い入力文脈の中央に置かれた情報の利用が落ちる現象です。Liu ら TACL 2023 が報告しました。先頭と末尾はよく使われます。",
+    "long": "長い入力文脈の中央に置かれた情報の利用が落ちる現象。入力文脈の先頭と末尾にある情報はよく使われる。Liu ら TACL 2023。ここから言えるのは「置かれ方で使われ方が変わりうる」というところまでで、各製品の並べ方は非公開のため具体的な語数や位置の指示は出せない。",
+    "aliases": []
+  },
+  "KDD": {
+    "short": "データマイニングの国際会議です。Aggarwal らの GEO 論文は、この KDD 2024 で発表されました。",
+    "long": "データマイニングの国際会議。Aggarwal らの GEO 論文はここで発表された。",
+    "aliases": []
+  },
+  "NeurIPS": {
+    "short": "機械学習の国際会議です。C-SEO Bench は NeurIPS 2025 の Datasets & Benchmarks トラックで出ました。",
+    "long": "機械学習の国際会議。C-SEO Bench は NeurIPS 2025 Datasets & Benchmarks で発表された。",
+    "aliases": []
+  },
+  "TACL": {
+    "short": "Transactions of the ACL という自然言語処理の学術誌です。lost in the middle はここに載りました。",
+    "long": "Transactions of the Association for Computational Linguistics。自然言語処理の学術誌。Liu らの lost in the middle はここに載った。",
+    "aliases": []
+  }
+}

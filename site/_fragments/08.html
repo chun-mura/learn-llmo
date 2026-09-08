@@ -1,6 +1,6 @@
       <section class="step">
         <h2>Google で測る</h2>
-        <p>Search Console の生成 AI パフォーマンスレポートは、AI Overviews と AI Mode での掲載を扱います。何が測れないかを先に覚えてください。</p>
+        <p>効果を測る前に、道具が何を数えているのかを押さえます。Search Console の生成 AI パフォーマンスレポートは、AI Overviews と AI Mode での掲載を扱います。ただし、通常の検索レポートと同じ列が並んでいるわけではありません。次の表で区別するのは、このレポートで取れる数字と、取れない数字です。</p>
         <table>
           <thead><tr><th>測れる</th><th>測れない</th></tr></thead>
           <tbody>
@@ -9,9 +9,13 @@
             <tr><td>AI Overviews と AI Mode の合算</td><td>AI Overviews と AI Mode の内訳</td></tr>
           </tbody>
         </table>
-        <p>AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。AI Overviews 経由のクリックは滞在が長い、という Google 側の観察もあります。クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
+        <p>右の列を忘れると、無いものを探して時間を使うことになります。たとえば AI Overviews と AI Mode のどちらで伸びたのかを、このレポートだけで切り分けることはできません。数え方にも注意が要ります。AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。さらに、AI Overviews 経由のクリックは滞在が長い、という Google 側の観察もあります。だから、クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
         <card id="c-08-1">
-          <q>Search Console の生成 AI パフォーマンスレポートで、測れるものと測れないものを言ってください。</q>
+          <q>Search Console の生成 AI パフォーマンスレポートで、測れるものと測れないものの組み合わせとして正しいものはどれですか。</q>
+          <opt correct>測れるのは表示回数と、ページ・国・デバイス・日付の内訳。測れないのはクリック数、掲載順位、CTR、AI Overviews と AI Mode の内訳</opt>
+          <opt>測れるのは表示回数とクリック数、ページ・国・デバイス・日付の内訳。測れないのは掲載順位、CTR、AI Overviews と AI Mode の内訳</opt>
+          <opt>測れるのは表示回数と、AI Overviews と AI Mode の内訳。測れないのはクリック数、掲載順位、CTR、ページ・国・デバイス・日付の内訳</opt>
+          <opt>測れるのは表示回数と掲載順位、CTR。測れないのはクリック数、ページ・国・デバイス・日付の内訳、AI Overviews と AI Mode の内訳</opt>
           <ans><p>測れるのは表示回数と、ページ・国・デバイス・日付での内訳。測れないのはクリック数、掲載順位、CTR、そして AI Overviews と AI Mode の内訳（両者は合算）。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -23,7 +27,7 @@
       </section>
       <section class="step">
         <h2>スイッチを混ぜない</h2>
-        <p>以下では、AI 面の挙動を切り替える設定をまとめて「スイッチ」と呼びます。実体はメタタグ、robots.txt のトークン、Search Console の設定の三種類です。</p>
+        <p>測る話から、出方を変える設定の話に移ります。以下では、AI 面の挙動を切り替える設定をまとめて「スイッチ」と呼びます。実体はメタタグ、robots.txt のトークン、Search Console の設定の三種類です。四つのスイッチがありますが、どれも効く範囲が違います。次の表で区別するのは、一つ倒したときに何が止まり、何が止まらないかです。</p>
         <table>
           <thead><tr><th>スイッチ</th><th>止まると</th><th>止まらない</th></tr></thead>
           <tbody>
@@ -33,10 +37,14 @@
             <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地</td><td>Search の掲載と順位</td></tr>
           </tbody>
         </table>
-        <p>Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
+        <p>右の二列を取り違えると、狙っていない側を止めることになります。とくに紛らわしいのが下の二行で、Search generative AI control は AI 面の掲載を止めますが学習は止まらず、Google-Extended は学習を止めますが Search の掲載には触りません。運用の細かい条件も押さえてください。Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
         <p class="note">学習だけを止めたいときに生成 AI control で除外するのは、取り違えです。</p>
         <card id="c-08-2">
           <q>学習には使われたくないが AI Overviews には出したい。どのスイッチをどう倒しますか。</q>
+          <opt correct>Google-Extended を Disallow する。生成 AI control は既定の「掲載する」のままにする</opt>
+          <opt>生成 AI control で除外する。Google-Extended は許可のままにする</opt>
+          <opt>生成 AI control で除外し、あわせて Google-Extended も Disallow する</opt>
+          <opt>nosnippet 系を付ける。Google-Extended と生成 AI control はどちらも触らない</opt>
           <ans><p>Google-Extended を Disallow する。生成 AI control は触らない（既定の「掲載する」のまま）。Googlebot は許可のまま。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -48,7 +56,7 @@
       </section>
       <section class="step">
         <h2>Bing / Copilot で測る</h2>
-        <p>Bing Webmaster Tools には AI Performance レポートがあります（2026-02 公開、プレビュー）。対象は Microsoft Copilot、Bing の AI 生成要約、一部の提携です。</p>
+        <p>Google の外にも、公式に数えてくれる面があります。Bing Webmaster Tools には AI Performance レポートがあります（2026-02 公開、プレビュー）。対象は Microsoft Copilot、Bing の AI 生成要約、一部の提携で、次の指標が並びます。</p>
         <ul class="plain">
           <li><strong>Total Citations</strong> AI 回答で出典として表示された回数</li>
           <li><strong>Average Cited Pages</strong> 1 日あたりの、出典になった自サイトのユニークページ数</li>
@@ -56,8 +64,13 @@
           <li>URL 単位の引用回数</li>
         </ul>
         <p class="note">こちらも数えているのは引用であって、クリックではありません。Google 側と指標名が違うので、並べるときは「表示回数」と「引用回数」を混ぜないでください。</p>
+        <p>混ぜると、同じ単位でないものを足したり、前月比として比べたりしてしまいます。たとえば Grounding Queries はサンプルと明記されているので、これを検索クエリの全数のように扱うと、母数を取り違えたまま結論を出すことになります。</p>
         <card id="c-08-3">
           <q>Bing の AI Performance レポートが数えているのは何ですか。Google 側の指標と同じですか。</q>
+          <opt correct>AI 回答で出典として表示された引用の回数。Google 側は表示回数なので、指標が違う</opt>
+          <opt>AI 回答で出典として表示された引用の回数。Google 側も引用回数なので、指標は同じ</opt>
+          <opt>AI 回答から自サイトへのクリック数。Google 側もクリック数なので、指標は同じ</opt>
+          <opt>AI 回答での掲載順位と CTR。Google 側は表示回数なので、指標が違う</opt>
           <ans><p>AI 回答で出典として表示された引用の回数（と、出典になったページ数、取得に使われたキーフレーズ）。Google 側は表示回数で、指標が違う。どちらもクリックではない。grounding queries はサンプルと明記されている。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -66,11 +79,15 @@
       </section>
       <section class="step">
         <h2>流入側で測る</h2>
-        <p>回答面ではなく、そこから来た人を見る道もあります。GA4 の既定チャネルには <strong>AI Assistant</strong> があります。</p>
-        <p>定義は「ChatGPT, Gemini, Deepseek, Copilot, Grok のようなソースから来たチャネル」で、判定は参照元の一致です。medium が <code>ai-assistant</code> に一致する、というルールで分類されます。</p>
+        <p>ここまでは回答面そのものを数える話でした。もう一つ、そこから来た人を見る道もあります。GA4 の既定チャネルには <strong>AI Assistant</strong> があります。定義は「ChatGPT, Gemini, Deepseek, Copilot, Grok のようなソースから来たチャネル」で、判定は参照元の一致です。medium が <code>ai-assistant</code> に一致する、というルールで分類されます。</p>
         <p class="note">重要なのは除外の一文です。<strong>Google 自身の AI Overviews と AI Mode はこのチャネルに入りません。</strong>そちらは Organic Search 側で数えられます。「AI 流入」を一つの数字にまとめると、Google の AI 面が消えます。</p>
+        <p>だから、GA4 の AI Assistant を「AI からの流入」の全体だと読むと、報告のたびに Google の分だけが抜け落ちます。Search Console の表示回数と GA4 の AI Assistant は、同じ面を見ている数字ではないと覚えてください。</p>
         <card id="c-08-4">
           <q>GA4 の AI Assistant チャネルに、Google の AI Overviews からの流入は入りますか。</q>
+          <opt correct>入らない。Google の AI Overviews と AI Mode は除外され、Organic Search 側で数えられる</opt>
+          <opt>入らない。Google の AI Overviews と AI Mode はどのチャネルにも入らず、数えられない</opt>
+          <opt>入る。ChatGPT や Copilot からの流入と同じチャネルにまとめて数えられる</opt>
+          <opt>入る。ただし AI Mode からの流入だけは Organic Search 側で数えられる</opt>
           <ans><p>入らない。GA4 の定義は明示的に "It excludes Google's AI Overviews and AI Mode." としており、そちらは Organic Search 側で数えられる。AI 流入を一つの数字にまとめると Google の AI 面が抜け落ちる。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -79,16 +96,21 @@
       </section>
       <section class="step">
         <h2>公式コンソールが無い面</h2>
-        <p>ChatGPT の掲載オプトアウトは OAI-SearchBot。約 24 時間。ChatGPT-User は検索掲載の判定に使いません。</p>
-        <p>公式コンソールが無い面は、固定プロンプトの定点観測です。言及、引用 URL、誤情報、日付、モデル名を記録してください。</p>
-        <p>「ブロックしたのに引用された」なら、まず各社の公式ドキュメントで「robots.txt を無視することがある」と書かれている箇所を確認してください。</p>
+        <p>残るのが、数えてくれるコンソールが用意されていない面です。設定だけは公開されているものもあります。たとえば ChatGPT の掲載オプトアウトは OAI-SearchBot で、反映は約 24 時間です。ChatGPT-User は検索掲載の判定に使いません。</p>
+        <p>ただし、掲載の結果を集計してくれる画面はありません。だから、公式コンソールが無い面は、固定プロンプトの定点観測になります。言及、引用 URL、誤情報、日付、モデル名を記録してください。毎回プロンプトを変えると、変わったのが自社ページなのか質問なのか分からなくなるからです。</p>
+        <p>そのうえで、観測結果が期待と違ったときの手順も決めておきます。「ブロックしたのに引用された」なら、まず各社の公式ドキュメントで「robots.txt を無視することがある」と書かれている箇所を確認してください。</p>
         <card id="c-08-5">
-          <q>公式コンソールが無い面を測るとき、記録に残す列を四つ以上挙げてください。</q>
+          <q>公式コンソールが無い面を測るとき、記録に残す列の組み合わせとして正しいものはどれですか。</q>
+          <opt correct>日付、製品とモデル名、検索の On/Off、言及の有無、引用 URL、誤情報、保存場所</opt>
+          <opt>日付、表示回数、クリック数、掲載順位、CTR、ページ、国、デバイス</opt>
+          <opt>日付、Total Citations、Average Cited Pages、Grounding Queries、URL 単位の引用回数</opt>
+          <opt>日付、技術準備度、言及率、引用率、正確性、コンソールの表示回数</opt>
           <ans><p>日付、製品とモデル名、検索の On/Off、言及の有無、引用 URL、誤情報、保存場所。固定プロンプトで同じものを繰り返す。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>最小の指標</h2>
+        <p>最後に、ここまでの道具を運用に落とします。追う指標は次の順に並べてください。</p>
         <ol class="plain">
           <li>技術準備度（200 で本文を取れているか）。これは引用率ではない</li>
           <li>言及率</li>
@@ -96,9 +118,13 @@
           <li>正確性（価格・拠点の誤り）</li>
           <li>コンソール（Search Console の表示回数、Bing の引用回数、GA4 の AI Assistant）</li>
         </ol>
-        <p>技術準備度（200 で本文を取れているか）が満たせていない状態で、言及率をコンテンツ改稿で上げようとしても意味がありません。まず技術面を直してください。</p>
+        <p>順番に意味があります。技術準備度（200 で本文を取れているか）が満たせていない状態で、言及率をコンテンツ改稿で上げようとしても意味がありません。まず技術面を直してください。</p>
         <card id="c-08-6">
           <q>生成 AI control で除外したあと、通常検索は 3 位のままでした。矛盾していますか。</q>
+          <opt correct>矛盾しない。通常検索のランキング信号には使わず、止まるのは AI Overviews / AI Mode / Discover の生成 AI 面だけ</opt>
+          <opt>矛盾しない。生成 AI control が止めるのは学習だけで、AI 面の掲載も通常検索も止まらない</opt>
+          <opt>矛盾しない。反映に数日かかっているだけで、いずれ通常検索の順位も下がる</opt>
+          <opt>矛盾する。生成 AI control は Search 全体から外す設定なので、通常検索にも出なくなるはず</opt>
           <ans><p>矛盾しない。公式は生成 AI control を通常検索のランキング信号には使わないと書いている。止まるのは AI Overviews / AI Mode / Discover の生成 AI 面だけ。</p></ans>
         </card>
       </section>

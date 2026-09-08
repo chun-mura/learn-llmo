@@ -1,6 +1,6 @@
       <section class="step">
         <h2>三つの役割</h2>
-        <p>主要ベンダーはボットをだいたい三種に分けます。設定は独立です。</p>
+        <p>ボットの設定を考えるときは、まず相手が何のために来ているのかを分けて見てください。というのも、主要ベンダーはボットをだいたい三種に分けていて、その設定は互いに独立しているからです。次の表は、役割ごとに名前の例と、止めたときに何が失われるのかを並べたものです。</p>
         <table>
           <thead><tr><th>役割</th><th>名前の例</th><th>止めると</th></tr></thead>
           <tbody>
@@ -10,15 +10,19 @@
           </tbody>
         </table>
         <p class="note">接地（grounding）は、モデルが回答を書くときに外部の文書を根拠として参照することです。</p>
-        <p>学習用ボットだけを拒否し、検索用ボットは許可するという設定は、公式に想定されています。</p>
+        <p>三つが独立しているということは、まとめて拒否する必要はないという意味でもあります。だから、学習用ボットだけを拒否し、検索用ボットは許可するという設定は、公式に想定されています。たとえば自社サイトを学習には使われたくないが ChatGPT の回答には出したい、という方針も、二つを別々の行に書くことで表せます。では、その設定を書く robots.txt は、どこまでを約束してくれるのでしょうか。</p>
         <card id="c-04-1">
-          <q>ボットの三つの役割を挙げ、それぞれを止めると何が起きるか言ってください。</q>
+          <q>ボットの三つの役割と、それぞれを止めたときに起きることの組み合わせとして正しいものはどれですか。</q>
+          <opt correct>学習は将来の学習から外れ、検索インデックスは出典候補から外れ、ユーザー起動はライブ取得が止まる</opt>
+          <opt>学習は出典候補から外れ、検索インデックスはライブ取得が止まり、ユーザー起動は将来の学習から外れる</opt>
+          <opt>学習はライブ取得が止まり、検索インデックスは将来の学習から外れ、ユーザー起動は出典候補から外れる</opt>
+          <opt>三つの設定は連動しており、どれを止めても将来の学習と出典候補とライブ取得がまとめて止まる</opt>
           <ans><p>学習（止めると将来の学習や製品によってはアプリ側の接地から外れる）、検索インデックス（止めるとその製品の出典候補から外れる）、ユーザー起動（止めると今この質問のためのライブ取得が止まる）。三つの設定は独立で、学習だけ拒否して検索は許可できる。</p></ans>
         </card>
       </section>
       <section class="step">
         <h2>robots.txt が約束していないこと</h2>
-        <p>robots.txt は RFC 9309 として標準化されています。読むべきは、そこに書いていないことです。</p>
+        <p>robots.txt は RFC 9309 として標準化されているので、書式そのもので迷うことはあまりありません。つまずくのは、規格が引き受けていない部分のほうです。というのも、robots.txt に書けば止まると思われがちなことの多くが、規格上は何も保証されていないからです。以下は、その書いていないことを並べたものです。</p>
         <ul class="plain">
           <li><strong>アクセス認可ではない。</strong><span data-term="RFC 9309">RFC 9309</span> は "These rules are not a form of access authorization." と書きます。守るかどうかは相手次第です</li>
           <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが User-Agent（以下 UA）名を分けて実現しているだけです</li>
@@ -27,13 +31,21 @@
           <li><strong>4xx と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、クローラーは「どのリソースにもアクセスしてよい」と解釈します。5xx を返したときは「全面禁止」とみなします</li>
           <li>キャッシュは 24 時間まで。パーサーは最低 500 KiB を読む</li>
         </ul>
-        <p class="note">秘密の URL を robots.txt で隠すのは筋が悪いという話が、ここに繋がります。止めたいものは認証で止めてください。</p>
+        <p class="note">アクセス認可ではない以上、秘密の URL を robots.txt で隠すのは筋が悪いという話が、ここに繋がります。止めたいものは認証で止めてください。そして用途の区別が規格にない以上、学習だけを外せるかどうかは、ベンダーが公開している UA の名前を見て確かめるしかありません。</p>
         <card id="c-04-2">
           <q>robots.txt が 5xx を返しているとき、規格上クローラーはどう振る舞いますか。4xx のときは。</q>
+          <opt correct>5xx なら全面禁止とみなし、4xx ならどのリソースにもアクセスしてよいと解釈する</opt>
+          <opt>4xx なら全面禁止とみなし、5xx ならどのリソースにもアクセスしてよいと解釈する</opt>
+          <opt>4xx でも 5xx でも、直前に読めた robots.txt を 24 時間まではキャッシュとして使い続ける</opt>
+          <opt>4xx でも 5xx でも、規格上は取得を保留し robots.txt が読めるようになるまで待つ</opt>
           <ans><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。</p></ans>
         </card>
         <card id="c-04-3">
           <q>RFC 9309 は robots.txt の規則を何ではないと明記していますか。</q>
+          <opt correct>アクセス認可（access authorization）の一形式ではない、と明記している</opt>
+          <opt>取得してよいパスと駄目なパスを伝える手段ではない、と明記している</opt>
+          <opt>ベンダーが UA トークンを分けて用途を表す仕組みではない、と明記している</opt>
+          <opt>最も長く一致した規則を選んで適用する書式ではない、と明記している</opt>
           <ans><p>アクセス認可ではない（"These rules are not a form of access authorization."）。守るかどうかは相手次第であり、規格には学習・検索・エージェントという用途の区別もない。用途はベンダーが UA を分けて実現しているだけ。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -42,6 +54,7 @@
       </section>
       <section class="step">
         <h2>OpenAI</h2>
+        <p>ここからはベンダーごとに UA の名前を確認していきます。OpenAI は、学習・検索・ユーザー起動の三つをそれぞれ別の名前に割り当てています。</p>
         <ul class="plain">
           <li><strong>OAI-SearchBot</strong> ChatGPT の検索回答に出す。拒否すると検索回答に出ない。ナビリンクは残る場合あり。反映は約 24 時間</li>
           <li><strong>GPTBot</strong> 基盤モデルの学習</li>
@@ -52,9 +65,13 @@ Disallow: /
 
 User-agent: OAI-SearchBot
 Allow: /</pre>
-        <p>OpenAI の公式ドキュメントには、ChatGPT-User を拒否しても robots.txt を見ない取得がありうると書かれています。</p>
+        <p>上の例は、学習用の GPTBot だけを拒否し、検索用の OAI-SearchBot は許可する書き方です。二つは独立しているので、ChatGPT の検索回答には出したまま学習からは外れる、という方針をそのまま行に落とせます。ただし ChatGPT-User だけは同じようには扱えません。というのも、OpenAI の公式ドキュメントには、ChatGPT-User を拒否しても robots.txt を見ない取得がありうると書かれているからです。</p>
         <card id="c-04-4">
-          <q>OpenAI の三つの UA を、役割つきで挙げてください。</q>
+          <q>OpenAI の三つの UA と、その役割の組み合わせとして正しいものはどれですか。</q>
+          <opt correct>OAI-SearchBot が検索回答への掲載、GPTBot が基盤モデルの学習、ChatGPT-User がユーザー操作に応じた取得</opt>
+          <opt>GPTBot が検索回答への掲載、OAI-SearchBot が基盤モデルの学習、ChatGPT-User がユーザー操作に応じた取得</opt>
+          <opt>OAI-SearchBot が基盤モデルの学習、ChatGPT-User が検索回答への掲載、GPTBot がユーザー操作に応じた取得</opt>
+          <opt>ChatGPT-User が検索回答への掲載、OAI-SearchBot がユーザー操作に応じた取得、GPTBot が基盤モデルの学習</opt>
           <ans><p>OAI-SearchBot（検索回答への掲載。拒否すると出ない。反映は約 24 時間）、GPTBot（基盤モデルの学習）、ChatGPT-User（ユーザー操作に応じた取得。robots.txt が適用されない場合がある。検索掲載の判定には使わない）。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -66,6 +83,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Anthropic</h2>
+        <p>Anthropic も同じ三つの役割を別々のボットに割り当てています。次の表で、用途と、無効化したときに何が起きるのかを対応させて見てください。</p>
         <table>
           <thead><tr><th>ボット</th><th>用途</th><th>無効化すると</th></tr></thead>
           <tbody>
@@ -74,10 +92,14 @@ Allow: /</pre>
             <tr><td>Claude-SearchBot</td><td>検索用クロール</td><td>検索インデックスから外れる</td></tr>
           </tbody>
         </table>
-        <p>Anthropic の公式ドキュメントには、robots.txt と Crawl-delay を尊重すること、CAPTCHA を迂回しないこと、IP ブロックは robots.txt が読めず不安定であることが書かれています。</p>
-        <p class="note">OpenAI / Perplexity と違い、ユーザー起動の Claude-User も robots.txt で止められると書かれています。ベンダー間で一致しません。</p>
+        <p>運用側の作法も公式ドキュメントに書かれています。robots.txt と Crawl-delay を尊重すること、CAPTCHA を迂回しないこと、そして IP ブロックは robots.txt が読めず不安定であることです。</p>
+        <p class="note">ただし、ユーザー起動のフェッチャーの扱いは OpenAI / Perplexity と違います。Anthropic は、ユーザー起動の Claude-User も robots.txt で止められると書いています。つまり同じユーザー起動でも robots.txt が効くかどうかはベンダー間で一致しないので、一社の書き方を他社にそのまま当てはめないでください。</p>
         <card id="c-04-5">
-          <q>ユーザー起動のフェッチャーと robots.txt の関係は、ベンダー間で揃っていますか。三社で言ってください。</q>
+          <q>ユーザー起動のフェッチャーと robots.txt の関係について、三社の記述の組み合わせとして正しいものはどれですか。</q>
+          <opt correct>Claude-User は尊重すると書き、ChatGPT-User は適用されない場合があると書き、Perplexity-User は一般に無視すると書く</opt>
+          <opt>Claude-User は一般に無視すると書き、ChatGPT-User は尊重すると書き、Perplexity-User は適用されない場合があると書く</opt>
+          <opt>Perplexity-User は尊重すると書き、Claude-User は適用されない場合があると書き、ChatGPT-User は一般に無視すると書く</opt>
+          <opt>三社ともユーザー起動のフェッチャーは robots.txt を尊重すると書いており、記述は揃っている</opt>
           <ans><p>揃っていない。Anthropic の Claude-User は robots.txt を尊重すると書く。OpenAI の ChatGPT-User は適用されない場合があると書く。Perplexity-User は一般に robots.txt を無視すると書く。矛盾を消さずに覚える。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -86,13 +108,18 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Perplexity</h2>
+        <p>Perplexity が公開している UA は二つです。注意すべきなのは、ユーザー起動のほうです。</p>
         <ul class="plain">
           <li><strong>PerplexityBot</strong> 検索結果に出してリンクする。基盤モデル学習のためのクロールではない</li>
           <li><strong>Perplexity-User</strong> ユーザーの質問に応じてページを取る。学習用ではない。<strong>一般に robots.txt を無視する</strong></li>
         </ul>
-        <p>WAF のボット一括拒否は、許可したつもりでも届きません。公式は UA と公開 IP の両方を見ることを勧めています。</p>
+        <p>もう一つ、robots.txt の書き方とは別のところで詰まることがあります。というのも、WAF のボット一括拒否は robots.txt より手前で効くからです。その結果、robots.txt で許可したつもりでもクロールは届きません。だから公式は、UA と公開 IP の両方を見て判定することを勧めています。</p>
         <card id="c-04-6">
           <q>robots.txt で検索ボットを許可したのに、そのエンジンに一切出ません。次に見るのはどこですか。</q>
+          <opt correct>WAF やボット対策の一括拒否。robots.txt より手前で落ちていないかを見る</opt>
+          <opt>robots.txt の最長一致。より長い Disallow の規則が先に当たっていないかを見る</opt>
+          <opt>robots.txt のキャッシュ。24 時間の期限が切れずに古い内容が残っていないかを見る</opt>
+          <opt>学習用トークンの設定。Google-Extended などを拒否したままにしていないかを見る</opt>
           <ans><p>WAF やボット対策の一括拒否。robots.txt で許可しても手前で落ちていれば届かない。公式は UA と公開 IP の両方で判定することを勧めている。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -104,12 +131,15 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Google</h2>
-        <p>AI Overviews / AI Mode のクロール制御は Googlebot です。AI 機能だけを別のボットが担当するわけではありません。</p>
-        <p>適格条件: インデックスされ、スニペット付きで Search に出せること。追加の技術要件はありません。</p>
-        <p><span data-term="Google-Extended">Google-Extended</span> は別物です。独立した UA はなく、robots.txt のトークンだけを見ます。影響は Gemini アプリと Vertex の学習・接地です。<strong>Search の掲載や順位には使いません。</strong></p>
-        <p>AI 面だけ止めたい場合は Search Console の生成 AI control です（第 8 課）。プレビューは nosnippet 系です。</p>
+        <p>Google は、ここまでの三社と制御の置き場所が違います。AI Overviews / AI Mode のクロール制御は Googlebot で、AI 機能だけを別のボットが担当するわけではありません。だから適格条件も通常の検索と同じで、インデックスされ、スニペット付きで Search に出せることだけです。追加の技術要件はありません。</p>
+        <p>紛らわしいのは <span data-term="Google-Extended">Google-Extended</span> です。これは独立した UA を持たず、robots.txt のトークンだけを見ます。影響が及ぶのは Gemini アプリと Vertex の学習・接地で、<strong>Search の掲載や順位には使いません。</strong>たとえば Google-Extended を拒否しても、AI Overviews への出方はそのままです。</p>
+        <p>では AI 面だけを止めたい場合はどうするかというと、Search Console の生成 AI control を使います（第 8 章）。プレビューの出方を絞りたい場合は nosnippet 系です。</p>
         <card id="c-04-7">
           <q>AI Overviews に出るかどうかを制御するのは、どのボットですか。Google-Extended は何に効きますか。</q>
+          <opt correct>制御は Googlebot。Google-Extended は Gemini アプリと Vertex の学習・接地に効く</opt>
+          <opt>制御は Google-Extended。Googlebot は Gemini アプリと Vertex の学習・接地に効く</opt>
+          <opt>制御は AI 機能専用のボット。Google-Extended は Search の掲載と順位に効く</opt>
+          <opt>制御は Googlebot。Google-Extended は Search の掲載と順位に効き、学習には効かない</opt>
           <ans><p>Googlebot。AI 機能専用のボットはない。Google-Extended は独立した UA を持たない robots.txt のトークンで、効くのは Gemini アプリと Vertex の学習・接地。Search の掲載や順位には使わない。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -121,7 +151,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>四社の外側</h2>
-        <p>同じ三分類が、他社の文書にも出てきます。名前だけ覚えてください。</p>
+        <p>学習・検索・ユーザー起動という同じ三分類は、ここまでの四社以外の文書にも出てきます。だから残りは、名前と、各社が独自に書いている条件だけを押さえれば足ります。次の表で、公式が明記していることを一社ずつ確かめてください。</p>
         <table>
           <thead><tr><th>提供元</th><th>UA</th><th>公式が書いていること</th></tr></thead>
           <tbody>
@@ -133,9 +163,13 @@ Allow: /</pre>
             <tr><td>Common Crawl</td><td>CCBot</td><td>公開アーカイブ用。なりすましがあるため UA だけで判定しない。IP は JSON で公開</td></tr>
           </tbody>
         </table>
-        <p class="note">Bytespider（ByteDance）は、到達可能な公式ドキュメントを確認できませんでした。robots.txt の遵守についても一次情報がありません。未確認として扱います。</p>
+        <p class="note">一方で、Bytespider（ByteDance）は、到達可能な公式ドキュメントを確認できませんでした。robots.txt の遵守についても一次情報がないので、未確認として扱います。</p>
         <card id="c-04-8">
-          <q>Applebot-Extended を Disallow すると、Apple の検索結果からも消えますか。Amazonbot の学習だけ外す方法は。</q>
+          <q>Applebot-Extended を Disallow したときに及ぶ範囲と、Amazonbot の学習利用だけを外す方法の組み合わせとして正しいものはどれですか。</q>
+          <opt correct>学習利用だけを外し検索結果には残る。Amazonbot はページ単位の noarchive で学習から外せる</opt>
+          <opt>学習利用に加えて検索結果からも消える。Amazonbot はページ単位の noarchive で学習から外せる</opt>
+          <opt>学習利用だけを外し検索結果には残る。Amazonbot は学習だけを制御する二次トークンで外せる</opt>
+          <opt>学習利用に加えて検索結果からも消える。Amazonbot は robots.txt のキャッシュを 30 日空ければ外せる</opt>
           <ans><p>消えない。Applebot-Extended は学習利用だけを制御する二次トークンで、自身はクロールせず、拒否しても検索結果には残る。Amazonbot はページ単位の <code>noarchive</code> メタタグで学習から外せる。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -147,19 +181,27 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>robots.txt の外側で動いているもの</h2>
-        <p>robots.txt には利用目的を書けません。この欠落を、IETF と Cloudflare が別々の方向から埋めようとしています。どちらもまだ標準ではありません。</p>
+        <p>ここまでは robots.txt の中の話でしたが、実務に効いてくるものはその外側にもあります。というのも、robots.txt には取得の可否しか書けず、取ったあとに何へ使ってよいかという利用目的を書けないからです。この欠落を、IETF と Cloudflare が別々の方向から埋めようとしています。どちらもまだ標準ではありません。</p>
         <div class="pair">
           <div class="seal official"><small>IETF</small>aipref WG。<span data-term="Content-Usage">Content-Usage</span> を HTTP ヘッダと robots.txt の両方に付け、取得と利用を二段に分ける。<strong>Internet-Draft であり RFC ではない</strong></div>
           <div class="seal paper"><small>Cloudflare</small>Search / Agent / Training の三分類。2026-09-15 から、新規ドメインの広告掲載ページで Training と Agent を既定でブロック。Search は許可のまま</div>
         </div>
-        <p>Cloudflare は <code>Content-Signal:</code> というディレクティブも出しています。<code>Content-Signal: search=yes,ai-train=no</code> のように書きます。</p>
-        <p class="note">実務の含意は一つです。自分が robots.txt に何も書いていなくても、CDN 側の既定でブロックが入ることがあります。「許可したつもり」を確かめる先が増えました。</p>
+        <p>Cloudflare は <code>Content-Signal:</code> というディレクティブも出しています。<code>Content-Signal: search=yes,ai-train=no</code> のように書きます。書き方を見ると分かるように、検索と学習で可否を分けて示す形になっています。</p>
+        <p class="note">実務の含意は一つです。自分が robots.txt に何も書いていなくても、CDN 側の既定でブロックが入ることがあります。だから「許可したつもり」を確かめる先が、自社の robots.txt だけでなく CDN の設定にも増えました。</p>
         <card id="c-04-9">
           <q>IETF aipref の <code>Content-Usage</code> は、いま何の段階ですか。robots.txt と何が違いますか。</q>
+          <opt correct>Internet-Draft で RFC ではない。robots.txt が取得の可否を書くのに対し、利用の意向を書く</opt>
+          <opt>すでに RFC として標準化済み。robots.txt が取得の可否を書くのに対し、利用の意向を書く</opt>
+          <opt>Internet-Draft で RFC ではない。robots.txt が利用の意向を書くのに対し、取得の可否を書く</opt>
+          <opt>Internet-Draft で RFC ではない。robots.txt と同じく取得の可否だけを、HTTP ヘッダに書く</opt>
           <ans><p>Internet-Draft（aipref WG、Proposed Standard 志向）で、RFC ではない。robots.txt が取得の可否を書くのに対し、Content-Usage は利用の意向を書く。取得と利用を二段に分ける設計で、HTTP ヘッダと robots.txt の両方に付ける。</p></ans>
         </card>
         <card id="c-04-10">
           <q>Cloudflare のボット三分類と、2026-09-15 から何が変わるかを言ってください。</q>
+          <opt correct>Search / Agent / Training の三分類。新規ドメインの広告掲載ページで Training と Agent を既定でブロック</opt>
+          <opt>学習 / 検索インデックス / ユーザー起動の三分類。新規ドメインの広告掲載ページで Training と Agent を既定でブロック</opt>
+          <opt>Search / Agent / Training の三分類。新規ドメインの広告掲載ページで Search と Training を既定でブロック</opt>
+          <opt>Search / Agent / Training の三分類。すべてのドメインで三分類とも既定でブロックし、許可は個別に設定</opt>
           <ans><p>Search（収集して後で答えるためのインデックス）／ Agent（人の代理でいま行動する）／ Training（学習用の収集）。2026-09-15 から、新規に Cloudflare へ載せるドメインでは、広告を出しているページで Training と Agent が既定でブロックされる。Search は許可のまま。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
@@ -171,7 +213,7 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>作業例</h2>
-        <p>方針: 学習には使われたくない。ChatGPT・Perplexity・Claude の回答には出てよい。Google Search（AI 含む）も出してよい。</p>
+        <p>ここまでの内容を、一つの robots.txt にまとめてみます。方針は、学習には使われたくない、ChatGPT・Perplexity・Claude の回答には出てよい、Google Search（AI 含む）にも出してよい、というものです。学習用と検索用の設定が独立しているので、この方針はそのまま行に落とせます。</p>
         <pre>User-agent: GPTBot
 Disallow: /
 
@@ -195,16 +237,24 @@ Allow: /
 
 User-agent: PerplexityBot
 Allow: /</pre>
-        <p>この例では Googlebot に対する規則を書いていません。Perplexity-User と ChatGPT-User と Meta-ExternalFetcher は robots.txt だけでは止まらないことがあります。秘密のパスは認証と noindex です。</p>
+        <p>この例では Googlebot に対する規則を書いていません。というのも、Google では AI 面も通常の検索も同じ Googlebot が担当していて、方針が「どちらにも出してよい」である以上、書き足す必要がないからです。ただし、この書き方で取得が止まらない相手もいます。Perplexity-User と ChatGPT-User と Meta-ExternalFetcher は robots.txt だけでは止まらないことがあります。だから、秘密のパスは認証と noindex で守ってください。</p>
       </section>
       <section class="step">
         <h2>閉じてから答える</h2>
         <card id="c-04-11">
           <q>GPTBot だけ Disallow したサイトは ChatGPT search に出なくなる。正しいですか。</q>
+          <opt correct>誤り。検索回答への掲載は OAI-SearchBot で決まり、学習用の GPTBot とは独立している</opt>
+          <opt>正しい。GPTBot を拒否すると OAI-SearchBot のクロールもまとめて止まるため掲載されない</opt>
+          <opt>正しい。ChatGPT search の掲載は、GPTBot が集めたクロール結果から作られている</opt>
+          <opt>誤り。検索回答への掲載は ChatGPT-User で決まり、学習用の GPTBot とは独立している</opt>
           <ans><p>誤り。ChatGPT search への掲載は OAI-SearchBot で決まる。GPTBot は学習用で、二つは独立している。</p></ans>
         </card>
         <card id="c-04-12">
           <q>Google-Extended を拒否したのに AI Overviews に出ます。バグですか。</q>
+          <opt correct>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効き、Search の掲載には使われない</opt>
+          <opt>バグではない。Google-Extended の反映には約 24 時間かかるので、待てば AI Overviews からも消える</opt>
+          <opt>バグである。Google-Extended は AI Overviews 用の制御トークンなので、拒否すれば出なくなるはず</opt>
+          <opt>バグではない。AI Overviews の制御は、Applebot-Extended と同じ性質の二次トークンが担当している</opt>
           <ans><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></ans>
         </card>
       </section>
