@@ -28,8 +28,8 @@
           <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが User-Agent（以下 UA）名を分けて実現しているだけです</li>
           <li><strong>最長一致。</strong>複数の規則が当たったら、オクテット数が最も多い規則が使われます</li>
           <li><strong>パスは大小を区別し、UA トークンは区別しない。</strong>パスの照合は case sensitive（SHOULD）、UA の照合は case-insensitive（MUST）</li>
-          <li><strong>4xx と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、クローラーは「どのリソースにもアクセスしてよい」と解釈します。5xx を返したときは「全面禁止」とみなします</li>
-          <li>キャッシュは 24 時間まで。パーサーは最低 500 KiB を読む</li>
+          <li><strong>4xx と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、クローラーは「どのリソースにもアクセスしてよい」と解釈してよい（MAY）とされます。5xx を返したときは「全面禁止」とみなさなければならない（MUST）とされ、こちらのほうが強い規定です。ただし 5xx が長期間（たとえば 30 日）続く場合は、robots.txt が無いものとして扱ってよいとも書かれています</li>
+          <li>キャッシュは 24 時間を超えて使うべきでない（SHOULD NOT。robots.txt が到達不能なときは例外）。パーサーは最低 500 KiB を読む</li>
         </ul>
         <p class="note">アクセス認可ではない以上、秘密の URL を robots.txt で隠すのは筋が悪いという話が、ここに繋がります。止めたいものは認証で止めてください。そして用途の区別が規格にない以上、学習だけを外せるかどうかは、ベンダーが公開している UA の名前を見て確かめるしかありません。</p>
         <card id="c-04-2">
@@ -38,7 +38,7 @@
           <opt>4xx なら全面禁止とみなし、5xx ならどのリソースにもアクセスしてよいと解釈する</opt>
           <opt>4xx でも 5xx でも、直前に読めた robots.txt を 24 時間まではキャッシュとして使い続ける</opt>
           <opt>4xx でも 5xx でも、規格上は取得を保留し robots.txt が読めるようになるまで待つ</opt>
-          <ans><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。</p></ans>
+          <ans><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。ただし 5xx が 30 日規模で続くと、逆に robots.txt 無しとして扱われうる。</p></ans>
         </card>
         <card id="c-04-3">
           <q>RFC 9309 は robots.txt の規則を何ではないと明記していますか。</q>
@@ -49,12 +49,12 @@
           <ans><p>アクセス認可ではない（"These rules are not a form of access authorization."）。守るかどうかは相手次第であり、規格には学習・検索・エージェントという用途の区別もない。用途はベンダーが UA を分けて実現しているだけ。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
-          <ul><li>RFC 9309, §1.4, §2.2.1, §2.2.2, §2.3.1.3, §2.3.1.4, §2.4, §2.5</li></ul>
+          <ul><li>RFC 9309, §1, §2.2.1, §2.2.2, §2.3.1.3, §2.3.1.4, §2.4, §2.5</li></ul>
         </details>
       </section>
       <section class="step">
         <h2>OpenAI</h2>
-        <p>ここからはベンダーごとに UA の名前を確認していきます。OpenAI は、学習・検索・ユーザー起動の三つをそれぞれ別の名前に割り当てています。</p>
+        <p>ここからはベンダーごとに UA の名前を確認していきます。OpenAI は、学習・検索・ユーザー起動をそれぞれ別の名前に割り当てています（ほかに広告用の OAI-AdsBot がありますが、ここでは扱いません）。</p>
         <ul class="plain">
           <li><strong>OAI-SearchBot</strong> ChatGPT の検索回答に出す。拒否すると検索回答に出ない。ナビリンクは残る場合あり。反映は約 24 時間</li>
           <li><strong>GPTBot</strong> 基盤モデルの学習</li>
@@ -93,14 +93,14 @@ Allow: /</pre>
           </tbody>
         </table>
         <p>運用側の作法も公式ドキュメントに書かれています。robots.txt と Crawl-delay を尊重すること、CAPTCHA を迂回しないこと、そして IP ブロックは robots.txt が読めず不安定であることです。</p>
-        <p class="note">ただし、ユーザー起動のフェッチャーの扱いは OpenAI / Perplexity と違います。Anthropic は、ユーザー起動の Claude-User も robots.txt で止められると書いています。つまり同じユーザー起動でも robots.txt が効くかどうかはベンダー間で一致しないので、一社の書き方を他社にそのまま当てはめないでください。</p>
+        <p class="note">ただし、ユーザー起動のフェッチャーの扱いは OpenAI / Perplexity と違います。Anthropic は自社ボット全体が robots.txt を尊重すると書いており、Claude-User についても robots.txt で制御できるとしています。つまり同じユーザー起動でも robots.txt が効くかどうかはベンダー間で一致しないので、一社の書き方を他社にそのまま当てはめないでください。</p>
         <card id="c-04-5">
           <q>ユーザー起動のフェッチャーと robots.txt の関係について、三社の記述の組み合わせとして正しいものはどれですか。</q>
           <opt correct>Claude-User は尊重すると書き、ChatGPT-User は適用されない場合があると書き、Perplexity-User は一般に無視すると書く</opt>
           <opt>Claude-User は一般に無視すると書き、ChatGPT-User は尊重すると書き、Perplexity-User は適用されない場合があると書く</opt>
           <opt>Perplexity-User は尊重すると書き、Claude-User は適用されない場合があると書き、ChatGPT-User は一般に無視すると書く</opt>
           <opt>三社ともユーザー起動のフェッチャーは robots.txt を尊重すると書いており、記述は揃っている</opt>
-          <ans><p>揃っていない。Anthropic の Claude-User は robots.txt を尊重すると書く。OpenAI の ChatGPT-User は適用されない場合があると書く。Perplexity-User は一般に robots.txt を無視すると書く。矛盾を消さずに覚える。</p></ans>
+          <ans><p>揃っていない。Anthropic は自社ボット全体が robots.txt を尊重すると書き、Claude-User もそこに含まれる。OpenAI の ChatGPT-User は適用されない場合があると書く。Perplexity-User は一般に robots.txt を無視すると書く。矛盾を消さずに覚える。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
           <ul><li>Anthropic Help Center, crawler FAQ（更新表示 2026-04-07）</li></ul>
@@ -131,8 +131,8 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Google</h2>
-        <p>Google は、ここまでの三社と制御の置き場所が違います。AI Overviews / AI Mode のクロール制御は Googlebot で、AI 機能だけを別のボットが担当するわけではありません。だから適格条件も通常の検索と同じで、インデックスされ、スニペット付きで Search に出せることだけです。追加の技術要件はありません。</p>
-        <p>紛らわしいのは <span data-term="Google-Extended">Google-Extended</span> です。これは独立した UA を持たず、robots.txt のトークンだけを見ます。影響が及ぶのは Gemini アプリと Vertex の学習・接地で、<strong>Search の掲載や順位には使いません。</strong>たとえば Google-Extended を拒否しても、AI Overviews への出方はそのままです。</p>
+        <p>Google は、ここまでの三社と制御の置き場所が違います。AI Overviews / AI Mode のクロール制御は Googlebot で、AI 機能だけを別のボットが担当するわけではありません。だから適格条件も通常の検索と同じで、インデックスされ、スニペット付きで Search に出せることだけです。追加の技術要件はありません。これに加えて、Search Console の生成 AI 掲載から自分で除外していないことも条件になります。</p>
+        <p>紛らわしいのは <span data-term="Google-Extended">Google-Extended</span> です。これは独立した UA を持たず、robots.txt のトークンだけを見ます。影響が及ぶのは学習側です。Gemini アプリと Vertex の学習・接地に加えて、Search の生成 AI 面で応答を作るモデルの学習も、このトークンで制限します。一方で <strong>Search の掲載や順位には使いません。</strong>たとえば Google-Extended を拒否しても、AI Overviews への出方はそのままです。</p>
         <p>では AI 面だけを止めたい場合はどうするかというと、Search Console の生成 AI control を使います（第 8 章）。プレビューの出方を絞りたい場合は nosnippet 系です。</p>
         <card id="c-04-7">
           <q>AI Overviews に出るかどうかを制御するのは、どのボットですか。Google-Extended は何に効きますか。</q>
@@ -140,7 +140,7 @@ Allow: /</pre>
           <opt>制御は Google-Extended。Googlebot は Gemini アプリと Vertex の学習・接地に効く</opt>
           <opt>制御は AI 機能専用のボット。Google-Extended は Search の掲載と順位に効く</opt>
           <opt>制御は Googlebot。Google-Extended は Search の掲載と順位に効き、学習には効かない</opt>
-          <ans><p>Googlebot。AI 機能専用のボットはない。Google-Extended は独立した UA を持たない robots.txt のトークンで、効くのは Gemini アプリと Vertex の学習・接地。Search の掲載や順位には使わない。</p></ans>
+          <ans><p>Googlebot。AI 機能専用のボットはない。Google-Extended は独立した UA を持たない robots.txt のトークンで、効くのは学習側（Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習）。Search の掲載や順位には使わない。</p></ans>
         </card>
         <details class="source"><summary>出典</summary>
           <ul>
@@ -159,7 +159,7 @@ Allow: /</pre>
             <tr><td>Apple</td><td>Applebot-Extended</td><td>学習利用だけを制御する。自身はクロールしない。拒否しても検索結果には残る</td></tr>
             <tr><td>Amazon</td><td>Amazonbot / Amzn-SearchBot / Amzn-User</td><td>Amazonbot は学習に使われうる。ページ単位の <code>noarchive</code> で学習から外せる。robots.txt のキャッシュは最大 30 日</td></tr>
             <tr><td>Mistral</td><td>MistralAI-Training / -Index / -User</td><td>学習用だけが生成 AI 学習に使われる。残り二つは学習に使わないと明記</td></tr>
-            <tr><td>DuckDuckGo</td><td>DuckAssistBot</td><td>AI 回答用のライブ取得。学習には使わない。反映は 72 時間。拒否しても検索順位に影響しない</td></tr>
+            <tr><td>DuckDuckGo</td><td>DuckAssistBot</td><td>AI 回答のためにリアルタイムでクロールする自動クローラー。学習には使わない。反映は 72 時間。拒否しても検索順位に影響しない</td></tr>
             <tr><td>Common Crawl</td><td>CCBot</td><td>公開アーカイブ用。なりすましがあるため UA だけで判定しない。IP は JSON で公開</td></tr>
           </tbody>
         </table>
@@ -207,7 +207,7 @@ Allow: /</pre>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>IETF aipref WG charter / draft-ietf-aipref-attach（Internet-Draft）</li>
-            <li>Cloudflare, Content Independence Day: AI options / changelog（2026-07-01）</li>
+            <li>Cloudflare, Your site, your rules: new AI traffic options for all customers（2026-07-01）</li>
           </ul>
         </details>
       </section>
@@ -255,6 +255,6 @@ Allow: /</pre>
           <opt>バグではない。Google-Extended の反映には約 24 時間かかるので、待てば AI Overviews からも消える</opt>
           <opt>バグである。Google-Extended は AI Overviews 用の制御トークンなので、拒否すれば出なくなるはず</opt>
           <opt>バグではない。AI Overviews の制御は、Applebot-Extended と同じ性質の二次トークンが担当している</opt>
-          <ans><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></ans>
+          <ans><p>バグではない。Google-Extended が効くのは学習側（Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習）で、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></ans>
         </card>
       </section>

@@ -46,9 +46,9 @@
 
 | 出典 | 何が一次か |
 |---|---|
-| [RFC 9309, Robots Exclusion Protocol](https://www.rfc-editor.org/rfc/rfc9309.html) | 規則はアクセス認可ではないこと（§1.4）、最長一致（§2.2.2）、UA は case-insensitive（§2.2.1）、4xx は許可・5xx は全面禁止（§2.3.1.3, §2.3.1.4）、24 時間キャッシュ（§2.4）、500 KiB（§2.5） |
+| [RFC 9309, Robots Exclusion Protocol](https://www.rfc-editor.org/rfc/rfc9309.html) | 規則はアクセス認可ではないこと（§1）、最長一致（§2.2.2）、UA は case-insensitive（§2.2.1）、4xx は許可（MAY）・5xx は全面禁止（MUST。30 日規模の継続は例外）（§2.3.1.3, §2.3.1.4）、24 時間キャッシュ（SHOULD NOT、§2.4）、500 KiB（§2.5） |
 | [IETF aipref WG charter](https://datatracker.ietf.org/doc/charter-ietf-aipref/) / [draft-ietf-aipref-attach](https://datatracker.ietf.org/doc/draft-ietf-aipref-attach/) | 利用意向の表現を標準化する作業。`Content-Usage` は Internet-Draft であり RFC ではない |
-| [Cloudflare, Content Independence Day: AI options](https://blog.cloudflare.com/content-independence-day-ai-options/) / [changelog 2026-07-01](https://developers.cloudflare.com/changelog/post/2026-07-01-ai-traffic-options/) | Search / Agent / Training の三分類、2026-09-15 からの新規ドメイン既定ブロック、`Content-Signal:` ディレクティブ |
+| [Cloudflare, Your site, your rules: new AI traffic options for all customers](https://blog.cloudflare.com/content-independence-day-ai-options/)（2026-07-01） / [managed robots.txt](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/) | Search / Agent / Training の三分類、2026-09-15 からの新規ドメイン既定ブロック、`Content-Signal:` ディレクティブ |
 
 ### ベンダーのクローラ（四社の外側）
 
@@ -79,7 +79,7 @@ Bytespider（ByteDance）は到達可能な公式文書を確認できなかっ�
 |---|---|
 | Puerto, Gubri, Green, Oh & Yun, *C-SEO Bench: Does Conversational SEO Work?*, NeurIPS 2025 Datasets & Benchmarks / [arXiv:2506.11097](https://arxiv.org/abs/2506.11097) | 競合採用・複数ドメイン条件で、多くの C-SEO 手法が無効〜逆効果。従来 SEO 的手法が有効。ゼロサム性 |
 | Wallat, Heuss, de Rijke & Anand, *Correctness is not Faithfulness in RAG Attributions*, [arXiv:2412.18004](https://arxiv.org/abs/2412.18004) | 引用の correctness と faithfulness の分離。最大 57% が post-rationalization |
-| Liu et al., *Lost in the Middle: How Language Models Use Long Contexts*, TACL 2023 / [arXiv:2307.03172](https://arxiv.org/abs/2307.03172) | 入力文脈の位置バイアス |
+| Liu et al., *Lost in the Middle: How Language Models Use Long Contexts*, TACL 2024 (Vol. 12) / [arXiv:2307.03172](https://arxiv.org/abs/2307.03172) | 入力文脈の位置バイアス |
 | Zhang et al., *Practical Poisoning Attacks against RAG*（CorruptRAG）, ACM SACMAT 2026 / [arXiv:2504.03957](https://arxiv.org/abs/2504.03957) | 毒入りテキスト 1 件での RAG 出力操作。UGC 面のリスクとして引く |
 
 ## 教材の作り方の根拠（学習科学）

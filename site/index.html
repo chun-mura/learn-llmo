@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Fragment+Mono&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/learn.css">
-  <script>window.LLMO_TERMS = {"LLMO": "生成 AI の回答の中で、自社のページやブランドが言及・引用される状態を改善する実務用語です。論文が導入した語ではありません。", "GEO": "Aggarwal らが KDD 2024 で定式化した枠組みです。生成エンジンの回答内での可視性を、テキストの改変で上げることを扱います。", "SEO": "検索エンジン向けに、発見・理解・掲載を最適化することです。Google は生成 AI 面でもこれが土台だとしています。", "AEO": "質問に直接答える面への最適化を指す業界用語です。強調スニペット時代からの言い回しで、Google の製品名ではありません。", "AIO": "文脈によって、生成 AI 検索の全体を指したり、AI Overviews だけを指したりする業界用語です。Google の製品名ではありません。", "言及": "回答文にブランド名や製品名が出ることです。出典 URL のリンクが付かない場合もあるため、引用とは別に数えてください。", "引用": "回答に出典 URL が付くことです。名前だけが出る言及とは別のできごとなので、測るときは分けて数えてください。", "impression": "GEO 論文が定義した、生成回答における出典の可視性です。単語数、位置補正単語数、主観印象の三つに分けて測ります。", "Word Count": "GEO 論文の可視性指標の一つです。その出典に紐づく文の単語数が、回答全体の単語数に占める割合を測ります。単純な分量の指標です。", "位置補正単語数": "GEO 論文の主指標の一つです。出典に紐づく単語数を、回答の先頭に近い引用ほど重くなるように補正して数えます。", "Subjective Impression": "GEO 論文の可視性指標の一つです。関連性・影響・独自性などを LLM に採点させ、正規化した主観的な印象を指します。", "GEO-bench": "GEO 論文が可視性の改善率を測るために使った評価セットです。約 1 万クエリからなり、論文の数字はこの上で出ています。", "内部 GE": "GEO 論文が実験のために自作した生成エンジンです。Google 上位 5 件と gpt-3.5-turbo を組み合わせたもので、実在の製品ではありません。", "生成エンジン": "検索で文書を取り、LLM が引用つきの回答を書くシステムのことです。GEO 論文がこの呼び名を使っています。実装は製品ごとに違います。", "C-SEO": "competitive SEO の略で、競合が同じ手法を採る条件下の SEO を指します。C-SEO Bench が想定した条件です。", "C-SEO Bench": "Puerto らが NeurIPS 2025 で出したベンチマークです。競合採用と複数ドメインの条件では、多くの C-SEO 手法が無効か逆効果だったと報告しています。", "GPT-3.5": "GEO 論文の内部 GE が回答生成に使ったモデルです。実験条件を述べるときは gpt-3.5-turbo と書きます。", "RAG": "検索で取ったページに回答を接地する手法です。Google は自社の生成 AI 機能がこれに根ざすと説明しています。", "query fan-out": "一つの質問から複数の関連検索を同時に出すことです。Google の公式用語で、引用元は展開後の下位クエリ側で選ばれます。", "下位クエリ": "query fan-out で元の質問から展開される、個々の検索クエリのことです。引用元はこの下位クエリ側で選ばれます。", "AI Overviews": "Google Search の結果ページに出る生成概要です。通常検索に追加価値があると判断されたときだけ出ます。", "AI Mode": "Google Search の対話型の生成 AI 面です。AI Overviews とはモデルも手法も違い、出るリンクも一致しないと公式が述べています。", "強調スニペット": "検索結果ページの上部に、質問への答えを抜き出して直接示す枠です。AEO という言い回しはこの時代から使われています。", "SERP": "Search Engine Results Page の略で、検索結果ページのことです。生成 AI 面の引用元は、元クエリの SERP 上位とは限りません。", "ゼロクリック": "回答面だけで用が足り、検索結果のリンクがクリックされない状態です。クリック数だけで LLMO の成否を判断しない理由になります。", "入場条件": "本教材の用語で、Search インデックスに載り、スニペットを出せる状態のことです。ここを満たさないと AI 面の出典候補になりません。", "インデックス": "検索エンジンがページを登録し、クエリに対して取り出せるようにした索引です。Google の AI 機能は同じ Search インデックスからページを取り出します。", "クロール": "クローラーがページを巡回して取得することです。インデックスに載る前段の工程にあたり、ここで止まると掲載もされません。", "スニペット": "検索結果に出る本文の抜粋です。スニペットを出せる状態は、生成 AI 面の出典候補になるための入場条件に含まれます。", "noindex": "そのページをインデックスから外すための指定です。公開したくない URL については、認証とあわせて使ってください。", "nosnippet": "スニペットと AI 面のプレビューを出させないためのメタタグです。効かないときは、Googlebot が取得した HTML にそのタグが入っているかを確認してください。", "NOARCHIVE": "Bing のメタタグです。Copilot の回答にも学習にも使われなくなりますが、通常の Bing 検索表示は変わりません。", "NOCACHE": "Bing のメタタグです。URL・タイトル・スニペットだけが使われる状態になり、通常の Bing 検索表示は変わりません。", "メタタグ": "HTML の head に置いて、検索エンジンやボットへの指示を書くタグです。noindex、nosnippet、NOARCHIVE などが該当します。", "構造化データ": "JSON-LD などで、ページの意味を機械に明示するマークアップです。リッチリザルト用であり、生成 AI 検索の必須条件ではありません。", "JSON-LD": "構造化データを書くための推奨形式です。マークアップの内容は、読者に見える本文と一致させてください。本文に無い情報を書くことはできません。", "リッチリザルト": "構造化データをもとに、検索結果を通常より豊かな見た目で出す表示です。構造化データの本来の用途はここにあり、生成 AI 検索の要件ではありません。", "robots.txt": "サイトの root に置き、どのボットにどのパスを許すかを書くファイルです。RFC 9309 で標準化されています。", "RFC 9309": "robots.txt を標準化した RFC です。規則はアクセス認可ではないと明記し、4xx は許可、5xx は全面禁止とみなします。", "User-Agent": "ボットが自分を名乗る文字列です。以下 UA と書きます。ベンダーは UA 名を分けることで、学習用と検索用を区別しています。", "Crawl-delay": "robots.txt に書く、取得間隔の指定です。Anthropic は公式ドキュメントでこれを尊重すると述べています。", "4xx / 5xx": "robots.txt を返すときの HTTP ステータスコードです。4xx なら全許可、5xx なら全面禁止と解釈され、結果が正反対になります。", "GPTBot": "OpenAI の学習用クローラーです。検索掲載とは独立していて、拒否しても ChatGPT の検索回答からは外れません。", "OAI-SearchBot": "ChatGPT search 用のインデックスボットです。拒否すると検索回答に出なくなり、反映には約 24 時間かかります。", "ChatGPT-User": "OpenAI のユーザー起動フェッチャーです。自動クロールではなく、検索掲載の判定にも使われません。robots.txt が適用されない場合があります。", "ChatGPT search": "ChatGPT の検索機能です。出典候補になるかどうかは OAI-SearchBot を許可しているかで決まります。", "ClaudeBot": "Anthropic の学習用クローラーです。robots.txt と Crawl-delay を尊重すると公式が述べています。", "Claude-SearchBot": "Anthropic の検索インデックス用クローラーです。拒否すると Claude の検索インデックスから外れます。", "Claude-User": "Anthropic のユーザー起動フェッチャーです。拒否するとユーザー起点の可視性が下がります。robots.txt を尊重すると公式が述べています。", "PerplexityBot": "Perplexity の検索掲載用クローラーです。学習用ではなく、拒否すると Perplexity の回答の出典候補から外れます。", "Perplexity-User": "Perplexity のユーザー起動フェッチャーです。一般に robots.txt を無視するため、robots.txt では止まりません。", "Perplexity": "検索して引用つきの回答を書く生成 AI 製品です。GEO 論文は実世界のエンジンとして Perplexity.ai を使いました。", "Googlebot": "Google Search の検索用クローラーです。AI 面に本文が出るかどうかは、Googlebot が取得した HTML の内容で決まります。", "Google-Extended": "robots.txt のトークンです。Gemini アプリと Vertex AI の学習・接地に影響し、Search の掲載や順位には使いません。", "Gemini": "Google の生成 AI アプリです。Google-Extended の拒否は、このアプリと Vertex AI の学習・接地に効きます。", "Vertex AI": "Google のクラウド向け AI プラットフォームです。Google-Extended の影響範囲に、Gemini アプリとあわせて含まれます。", "Applebot-Extended": "Apple の学習利用だけを制御する二次トークンです。自身はクロールせず、拒否しても Apple の検索結果には残ります。", "Amazonbot": "Amazon の収集用クローラーです。学習に使われうるため、ページ単位の noarchive で学習から外せます。", "MistralAI-Training": "Mistral の学習用クローラーです。生成 AI の学習に使われるのはこれだけで、検索用とユーザー起動は学習に使わないと明記されています。", "Meta-ExternalAgent": "Meta の学習・インデックス用クローラーです。ユーザー起動の Meta-ExternalFetcher は robots.txt を迂回しうると公式が書いています。", "DuckAssistBot": "DuckDuckGo の AI 回答用クローラーです。学習には使わないと明記されていて、拒否しても検索順位に影響しません。", "CCBot": "Common Crawl のクローラーです。公開アーカイブ用で、なりすましがあるため UA だけで判定しないでください。", "Common Crawl": "ウェブを収集して公開アーカイブを作る取り組みです。クローラーは CCBot で、学習データの供給元にもなります。", "Bytespider": "ByteDance のクローラーです。到達可能な公式ドキュメントを確認できず、robots.txt の遵守についても一次情報がないため、本教材では未確認として扱います。", "WAF": "Web Application Firewall の略で、不正なアクセスを遮断する仕組みです。ボットを一括拒否していると、robots.txt で許可したつもりでも届きません。", "CDN": "配信を代行するネットワークです。自分が robots.txt に何も書いていなくても、CDN 側の既定でブロックが入ることがあります。", "Content-Signal": "Cloudflare が提案する robots.txt のディレクティブです。search / ai-input / ai-train の可否を書きます。", "Content-Usage": "IETF の aipref ワーキンググループが定義中の利用意向フィールドです。Internet-Draft であり、RFC ではありません。", "Internet-Draft": "IETF で検討中の文書です。RFC として発行された標準ではないため、確定した仕様として扱わないでください。", "llms.txt": "Jeremy Howard が提案した、エージェント向けの Markdown 地図です。Google Search は使わないと公式が述べています。", "Lighthouse": "Chrome に入っているページ検査ツールです。llms.txt の監査は、サーバーエラーのときに警告を出し、404 のときは N/A になります。", "IndexNow": "参加している検索エンジンに URL の更新を通知する仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。", "Search Console": "Google のサイト所有者向け管理ツールです。生成 AI パフォーマンスレポートと、生成 AI control のトグルがここにあります。", "Search generative AI control": "Search Console の、生成 AI 面への掲載・接地を止めるトグルです。学習のオプトアウトではありません。以下、生成 AI control と書きます。", "Discover": "Google のフィード型の配信面です。生成 AI control の対象範囲に、AI Overviews と AI Mode とあわせて含まれます。", "Bing Webmaster Tools": "Bing のサイト所有者向け管理ツールです。Copilot などでの掲載を見る AI Performance レポートがここにあります。", "AI Performance レポート": "Bing Webmaster Tools のレポートです。Microsoft Copilot、Bing の AI 生成要約、一部の提携先を対象にしています。", "Copilot": "Microsoft の生成 AI 製品です。回答に出したくない場合は、Bing に NOARCHIVE を付けます。通常の Bing 検索表示は変わりません。", "E-E-A-T": "経験・専門性・権威性・信頼性という、Google の品質評価で使う観点の束です。それ自体は単一のランキング因子ではありません。", "UGC": "ユーザー投稿コンテンツのことです。レビュー、コメント、Q&A、掲示板など、自分以外の人が本文を書ける面が該当します。", "faithfulness": "引用がその文書を実際に根拠にしているかという性質です。引用が正しく見えること（correctness）とは別の性質になります。", "post-rationalization": "文を生成したあとで、それらしい出典を後付けすることです。引用が付いていても根拠とは限らない理由の一つになります。", "lost in the middle": "長い入力文脈の中央に置かれた情報の利用が落ちる現象です。Liu ら TACL 2023 が報告しました。先頭と末尾はよく使われます。", "KDD": "データマイニングの国際会議です。Aggarwal らの GEO 論文は、この KDD 2024 で発表されました。", "NeurIPS": "機械学習の国際会議です。C-SEO Bench は NeurIPS 2025 の Datasets & Benchmarks トラックで出ました。", "TACL": "Transactions of the ACL という自然言語処理の学術誌です。lost in the middle はここに載りました。"};</script>
+  <script>window.LLMO_TERMS = {"LLMO": "生成 AI の回答の中で、自社のページやブランドが言及・引用される状態を改善する実務用語です。論文が導入した語ではありません。", "GEO": "Aggarwal らが KDD 2024 で定式化した枠組みです。生成エンジンの回答内での可視性を、テキストの改変で上げることを扱います。", "SEO": "検索エンジン向けに、発見・理解・掲載を最適化することです。Google は生成 AI 面でもこれが土台だとしています。", "AEO": "質問に直接答える面への最適化を指す業界用語です。強調スニペット時代からの言い回しで、Google の製品名ではありません。", "AIO": "文脈によって、生成 AI 検索の全体を指したり、AI Overviews だけを指したりする業界用語です。Google の製品名ではありません。", "言及": "回答文にブランド名や製品名が出ることです。出典 URL のリンクが付かない場合もあるため、引用とは別に数えてください。", "引用": "回答に出典 URL が付くことです。名前だけが出る言及とは別のできごとなので、測るときは分けて数えてください。", "impression": "GEO 論文が定義した、生成回答における出典の可視性です。単語数、位置補正単語数、主観印象の三つに分けて測ります。", "Word Count": "GEO 論文の可視性指標の一つです。その出典に紐づく文の単語数が、回答全体の単語数に占める割合を測ります。単純な分量の指標です。", "位置補正単語数": "GEO 論文の主指標の一つです。出典に紐づく単語数を、回答の先頭に近い引用ほど重くなるように補正して数えます。", "Subjective Impression": "GEO 論文の可視性指標の一つです。関連性・影響・独自性などを LLM に採点させ、正規化した主観的な印象を指します。", "GEO-bench": "GEO 論文が可視性の改善率を測るために使った評価セットです。約 1 万クエリからなり、論文の数字はこの上で出ています。", "内部 GE": "GEO 論文が実験のために自作した生成エンジンです。Google 上位 5 件と gpt-3.5-turbo を組み合わせたもので、実在の製品ではありません。", "生成エンジン": "検索で文書を取り、LLM が引用つきの回答を書くシステムのことです。GEO 論文がこの呼び名を使っています。実装は製品ごとに違います。", "C-SEO": "Conversational Search Engine Optimization の略で、会話型の検索エンジンに向けた最適化を指します。競合も同じ手法を採る条件は C-SEO Bench が足した評価軸です。", "C-SEO Bench": "Puerto らが NeurIPS 2025 で出したベンチマークです。競合採用と複数ドメインの条件では、多くの C-SEO 手法が無効か逆効果だったと報告しています。", "GPT-3.5": "GEO 論文の内部 GE が回答生成に使ったモデルです。実験条件を述べるときは gpt-3.5-turbo と書きます。", "RAG": "検索で取ったページに回答を接地する手法です。Google は自社の生成 AI 機能がこれに根ざすと説明しています。", "query fan-out": "一つの質問から複数の関連検索を同時に出すことです。Google の公式用語で、引用元は展開後の下位クエリ側で選ばれます。", "下位クエリ": "query fan-out で元の質問から展開される、個々の検索クエリのことです。引用元はこの下位クエリ側で選ばれます。", "AI Overviews": "Google Search の結果ページに出る生成概要です。通常検索に追加価値があると判断されたときだけ出ます。", "AI Mode": "Google Search の対話型の生成 AI 面です。AI Overviews とはモデルも手法も違い、出るリンクも一致しないと公式が述べています。", "強調スニペット": "検索結果ページの上部に、質問への答えを抜き出して直接示す枠です。AEO という言い回しはこの時代から使われています。", "SERP": "Search Engine Results Page の略で、検索結果ページのことです。生成 AI 面の引用元は、元クエリの SERP 上位とは限りません。", "ゼロクリック": "回答面だけで用が足り、検索結果のリンクがクリックされない状態です。クリック数だけで LLMO の成否を判断しない理由になります。", "入場条件": "本教材の用語で、Search インデックスに載り、スニペットを出せる状態のことです。ここを満たさないと AI 面の出典候補になりません。加えて、Search Console の生成 AI 掲載から除外していないことも条件です。", "インデックス": "検索エンジンがページを登録し、クエリに対して取り出せるようにした索引です。Google の AI 機能は同じ Search インデックスからページを取り出します。", "クロール": "クローラーがページを巡回して取得することです。インデックスに載る前段の工程にあたり、ここで止まると掲載もされません。", "スニペット": "検索結果に出る本文の抜粋です。スニペットを出せる状態は、生成 AI 面の出典候補になるための入場条件に含まれます。", "noindex": "そのページをインデックスから外すための指定です。公開したくない URL については、認証とあわせて使ってください。", "nosnippet": "スニペットと AI 面のプレビューを出させないためのメタタグです。効かないときは、Googlebot が取得した HTML にそのタグが入っているかを確認してください。", "NOARCHIVE": "Bing のメタタグです。Copilot の回答にも学習にも使われなくなりますが、通常の Bing 検索表示は変わりません。", "NOCACHE": "Bing のメタタグです。URL・タイトル・スニペットだけが使われる状態になり、通常の Bing 検索表示は変わりません。", "メタタグ": "HTML の head に置いて、検索エンジンやボットへの指示を書くタグです。noindex、nosnippet、NOARCHIVE などが該当します。", "構造化データ": "JSON-LD などで、ページの意味を機械に明示するマークアップです。リッチリザルト用であり、生成 AI 検索の必須条件ではありません。", "JSON-LD": "構造化データを書くための推奨形式です。マークアップの内容は、読者に見える本文と一致させてください。本文に無い情報を書くことはできません。", "リッチリザルト": "構造化データをもとに、検索結果を通常より豊かな見た目で出す表示です。構造化データの本来の用途はここにあり、生成 AI 検索の要件ではありません。", "robots.txt": "サイトの root に置き、どのボットにどのパスを許すかを書くファイルです。RFC 9309 で標準化されています。", "RFC 9309": "robots.txt を標準化した RFC です。規則はアクセス認可ではないと明記し、4xx は許可、5xx は全面禁止とみなします。", "User-Agent": "ボットが自分を名乗る文字列です。以下 UA と書きます。ベンダーは UA 名を分けることで、学習用と検索用を区別しています。", "Crawl-delay": "robots.txt に書く、取得間隔の指定です。Anthropic は公式ドキュメントでこれを尊重すると述べています。", "4xx / 5xx": "robots.txt を返すときの HTTP ステータスコードです。4xx なら全許可、5xx なら全面禁止と解釈され、結果が正反対になります。", "GPTBot": "OpenAI の学習用クローラーです。検索掲載とは独立していて、拒否しても ChatGPT の検索回答からは外れません。", "OAI-SearchBot": "ChatGPT search 用のインデックスボットです。拒否すると検索回答に出なくなり、反映には約 24 時間かかります。", "ChatGPT-User": "OpenAI のユーザー起動フェッチャーです。自動クロールではなく、検索掲載の判定にも使われません。robots.txt が適用されない場合があります。", "ChatGPT search": "ChatGPT の検索機能です。出典候補になるかどうかは OAI-SearchBot を許可しているかで決まります。", "ClaudeBot": "Anthropic の学習用クローラーです。robots.txt と Crawl-delay を尊重すると公式が述べています。", "Claude-SearchBot": "Anthropic の検索インデックス用クローラーです。拒否すると Claude の検索インデックスから外れます。", "Claude-User": "Anthropic のユーザー起動フェッチャーです。拒否するとユーザー起点の可視性が下がります。robots.txt を尊重すると公式が述べています。", "PerplexityBot": "Perplexity の検索掲載用クローラーです。学習用ではなく、拒否すると Perplexity の回答の出典候補から外れます。", "Perplexity-User": "Perplexity のユーザー起動フェッチャーです。一般に robots.txt を無視するため、robots.txt では止まりません。", "Perplexity": "検索して引用つきの回答を書く生成 AI 製品です。GEO 論文は実世界のエンジンとして Perplexity.ai を使いました。", "Googlebot": "Google Search の検索用クローラーです。AI 面に本文が出るかどうかは、Googlebot が取得した HTML の内容で決まります。", "Google-Extended": "robots.txt のトークンです。Gemini アプリと Vertex AI の学習・接地、および Search 生成 AI 面の応答モデルの学習に影響し、Search の掲載や順位には使いません。", "Gemini": "Google の生成 AI アプリです。Google-Extended の拒否は、このアプリと Vertex AI の学習・接地に効きます。", "Vertex AI": "Google のクラウド向け AI プラットフォームです。Google-Extended の影響範囲に、Gemini アプリとあわせて含まれます。", "Applebot-Extended": "Apple の学習利用だけを制御する二次トークンです。自身はクロールせず、拒否しても Apple の検索結果には残ります。", "Amazonbot": "Amazon の収集用クローラーです。学習に使われうるため、ページ単位の noarchive で学習から外せます。", "MistralAI-Training": "Mistral の学習用クローラーです。生成 AI の学習に使われるのはこれだけで、検索用とユーザー起動は学習に使わないと明記されています。", "Meta-ExternalAgent": "Meta の学習・インデックス用クローラーです。ユーザー起動の Meta-ExternalFetcher は robots.txt を迂回しうると公式が書いています。", "DuckAssistBot": "DuckDuckGo の AI 回答用クローラーです。学習には使わないと明記されていて、拒否しても検索順位に影響しません。", "CCBot": "Common Crawl のクローラーです。公開アーカイブ用で、なりすましがあるため UA だけで判定しないでください。", "Common Crawl": "ウェブを収集して公開アーカイブを作る取り組みです。クローラーは CCBot で、学習データの供給元にもなります。", "Bytespider": "ByteDance のクローラーです。到達可能な公式ドキュメントを確認できず、robots.txt の遵守についても一次情報がないため、本教材では未確認として扱います。", "WAF": "Web Application Firewall の略で、不正なアクセスを遮断する仕組みです。ボットを一括拒否していると、robots.txt で許可したつもりでも届きません。", "CDN": "配信を代行するネットワークです。自分が robots.txt に何も書いていなくても、CDN 側の既定でブロックが入ることがあります。", "Content-Signal": "Cloudflare が提案する robots.txt のディレクティブです。search / ai-input / ai-train の可否を書きます。", "Content-Usage": "IETF の aipref ワーキンググループが定義中の利用意向フィールドです。Internet-Draft であり、RFC ではありません。", "Internet-Draft": "IETF で検討中の文書です。RFC として発行された標準ではないため、確定した仕様として扱わないでください。", "llms.txt": "Jeremy Howard が提案した、エージェント向けの Markdown 地図です。Google Search は使わないと公式が述べています。", "Lighthouse": "Chrome に入っているページ検査ツールです。llms.txt の監査は、サーバーエラーのときに警告を出し、404 のときは N/A になります。", "IndexNow": "参加している検索エンジンに URL の更新を通知する仕組みです。Google は参加しておらず、AI 回答に選ばれやすくなるという根拠も公式にはありません。", "Search Console": "Google のサイト所有者向け管理ツールです。生成 AI パフォーマンスレポートと、生成 AI control のトグルがここにあります。", "Search generative AI control": "Search Console の、生成 AI 面への掲載・接地を止めるトグルです。学習のオプトアウトではありません。以下、生成 AI control と書きます。", "Discover": "Google のフィード型の配信面です。生成 AI control の対象範囲に、AI Overviews と AI Mode とあわせて含まれます。", "Bing Webmaster Tools": "Bing のサイト所有者向け管理ツールです。Copilot などでの掲載を見る AI Performance レポートがここにあります。", "AI Performance レポート": "Bing Webmaster Tools のレポートです。Microsoft Copilot、Bing の AI 生成要約、一部の提携先を対象にしています。", "Copilot": "Microsoft の生成 AI 製品です。回答に出したくない場合は、Bing に NOARCHIVE を付けます。通常の Bing 検索表示は変わりません。", "E-E-A-T": "経験・専門性・権威性・信頼性という、Google の品質評価で使う観点の束です。それ自体は単一のランキング因子ではありません。", "UGC": "ユーザー投稿コンテンツのことです。レビュー、コメント、Q&A、掲示板など、自分以外の人が本文を書ける面が該当します。", "faithfulness": "引用がその文書を実際に根拠にしているかという性質です。引用先がその文を支持すること（correctness）とは別の性質になります。", "post-rationalization": "文を生成したあとで、それらしい出典を後付けすることです。引用が付いていても根拠とは限らない理由の一つになります。", "lost in the middle": "長い入力文脈の中央に置かれた情報の利用が落ちる現象です。Liu ら TACL 2024 が報告しました。先頭と末尾はよく使われます。", "KDD": "データマイニングの国際会議です。Aggarwal らの GEO 論文は、この KDD 2024 で発表されました。", "NeurIPS": "機械学習の国際会議です。C-SEO Bench は NeurIPS 2025 の Datasets & Benchmarks トラックで出ました。", "TACL": "Transactions of the ACL という自然言語処理の学術誌です。lost in the middle はここに載りました。"};</script>
 </head>
 <body class="desk" data-lesson="00">
   <a class="skip" href="#stage">本文へ</a>
@@ -189,7 +189,7 @@
       </section>
       <section class="step">
         <h2>SEO との関係</h2>
-        <p><span data-term="SEO">SEO</span> と <span data-term="LLMO">LLMO</span> は別の仕事に見えますが、実は前者が後者の入口になっています。<span data-term="SEO">SEO</span> が扱うのは、<span data-term="クロール">クロール</span>され、<span data-term="インデックス">インデックス</span>され、クエリに対してページが選ばれるまでの過程です。というのも、Google の AI 機能は別の場所からページを集めているわけではなく、通常の検索と同じ Search インデックスから取り出しているからです（<span data-term="RAG">RAG</span>）。だから Search に出る資格がなければ、<span data-term="AI Overviews">AI Overviews</span>（AI 概要）の出典候補にもなりません。たとえば自社のページが <span data-term="noindex">noindex</span> のままなら、どれだけ本文を磨いても出典候補には入りません。本教材ではこの資格を「<span data-term="入場条件">入場条件</span>」と呼びます。Search インデックスに載り、<span data-term="スニペット">スニペット</span>を出せる状態のことです。</p>
+        <p><span data-term="SEO">SEO</span> と <span data-term="LLMO">LLMO</span> は別の仕事に見えますが、実は前者が後者の入口になっています。<span data-term="SEO">SEO</span> が扱うのは、<span data-term="クロール">クロール</span>され、<span data-term="インデックス">インデックス</span>され、クエリに対してページが選ばれるまでの過程です。というのも、Google の AI 機能は別の場所からページを集めているわけではなく、通常の検索と同じ Search インデックスから取り出しているからです（<span data-term="RAG">RAG</span>）。だから Search に出る資格がなければ、<span data-term="AI Overviews">AI Overviews</span>（AI 概要）の出典候補にもなりません。たとえば自社のページが <span data-term="noindex">noindex</span> のままなら、どれだけ本文を磨いても出典候補には入りません。本教材ではこの資格を「<span data-term="入場条件">入場条件</span>」と呼びます。Search インデックスに載り、<span data-term="スニペット">スニペット</span>を出せる状態のことです。なお 2026-07 更新の Google のガイドは、この技術要件に加えて、<span data-term="Search Console">Search Console</span> の生成 AI 掲載から自分で除外していないことも条件に挙げています。既定は「掲載する」なので、触っていなければ満たされています。</p>
         <p class="note">LLMO は SEO の代替ではありません。土台（取得できる、本文がある、独自の情報がある）の上に、回答面の観測と、サービスごとのクローラー方針が乗ります。</p>
         <p>ただし、この話がそのまま当てはまるのは Google の AI 機能に限られます。ChatGPT や <span data-term="Perplexity">Perplexity</span> は Google のインデックスとは別経路なので、入場条件も別に考える必要があります。こちらは第 4 章で扱います。</p>
         <div class="card" data-card="c-01-4">
@@ -221,7 +221,7 @@
           <li><strong><span data-term="言及">言及</span>された</strong> 回答文にブランド名がある。リンクは無いこともある</li>
           <li><strong><span data-term="引用">引用</span>された</strong> 出典 URL が付いている</li>
         </ol>
-        <p>この三つは順に積み上がる関係ですが、上まで自動的に進むわけではありません。「取得された」は「引用された」の前提ですが、取得されても引用されないことは普通にあります。実際 Google も、<span data-term="query fan-out">query fan-out</span> で裏で読んだページと、画面に表示されるリンクは必ずしも一致しない、という書き方をしています。だから「クローラーが来ているのに回答に出ない」という状態は、異常ではなく想定内です。</p>
+        <p>この三つは順に積み上がる関係ですが、上まで自動的に進むわけではありません。「取得された」は「引用された」の前提ですが、取得されても引用されないことは普通にあります。実際 Google は、<span data-term="query fan-out">query fan-out</span> で元のクエリの検索結果より広く多様なリンクを出せる、と書いています。つまり取得されるページの集合と表示されるリンクの集合は同じではありません。だから「クローラーが来ているのに回答に出ない」という状態は、異常ではなく想定内です。</p>
         <p>さらに、引用された場合でも見え方は一様ではありません。生成回答では、同じ URL でも先頭か末尾か、何文が紐づくか、リンクを辿りそうかが変わります。論文はこの見え方の量を <span data-term="impression">impression</span> と呼びました。つまり測る対象は「出たか出ないか」ではなく、どう出たかまで含みます。</p>
         <div class="card" data-card="c-01-5">
           <p class="q">可視性を三つに分けてください。そのうち二つの違いを、リンクの有無で説明できますか。</p>
@@ -242,7 +242,7 @@
         </div>
         <details class="source"><summary>出典</summary>
           <ul>
-            <li>GEO 論文 §2.2</li>
+            <li>GEO 論文 §2.2（impression の定義。取得・言及・引用という三分類は本教材の整理）</li>
             <li>Google, AI features and your website</li>
           </ul>
         </details>
@@ -375,7 +375,7 @@
       <section class="step">
         <h2>なぜ引用が付くか</h2>
         <p>そもそも、なぜ生成された回答に出典リンクが付くのでしょうか。理由は品質の担保です。生成モデルは放っておくと根拠のない文を書きます。だから製品側は、書いた文を検索結果に紐づける制約を入れています。論文のプロンプトは「すべての文の直後に、その文を完全に支える検索結果の<span data-term="引用">引用</span>を付けよ」とまで書いていて、実際の製品はもっと緩いことがありますが、狙いは同じです。</p>
-        <p>この制約から、書き手側にとっての含みが一つ出てきます。それだけで意味が通り、事実として確かめられる主張を含んだ段落は、引用の単位になりやすいということです。これは作業仮説ですが、論文のプロンプト設計とは矛盾しません。関連して Google は、重要な情報はテキストとして存在する必要がある、と繰り返しています。画像や動画は補助という位置づけです。たとえば料金の内訳を画像 1 枚に収めているページは、その数字を根拠として使ってもらえません。</p>
+        <p>この制約から、書き手側にとっての含みが一つ出てきます。それだけで意味が通り、事実として確かめられる主張を含んだ段落は、引用の単位になりやすいということです。これは作業仮説ですが、論文のプロンプト設計とは矛盾しません。関連して Google は、重要な情報はテキストとして存在する必要がある、と繰り返しています。画像や動画は補助という位置づけです。たとえば料金の内訳を画像 1 枚に収めているページは、その数字がテキストとして取れないぶん、根拠として使われにくくなります。「使われない」と断定できる公式の記述はありませんが、テキストで置いておくほうが確実です。</p>
         <p class="note">ここでは踏み込みません。引用が付いていることと、その文書を根拠に書かれたことは別です。第 11 章で扱います。</p>
         <div class="card" data-card="c-02-3">
           <p class="q">製品はなぜ文に引用を紐づけるのですか。Google が「テキストとして存在する必要がある」と言うのは何ですか。</p>
@@ -403,12 +403,12 @@
       </section>
       <section class="step">
         <h2>会話になると</h2>
-        <p>ここまでは一問一答を前提にしてきましたが、実際の利用は会話で続きます。人は最初の答えを見たあと、「他とどう違うのか」「いくらかかるのか」「どう始めるのか」と続けて聞きます。この二手目以降の質問でも<span data-term="言及">言及</span>は起きますし、<span data-term="ChatGPT search">ChatGPT search</span> も、会話全体の文脈を使うと述べています。その結果、初回の質問では出なかったページが、二手目や三手目で出てくることがあります。だから定点観測をするなら、初回クエリだけで終わらせないでください。想定される次の質問まで続けて、どこで名前が出るかを記録してください。</p>
+        <p>ここまでは一問一答を前提にしてきましたが、実際の利用は会話で続きます。比較、価格、次の手順といったフォローアップでも<span data-term="言及">言及</span>は起きますし、<span data-term="ChatGPT search">ChatGPT search</span> も、会話全体の文脈を使うと述べています。その結果、初回の質問では出なかったページが、二手目や三手目で出てくることがあります。だから定点観測をするなら、初回クエリだけで終わらせないでください。想定される次の質問まで続けて、どこで名前が出るかを記録してください。</p>
         <div class="card" data-card="c-02-4">
           <p class="q">定点観測を初回クエリだけで終わらせてはいけないのはなぜですか。</p>
           <div class="try">
             <ul class="choices">
-              <li><label class="choice"><input type="radio" name="c-02-4" value="0" data-correct="1"><span class="key">A</span><span class="body">二手目以降の質問でも言及が起きるから。ChatGPT search は会話全体の文脈を使うと述べている</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-02-4" value="0" data-correct="1"><span class="key">A</span><span class="body">フォローアップでも言及が起きるから。ChatGPT search は会話全体の文脈を使うと述べている</span></label></li>
               <li><label class="choice"><input type="radio" name="c-02-4" value="1"><span class="key">B</span><span class="body">AI Overviews は追加価値があるときだけ出るから。初回クエリでは生成面がまず出ない</span></label></li>
               <li><label class="choice"><input type="radio" name="c-02-4" value="2"><span class="key">C</span><span class="body">初回の回答はキャッシュされるから。ChatGPT search は会話ごとに検索をやり直さない</span></label></li>
               <li><label class="choice"><input type="radio" name="c-02-4" value="3"><span class="key">D</span><span class="body">query fan-out は二手目以降にしか働かないから。初回クエリでは部分クエリが出ない</span></label></li>
@@ -417,7 +417,7 @@
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>二手目以降の質問（他との違い・費用・始め方）でも言及が起きるから。ChatGPT search は会話全体の文脈を使うと述べている。</p></div>
+          <div class="a" hidden><p>フォローアップ（比較・価格・次の手順）でも言及が起きるから。ChatGPT search は会話全体の文脈を使うと述べている。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -585,7 +585,7 @@
       </section>
       <section class="step">
         <h2>ChatGPT に出たいとき</h2>
-        <p><span data-term="ChatGPT search">ChatGPT search</span> は Google の<span data-term="インデックス">インデックス</span>ではありません。第三者検索プロバイダと提携メディアを使います。だから掲載されるかどうかは Google 側の状態では決まらず、<span data-term="robots.txt">robots.txt</span> で <span data-term="OAI-SearchBot">OAI-SearchBot</span> を許可しているかで決まります。たとえば Google では問題なく上位に出ているページでも、このボットを robots.txt で拒否していれば候補にすら入りません。</p>
+        <p><span data-term="ChatGPT search">ChatGPT search</span> は Google の<span data-term="インデックス">インデックス</span>に依存しません。OpenAI は第三者検索プロバイダと提携メディアのコンテンツを使うとだけ書いており、どのプロバイダかは明かしていません。だから掲載されるかどうかは Google 側の状態では決まらず、<span data-term="robots.txt">robots.txt</span> で <span data-term="OAI-SearchBot">OAI-SearchBot</span> を許可しているかで決まります。たとえば Google では問題なく上位に出ているページでも、このボットを robots.txt で拒否していれば回答の出典としては出ません。ただし OpenAI は、拒否したサイトもナビゲーションリンクとしては表示されうる、と書いています。</p>
         <p><span data-term="入場条件">入場条件</span>を満たしたあとの話は、論文の関心に近づきます。つまり「検索結果に載ったあと、生成がどの出典を厚く書くか」という条件です。ただし論文の<span data-term="内部 GE">内部 GE</span> は <span data-term="GPT-3.5">GPT-3.5</span> と Google 上位 5 件であり、いまの ChatGPT search そのものではありません。だから近いのは関心の位置であって、結果の数字ではありません。</p>
         <div class="card" data-card="c-03-4">
           <p class="q">ChatGPT search に出るかどうかを決めるのは、どのボットの許可ですか。</p>
@@ -736,8 +736,8 @@
           <li><strong>用途を区別できない。</strong>学習か検索かエージェントか、という概念は規格にありません。ベンダーが <span data-term="User-Agent">User-Agent</span>（以下 UA）名を分けて実現しているだけです</li>
           <li><strong>最長一致。</strong>複数の規則が当たったら、オクテット数が最も多い規則が使われます</li>
           <li><strong>パスは大小を区別し、UA トークンは区別しない。</strong>パスの照合は case sensitive（SHOULD）、UA の照合は case-insensitive（MUST）</li>
-          <li><strong><span data-term="4xx / 5xx">4xx</span> と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、<span data-term="クロール">クローラー</span>は「どのリソースにもアクセスしてよい」と解釈します。5xx を返したときは「全面禁止」とみなします</li>
-          <li>キャッシュは 24 時間まで。パーサーは最低 500 KiB を読む</li>
+          <li><strong><span data-term="4xx / 5xx">4xx</span> と 5xx で結果が正反対になる。</strong>robots.txt が 4xx を返したときは、<span data-term="クロール">クローラー</span>は「どのリソースにもアクセスしてよい」と解釈してよい（MAY）とされます。5xx を返したときは「全面禁止」とみなさなければならない（MUST）とされ、こちらのほうが強い規定です。ただし 5xx が長期間（たとえば 30 日）続く場合は、robots.txt が無いものとして扱ってよいとも書かれています</li>
+          <li>キャッシュは 24 時間を超えて使うべきでない（SHOULD NOT。robots.txt が到達不能なときは例外）。パーサーは最低 500 KiB を読む</li>
         </ul>
         <p class="note">アクセス認可ではない以上、秘密の URL を robots.txt で隠すのは筋が悪いという話が、ここに繋がります。止めたいものは認証で止めてください。そして用途の区別が規格にない以上、学習だけを外せるかどうかは、ベンダーが公開している UA の名前を見て確かめるしかありません。</p>
         <div class="card" data-card="c-04-2">
@@ -753,7 +753,7 @@
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。</p></div>
+          <div class="a" hidden><p>5xx（到達不能）なら "complete disallow" とみなす＝全面禁止。4xx（利用不可）なら "MAY access any resources on the server"＝どのリソースにもアクセスしてよい。4xx と 5xx で結果が正反対になるため、サーバー障害中は正規のクローラーも止まる。ただし 5xx が 30 日規模で続くと、逆に robots.txt 無しとして扱われうる。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -775,12 +775,12 @@
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
         <details class="source"><summary>出典</summary>
-          <ul><li>RFC 9309, §1.4, §2.2.1, §2.2.2, §2.3.1.3, §2.3.1.4, §2.4, §2.5</li></ul>
+          <ul><li>RFC 9309, §1, §2.2.1, §2.2.2, §2.3.1.3, §2.3.1.4, §2.4, §2.5</li></ul>
         </details>
       </section>
       <section class="step">
         <h2>OpenAI</h2>
-        <p>ここからはベンダーごとに <span data-term="User-Agent">UA</span> の名前を確認していきます。OpenAI は、学習・検索・ユーザー起動の三つをそれぞれ別の名前に割り当てています。</p>
+        <p>ここからはベンダーごとに <span data-term="User-Agent">UA</span> の名前を確認していきます。OpenAI は、学習・検索・ユーザー起動をそれぞれ別の名前に割り当てています（ほかに広告用の OAI-AdsBot がありますが、ここでは扱いません）。</p>
         <ul class="plain">
           <li><strong><span data-term="OAI-SearchBot">OAI-SearchBot</span></strong> ChatGPT の検索回答に出す。拒否すると検索回答に出ない。ナビリンクは残る場合あり。反映は約 24 時間</li>
           <li><strong><span data-term="GPTBot">GPTBot</span></strong> 基盤モデルの学習</li>
@@ -828,7 +828,7 @@ Allow: /</pre>
           </tbody>
         </table>
         <p>運用側の作法も公式ドキュメントに書かれています。<span data-term="robots.txt">robots.txt</span> と <span data-term="Crawl-delay">Crawl-delay</span> を尊重すること、CAPTCHA を迂回しないこと、そして IP ブロックは robots.txt が読めず不安定であることです。</p>
-        <p class="note">ただし、ユーザー起動のフェッチャーの扱いは OpenAI / <span data-term="Perplexity">Perplexity</span> と違います。Anthropic は、ユーザー起動の <span data-term="Claude-User">Claude-User</span> も robots.txt で止められると書いています。つまり同じユーザー起動でも robots.txt が効くかどうかはベンダー間で一致しないので、一社の書き方を他社にそのまま当てはめないでください。</p>
+        <p class="note">ただし、ユーザー起動のフェッチャーの扱いは OpenAI / <span data-term="Perplexity">Perplexity</span> と違います。Anthropic は自社ボット全体が robots.txt を尊重すると書いており、<span data-term="Claude-User">Claude-User</span> についても robots.txt で制御できるとしています。つまり同じユーザー起動でも robots.txt が効くかどうかはベンダー間で一致しないので、一社の書き方を他社にそのまま当てはめないでください。</p>
         <div class="card" data-card="c-04-5">
           <p class="q">ユーザー起動のフェッチャーと robots.txt の関係について、三社の記述の組み合わせとして正しいものはどれですか。</p>
           <div class="try">
@@ -842,7 +842,7 @@ Allow: /</pre>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>揃っていない。Anthropic の Claude-User は robots.txt を尊重すると書く。OpenAI の ChatGPT-User は適用されない場合があると書く。Perplexity-User は一般に robots.txt を無視すると書く。矛盾を消さずに覚える。</p></div>
+          <div class="a" hidden><p>揃っていない。Anthropic は自社ボット全体が robots.txt を尊重すると書き、Claude-User もそこに含まれる。OpenAI の ChatGPT-User は適用されない場合があると書く。Perplexity-User は一般に robots.txt を無視すると書く。矛盾を消さずに覚える。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -884,9 +884,9 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Google</h2>
-        <p>Google は、ここまでの三社と制御の置き場所が違います。<span data-term="AI Overviews">AI Overviews</span> / <span data-term="AI Mode">AI Mode</span> の<span data-term="クロール">クロール</span>制御は <span data-term="Googlebot">Googlebot</span> で、AI 機能だけを別のボットが担当するわけではありません。だから適格条件も通常の検索と同じで、<span data-term="インデックス">インデックス</span>され、<span data-term="スニペット">スニペット</span>付きで Search に出せることだけです。追加の技術要件はありません。</p>
-        <p>紛らわしいのは <span data-term="Google-Extended">Google-Extended</span> です。これは独立した <span data-term="User-Agent">UA</span> を持たず、<span data-term="robots.txt">robots.txt</span> のトークンだけを見ます。影響が及ぶのは <span data-term="Gemini">Gemini</span> アプリと <span data-term="Vertex AI">Vertex</span> の学習・<span data-term="RAG">接地</span>で、<strong>Search の掲載や順位には使いません。</strong>たとえば Google-Extended を拒否しても、AI Overviews への出方はそのままです。</p>
-        <p>では AI 面だけを止めたい場合はどうするかというと、<span data-term="Search Console">Search Console</span> の<span data-term="Search generative AI control">生成 AI control</span> を使います（第 8 章）。プレビューの出方を絞りたい場合は <span data-term="nosnippet">nosnippet</span> 系です。</p>
+        <p>Google は、ここまでの三社と制御の置き場所が違います。<span data-term="AI Overviews">AI Overviews</span> / <span data-term="AI Mode">AI Mode</span> の<span data-term="クロール">クロール</span>制御は <span data-term="Googlebot">Googlebot</span> で、AI 機能だけを別のボットが担当するわけではありません。だから適格条件も通常の検索と同じで、<span data-term="インデックス">インデックス</span>され、<span data-term="スニペット">スニペット</span>付きで Search に出せることだけです。追加の技術要件はありません。これに加えて、<span data-term="Search Console">Search Console</span> の生成 AI 掲載から自分で除外していないことも条件になります。</p>
+        <p>紛らわしいのは <span data-term="Google-Extended">Google-Extended</span> です。これは独立した <span data-term="User-Agent">UA</span> を持たず、<span data-term="robots.txt">robots.txt</span> のトークンだけを見ます。影響が及ぶのは学習側です。<span data-term="Gemini">Gemini</span> アプリと <span data-term="Vertex AI">Vertex</span> の学習・<span data-term="RAG">接地</span>に加えて、Search の生成 AI 面で応答を作るモデルの学習も、このトークンで制限します。一方で <strong>Search の掲載や順位には使いません。</strong>たとえば Google-Extended を拒否しても、AI Overviews への出方はそのままです。</p>
+        <p>では AI 面だけを止めたい場合はどうするかというと、Search Console の<span data-term="Search generative AI control">生成 AI control</span> を使います（第 8 章）。プレビューの出方を絞りたい場合は <span data-term="nosnippet">nosnippet</span> 系です。</p>
         <div class="card" data-card="c-04-7">
           <p class="q">AI Overviews に出るかどうかを制御するのは、どのボットですか。Google-Extended は何に効きますか。</p>
           <div class="try">
@@ -900,7 +900,7 @@ Allow: /</pre>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>Googlebot。AI 機能専用のボットはない。Google-Extended は独立した UA を持たない robots.txt のトークンで、効くのは Gemini アプリと Vertex の学習・接地。Search の掲載や順位には使わない。</p></div>
+          <div class="a" hidden><p>Googlebot。AI 機能専用のボットはない。Google-Extended は独立した UA を持たない robots.txt のトークンで、効くのは学習側（Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習）。Search の掲載や順位には使わない。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -921,7 +921,7 @@ Allow: /</pre>
             <tr><td>Apple</td><td>Applebot-Extended</td><td>学習利用だけを制御する。自身はクロールしない。拒否しても検索結果には残る</td></tr>
             <tr><td>Amazon</td><td>Amazonbot / Amzn-SearchBot / Amzn-User</td><td>Amazonbot は学習に使われうる。ページ単位の <code>noarchive</code> で学習から外せる。robots.txt のキャッシュは最大 30 日</td></tr>
             <tr><td>Mistral</td><td>MistralAI-Training / -Index / -User</td><td>学習用だけが生成 AI 学習に使われる。残り二つは学習に使わないと明記</td></tr>
-            <tr><td>DuckDuckGo</td><td>DuckAssistBot</td><td>AI 回答用のライブ取得。学習には使わない。反映は 72 時間。拒否しても検索順位に影響しない</td></tr>
+            <tr><td>DuckDuckGo</td><td>DuckAssistBot</td><td>AI 回答のためにリアルタイムでクロールする自動クローラー。学習には使わない。反映は 72 時間。拒否しても検索順位に影響しない</td></tr>
             <tr><td>Common Crawl</td><td>CCBot</td><td>公開アーカイブ用。なりすましがあるため UA だけで判定しない。IP は JSON で公開</td></tr>
           </tbody>
         </table>
@@ -996,7 +996,7 @@ Allow: /</pre>
         <details class="source"><summary>出典</summary>
           <ul>
             <li>IETF aipref WG charter / draft-ietf-aipref-attach（Internet-Draft）</li>
-            <li>Cloudflare, Content Independence Day: AI options / changelog（2026-07-01）</li>
+            <li>Cloudflare, Your site, your rules: new AI traffic options for all customers（2026-07-01）</li>
           </ul>
         </details>
       </section>
@@ -1060,7 +1060,7 @@ Allow: /</pre>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>バグではない。Google-Extended は Gemini アプリと Vertex の学習・接地に効くもので、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></div>
+          <div class="a" hidden><p>バグではない。Google-Extended が効くのは学習側（Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習）で、Search の掲載や順位には使われない。AI Overviews の制御は Googlebot と Search Console 側の生成 AI control。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -1112,12 +1112,12 @@ Allow: /</pre>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
-        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2</li></ul></details>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §2.2.1</li></ul></details>
       </section>
       <section class="step">
         <h2>実験の条件</h2>
         <p>数字を引く前に、それがどの装置で出たものかを押さえてください。というのも、測定に使われた<span data-term="生成エンジン">生成エンジン</span>は市販の製品ではなく、著者が自作したものだからです。</p>
-        <div class="seal paper"><small>ここを外すと数字は使えない</small>論文が自作した生成エンジン（以下、<span data-term="内部 GE">内部 GE</span>）は Google 上位 5 件 + <span data-term="GPT-3.5">gpt-3.5-turbo</span>。実世界チェックは <span data-term="Perplexity">Perplexity.ai</span>。<span data-term="GEO-bench">GEO-bench</span> は約 1 万クエリ。</div>
+        <div class="seal paper"><small>ここを外すと数字は使えない</small>論文が自作した生成エンジン（以下、<span data-term="内部 GE">内部 GE</span>）は Google 上位 5 件 + <span data-term="GPT-3.5">gpt-3.5-turbo</span>。実世界チェックは <span data-term="Perplexity">Perplexity.ai</span>。<span data-term="GEO-bench">GEO-bench</span> は約 1 万クエリ（評価に使うのはその test split、約 1,000 件）。</div>
         <p>この内部 GE に与えたプロンプトは「検索結果だけを使え。文の直後に<span data-term="引用">引用</span>を付けよ」です。だから、モデルが自分の知識で書くのではなく、渡された 5 件から書くという前提が置かれています。以降に出てくる数字は、すべてこの装置の上での測定値です。</p>
         <div class="card" data-card="c-05-2">
           <p class="q">論文の内部 GE の構成と、改変されるソースの本数の組み合わせとして正しいものはどれですか。</p>
@@ -1136,7 +1136,7 @@ Allow: /</pre>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
-        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §3.1, §6</li></ul></details>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §3.1, §3.2, §6</li></ul></details>
       </section>
       <section class="step">
         <h2>9 つの改変</h2>
@@ -1145,7 +1145,7 @@ Allow: /</pre>
           <thead><tr><th>効いた（論文）</th><th>弱かった</th></tr></thead>
           <tbody>
             <tr><td>統計を足す、引用文、出典、流暢さ</td><td>キーワード詰め込み、独特な語</td></tr>
-            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（効果は弱い）</td></tr>
+            <tr><td>分かりやすくする、専門用語</td><td>権威的トーン（本文は「有意な改善なし」。ただし Table 1 では高性能側に分類）</td></tr>
           </tbody>
         </table>
         <p>この分かれ方は、手間の大小とは対応していません。論文の 9 手法のうち、キーワード詰め込み・出典の明記・<span data-term="引用">引用</span>文の追加の 3 つだけは新しい情報を足す必要があり、残りは既存の文の見せ方を変えるだけでよい、と著者は述べます。ところが、新しい情報を足す側にも効いた手法（引用文の追加）と効かなかった手法（キーワード詰め込み）の両方があります。だから、どれだけ効いたのかは手法ごとに数字で見るしかありません。</p>
@@ -1181,9 +1181,9 @@ Allow: /</pre>
             <tr><td>Quotation Addition</td><td class="num">27.2</td><td>最高</td></tr>
           </tbody>
         </table>
-        <p>ただし、この平均値の裏では効き方が場所によって逆を向いています。Cite Sources は 5 位ソースで +115.1%、1 位は −30.3% でした。しかもこれは、すでに上位 5 件に入っている 5 位の話であり、圏外ページの話ではありません。だから「<span data-term="引用">引用</span>を足せば 115% 上がる」という引用の仕方は、条件を落としていることになります。</p>
+        <p>ただし、この平均値の裏では効き方が場所によって逆を向いています。論文は、ソースを 1 つだけ改変する主実験とは別に、5 件すべてを同時に改変する条件も測っています（§5.2, Table 2）。そちらでは、元の順位によって符号が変わりました。Cite Sources は 5 位ソースで +115.1%、1 位は −30.3% です。しかもこの 5 位は、すでに上位 5 件に入っているソースであり、圏外ページの話ではありません。だから「<span data-term="引用">引用</span>を足せば 115% 上がる」という引用の仕方は、条件を二重に落としていることになります。</p>
         <div class="card" data-card="c-05-4">
-          <p class="q">「引用を足したら 115% 上がる」を、誰のどの順位の、どの指標の話か、に直してください。</p>
+          <p class="q">5 件すべてを同時に改変した条件（Table 2）の話として、「引用を足したら 115% 上がる」を、誰のどの順位の、どの指標の話か、に直してください。</p>
           <div class="try">
             <ul class="choices">
               <li><label class="choice"><input type="radio" name="c-05-4" value="0" data-correct="1"><span class="key">A</span><span class="body">Cite Sources の話で、すでに上位 5 件に入っている 5 位のソースの相対改善が +115.1%。1 位では −30.3%</span></label></li>
@@ -1195,7 +1195,7 @@ Allow: /</pre>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>Cite Sources の話。論文の内部 GE で、すでに Google 上位 5 件に入っているソースのうち 5 位のものの相対改善が +115.1%。1 位のソースでは −30.3%。指標は著者が定義した可視性であり、クリックでも売上でもない。</p></div>
+          <div class="a" hidden><p>Cite Sources の話。論文の内部 GE で 5 件すべてを同時に改変した条件（§5.2, Table 2）において、すでに Google 上位 5 件に入っているソースのうち 5 位のものの相対改善が +115.1%。1 位のソースでは −30.3%。指標は著者が定義した可視性であり、クリックでも売上でもない。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -1203,9 +1203,9 @@ Allow: /</pre>
       </section>
       <section class="step">
         <h2>Perplexity と限界</h2>
-        <p>同じ傾向が自作エンジンの外でも見えるかを、著者は <span data-term="Perplexity">Perplexity.ai</span> で確かめています。Quotation は<span data-term="位置補正単語数">位置補正単語数</span>で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing では、<span data-term="内部 GE">内部 GE</span> と同じく、単語数にもとづく指標（<span data-term="Word Count">Word Count</span> と位置補正単語数）が悪化しました。だから、内部 GE だけで起きた現象ではないという確認にはなっています。</p>
+        <p>同じ傾向が自作エンジンの外でも見えるかを、著者は <span data-term="Perplexity">Perplexity.ai</span> で確かめています。ただしこれはテストセットのうち 200 件を対象に、URL を指定できない都合からソース本文をファイルとして渡し、そこだけを見て答えさせたものです。つまり Perplexity 自身の検索・取得の経路は通っていません。その条件で、Quotation は<span data-term="位置補正単語数">位置補正単語数</span>で約 +22%。Statistics は主観で約 +37%。Keyword Stuffing では、<span data-term="内部 GE">内部 GE</span> と同じく、単語数にもとづく指標（<span data-term="Word Count">Word Count</span> と位置補正単語数）が悪化しました。だから、内部 GE だけで起きた現象ではないという確認にはなっています。</p>
         <p>ただし、著者自身も適用範囲に線を引いています。エンジンが変われば手法も更新が要ること、従来検索の順位への影響は未評価であること、クエリ分布は将来変わることの三点です。</p>
-        <p class="note">加えて、ここでいう可視性は著者が定義した <span data-term="impression">impression</span> であり、クリックや売上ではありません。だから、売上への効果としては読めません。Google 公式も、この種のハックの多くを Search では無効と述べています。</p>
+        <p class="note">加えて、ここでいう可視性は著者が定義した <span data-term="impression">impression</span> であり、クリックや売上ではありません。だから、売上への効果としては読めません。なお Google 公式は、生成 AI 面に効くとされる「ハック」の多くは Search の実際の仕組みと合わないと書いていますが、論文の 9 手法を名指しで否定しているわけではありません。</p>
         <div class="card" data-card="c-05-5">
           <p class="q">著者自身が挙げた限界として正しいものはどれですか。</p>
           <div class="try">
@@ -1223,17 +1223,17 @@ Allow: /</pre>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
-        <details class="source"><summary>出典</summary><ul><li>Table 5, §6, §9</li></ul></details>
+        <details class="source"><summary>出典</summary><ul><li>Table 7, §6, §9, Appendix C.1 / Google, Optimizing for generative AI features</li></ul></details>
       </section>
       <section class="step">
         <h2>追試された</h2>
-        <p><span data-term="GEO">GEO</span> 論文の条件が実務とどれだけ違うのかは、後から出た追試ではっきりします。2025 年、同じ問いを別の条件で測ったベンチマークが出ました。<span data-term="C-SEO Bench">C-SEO Bench</span>（<span data-term="NeurIPS">NeurIPS</span> 2025 Datasets &amp; Benchmarks）です。<span data-term="C-SEO">C-SEO</span> は competitive <span data-term="SEO">SEO</span>、つまり競合が同じ手法を採る条件下の SEO を指します。</p>
+        <p><span data-term="GEO">GEO</span> 論文の条件が実務とどれだけ違うのかは、後から出た追試ではっきりします。2025 年、同じ問いを別の条件で測ったベンチマークが出ました。<span data-term="C-SEO Bench">C-SEO Bench</span>（<span data-term="NeurIPS">NeurIPS</span> 2025 Datasets &amp; Benchmarks）です。<span data-term="C-SEO">C-SEO</span> は Conversational Search Engine Optimization の略で、会話型の検索エンジンに向けた最適化を指します。競合も同じ手法を採る条件は、このベンチマークが新しく足した評価軸のほうです。</p>
         <p>GEO 論文の条件に足したものは二つです。</p>
         <ul class="plain">
           <li>単一のタスク・ドメインではなく、質問応答と商品推薦の 2 タスク × 各 3 ドメイン</li>
           <li>1 者だけが改変する状況ではなく、<strong>競合も同じ手法を採用していく</strong>状況</li>
         </ul>
-        <p>その条件で測ると、結果は反対を向きました。既存の C-SEO 手法の多くは、効かないどころか順位に負の影響を与えることがしばしばあり、従来の SEO 的な手法のほうが有効でした。著者は、採用が広がるほど混雑しゼロサムに近づくとも書いています。</p>
+        <p>その条件で測ると、結果は反対を向きました。既存の C-SEO 手法の多くは、効かないどころか順位に負の影響を与えることがしばしばあり、従来の <span data-term="SEO">SEO</span> 的な手法のほうが有効でした。著者は、採用が広がるほど混雑しゼロサムに近づくとも書いています。</p>
         <p class="note">とはいえ、GEO 論文が間違っていた、という話ではありません。二つは測った条件が違います。GEO 論文が測ったのは「他が動かないときに 1 者が動いたらどうなるか」で、C-SEO Bench はそこに競合と多様性を足しました。だから、どちらの数字を引くかは自分が置かれている条件で決まります。実務が置かれているのは後者の条件です。</p>
         <div class="card" data-card="c-05-6">
           <p class="q">C-SEO Bench の結果を一文で。GEO 論文と条件はどう違いますか。</p>
@@ -1324,6 +1324,7 @@ Allow: /</pre>
           <li>出典が本文から辿れる</li>
           <li>読者が確かめられる形で書かれており、事実の誤りが残っていない</li>
         </ul>
+        <p class="note">この五つは <span data-term="E-E-A-T">E-E-A-T</span> の言い換えとしてよく紹介されますが、Google は E-E-A-T 自体を単一のランキング要因ではないと書いています。点数として最適化する対象ではなく、自己点検の観点として使ってください。</p>
         <p>この並びに共通しているのは、そのページでしか手に入らないものがあるかどうかです。だから、<span data-term="query fan-out">query fan-out</span> で出る<span data-term="下位クエリ">下位クエリ</span>ごとに中身の薄いページを量産するやり方は、効果がなくポリシー違反になりうると公式が書いています。というのも、ページ数を増やしても、そこでしか読めない事実は 1 つも増えないからです。では、そのページでしか読めない事実とは具体的に何を足すことなのか。次の節では、論文が実験で効果を測った改変を見ます。</p>
         <div class="card" data-card="c-06-1">
           <p class="q">query fan-out の下位クエリごとに中身の薄いページを量産すると、公式は何と言いますか。</p>
@@ -1359,7 +1360,7 @@ Allow: /</pre>
           <li>読みやすくする。権威的トーンだけは押しが弱い</li>
           <li>キーワードを詰め込まない</li>
         </ul>
-        <p class="note">この一覧は「他が同じ手を打っていないとき」の結果です（第 5 章の追試）。独自の一次情報がないまま文体だけ変えても、競合下では効きません。</p>
+        <p class="note">この一覧は「他が同じ手を打っていないとき」の結果です。追試（<span data-term="C-SEO Bench">C-SEO Bench</span>、第 5 章）は、競合が同じ手を打つ条件だけでなく単独採用でも、多くの手法が効かないか順位を下げると報告しています。独自の一次情報がないまま文体だけ変えても届きません。</p>
         <p>つまり、効いているのは文体そのものではなく、文体を変えるときに一緒に入る中身です。たとえば「統計を足す」は、書き方を変える作業に見えて、実際には数えた結果を手元に持っていなければ実行できません。だから、この一覧は先に一次情報があって初めて意味を持ちます。次の節で、その書き換えを一つの段落でやってみます。</p>
         <div class="card" data-card="c-06-2">
           <p class="q">論文で効いた改変と、それを適用してよい前提の組み合わせとして正しいものはどれですか。</p>
@@ -1378,7 +1379,7 @@ Allow: /</pre>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
-        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §4, Table 4 / C-SEO Bench（NeurIPS 2025）</li></ul></details>
+        <details class="source"><summary>出典</summary><ul><li>GEO 論文 §4, Table 1（書き換え例は Table 4）/ C-SEO Bench（NeurIPS 2025）</li></ul></details>
       </section>
       <section class="step">
         <h2>作業例: 請求書ツールの比較</h2>
@@ -1539,7 +1540,7 @@ Allow: /</pre>
           <li><code>nosnippet</code> 系 プレビューに出す量。厳しいほど AI 面も細くなる</li>
         </ul>
         <p>二つの効き方は段違いです。<code>noindex</code> は「届く」ごと落とすので AI 出典の可能性も消えますが、<code>nosnippet</code> 系は<span data-term="インデックス">インデックス</span>は残したまま、見せる分量を絞ります。だから、AI 面の本文が細いという症状は、この二つのどちらが効いているかで対処が変わります。</p>
-        <p>そのうえで、二層目の<span data-term="構造化データ">構造化データ</span>です。これはページ内容の手がかりで、<span data-term="リッチリザルト">リッチリザルト</span>の適格化に使います。推奨は <span data-term="JSON-LD">JSON-LD</span> で、マークアップは見える本文と一致させます。だから、空ページに JSON-LD だけ置くのは不可です。そして生成 AI 検索のために特別な schema は不要で、必須でもありません。つまり構造化データは、出典に選ばれるための条件ではなく、あくまでリッチリザルト側の仕事だということです。</p>
+        <p>そのうえで、二層目の<span data-term="構造化データ">構造化データ</span>です。これはページ内容の手がかりで、<span data-term="リッチリザルト">リッチリザルト</span>の適格化に使います。推奨は <span data-term="JSON-LD">JSON-LD</span> で、マークアップは見える本文と一致させます。だから、空ページに JSON-LD だけ置くのは不可です。そして生成 AI 検索のために特別な schema は不要で、必須でもありません。つまり構造化データは、出典に選ばれるための<span data-term="入場条件">入場条件</span>ではありません。主な仕事はリッチリザルトの適格化です。ただし Google は、機械可読な形で内容を伝える手段としてシステムが参照するとも書いているので、AI 面と無関係というわけでもありません。</p>
         <div class="card" data-card="c-07-3">
           <p class="q">構造化データは生成 AI 検索の必須条件ですか。マークアップの原則は。</p>
           <div class="try">
@@ -1576,7 +1577,7 @@ Allow: /</pre>
           </tbody>
         </table>
         <p>この表で見てほしいのは、右端の列が両方とも「変わらない」ことです。つまり、どちらのタグも通常の Bing 検索の表示には影響せず、効くのは AI 回答と学習の側だけです。なお、<span data-term="NOCACHE">NOCACHE</span> と <span data-term="NOARCHIVE">NOARCHIVE</span> の両方が指定されているときは NOCACHE として扱われる、と公式ブログに書かれています。</p>
-        <p class="note"><span data-term="IndexNow">IndexNow</span> は「URL の更新を参加検索エンジンに通知する」仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。IndexNow が AI 対策として売られていても、その根拠は一次情報にありません。</p>
+        <p class="note"><span data-term="IndexNow">IndexNow</span> は「URL の更新を参加検索エンジンに通知する」仕組みです。参加しているのは Bing・Yandex・Naver・Seznam・Yep・Amazon で、Google は入っていません。公式 FAQ には「AI 検索結果の内容を最新に保つのに役立つ」という一文がありますが、AI 回答に選ばれやすくなるという機序や効果の記述はありません。IndexNow が AI 対策として売られていても、その根拠は一次情報にありません。</p>
         <div class="card" data-card="c-07-4">
           <p class="q">Bing の <span data-term="NOARCHIVE">NOARCHIVE</span> は何を止めますか。通常の Bing 検索の表示はどうなりますか。</p>
           <div class="try">
@@ -1716,7 +1717,7 @@ Allow: /</pre>
             <tr><td>AI Overviews と AI Mode の合算</td><td>AI Overviews と AI Mode の内訳</td></tr>
           </tbody>
         </table>
-        <p>右の列を忘れると、無いものを探して時間を使うことになります。たとえば AI Overviews と AI Mode のどちらで伸びたのかを、このレポートだけで切り分けることはできません。数え方にも注意が要ります。AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。さらに、AI Overviews 経由のクリックは滞在が長い、という Google 側の観察もあります。だから、クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
+        <p>右の列を忘れると、無いものを探して時間を使うことになります。たとえば AI Overviews と AI Mode のどちらで伸びたのかを、このレポートだけで切り分けることはできません。数え方にも注意が要ります。AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。さらに Google は、AI Overviews が表示された<span data-term="SERP">検索結果ページ</span>からのクリックは滞在が長い、と観察を述べています。だから、クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
         <div class="card" data-card="c-08-1">
           <p class="q">Search Console の生成 AI パフォーマンスレポートで、測れるものと測れないものの組み合わせとして正しいものはどれですか。</p>
           <div class="try">
@@ -1750,10 +1751,10 @@ Allow: /</pre>
             <tr><td>Googlebot / noindex</td><td>Search 全体</td><td>—</td></tr>
             <tr><td>nosnippet 系</td><td>プレビューと AI 面の本文量</td><td>インデックス（noindex 以外）</td></tr>
             <tr><td>Search generative AI control</td><td>AI Overviews / AI Mode / Discover の生成 AI</td><td>通常検索の順位。学習は止まらない</td></tr>
-            <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地</td><td>Search の掲載と順位</td></tr>
+            <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習</td><td>Search の掲載と順位</td></tr>
           </tbody>
         </table>
-        <p>右の二列を取り違えると、狙っていない側を止めることになります。とくに紛らわしいのが下の二行で、<span data-term="Search generative AI control">Search generative AI control</span> は AI 面の掲載を止めますが学習は止まらず、<span data-term="Google-Extended">Google-Extended</span> は学習を止めますが Search の掲載には触りません。運用の細かい条件も押さえてください。Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
+        <p>右の二列を取り違えると、狙っていない側を止めることになります。とくに紛らわしいのが下の二行で、<span data-term="Search generative AI control">Search generative AI control</span> は AI 面の掲載を止めますが学習は止まらず、<span data-term="Google-Extended">Google-Extended</span> は学習を止めますが Search の掲載には触りません。運用の細かい条件も押さえてください。Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は 1〜2 日が目安で、キャッシュや反映の都合でさらにかかることがあります。2026-08-31 に全世界の全サイトへ展開済みです。</p>
         <p class="note">学習だけを止めたいときに生成 AI control で除外するのは、取り違えです。</p>
         <div class="card" data-card="c-08-2">
           <p class="q">学習には使われたくないが AI Overviews には出したい。どのスイッチをどう倒しますか。</p>
@@ -1784,7 +1785,7 @@ Allow: /</pre>
         <p>Google の外にも、公式に数えてくれる面があります。<span data-term="Bing Webmaster Tools">Bing Webmaster Tools</span> には <span data-term="AI Performance レポート">AI Performance レポート</span>があります（2026-02 公開、プレビュー）。対象は <span data-term="Copilot">Microsoft Copilot</span>、Bing の AI 生成要約、一部の提携で、次の指標が並びます。</p>
         <ul class="plain">
           <li><strong>Total Citations</strong> AI 回答で出典として表示された回数</li>
-          <li><strong>Average Cited Pages</strong> 1 日あたりの、出典になった自サイトのユニークページ数</li>
+          <li><strong>Average Cited Pages</strong> 1 日あたりの、出典になった自サイトのユニークページ数の平均</li>
           <li><strong>Grounding Queries</strong> 取得時に AI が使ったキーフレーズ。<strong>全数ではなくサンプル</strong>と明記</li>
           <li>URL 単位の<span data-term="引用">引用</span>回数</li>
         </ul>
@@ -1921,7 +1922,7 @@ Allow: /</pre>
         </div>
         <div class="myth">
           <h2>2. 論文の最大 40% は Google の公式効果</h2>
-          <p>出典が論文だと、Google 自身を測った数字のように聞こえてしまいます。実際に測られたのは、論文が自作した<span data-term="生成エンジン">生成エンジン</span>（<span data-term="内部 GE">内部 GE</span>）で、その中身は <span data-term="GPT-3.5">GPT-3.5</span> と Google 上位 5 件です。指標も Google が公表しているものではなく、著者が定義した <span data-term="impression">impression</span> です。だから、この数字を Google の挙動として引くことはできません。</p>
+          <p>出典が論文だと、Google 自身を測った数字のように聞こえてしまいます。実際に測られたのは、論文が自作した<span data-term="生成エンジン">生成エンジン</span>（<span data-term="内部 GE">内部 GE</span>）で、その中身は <span data-term="GPT-3.5">GPT-3.5</span> と Google 上位 5 件です。指標も Google が公表しているものではなく、著者が定義した <span data-term="impression">impression</span> です。著者は <span data-term="Perplexity">Perplexity.ai</span> でも追試していますが、そちらもテストセットの一部にソース本文をアップロードして答えさせたもので、Google を測ったものではありません。だから、この数字を Google の挙動として引くことはできません。</p>
         </div>
         <div class="card" data-card="c-09-1">
           <p class="q">「LLMO をやれば SEO は不要」を、一次情報で一文で止めてください。</p>
@@ -1981,11 +1982,11 @@ Allow: /</pre>
       <section class="step">
         <div class="myth">
           <h2>7. Google-Extended を拒否すると AI Overviews に出ない</h2>
-          <p>これも名前から来る誤解です。<span data-term="Google-Extended">Google-Extended</span> は <span data-term="Gemini">Gemini</span> アプリと <span data-term="Vertex AI">Vertex</span> 向けの設定で、Google Search の掲載判断には使われません。だから、この設定を拒否したことを理由に <span data-term="AI Overviews">AI Overviews</span> から外れるわけではありません。</p>
+          <p>これも名前から来る誤解です。<span data-term="Google-Extended">Google-Extended</span> は学習側の設定です。<span data-term="Gemini">Gemini</span> アプリと <span data-term="Vertex AI">Vertex</span> に加えて Search 生成 AI 面の応答モデルの学習にも効きますが、Google Search の掲載判断には使われません。だから、この設定を拒否したことを理由に <span data-term="AI Overviews">AI Overviews</span> から外れるわけではありません。</p>
         </div>
         <div class="myth">
           <h2>8. robots.txt で全 AI を止められる</h2>
-          <p><span data-term="robots.txt">robots.txt</span> は、一枚書けば全部に効く道具に見えます。ただし、ユーザーが起動して取りに行く種類のボットは扱いが違い、各社が自分でそう書いています。<span data-term="Perplexity-User">Perplexity-User</span> は一般に無視します。<span data-term="ChatGPT-User">ChatGPT-User</span> は適用されない場合があります。<span data-term="Meta-ExternalAgent">Meta-ExternalFetcher</span> も迂回しうると書いてあります。一方で <span data-term="Claude-User">Claude-User</span> は尊重すると書いてあります。つまり robots.txt は、守ると宣言した相手にだけ効く合図です。だから、公開したくない URL は、認証で保護してください。</p>
+          <p><span data-term="robots.txt">robots.txt</span> は、一枚書けば全部に効く道具に見えます。ただし、ユーザーが起動して取りに行く種類のボットは扱いが違い、各社が自分でそう書いています。<span data-term="Perplexity-User">Perplexity-User</span> は一般に無視します。<span data-term="ChatGPT-User">ChatGPT-User</span> は適用されない場合があります。<span data-term="Meta-ExternalAgent">Meta-ExternalFetcher</span> も迂回しうると書いてあります。一方 Anthropic は、自社ボット全体が robots.txt を尊重すると書いており、<span data-term="Claude-User">Claude-User</span> もそこに含まれます。つまり robots.txt は、守ると宣言した相手にだけ効く合図です。だから、公開したくない URL は、認証で保護してください。</p>
         </div>
         <div class="card" data-card="c-09-3">
           <p class="q">「robots.txt で全 AI を止められる」。どのベンダーの文言で止めますか。</p>
@@ -2022,7 +2023,7 @@ Allow: /</pre>
         </div>
         <div class="myth">
           <h2>12. 引用が付いている＝その文書を根拠に生成した</h2>
-          <p>出典リンクは、その文書を読んで書いた証拠に見えます。ところが、正しく見える<span data-term="引用">引用</span>のうち最大 57% が後付けだった、という報告があります（第 11 章）。だから、引用の存在は根拠の存在を保証しません。</p>
+          <p>出典リンクは、その文書を読んで書いた証拠に見えます。ところが、<span data-term="引用">引用</span>のうち最大 57% が後付けだった、という報告があります（第 11 章）。だから、引用の存在は根拠の存在を保証しません。</p>
         </div>
         <div class="myth">
           <h2>13. 論文で効いた改変は、競合も同じことをしても効く</h2>
@@ -2033,15 +2034,15 @@ Allow: /</pre>
           <div class="try">
             <ul class="choices">
               <li><label class="choice"><input type="radio" name="c-09-4" value="0"><span class="key">A</span><span class="body">RFC 9309 は規則がアクセス認可ではないと明記／引用の存在が根拠を保証する／C-SEO Bench が従来の SEO 的手法も無効と報告</span></label></li>
-              <li><label class="choice"><input type="radio" name="c-09-4" value="1" data-correct="1"><span class="key">B</span><span class="body">RFC 9309 は規則がアクセス認可ではないと明記／正しく見える引用の最大 57% が後付け／C-SEO Bench が競合採用下で無効から逆効果と報告</span></label></li>
-              <li><label class="choice"><input type="radio" name="c-09-4" value="2"><span class="key">C</span><span class="body">RFC 9309 が学習と検索の用途を区別／正しく見える引用の最大 40% が後付け／C-SEO Bench が採用率と無関係に有効と報告</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-09-4" value="1" data-correct="1"><span class="key">B</span><span class="body">RFC 9309 は規則がアクセス認可ではないと明記／引用の最大 57% が後付け／C-SEO Bench が競合採用下で無効から逆効果と報告</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-09-4" value="2"><span class="key">C</span><span class="body">RFC 9309 が学習と検索の用途を区別／引用の最大 40% が後付け／C-SEO Bench が採用率と無関係に有効と報告</span></label></li>
               <li><label class="choice"><input type="radio" name="c-09-4" value="3"><span class="key">D</span><span class="body">robots.txt は認証と同じ効力を持つ／引用の存在が根拠の存在を保証する／GEO 論文が競合採用の条件も測っている</span></label></li>
             </ul>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>robots.txt の話は、RFC 9309 が規則はアクセス認可ではないと明記。引用の話は、正しく見える引用の最大 57% が後付け（Wallat ら）。競合採用の話は、C-SEO Bench が競合採用下で多くの手法が無効〜逆効果と報告。</p></div>
+          <div class="a" hidden><p>robots.txt の話は、RFC 9309 が規則はアクセス認可ではないと明記。引用の話は、引用の最大 57% が後付け（Wallat ら）。競合採用の話は、C-SEO Bench が競合採用下で多くの手法が無効〜逆効果と報告。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -2089,7 +2090,7 @@ Allow: /</pre>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>SEO の成功は順位または掲載。LLMO の成功は回答文の中に名前が出る（言及）／出典 URL が付く（引用）。クリックが減る理由は、ゼロクリックで用が足りる場合があるため。ただし AI Overviews 経由のクリックは滞在が長い、という観察もあるので、クリック数だけで判断しない。</p></div>
+          <div class="a" hidden><p>SEO の成功は順位または掲載。LLMO の成功は回答文の中に名前が出る（言及）／出典 URL が付く（引用）。クリックが減る理由は、ゼロクリックで用が足りる場合があるため。ただし AI Overviews が出ている検索結果ページからのクリックは滞在が長い、という Google の観察もあるので、クリック数だけで判断しない。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -2130,15 +2131,15 @@ Allow: /</pre>
           <div class="try">
             <ul class="choices">
               <li><label class="choice"><input type="radio" name="c-10-3" value="0"><span class="key">A</span><span class="body">内部 GE（Google 上位 5 件と GPT-3.5）で 1 ソースだけを改変したとき、著者定義のクリック率で最大約 57%、5 位が +115%</span></label></li>
-              <li><label class="choice"><input type="radio" name="c-10-3" value="1" data-correct="1"><span class="key">B</span><span class="body">内部 GE（Google 上位 5 件と GPT-3.5）で 1 ソースだけを改変したとき、位置補正単語数で最大約 41%、Cite Sources では 5 位が +115%、1 位は平均 −30%</span></label></li>
-              <li><label class="choice"><input type="radio" name="c-10-3" value="2"><span class="key">C</span><span class="body">内部 GE（Google 上位 5 件と GPT-3.5）で全ソースを同時に改変したとき、位置補正単語数で最大約 41%、1 位ソースも +115%</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-10-3" value="1" data-correct="1"><span class="key">B</span><span class="body">内部 GE（Google 上位 5 件と GPT-3.5）で 1 ソースだけを改変したとき、位置補正単語数で最大約 41%。5 位 +115%／1 位 −30% は全ソースを同時に改変した条件の Cite Sources</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-10-3" value="2"><span class="key">C</span><span class="body">内部 GE（Google 上位 5 件と GPT-3.5）で全ソースを同時に改変したとき、位置補正単語数で最大約 41%。5 位 +115%／1 位 −30% は 1 ソースだけを改変した条件の Cite Sources</span></label></li>
               <li><label class="choice"><input type="radio" name="c-10-3" value="3"><span class="key">D</span><span class="body">Google の AI Overviews を測ったとき、クリック数で最大約 41%、Cite Sources では 5 位が +115%、1 位は平均 −30%</span></label></li>
             </ul>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>論文の内部 GE（Google 上位 5 件 + GPT-3.5）で、すでに上位 5 件に入っているソースを 1 つだけ改変したとき、位置補正単語数で最大約 41%、Cite Sources では 5 位ソースが +115%、1 位ソースは平均で −30% だった。指標は著者定義の可視性でクリックではない。競合も同じ手法を採る条件では、追試（C-SEO Bench）が無効〜逆効果を報告している。</p></div>
+          <div class="a" hidden><p>論文の内部 GE（Google 上位 5 件 + GPT-3.5）で、すでに上位 5 件に入っているソースを 1 つだけ改変したとき、位置補正単語数で最大約 41%。5 位ソースが +115%、1 位ソースが −30% というのは、5 件すべてを同時に改変した別条件（§5.2, Table 2）の Cite Sources の数字であり、混ぜてはいけない。指標はどちらも著者定義の可視性でクリックではない。競合も同じ手法を採る条件では、追試（C-SEO Bench）が無効〜逆効果を報告している。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -2162,7 +2163,7 @@ Allow: /</pre>
         <h2>演習 E · スイッチ</h2>
         <p>この演習で確かめるのは、目的から AI 面の設定を逆算できるかどうかです。学習・検索・ユーザー起動のどれを断りたいかによって、書く行が変わるからです。次の四つの場面について、On / Off だけ決めてください。実装手順は書かないでください。</p>
         <ol class="plain">
-          <li>通常検索には出したい。<span data-term="AI Overviews">AI Overviews</span> には出したくない。<span data-term="Gemini">Gemini</span> アプリの学習にも使われたくない</li>
+          <li>通常検索には出したい。<span data-term="AI Overviews">AI Overviews</span> には出したくない（<span data-term="Search generative AI control">生成 AI control</span> は <span data-term="AI Mode">AI Mode</span> と <span data-term="Discover">Discover</span> の生成 AI もまとめて外れる点は承知のうえ）。<span data-term="Gemini">Gemini</span> アプリの学習にも使われたくない</li>
           <li><span data-term="ChatGPT search">ChatGPT search</span> には出したい。将来の GPT 学習には使われたくない</li>
           <li><span data-term="Perplexity">Perplexity</span> の回答には出したいが、ライブ取得の負荷は下げたい</li>
           <li><span data-term="Copilot">Copilot</span> の回答には出したくない。Bing の通常検索には出したい</li>
@@ -2265,22 +2266,22 @@ Allow: /</pre>
           <li><strong>correctness</strong> <span data-term="引用">引用</span>先を読むと、その文と矛盾しない</li>
           <li><strong><span data-term="faithfulness">faithfulness</span></strong> モデルが実際にその文書を使って書いた</li>
         </ul>
-        <p>この二つは、いつも同時に成り立つわけではありません。Wallat らは、正しく見える引用のうち最大 57% が <span data-term="post-rationalization">post-rationalization</span>、つまり生成したあとに付けた後付けだったと報告しています。だから、引用先を読んで矛盾がないことを確かめられても、それはその文書から書かれたことの証拠にはなりません。</p>
-        <p class="note">ここで言えることと言えないことを分けておきます。言えるのは「引用が付いていることは、根拠があることの保証にならない」というところまでです。言えないのは、この割合が他の製品にも当てはまるということで、57% は特定の実装を測った数字です。だから「どの製品でも 57%」とは広げないでください。</p>
+        <p>この二つは、いつも同時に成り立つわけではありません。Wallat らは、引用のうち最大 57% が <span data-term="post-rationalization">post-rationalization</span>、つまり生成したあとに付けた後付けだったと報告しています。だから、引用先を読んで矛盾がないことを確かめられても、それはその文書から書かれたことの証拠にはなりません。</p>
+        <p class="note">ここで言えることと言えないことを分けておきます。言えるのは「引用が付いていることは、根拠があることの保証にならない」というところまでです。言えないのは、この割合が他の製品にも当てはまるということです。57% は Command-R+ に NaturalQuestions を解かせた条件での上限値であり、平均でも一般値でもありません。だから「どの製品でも 57%」とは広げないでください。</p>
         <div class="card" data-card="c-11-1">
           <p class="q">引用の correctness と <span data-term="faithfulness">faithfulness</span> の違いを言ってください。研究は何と報告しましたか。</p>
           <div class="try">
             <ul class="choices">
-              <li><label class="choice"><input type="radio" name="c-11-1" value="0"><span class="key">A</span><span class="body">correctness は引用先が文と矛盾しないこと、faithfulness は実際にその文書を使って書いたこと。57% という割合はどの製品にも当てはまると報告された</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-11-1" value="0"><span class="key">A</span><span class="body">correctness は引用先がその文を支持すること、faithfulness は実際にその文書を使って書いたこと。57% という割合はどの製品にも当てはまると報告された</span></label></li>
               <li><label class="choice"><input type="radio" name="c-11-1" value="1"><span class="key">B</span><span class="body">correctness は引用先が文と矛盾しないこと、faithfulness は実際にその文書を使って書いたこと。この二つは常に同時に成り立つと報告された</span></label></li>
-              <li><label class="choice"><input type="radio" name="c-11-1" value="2"><span class="key">C</span><span class="body">correctness は実際にその文書を使って書いたこと、faithfulness は引用先が文と矛盾しないこと。正しく見える引用の最大 57% が後付けだった</span></label></li>
-              <li><label class="choice"><input type="radio" name="c-11-1" value="3" data-correct="1"><span class="key">D</span><span class="body">correctness は引用先が文と矛盾しないこと、faithfulness は実際にその文書を使って書いたこと。正しく見える引用の最大 57% が後付けだった</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-11-1" value="2"><span class="key">C</span><span class="body">correctness は実際にその文書を使って書いたこと、faithfulness は引用先がその文を支持すること。引用の最大 57% が後付けだった</span></label></li>
+              <li><label class="choice"><input type="radio" name="c-11-1" value="3" data-correct="1"><span class="key">D</span><span class="body">correctness は引用先がその文を支持すること、faithfulness は実際にその文書を使って書いたこと。引用の最大 57% が後付けだった</span></label></li>
             </ul>
             <button type="button" class="btn" data-reveal>答え合わせ</button>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>correctness は引用先が文と矛盾しないこと。faithfulness はモデルが実際にその文書を使って書いたこと。Wallat らは正しく見える引用の最大 57% が後付け（post-rationalization）だったと報告した。引用の存在は根拠の存在を保証しない。</p></div>
+          <div class="a" hidden><p>correctness は引用先がその文を支持すること。faithfulness はモデルが実際にその文書を使って書いたこと。Wallat らは引用の最大 57% が後付け（post-rationalization）だったと報告した。引用の存在は根拠の存在を保証しない。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
@@ -2309,18 +2310,18 @@ Allow: /</pre>
             <p>選ぶ前に、声か頭の中で自分の答えを言い切ってください。</p>
           </div>
           <p class="verdict" hidden></p>
-          <div class="a" hidden><p>入力文脈の先頭と末尾にある情報はよく使われ、中央に置かれた情報の利用が落ちる現象（Liu ら, TACL 2023）。言えるのは「置かれ方で使われ方が変わりうる」というところまで。各製品の並べ方は非公開なので、具体的な語数や位置の指示は出せない。</p></div>
+          <div class="a" hidden><p>入力文脈の先頭と末尾にある情報はよく使われ、中央に置かれた情報の利用が落ちる現象（Liu ら, TACL 2024）。言えるのは「置かれ方で使われ方が変わりうる」というところまで。各製品の並べ方は非公開なので、具体的な語数や位置の指示は出せない。</p></div>
           <p data-sched hidden></p>
           <div class="after" hidden><button type="button" class="btn" data-next-card>次のカード</button></div>
         </div>
         <details class="source"><summary>出典</summary>
-          <ul><li>Liu et al., <em>Lost in the Middle: How Language Models Use Long Contexts</em>, TACL 2023 / arXiv:2307.03172</li></ul>
+          <ul><li>Liu et al., <em>Lost in the Middle: How Language Models Use Long Contexts</em>, TACL 2024（Vol. 12）/ arXiv:2307.03172, 2023</li></ul>
         </details>
       </section>
       <section class="step">
         <h2>全員が同じ手を打つと</h2>
-        <p>ここまでの研究は、自分だけが手を打った場合の話でした。<span data-term="GEO">GEO</span> 論文も、1 つのソースだけを改変した前後を比べています。だから、競合が同じ手を打つ状況は測っていません。</p>
-        <p><span data-term="C-SEO Bench">C-SEO Bench</span> はそこを測りました。複数タスク・複数ドメインと、採用率を変えた条件で、既存の <span data-term="C-SEO">C-SEO</span> 手法の多くは効かないだけでなく、順位を下げることがしばしばあった、と報告しています。従来の <span data-term="SEO">SEO</span> 的な手法のほうが有効でした。</p>
+        <p>ここまでの研究は、おおむね自分だけが手を打った場合の話でした。<span data-term="GEO">GEO</span> 論文の主要な結果も、1 つのソースだけを改変した前後の比較です。全ソースを同時に改変する条件は §5.2 で部分的に触れられていますが、採用率を変えて体系的に測ったわけではありません。</p>
+        <p><span data-term="C-SEO Bench">C-SEO Bench</span> はそこを正面から測りました。複数タスク・複数ドメインと、採用率を変えた条件で、既存の <span data-term="C-SEO">C-SEO</span> 手法の多くは効かないだけでなく、順位を下げることがしばしばあった、と報告しています。従来の <span data-term="SEO">SEO</span> 的な手法のほうが有効でした。</p>
         <p>採用が広がるほど混雑し、ゼロサムに近づく、とも書いています。だから、公開されて広まった手法は、自分だけが得をする前提では考えられません。</p>
         <div class="card" data-card="c-11-3">
           <p class="q">C-SEO Bench は、GEO 論文の何を条件として足しましたか。結論は。</p>
@@ -2452,18 +2453,18 @@ Allow: /</pre>
             <dt>GEO-bench</dt><dd>GEO 論文の約 1 万クエリの評価セット。</dd>
             <dt>内部 GE</dt><dd>論文が自作した生成エンジン。Google 上位 5 件と gpt-3.5-turbo を組み合わせた実験装置であり、実在の製品ではない。</dd>
             <dt>生成エンジン</dt><dd>検索で文書を取り、LLM が引用つき回答を書くシステム。論文の呼称。</dd>
-            <dt>C-SEO</dt><dd>competitive SEO。競合が同じ手法を採る条件下の SEO。C-SEO Bench が追加した実験条件を指す。</dd>
+            <dt>C-SEO</dt><dd>Conversational Search Engine Optimization。会話型の検索エンジンに向けた最適化。competitive SEO の略ではない。競合も同じ手法を採用する条件は、C-SEO Bench が新たに足した評価軸のほう。</dd>
             <dt>C-SEO Bench</dt><dd>Puerto ら NeurIPS 2025 のベンチマーク。競合採用と複数ドメインの条件で、多くの C-SEO 手法が無効か逆効果だったと報告。</dd>
             <dt>GPT-3.5</dt><dd>GEO 論文の内部 GE が回答生成に使ったモデル。実験条件を述べるときは gpt-3.5-turbo と表記する。</dd>
             <dt>RAG</dt><dd>Retrieval-Augmented Generation。回答を検索インデックス上のページに接地する手法。接地（grounding）とは、モデルが回答を書くときに外部の文書を根拠として参照することを指す。</dd>
-            <dt>query fan-out</dt><dd>1 つの質問を複数の下位クエリに分けて同時に検索すること。Google 公式用語。引用されるページは元クエリの検索結果ページ上位でなくてよい。</dd>
+            <dt>query fan-out</dt><dd>1 つの質問を複数の下位クエリに分けて同時に検索すること。Google 公式用語。Google は、これにより元のクエリの通常検索より広く多様なリンクを出せると書いている。つまり引用されるページは元クエリの検索結果上位とは限らない。</dd>
             <dt>下位クエリ</dt><dd>query fan-out で元の質問から展開される個々の検索クエリ。引用元は下位クエリ側で選ばれるため、元クエリの順位とはずれる。</dd>
             <dt>AI Overviews</dt><dd>Google Search の結果ページ上の生成概要。通常検索に追加価値があると判断されたときだけ出る。query fan-out を使うことがある。</dd>
             <dt>AI Mode</dt><dd>Google Search の対話型生成 AI 面。AI Overviews とモデル・手法が異なり、出るリンクも一致しないと公式が述べる。</dd>
             <dt>強調スニペット</dt><dd>検索結果ページの上部に、質問への答えを抜き出して直接示す枠。AEO という業界用語はこの面を対象に生まれた。</dd>
             <dt>SERP</dt><dd>Search Engine Results Page（検索結果ページ）。生成 AI 面で引用されるページは、元クエリの SERP 上位である必要がない。</dd>
-            <dt>ゼロクリック</dt><dd>回答面だけで用が足り、リンクがクリックされない状態。クリックが減る理由の一つ。ただし AI Overviews 経由のクリックは滞在が長いという観察もあるため、クリック数だけで判断しない。</dd>
-            <dt>入場条件</dt><dd>本教材の用語。Search インデックスに載り、スニペットを出せる状態。Search に出る資格がなければ AI Overviews の出典候補にもならない。</dd>
+            <dt>ゼロクリック</dt><dd>回答面だけで用が足り、リンクがクリックされない状態。クリックが減る理由の一つ。ただし AI Overviews が出ている検索結果ページからのクリックは滞在が長いという Google の観察もあるため、クリック数だけで判断しない。</dd>
+            <dt>入場条件</dt><dd>本教材の用語。Search インデックスに載り、スニペットを出せる状態。Search に出る資格がなければ AI Overviews の出典候補にもならない。2026-07 更新の Google のガイドは、技術要件に加えて Search Console の生成 AI 掲載に含まれていることも適格条件に挙げている（既定は掲載する）。</dd>
             <dt>インデックス</dt><dd>検索エンジンがページを登録し、クエリに対して取り出せるようにした索引。Google の生成 AI 機能は同じ Search インデックスからページを取り出す。</dd>
             <dt>クロール</dt><dd>クローラーがページを巡回して取得すること。インデックス登録の前段の工程。</dd>
             <dt>スニペット</dt><dd>検索結果に出る本文の抜粋。スニペットを出せる状態は入場条件に含まれる。プレビュー制御は nosnippet 系のメタタグで行う。</dd>
@@ -2491,14 +2492,14 @@ Allow: /</pre>
             <dt>Perplexity-User</dt><dd>Perplexity のユーザー起動フェッチャ。一般に robots.txt を無視する。</dd>
             <dt>Perplexity</dt><dd>検索して引用つきの回答を書く生成 AI 製品。GEO 論文は実世界チェックのエンジンとして Perplexity.ai を使った。</dd>
             <dt>Googlebot</dt><dd>Google Search の検索用クローラー。プレビュー制御が効いているかは、Googlebot が実際に取得した HTML にメタタグが含まれているかで確認する。</dd>
-            <dt>Google-Extended</dt><dd>robots.txt のトークン。Gemini アプリと Vertex の学習・接地に影響する。Search の掲載・順位には使わない。独立した User-Agent 文字列は無い。拒否しても AI Overviews に出るかどうかは変わらない。</dd>
-            <dt>Gemini</dt><dd>Google の生成 AI アプリ。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地であり、Google Search の掲載判断ではない。</dd>
+            <dt>Google-Extended</dt><dd>robots.txt のトークン。Gemini アプリと Vertex の学習・接地に加えて、Search 生成 AI 面で応答を作るモデルの学習にも影響する。Search の掲載・順位には使わない。独立した User-Agent 文字列は無い。拒否しても AI Overviews に出るかどうかは変わらない。</dd>
+            <dt>Gemini</dt><dd>Google の生成 AI アプリ。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習であり、Google Search の掲載判断ではない。</dd>
             <dt>Vertex AI</dt><dd>Google のクラウド向け AI プラットフォーム。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地。</dd>
             <dt>Applebot-Extended</dt><dd>Apple の学習利用だけを制御する二次トークン。自身はクロールしない。拒否しても検索結果には残る。</dd>
             <dt>Amazonbot</dt><dd>Amazon の収集用クローラー。Amzn-SearchBot が検索、Amzn-User がユーザー起動。Amazonbot は学習に使われうる。ページ単位の noarchive で学習から外せる。robots.txt のキャッシュは最大 30 日。</dd>
             <dt>MistralAI-Training</dt><dd>Mistral の学習用クローラー。MistralAI-Index が検索、MistralAI-User がユーザー起動。学習用だけが生成 AI 学習に使われ、残り二つは学習に使わないと明記されている。</dd>
             <dt>Meta-ExternalAgent</dt><dd>Meta の学習・インデックス用クローラー。Meta-WebIndexer が検索品質、Meta-ExternalFetcher がユーザー起動。ExternalFetcher は robots.txt を迂回しうると公式が書いている。反映は 24 時間。</dd>
-            <dt>DuckAssistBot</dt><dd>DuckDuckGo の AI 回答用のライブ取得。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。</dd>
+            <dt>DuckAssistBot</dt><dd>DuckDuckGo の AI 回答のためにリアルタイムでクロールする自動クローラー。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。</dd>
             <dt>CCBot</dt><dd>Common Crawl のクローラー。公開アーカイブ用。なりすましがあるため UA だけで判定しない。IP は JSON で公開されている。</dd>
             <dt>Common Crawl</dt><dd>ウェブを収集して公開アーカイブを作る取り組み。クローラーは CCBot。</dd>
             <dt>Bytespider</dt><dd>ByteDance のクローラー。到達可能な公式ドキュメントを確認できなかった。robots.txt の遵守についても一次情報が無いため、未確認として扱う。</dd>
@@ -2509,18 +2510,18 @@ Allow: /</pre>
             <dt>Internet-Draft</dt><dd>IETF で検討中の文書。RFC として発行された標準ではない。Content-Usage は現時点で Internet-Draft の段階にある。</dd>
             <dt>llms.txt</dt><dd>Jeremy Howard 提案の Markdown 地図。エージェント向け。必須は H1 の名前。Google Search は使わないと公式が述べる。</dd>
             <dt>Lighthouse</dt><dd>Chrome のページ検査ツール。llms.txt の監査は、サーバーエラーのときは警告を出し、404 のときは N/A（任意）になる。</dd>
-            <dt>IndexNow</dt><dd>参加検索エンジンに URL の更新を通知する仕組み。公式文書に AI 回答との関係の記述はなく、Google も出てこない。</dd>
+            <dt>IndexNow</dt><dd>参加検索エンジンに URL の更新を通知する仕組み。参加は Bing・Yandex・Naver・Seznam・Yep・Amazon で Google は入らない。公式 FAQ は AI 検索結果を最新に保つのに役立つとだけ書き、AI 回答に選ばれやすくなるという機序や効果は示していない。</dd>
             <dt>Search Console</dt><dd>Google のサイト所有者向け管理ツール。生成 AI パフォーマンスレポートは AI Overviews と AI Mode での掲載を扱う。Search generative AI control のトグルもここにある。</dd>
-            <dt>Search generative AI control</dt><dd>Search Console の、生成 AI 面への掲載・接地を止めるトグル（以下、生成 AI control）。既定値は「掲載する」。対象は AI Overviews / AI Mode / Discover の生成 AI で、通常検索の順位は変わらず、学習も止まらない。除外しても他サイトの似た内容は残る。反映は数日かかることがあり、展開は段階的。</dd>
+            <dt>Search generative AI control</dt><dd>Search Console の、生成 AI 面への掲載・接地を止めるトグル（以下、生成 AI control）。既定値は「掲載する」。対象は AI Overviews / AI Mode / Discover の生成 AI で、通常検索の順位は変わらず、学習も止まらない。除外しても他サイトの似た内容は残る。反映は 1〜2 日が目安で、さらにかかる場合もある。2026-08-31 に全世界へ展開済み。</dd>
             <dt>Discover</dt><dd>Google のフィード型の配信面。生成 AI control の対象は AI Overviews / AI Mode / Discover の生成 AI。</dd>
             <dt>Bing Webmaster Tools</dt><dd>Bing のサイト所有者向け管理ツール。AI Performance レポートを提供する。</dd>
             <dt>AI Performance レポート</dt><dd>Bing Webmaster Tools のレポート（2026-02 公開、プレビュー）。対象は Microsoft Copilot、Bing の AI 生成要約、一部の提携。</dd>
             <dt>Copilot</dt><dd>Microsoft の生成 AI 製品。回答に出したくない場合は Bing 向けに NOARCHIVE を付ける。通常の Bing 検索表示は変わらない。</dd>
             <dt>E-E-A-T</dt><dd>Experience, Expertise, Authoritativeness, Trustworthiness（経験・専門性・権威性・信頼性）。Google の品質評価で使う観点の束。それ自体は単一のランキング因子ではない、と公式が書く。</dd>
             <dt>UGC</dt><dd>ユーザー投稿コンテンツ（User Generated Content）。レビュー、コメント、Q&amp;A、掲示板、ユーザーが本文を作れるプロフィールページなどが該当する。</dd>
-            <dt>faithfulness</dt><dd>引用の忠実性。引用がその文書を実際に根拠にしているか。引用が正しく見えること（correctness）とは別の性質。</dd>
+            <dt>faithfulness</dt><dd>引用の忠実性。引用がその文書を実際に根拠にしているか。引用先がその文を支持すること（correctness）とは別の性質。</dd>
             <dt>post-rationalization</dt><dd>生成したあとで、それらしい出典を後付けすること。</dd>
-            <dt>lost in the middle</dt><dd>長い入力文脈の中央に置かれた情報の利用が落ちる現象。入力文脈の先頭と末尾にある情報はよく使われる。Liu ら TACL 2023。ここから言えるのは「置かれ方で使われ方が変わりうる」というところまでで、各製品の並べ方は非公開のため具体的な語数や位置の指示は出せない。</dd>
+            <dt>lost in the middle</dt><dd>長い入力文脈の中央に置かれた情報の利用が落ちる現象。入力文脈の先頭と末尾にある情報はよく使われる。Liu ら TACL 2024。ここから言えるのは「置かれ方で使われ方が変わりうる」というところまでで、各製品の並べ方は非公開のため具体的な語数や位置の指示は出せない。</dd>
             <dt>KDD</dt><dd>データマイニングの国際会議。Aggarwal らの GEO 論文はここで発表された。</dd>
             <dt>NeurIPS</dt><dd>機械学習の国際会議。C-SEO Bench は NeurIPS 2025 Datasets &amp; Benchmarks で発表された。</dd>
             <dt>TACL</dt><dd>Transactions of the Association for Computational Linguistics。自然言語処理の学術誌。Liu らの lost in the middle はここに載った。</dd>

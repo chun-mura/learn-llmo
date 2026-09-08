@@ -9,7 +9,7 @@
             <tr><td>AI Overviews と AI Mode の合算</td><td>AI Overviews と AI Mode の内訳</td></tr>
           </tbody>
         </table>
-        <p>右の列を忘れると、無いものを探して時間を使うことになります。たとえば AI Overviews と AI Mode のどちらで伸びたのかを、このレポートだけで切り分けることはできません。数え方にも注意が要ります。AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。さらに、AI Overviews 経由のクリックは滞在が長い、という Google 側の観察もあります。だから、クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
+        <p>右の列を忘れると、無いものを探して時間を使うことになります。たとえば AI Overviews と AI Mode のどちらで伸びたのかを、このレポートだけで切り分けることはできません。数え方にも注意が要ります。AI 機能の掲載は、Search Console の Web 検索タイプにも含まれます。さらに Google は、AI Overviews が表示された検索結果ページからのクリックは滞在が長い、と観察を述べています。だから、クリック数だけで判断すると、この面の価値を過小に見積もることになります。</p>
         <card id="c-08-1">
           <q>Search Console の生成 AI パフォーマンスレポートで、測れるものと測れないものの組み合わせとして正しいものはどれですか。</q>
           <opt correct>測れるのは表示回数と、ページ・国・デバイス・日付の内訳。測れないのはクリック数、掲載順位、CTR、AI Overviews と AI Mode の内訳</opt>
@@ -34,10 +34,10 @@
             <tr><td>Googlebot / noindex</td><td>Search 全体</td><td>—</td></tr>
             <tr><td>nosnippet 系</td><td>プレビューと AI 面の本文量</td><td>インデックス（noindex 以外）</td></tr>
             <tr><td>Search generative AI control</td><td>AI Overviews / AI Mode / Discover の生成 AI</td><td>通常検索の順位。学習は止まらない</td></tr>
-            <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地</td><td>Search の掲載と順位</td></tr>
+            <tr><td>Google-Extended</td><td>Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習</td><td>Search の掲載と順位</td></tr>
           </tbody>
         </table>
-        <p>右の二列を取り違えると、狙っていない側を止めることになります。とくに紛らわしいのが下の二行で、Search generative AI control は AI 面の掲載を止めますが学習は止まらず、Google-Extended は学習を止めますが Search の掲載には触りません。運用の細かい条件も押さえてください。Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は数日かかることがあります。2026-06 時点では一部地域への試験展開です。</p>
+        <p>右の二列を取り違えると、狙っていない側を止めることになります。とくに紛らわしいのが下の二行で、Search generative AI control は AI 面の掲載を止めますが学習は止まらず、Google-Extended は学習を止めますが Search の掲載には触りません。運用の細かい条件も押さえてください。Search Console の Search generative AI control（以下、生成 AI control）の既定値は「掲載する」です。除外すると他サイトの似た内容は残ります。反映は 1〜2 日が目安で、キャッシュや反映の都合でさらにかかることがあります。2026-08-31 に全世界の全サイトへ展開済みです。</p>
         <p class="note">学習だけを止めたいときに生成 AI control で除外するのは、取り違えです。</p>
         <card id="c-08-2">
           <q>学習には使われたくないが AI Overviews には出したい。どのスイッチをどう倒しますか。</q>
@@ -59,7 +59,7 @@
         <p>Google の外にも、公式に数えてくれる面があります。Bing Webmaster Tools には AI Performance レポートがあります（2026-02 公開、プレビュー）。対象は Microsoft Copilot、Bing の AI 生成要約、一部の提携で、次の指標が並びます。</p>
         <ul class="plain">
           <li><strong>Total Citations</strong> AI 回答で出典として表示された回数</li>
-          <li><strong>Average Cited Pages</strong> 1 日あたりの、出典になった自サイトのユニークページ数</li>
+          <li><strong>Average Cited Pages</strong> 1 日あたりの、出典になった自サイトのユニークページ数の平均</li>
           <li><strong>Grounding Queries</strong> 取得時に AI が使ったキーフレーズ。<strong>全数ではなくサンプル</strong>と明記</li>
           <li>URL 単位の引用回数</li>
         </ul>

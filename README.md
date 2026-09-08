@@ -2,7 +2,7 @@
 
 公開されている一次情報（論文、公式ドキュメント、仕様）をもとに、Large Language Model Optimization（LLMO）を自分の言葉で説明できるようにする教材です。調査日は **2026-08-21**、追補は **2026-09-06**。
 
-**学習用の画面は HTML です。** [`site/index.html`](site/index.html) をブラウザで開いてください。教材は 1 ファイルで、左の章名や番号をクリックすると同じページ内で移動します。各章は一節ずつ出ます。Markdown 原文は `curriculum/` に残してあります。
+**学習用の画面は HTML です。** [`site/index.html`](site/index.html) をブラウザで開いてください。教材は 1 ファイルで、左の章名や番号をクリックすると同じページ内で移動します。各章は一節ずつ出ます。本文を直すのは `site/_fragments/` です。
 
 読むだけで終わらない作りにしてあります。各節の終わりに、閉じた状態の問い（想起カード）が入っています。選択肢から選び、答え合わせを押すと正誤と解説が出ます。正解すると次の出題日が 1 → 3 → 7 → 16 → 35 日と伸び、期限が来たカードだけが「復習」面に、章をまたいで混ぜて出ます。根拠は画面のホームと `research/SOURCES.md` の学習科学の節にあります。
 
@@ -40,14 +40,13 @@ Google Search の公式見解では、AI Overviews や AI Mode に出るため�
 | 11 | [site/index.html#l11](site/index.html#l11) | 引用が根拠とは限らないことを、数字つきで言える |
 | 復習 | [site/index.html#lr](site/index.html#lr) | 期限の来たカードを、日をあけて思い出す |
 
-用語は画面左の「用語集」、または点線の語にマウスを置くと出ます。Markdown 原文は `curriculum/` です。
+用語は画面左の「用語集」、または点線の語にマウスを置くと出ます。用語の定義は `site/_fragments/terms.json` と `glossary.md` です。
 
 ## このリポジトリの中身
 
 ```
 site/                学習用 HTML（ここを開く。index.html は build.py の生成物）
 site/_fragments/     各章の本文。ここを直して `python3 site/build.py`
-curriculum/          Markdown 原文
 glossary.md          用語（HTML 版は site/index.html#lg）
 research/SOURCES.md  一次情報の目録
 research/sources/    取得した原文

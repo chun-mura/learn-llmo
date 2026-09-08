@@ -82,10 +82,10 @@
     ]
   },
   "C-SEO": {
-    "short": "competitive SEO の略で、競合が同じ手法を採る条件下の SEO を指します。C-SEO Bench が想定した条件です。",
-    "long": "competitive SEO。競合が同じ手法を採る条件下の SEO。C-SEO Bench が追加した実験条件を指す。",
+    "short": "Conversational Search Engine Optimization の略で、会話型の検索エンジンに向けた最適化を指します。競合も同じ手法を採る条件は C-SEO Bench が足した評価軸です。",
+    "long": "Conversational Search Engine Optimization。会話型の検索エンジンに向けた最適化。competitive SEO の略ではない。競合も同じ手法を採用する条件は、C-SEO Bench が新たに足した評価軸のほう。",
     "aliases": [
-      "competitive SEO"
+      "Conversational SEO"
     ]
   },
   "C-SEO Bench": {
@@ -111,7 +111,7 @@
   },
   "query fan-out": {
     "short": "一つの質問から複数の関連検索を同時に出すことです。Google の公式用語で、引用元は展開後の下位クエリ側で選ばれます。",
-    "long": "1 つの質問を複数の下位クエリに分けて同時に検索すること。Google 公式用語。引用されるページは元クエリの検索結果ページ上位でなくてよい。",
+    "long": "1 つの質問を複数の下位クエリに分けて同時に検索すること。Google 公式用語。Google は、これにより元のクエリの通常検索より広く多様なリンクを出せると書いている。つまり引用されるページは元クエリの検索結果上位とは限らない。",
     "aliases": [
       "fan-out"
     ]
@@ -149,12 +149,12 @@
   },
   "ゼロクリック": {
     "short": "回答面だけで用が足り、検索結果のリンクがクリックされない状態です。クリック数だけで LLMO の成否を判断しない理由になります。",
-    "long": "回答面だけで用が足り、リンクがクリックされない状態。クリックが減る理由の一つ。ただし AI Overviews 経由のクリックは滞在が長いという観察もあるため、クリック数だけで判断しない。",
+    "long": "回答面だけで用が足り、リンクがクリックされない状態。クリックが減る理由の一つ。ただし AI Overviews が出ている検索結果ページからのクリックは滞在が長いという Google の観察もあるため、クリック数だけで判断しない。",
     "aliases": []
   },
   "入場条件": {
-    "short": "本教材の用語で、Search インデックスに載り、スニペットを出せる状態のことです。ここを満たさないと AI 面の出典候補になりません。",
-    "long": "本教材の用語。Search インデックスに載り、スニペットを出せる状態。Search に出る資格がなければ AI Overviews の出典候補にもならない。",
+    "short": "本教材の用語で、Search インデックスに載り、スニペットを出せる状態のことです。ここを満たさないと AI 面の出典候補になりません。加えて、Search Console の生成 AI 掲載から除外していないことも条件です。",
+    "long": "本教材の用語。Search インデックスに載り、スニペットを出せる状態。Search に出る資格がなければ AI Overviews の出典候補にもならない。2026-07 更新の Google のガイドは、技術要件に加えて Search Console の生成 AI 掲載に含まれていることも適格条件に挙げている（既定は掲載する）。",
     "aliases": []
   },
   "インデックス": {
@@ -306,13 +306,13 @@
     "aliases": []
   },
   "Google-Extended": {
-    "short": "robots.txt のトークンです。Gemini アプリと Vertex AI の学習・接地に影響し、Search の掲載や順位には使いません。",
-    "long": "robots.txt のトークン。Gemini アプリと Vertex の学習・接地に影響する。Search の掲載・順位には使わない。独立した User-Agent 文字列は無い。拒否しても AI Overviews に出るかどうかは変わらない。",
+    "short": "robots.txt のトークンです。Gemini アプリと Vertex AI の学習・接地、および Search 生成 AI 面の応答モデルの学習に影響し、Search の掲載や順位には使いません。",
+    "long": "robots.txt のトークン。Gemini アプリと Vertex の学習・接地に加えて、Search 生成 AI 面で応答を作るモデルの学習にも影響する。Search の掲載・順位には使わない。独立した User-Agent 文字列は無い。拒否しても AI Overviews に出るかどうかは変わらない。",
     "aliases": []
   },
   "Gemini": {
     "short": "Google の生成 AI アプリです。Google-Extended の拒否は、このアプリと Vertex AI の学習・接地に効きます。",
-    "long": "Google の生成 AI アプリ。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地であり、Google Search の掲載判断ではない。",
+    "long": "Google の生成 AI アプリ。Google-Extended の影響範囲は Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習であり、Google Search の掲載判断ではない。",
     "aliases": []
   },
   "Vertex AI": {
@@ -353,7 +353,7 @@
   },
   "DuckAssistBot": {
     "short": "DuckDuckGo の AI 回答用クローラーです。学習には使わないと明記されていて、拒否しても検索順位に影響しません。",
-    "long": "DuckDuckGo の AI 回答用のライブ取得。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。",
+    "long": "DuckDuckGo の AI 回答のためにリアルタイムでクロールする自動クローラー。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。",
     "aliases": []
   },
   "CCBot": {
@@ -409,8 +409,8 @@
     "aliases": []
   },
   "IndexNow": {
-    "short": "参加している検索エンジンに URL の更新を通知する仕組みです。公式文書に AI 回答との関係の記述はなく、Google も出てきません。",
-    "long": "参加検索エンジンに URL の更新を通知する仕組み。公式文書に AI 回答との関係の記述はなく、Google も出てこない。",
+    "short": "参加している検索エンジンに URL の更新を通知する仕組みです。Google は参加しておらず、AI 回答に選ばれやすくなるという根拠も公式にはありません。",
+    "long": "参加検索エンジンに URL の更新を通知する仕組み。参加は Bing・Yandex・Naver・Seznam・Yep・Amazon で Google は入らない。公式 FAQ は AI 検索結果を最新に保つのに役立つとだけ書き、AI 回答に選ばれやすくなるという機序や効果は示していない。",
     "aliases": []
   },
   "Search Console": {
@@ -420,7 +420,7 @@
   },
   "Search generative AI control": {
     "short": "Search Console の、生成 AI 面への掲載・接地を止めるトグルです。学習のオプトアウトではありません。以下、生成 AI control と書きます。",
-    "long": "Search Console の、生成 AI 面への掲載・接地を止めるトグル（以下、生成 AI control）。既定値は「掲載する」。対象は AI Overviews / AI Mode / Discover の生成 AI で、通常検索の順位は変わらず、学習も止まらない。除外しても他サイトの似た内容は残る。反映は数日かかることがあり、展開は段階的。",
+    "long": "Search Console の、生成 AI 面への掲載・接地を止めるトグル（以下、生成 AI control）。既定値は「掲載する」。対象は AI Overviews / AI Mode / Discover の生成 AI で、通常検索の順位は変わらず、学習も止まらない。除外しても他サイトの似た内容は残る。反映は 1〜2 日が目安で、さらにかかる場合もある。2026-08-31 に全世界へ展開済み。",
     "aliases": [
       "生成 AI control"
     ]
@@ -462,8 +462,8 @@
     ]
   },
   "faithfulness": {
-    "short": "引用がその文書を実際に根拠にしているかという性質です。引用が正しく見えること（correctness）とは別の性質になります。",
-    "long": "引用の忠実性。引用がその文書を実際に根拠にしているか。引用が正しく見えること（correctness）とは別の性質。",
+    "short": "引用がその文書を実際に根拠にしているかという性質です。引用先がその文を支持すること（correctness）とは別の性質になります。",
+    "long": "引用の忠実性。引用がその文書を実際に根拠にしているか。引用先がその文を支持すること（correctness）とは別の性質。",
     "aliases": [
       "引用の忠実性"
     ]
@@ -474,8 +474,8 @@
     "aliases": []
   },
   "lost in the middle": {
-    "short": "長い入力文脈の中央に置かれた情報の利用が落ちる現象です。Liu ら TACL 2023 が報告しました。先頭と末尾はよく使われます。",
-    "long": "長い入力文脈の中央に置かれた情報の利用が落ちる現象。入力文脈の先頭と末尾にある情報はよく使われる。Liu ら TACL 2023。ここから言えるのは「置かれ方で使われ方が変わりうる」というところまでで、各製品の並べ方は非公開のため具体的な語数や位置の指示は出せない。",
+    "short": "長い入力文脈の中央に置かれた情報の利用が落ちる現象です。Liu ら TACL 2024 が報告しました。先頭と末尾はよく使われます。",
+    "long": "長い入力文脈の中央に置かれた情報の利用が落ちる現象。入力文脈の先頭と末尾にある情報はよく使われる。Liu ら TACL 2024。ここから言えるのは「置かれ方で使われ方が変わりうる」というところまでで、各製品の並べ方は非公開のため具体的な語数や位置の指示は出せない。",
     "aliases": []
   },
   "KDD": {

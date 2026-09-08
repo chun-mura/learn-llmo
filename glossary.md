@@ -30,7 +30,7 @@ Aggarwal ら KDD 2024 の枠組み。生成エンジン回答内の可視性を�
 検索で文書を取り、LLM が引用つき回答を書くシステム。論文の呼称。
 
 **Google-Extended**  
-robots.txt のトークン。Gemini アプリと Vertex の学習・接地。Search の掲載・順位には使わない。独立した User-Agent 文字列はない。
+robots.txt のトークン。Gemini アプリと Vertex の学習・接地、および Search 生成 AI 面の応答モデルの学習。Search の掲載・順位には使わない。独立した User-Agent 文字列はない。
 
 **GPTBot**  
 OpenAI の学習用クローラ。検索掲載とは独立。
@@ -87,13 +87,13 @@ IETF aipref が定義中の利用意向フィールド。HTTP ヘッダと robot
 DuckDuckGo の AI 回答用クローラ。学習には使わないと明記。反映は 72 時間。拒否しても検索順位に影響しない。
 
 **faithfulness（引用の忠実性）**  
-引用がその文書を実際に根拠にしているか。引用が正しく見えること（correctness）とは別の性質。
+引用がその文書を実際に根拠にしているか。引用先がその文を支持すること（correctness）とは別の性質。
 
 **IndexNow**  
-参加検索エンジンに URL の更新を通知する仕組み。公式文書に AI 回答との関係の記述はなく、Google も出てこない。
+参加検索エンジンに URL の更新を通知する仕組み。参加は Bing・Yandex・Naver・Seznam・Yep・Amazon で Google は入らない。公式 FAQ は AI 検索結果を最新に保つのに役立つとだけ書き、AI 回答に選ばれやすくなるという機序や効果は示していない。
 
 **lost in the middle**  
-長い入力文脈の中央に置かれた情報の利用が落ちる現象。Liu ら TACL 2023。
+長い入力文脈の中央に置かれた情報の利用が落ちる現象。Liu ら TACL 2024。
 
 **Meta-ExternalAgent / -WebIndexer / -ExternalFetcher**  
 Meta の学習・インデックス / 検索品質 / ユーザー起動。ExternalFetcher は robots.txt を迂回しうると公式が書く。
