@@ -1240,6 +1240,20 @@ body.is-finish .lesson-head .goal {
   margin-left: 0.3rem;
 }
 
+/* 読み列を、レールの右に残った領域の中央に置く。列幅そのものは変えない。
+   8vw の左右パディングは画面幅に比例して伸びるため、上限を付けて中央寄せに任せる。
+   860px 以下ではレールが上に回るので、この段だけを対象にする。 */
+@media (min-width: 861px) {
+  .stage {
+    padding-inline: clamp(1.5rem, 8vw, 3.5rem);
+  }
+
+  .view {
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 860px) {
   .desk {
     grid-template-columns: 1fr;
